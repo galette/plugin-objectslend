@@ -264,45 +264,4 @@ class PdfObjects extends Pdf
 
         $current_category = $object->category_id;
     }
-
-    /**
-     * Stretch a header string
-     *
-     * @param string  $str    Original string
-     * @param integer $length Max length
-     *
-     * @return string
-     */
-    protected function stretchHead($str, $length)
-    {
-        $this->SetFont(self::FONT, 'B', self::LIST_FONT);
-        $stretch = 100;
-        if ($this->GetStringWidth($str) > $length) {
-            while ($this->GetStringWidth($str) > $length) {
-                $this->setFontStretching(--$stretch);
-            }
-        }
-        return $str;
-    }
-
-
-    /**
-     * Cut a string
-     *
-     * @param string  $str    Original string
-     * @param integer $length Max length
-     *
-     * @return string
-     */
-    protected function cut($str, $length)
-    {
-        $length = $length -2; //keep a margin
-        if ($this->GetStringWidth($str) > $length) {
-            while ($this->GetStringWidth($str . '...') > $length) {
-                $str = mb_substr($str, 0, -1, 'UTF-8');
-            }
-            $str .= '...';
-        }
-        return $str;
-    }
 }
