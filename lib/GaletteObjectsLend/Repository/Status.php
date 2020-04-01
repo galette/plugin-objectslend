@@ -40,7 +40,7 @@ use Galette\Entity\DynamicFields;
 
 use Analog\Analog;
 use Galette\Core\Db;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\StatusList;
 use GaletteObjectsLend\Entity\Preferences;

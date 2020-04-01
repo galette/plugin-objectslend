@@ -42,7 +42,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use \Zend\Db\Sql\Predicate;
+use \Laminas\Db\Sql\Predicate;
 
 class Preferences
 {

@@ -44,7 +44,7 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
-use \Zend\Db\Sql\Predicate;
+use \Laminas\Db\Sql\Predicate;
 use GaletteObjectsLend\Entity\CategoryPicture;
 
 class LendCategory

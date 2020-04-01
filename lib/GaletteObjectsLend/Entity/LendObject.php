@@ -41,7 +41,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use \Zend\Db\Sql\Predicate;
+use \Laminas\Db\Sql\Predicate;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
