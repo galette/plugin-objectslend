@@ -96,11 +96,16 @@ class LendObject
     private $currency = '€';
     private $picture;
     private $cat_active = true;
+    private $cat_name;
+    private $member;
 
     private $deps = [
         'picture'   => true,
         'rents'     => false,
-        'last_rent' => false
+        'last_rent' => false,
+        'status'    => false,
+        'member'    => false,
+        'category'  => false
     ];
 
     private $zdb;
@@ -143,8 +148,45 @@ class LendObject
 
         if (is_int($args)) {
             try {
-                $select = $this->zdb->select(LEND_PREFIX . self::TABLE)
-                        ->where(array(self::PK => $args));
+                $select = $this->zdb->select(LEND_PREFIX . self::TABLE, 'o');
+
+                if ($this->deps['last_rent'] === true) {
+                    $select->join(
+                        ['r' => PREFIX_DB . LEND_PREFIX . LendRent::TABLE],
+                        'o.' . LendRent::PK . '=r.' . LendRent::PK,
+                        ['date_begin', 'date_forecast', 'date_end','comments'],
+                        $select::JOIN_LEFT
+                    );
+                }
+
+                if ($this->deps['status'] === true) {
+                    $select->join(
+                        ['s' => PREFIX_DB . LEND_PREFIX . LendStatus::TABLE],
+                        'r.' . LendStatus::PK . '=s.' . LendStatus::PK,
+                        ['status_id', 'status_text', 'in_stock'],
+                        $select::JOIN_LEFT
+                    );
+                }
+
+                if ($this->deps['member'] === true) {
+                    $select->join(
+                        ['a' => PREFIX_DB . Adherent::TABLE],
+                        'r.adherent_id=a.' . Adherent::PK,
+                        [Adherent::PK, 'nom_adh', 'prenom_adh'],
+                        $select::JOIN_LEFT
+                    );
+                }
+
+                if ($this->deps['category'] === true) {
+                    $select->join(
+                        array('c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE),
+                        'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
+                        ['cat_active'   => 'is_active', 'cat_name' => 'name'],
+                        $select::JOIN_LEFT
+                    );
+                }
+
+                $select->where(array('o.'.self::PK => $args));
                 $results = $this->zdb->execute($select);
                 if ($results->count() == 1) {
                     $this->loadFromRS($results->current());
@@ -184,6 +226,9 @@ class LendObject
             $this->cat_active = true;
         } else {
             $this->cat_active = false;
+        }
+        if (property_exists($r, 'cat_name') && trim($r->cat_name) != '') {
+            $this->cat_name = $r->cat_name;
         }
         $this->category_id = $r->category_id;
         $this->nb_available = $r->nb_available;
@@ -232,6 +277,18 @@ class LendObject
 
         if ($this->deps['picture'] === true) {
             $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+        }
+
+        if ($this->deps['member'] === true) {
+            $this->member = new Adherent(
+                $this->zdb,
+                (int)$r->id_adh,
+                [
+                    'picture'   => false,
+                    'groups'    => false,
+                    'dues'      => false,
+                ]
+            );
         }
     }
 

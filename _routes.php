@@ -1470,26 +1470,55 @@ $this->get(
 $this->get(
     '/object/print/{id:\d+}',
     function ($request, $response, $args) {
-        $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
+        $deps = [
+            'picture'   => true,
+            'rents'     => true,
+            'last_rent' => true,
+            'status'    => true,
+            'member'    => true,
+            'category'  => true
+        ];
+        $object = new LendObject(
+            $this->zdb,
+            $this->plugins,
+            (int)$args['id'],
+            $deps
+        );
+
         $lendsprefs = new Preferences($this->zdb);
+        $pdf = new GaletteObjectsLend\IO\PdfObject(
+            $this->zdb,
+            $this->preferences,
+            $lendsprefs
+        );
+        $pdf->drawCards([$object]);
+        $pdf->Output(_T("object_card", "objectslend") . '.pdf', 'D');
     }
 )->setName('objectslend_object_print')->add($authenticate);
 
 $this->get(
     '/object/show/{id:\d+}',
     function ($request, $response, $args) use ($module, $module_id) {
+        $lendsprefs = new Preferences($this->zdb);
+
+        $deps = [
+            'picture'   => true,
+            'rents'     => true,
+            'status'    => true,
+            'member'    => true,
+            'category'  => $lendsprefs->{Preferences::PARAM_VIEW_CATEGORY}
+        ];
         $object = new LendObject(
             $this->zdb,
             $this->plugins,
-            (int)$args['id']
+            (int)$args['id'],
+            $deps
         );
-        $rents = LendRent::getRentsForObjectId($args['id'], false, 'rent_id desc');
 
-        $lendsprefs = new Preferences($this->zdb);
         $params = [
             'page_title'    => str_replace('%object', $object->name, _T('Rents list for %object', 'objectslend')),
             'object'        => $object,
-            'rents'         => $rents,
+            'rents'         => $object->rents,
             'time'          => time(),
         ];
 
