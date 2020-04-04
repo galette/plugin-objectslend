@@ -108,9 +108,12 @@ class PdfObjects extends Pdf
      * Page header
      *
      * @return void
+     *
+     * @phpcs:disable
      */
     public function Header()
     {
+        // @phpcs:enable
         $this->SetFont(Pdf::FONT, 'B');
         $x = $this->getX();
         $this->Cell(0, 10, _T("Objects list", "objectslend"), 0, false, 'C', false, '', 0, false, 'M', 'M');

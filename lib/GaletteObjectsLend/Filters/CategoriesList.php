@@ -41,9 +41,6 @@ use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Categories;
 
-//use Galette\Entity\Group;
-//use Galette\Repository\Members;
-
 /**
  * Categories list filters and paginator
  *
@@ -62,12 +59,16 @@ class CategoriesList extends Pagination
     //filters
     private $filter_str;
     private $active_filter;
+    private $not_empty;
+    private $objects_filters;
 
     protected $query;
 
-    protected $objectslist_fields = array(
+    protected $categorylist_fields = array(
         'filter_str',
         'active_filter',
+        'not_empty',
+        'objects_filters',
         'query'
     );
 
@@ -86,7 +87,7 @@ class CategoriesList extends Pagination
      */
     protected function getDefaultOrder()
     {
-        return 'name';
+        return 'name ';
     }
 
     /**
@@ -99,6 +100,8 @@ class CategoriesList extends Pagination
         parent::reinit();
         $this->filter_str = null;
         $this->active_filter = null;
+        $this->not_empty = null;
+        $this->objects_filters = null;
     }
 
     /**
@@ -119,7 +122,7 @@ class CategoriesList extends Pagination
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
-            if (in_array($name, $this->objectslist_fields)) {
+            if (in_array($name, $this->categorylist_fields)) {
                 return $this->$name;
             } else {
                 Analog::log(
@@ -151,6 +154,8 @@ class CategoriesList extends Pagination
 
             switch ($name) {
                 case 'filter_str':
+                case 'query':
+                case 'not_empty':
                     $this->$name = $value;
                     break;
                 case 'active_filter':
@@ -169,9 +174,6 @@ class CategoriesList extends Pagination
                             );
                             break;
                     }
-                    break;
-                case 'query':
-                    $this->$name = $value;
                     break;
                 default:
                     Analog::log(
@@ -206,5 +208,18 @@ class CategoriesList extends Pagination
     {
         $this->counter = (int)$c;
         $this->countPages();
+    }
+
+    /**
+     * Set objects filter
+     *
+     * @param ObjectsList $filters Filters for objects list
+     *
+     * @return CategoriesList
+     */
+    public function setObjectsFilter(ObjectsList $filters)
+    {
+        $this->objects_filters = $filters;
+        return $this;
     }
 }

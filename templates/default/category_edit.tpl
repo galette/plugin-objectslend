@@ -24,7 +24,7 @@
             <div>
                 <p>
                     <span class="bline">{_T string="Picture:" domain="objectslend"}</span>
-                    <img src="{if $category->category_id}{path_for name="objectslend_photo" data=["type" => {_T string="category" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => $category->category_id]}{else}{path_for name="objectslend_photo" data=["type" => {_T string="category" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}]}{/if}?rand={$time}"
+                    <img src="{if $category->category_id}{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => $category->category_id]}{else}{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail"]}{/if}?rand={$time}"
                         class="picture"
                         width="{$category->picture->getOptimalThumbWidth($olendsprefs)}"
                         height="{$category->picture->getOptimalThumbHeight($olendsprefs)}"
@@ -43,9 +43,8 @@
             <i class="fas fa-save"></i>
             {_T string="Save"}
         </button>
-        <a href="categories_list.php?msg=canceled" class="button">
-            <i class="fas fa-th-list"></i>
-            {_T string="Back to list" domain="objectslend"}
+        <a href="{path_for name="objectslend_objects"}" class="button">
+            <i class="fas fa-th-list"></i> {_T string="Back"}
         </a>
     </div>
 </form>

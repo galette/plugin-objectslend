@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2020 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package  GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -36,6 +36,7 @@
  */
 
 use Analog\Analog;
+
 use Galette\Entity\ContributionsTypes;
 use GaletteObjectsLend\Preferences;
 use GaletteObjectsLend\ObjectPicture;
@@ -54,7 +55,7 @@ use GaletteObjectsLend\Repository\Objects;
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
-    __('/preferences', 'routes'),
+    '/preferences',
     function ($request, $response) use ($module, $module_id) {
         if ($this->session->objectslend_preferences !== null) {
             $lendsprefs = $this->session->objectslend_preferences;
@@ -82,7 +83,7 @@ $this->get(
 )->setName('objectslend_preferences')->add($authenticate);
 
 $this->post(
-    __('/preferences', 'routes'),
+    '/preferences',
     function ($request, $response) {
         $post = $request->getParsedBody();
         $lendsprefs = new Preferences($this->zdb);
@@ -114,7 +115,7 @@ $this->post(
 )->setName('store_objectlend_preferences')->add($authenticate);
 
 $this->get(
-    __('/administration', 'objectslend_routes') . __('/images', 'objectslend_routes'),
+    '/administration/images',
     function ($request, $response) use ($module, $module_id) {
         // display page
         $this->view->render(
@@ -129,7 +130,7 @@ $this->get(
 )->setName('objectslend_adminimages')->add($authenticate);
 
 $this->post(
-    __('/administration', 'objectslend_routes') . __('/images', 'objectslend_routes'),
+    '/administration/images',
     function ($request, $response, $args) use ($module, $module_id) {
         $post = $request->getParsedBody();
         $success_detected = [];
@@ -246,20 +247,19 @@ $this->post(
 )->setName('objectslend_adminimages_action')->add($authenticate);
 
 $this->get(
-    __('/category', 'objectslend_routes') . '/{action:' .
-    __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/category/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
-        if ($action === __('edit', 'routes') && !isset($args['id'])) {
+        if ($action === 'edit' && !isset($args['id'])) {
             throw new \RuntimeException(
                 _T("Category ID cannot be null calling edit route!")
             );
-        } elseif ($action === __('add', 'routes') && isset($args['id'])) {
-             return $response
+        } elseif ($action === 'add' && isset($args['id'])) {
+            return $response
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_category', ['action' => __('add', 'routes')])
+                    $this->router->pathFor('objectslend_category', ['action' => 'add'])
                 );
         }
 
@@ -296,8 +296,7 @@ $this->get(
 )->setName('objectslend_category')->add($authenticate);
 
 $this->post(
-    __('/category', 'objectslend_routes') . '/{action:' .
-    __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/category/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $post = $request->getParsedBody();
@@ -378,18 +377,17 @@ $this->post(
 )->setName('objectslend_category_action')->add($authenticate);
 
 $this->get(
-    '/{type:' . __('category', 'objectslend_routes') .'|' . __('object', 'objectslend_routes') . '}' .
-    '/{mode:' . __('photo', 'objectslend_routes') . '|' . __('thumbnail', 'objectslend_routes') . '}[/{id:\d+}]',
+    '/{type:category|object}/{mode:photo|thumbnail}[/{id:\d+}]',
     function ($request, $response, $args) {
         $id = isset($args['id']) ? $args['id'] : '';
         $type = $args['type'];
         $class = '\GaletteObjectsLend\\' .
-            ($type == __('category', 'objectslend_routes') ? 'CategoryPicture' : 'ObjectPicture');
+            ($type == 'category' ? 'CategoryPicture' : 'ObjectPicture');
         $picture = new $class($this->plugins, $id);
 
         $lendsprefs = new Preferences($this->zdb);
         $thumb = false;
-        if (!$lendsprefs->showFullsize() || $args['mode'] == __('thumbnail', 'objectslend_routes')) {
+        if (!$lendsprefs->showFullsize() || $args['mode'] == 'thumbnail') {
             //force thumbnail display from preferences
             $thumb = true;
         }
@@ -403,8 +401,7 @@ $this->get(
 )->setName('objectslend_photo');
 
 $this->get(
-    __('/categories', 'objectslend_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '}/{value:\d+}]',
+    '/categories[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -423,10 +420,10 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -461,7 +458,7 @@ $this->get(
 
 //categories list filtering
 $this->post(
-    __('/categories', 'objectslend_routes') . __('/filter', 'routes'),
+    '/categorie/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->objectslend_filter_categories)) {
@@ -501,7 +498,7 @@ $this->post(
 )->setName('objectslend_filter_categories')->add($authenticate);
 
 $this->get(
-    __('/category', 'objectslend_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/category/remove/{id:\d+}',
     function ($request, $response, $args) {
         $category = new LendCategory($this->zdb, $this->plugins, (int)$args['id']);
 
@@ -534,7 +531,7 @@ $this->get(
 )->setName('objectslend_remove_category')->add($authenticate);
 
 $this->post(
-    __('/category', 'objectslend_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/category/remove/{id:\d+}',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -595,20 +592,19 @@ $this->post(
 )->setName('objectslend_doremove_category')->add($authenticate);
 
 $this->get(
-    __('/status', 'objectslend_routes') . '/{action:' .
-    __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/status/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
-        if ($action === __('edit', 'routes') && !isset($args['id'])) {
+        if ($action === 'edit' && !isset($args['id'])) {
             throw new \RuntimeException(
                 _T("Status ID cannot be null calling edit route!")
             );
-        } elseif ($action === __('add', 'routes') && isset($args['id'])) {
-             return $response
+        } elseif ($action === 'add' && isset($args['id'])) {
+            return $response
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_status', ['action' => __('add', 'routes')])
+                    $this->router->pathFor('objectslend_status', ['action' => 'add'])
                 );
         }
 
@@ -646,8 +642,7 @@ $this->get(
 )->setName('objectslend_status')->add($authenticate);
 
 $this->post(
-    __('/status', 'objectslend_routes') . '/{action:' .
-    __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/status/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $post = $request->getParsedBody();
@@ -696,8 +691,7 @@ $this->post(
 )->setName('objectslend_status_action')->add($authenticate);
 
 $this->get(
-    __('/statuses', 'objectslend_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '}/{value:\d+}]',
+    '/statuses[/{option:page|order}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
@@ -716,10 +710,10 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -767,7 +761,7 @@ $this->get(
 
 //status list filtering
 $this->post(
-    __('/statuses', 'objectslend_routes') . __('/filter', 'routes'),
+    '/statuses/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->objectslend_filter_statuses)) {
@@ -814,7 +808,7 @@ $this->post(
 )->setName('objectslend_filter_statuses')->add($authenticate);
 
 $this->get(
-    __('/status', 'objectslend_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/status/remove/{id:\d+}',
     function ($request, $response, $args) {
         $status = new LendStatus($this->zdb, (int)$args['id']);
 
@@ -847,7 +841,7 @@ $this->get(
 )->setName('objectslend_remove_status')->add($authenticate);
 
 $this->post(
-    __('/status', 'objectslend_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/status/remove/{id:\d+}',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -908,20 +902,19 @@ $this->post(
 )->setName('objectslend_doremove_status')->add($authenticate);
 
 $this->get(
-    __('/object', 'objectslend_routes') . '/{action:' .
-    __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/object/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
-        if ($action === __('edit', 'routes') && !isset($args['id'])) {
+        if ($action === 'edit' && !isset($args['id'])) {
             throw new \RuntimeException(
                 _T("Object ID cannot be null calling edit route!")
             );
-        } elseif ($action === __('add', 'routes') && isset($args['id'])) {
-             return $response
+        } elseif ($action === 'add' && isset($args['id'])) {
+            return $response
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_object', ['action' => __('add', 'routes')])
+                    $this->router->pathFor('objectslend_object', ['action' =>'add'])
                 );
         }
 
@@ -969,7 +962,7 @@ $this->get(
 )->setName('objectslend_object')->add($authenticate);
 
 $this->get(
-    __('/object', 'objectslend_routes') . '/' . __('clone', 'objectslend') . '/{id:\d+}',
+    '/object/clone/{id:\d+}',
     function ($request, $response, $args) use ($module, $module_id) {
         $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
 
@@ -996,7 +989,7 @@ $this->get(
                 $this->router->pathFor(
                     'objectslend_object',
                     [
-                        'action'    => __('edit', 'routes'),
+                        'action'    => 'edit',
                         'id'        => $object->object_id
                     ]
                 )
@@ -1005,8 +998,7 @@ $this->get(
 )->setName('objectslend_object_clone')->add($authenticate);
 
 $this->post(
-    __('/object', 'objectslend_routes') . '/{action:' .
-    __('edit', 'routes') . '|' . __('add', 'routes') . '}[/{id:\d+}]',
+    '/object/{action:edit|add}[/{id:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $action = $args['action'];
         $post = $request->getParsedBody();
@@ -1046,7 +1038,7 @@ $this->post(
 
             $object_id = $object->object_id;
 
-            /* Modification du statut */
+            // Change status
             if ($post['status']) {
                 LendRent::closeAllRentsForObject(intval($object_id), $post['new_comment']);
 
@@ -1126,13 +1118,13 @@ $this->post(
 )->setName('objectslend_object_action')->add($authenticate);
 
 $this->get(
-    __('/objects', 'objectslend_routes') . '[/{option:' . __('page', 'routes') . '|' .
-    __('order', 'routes') . '|' . __('category', 'objectslend_routes') . '}/{value:\d+}]',
+    '/objects[/{option:page|order|category}/{value:\d+}]',
     function ($request, $response, $args) use ($module, $module_id) {
         $option = null;
         if (isset($args['option'])) {
             $option = $args['option'];
         }
+
         $value = null;
         if (isset($args['value'])) {
             $value = $args['value'];
@@ -1146,13 +1138,13 @@ $this->get(
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
-                case __('category', 'objectslend_routes'):
+                case 'category':
                     if ($value == 0) {
                         $value = null;
                     }
@@ -1171,7 +1163,10 @@ $this->get(
         $filters->setViewCommonsFilters($lendsprefs, $this->view->getSmarty());
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
-        $categories = new Categories($this->zdb, $this->login, $this->plugins);
+        $cat_filters = new GaletteObjectsLend\Filters\CategoriesList();
+        $cat_filters->is_active = true; //retrieve only active categories
+        $cat_filters->not_empty = true; //retrieve only categories with objects
+        $categories = new Categories($this->zdb, $this->login, $this->plugins, $cat_filters);
         $categories_list = $categories->getCategoriesList(true);
 
         // display page
@@ -1197,7 +1192,7 @@ $this->get(
 
 //objects list filtering
 $this->post(
-    __('/objects', 'objectslend_routes') . __('/filter', 'routes'),
+    '/objects/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->objectslend_filter_objects)) {
@@ -1237,7 +1232,7 @@ $this->post(
 )->setName('objectslend_filter_objects')->add($authenticate);
 
 $this->get(
-    __('/object', 'objectslend_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/object/remove/{id:\d+}',
     function ($request, $response, $args) {
         $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
 
@@ -1270,7 +1265,7 @@ $this->get(
 )->setName('objectslend_remove_object')->add($authenticate);
 
 $this->post(
-    __('/object', 'objectslend_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/object/remove[/{id:\d+}]',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -1359,7 +1354,7 @@ $this->post(
 
 //Batch actions on objects list
 $this->post(
-    __('/objects', 'objectslend_routes') . __('/batch', 'routes'),
+    '/objects/batch',
     function ($request, $response) {
         $post = $request->getParsedBody();
 
@@ -1403,7 +1398,7 @@ $this->post(
 )->setName('objectslend_batch-objectslist')->add($authenticate);
 
 $this->get(
-    __('/objects', 'objectslend_routes') . __('/remove', 'routes'),
+    '/objects/remove',
     function ($request, $response) {
         $filters =  $this->session->objectslend_filter_objects;
 
@@ -1435,7 +1430,7 @@ $this->get(
 )->setName('objectslend_remove_objects')->add($authenticate);
 
 $this->get(
-    __('/objects', 'objectslend_routes') . __('/print', 'objectslend_routes') . '[/{id:\d+}]',
+    '/objects/print[/{id:\d+}]',
     function ($request, $response, $args) {
         $lendsprefs = new Preferences($this->zdb);
 
@@ -1462,7 +1457,7 @@ $this->get(
 )->setName('objectslend_objects_print')->add($authenticate);
 
 $this->get(
-    __('/object', 'objectslend_routes') . __('/print', 'objectslend_routes') . '/{id:\d+}',
+    '/object/print/{id:\d+}',
     function ($request, $response, $args) {
         $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
         $lendsprefs = new Preferences($this->zdb);

@@ -12,11 +12,11 @@
             {if $login->isAdmin() or $login->isStaff()}
                 {_T string="Active:" domain="objectslend"}
                 <input type="radio" name="active_filter" id="filter_dc_active" value="{GaletteObjectsLend\Repository\Objects::ALL_OBJECTS}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Objects::ALL_OBJECTS')} checked="checked"{/if}>
-                <label for="filter_dc_active" >{_T string="Don't care"}</label>
+                <label for="filter_dc_active">{_T string="Don't care"}</label>
                 <input type="radio" name="active_filter" id="filter_yes_active" value="{GaletteObjectsLend\Repository\Objects::ACTIVE_OBJECTS}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Objects::ACTIVE_OBJECTS')} checked="checked"{/if}>
-                <label for="filter_yes_active" >{_T string="Yes"}</label>
+                <label for="filter_yes_active">{_T string="Yes"}</label>
                 <input type="radio" name="active_filter" id="filter_no_active" value="{GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS')} checked="checked"{/if}>
-                <label for="filter_no_active" >{_T string="No"}</label>
+                <label for="filter_no_active">{_T string="No"}</label>
             {/if}
             <input type="submit" class="inline" value="{_T string="Filter"}"/>
             <input name="clear_filter" type="submit" value="{_T string="Clear filter"}">
@@ -28,7 +28,11 @@
                 <select name="nbshow" id="nbshow">
                     {html_options options=$nbshow_options selected=$numrows}
                 </select>
-                <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+                <noscript>
+                    <span>
+                        <input type="submit" value="{_T string="Change"}"/>
+                    </span>
+                </noscript>
             </div>
         </div>
     </form>
@@ -39,18 +43,16 @@
                 {_T string="Categories" domain="objectslend"}
             </header>
             <div>
-                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='category' domain="objectslend_routes"}, "value" => 0]}"{if $filters->category_filter eq null} class="active"{/if}>
-                    <img src="{path_for name="objectslend_photo" data=["type" => {_T string="category" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => 0]}"
-                        class="picture"
+                <a href="{path_for name="objectslend_objects" data=["option" => "category", "value" => 0]}"{if $filters->category_filter eq null} class="active"{/if}>
+                    <img src="{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => 0]}"
                         alt=""/>
                     <br/>
                     {_T string="All"}
                 </a>
         {foreach from=$categories item=categ}
             {if $categ->is_active || $categ->category_id eq -1}
-                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='category' domain="objectslend_routes"}, "value" => $categ->category_id]}"{if $filters->category_filter eq $categ->category_id} class="active"{/if}>
-                    <img src="{path_for name="objectslend_photo" data=["type" => {_T string="category" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => $categ->category_id]}"
-                        class="picture"
+                <a href="{path_for name="objectslend_objects" data=["option" => "category", "value" => $categ->category_id]}"{if $filters->category_filter eq $categ->category_id} class="active"{/if}>
+                    <img src="{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => $categ->category_id]}"
                         width="{$categ->picture->getOptimalThumbWidth($olendsprefs)}"
                         height="{$categ->picture->getOptimalThumbHeight($olendsprefs)}"
                         alt=""/>
@@ -59,14 +61,6 @@
                     {if $lendsprefs.VIEW_LIST_PRICE_SUM && $lendsprefs.VIEW_PRICE && ($login->isAdmin() || $login->isStaff())}
                         &middot;
                         {$categ->objects_price_sum} &euro;
-
-                        {if $categ->is_active}
-                            <span class="use tooltip" title="{_T string="Category is active" domain="objectslend"}">
-                                <i class="fas fa-thumbs-up"></i>
-                                <span class="sr-only">{_T string="Active" domain="objectslend"}</span>
-                            </span>
-                        {/if}
-
                     {/if}
                 </a>
             {/if}
@@ -89,7 +83,7 @@
                             </th>
                         {/if}
                             <th>
-                                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_NAME"|constant]}">
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_NAME"|constant]}">
                                     {_T string="Name" domain="objectslend"}
                                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_NAME')}
                                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -162,7 +156,7 @@
                             </th>
                         {/if}
                         <th>
-                            <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS"|constant]}">
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS"|constant]}">
                                 {_T string="Status" domain="objectslend"}
                                 {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS')}
                                     {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -174,7 +168,7 @@
                             </a>
                         </th>
                         <th>
-                            <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_BDATE"|constant]}">
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_BDATE"|constant]}">
                                 {_T string="Since" domain="objectslend"}
                                 {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_BDATE')}
                                     {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -186,7 +180,7 @@
                             </a>
                         </th>
                         <th>
-                            <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_MEMBER"|constant]}">
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_MEMBER"|constant]}">
                                 {_T string="By" domain="objectslend"}
                                 {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_MEMBER')}
                                     {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -199,7 +193,7 @@
                         </th>
                         {if $lendsprefs.VIEW_DATE_FORECAST}
                         <th>
-                            <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_FDATE"|constant]}">
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_FDATE"|constant]}">
                                 {_T string="Return" domain="objectslend"}
                                 {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_FDATE')}
                                     {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -232,7 +226,7 @@
                         {/if}
     {if $olendsprefs->imagesInLists()}
                         <td class="center">
-                            <img src="{path_for name="objectslend_photo" data=["type" => {_T string="object" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => $object->object_id]}"
+                            <img src="{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}"
                                     class="picture"
                                     width="{$object->picture->getOptimalThumbWidth($olendsprefs)}"
                                     height="{$object->picture->getOptimalThumbHeight($olendsprefs)}"
@@ -370,23 +364,23 @@
                         <ul class="selection_menu">
                             <li>{_T string="For the selection:"}</li>
                             <li>
-                                <button type="submit" name="print_list" class="button">
+                                <button type="submit" name="print_list" class="tooltip use">
                                     <i class="fas fa-file-pdf"></i>
                                     {_T string="Print objects list" domain="objectslend"}
                                 </button>
                             </li>
     {if $login->isAdmin() || $login->isStaff()}
                             <li>
-                                <button type="submit" name="print_objects" class="button">
+                                <button type="submit" name="print_objects" class="tooltip use">
                                     <i class="fas fa-file-pdf"></i>
                                     {_T string="Print objects cards" domain="objectslend"}
                                 </button>
                             </li>
                             <li>
-                                <input type="submit" value="{_T string="Take out" domain="objectslend"}" id="objects_take_away" class="button">
+                                <input type="submit" value="{_T string="Take out" domain="objectslend"}" id="objects_take_away" class="tooltip action">
                             </li>
                             <li>
-                                <input type="submit" value="{_T string="Return" domain="objectslend"}" id="objects_give_back" class="button">
+                                <input type="submit" value="{_T string="Return" domain="objectslend"}" id="objects_give_back" class="tooltip action">
                             </li>
                             <li>
                                 <input type="submit" value="{_T string="Disable" domain="objectslend"}" onclick="return confirmDelete(false);">

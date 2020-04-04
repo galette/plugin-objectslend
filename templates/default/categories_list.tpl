@@ -30,7 +30,7 @@
         <tr>
             <th class="id_row">&nbsp;</th>
             <th>
-                <a href="{path_for name="objectslend_categories" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Categories::ORDERBY_NAME"|constant]}">
+                <a href="{path_for name="objectslend_categories" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Categories::ORDERBY_NAME"|constant]}">
                     {_T string="Name" domain="objectslend"}
                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Categories::ORDERBY_NAME')}
                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\CategoriesList::ORDER_ASC')}
@@ -42,7 +42,7 @@
                 </a>
             </th>
             <th class="id_row">
-                {_T string="Active" domain="objectslend"}
+                {_T string="Active"}
             </th>
             <th class="actions_row">
                 {_T string="Actions"}
@@ -65,7 +65,7 @@
                 </td>
                 <td>
     {if $olendsprefs->imagesInLists()}
-                    <img src="{path_for name="objectslend_photo" data=["type" => {_T string="category" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => $categ->category_id]}"
+                    <img src="{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => $categ->category_id]}"
                         class="picture"
                         width="{$categ->picture->getOptimalThumbWidth($olendsprefs)}"
                         height="{$categ->picture->getOptimalThumbHeight($olendsprefs)}"
@@ -77,6 +77,7 @@
                     <i class="fas fa-thumbs-{if $categ->is_active}up{else}down{/if}"></i>
                     <span class="sr-only">{_T string="Active"}</span>
                 </td>
+    {if $login->isAdmin() || $login->isStaff()}
                 <td class="center nowrap">
                     <a
                         class="action"
@@ -86,6 +87,7 @@
                         <i class="fas fa-edit"></i>
                         <span class="sr-only">{_T string="Edit %category" pattern="/%category/" domain="objectslend" replace=$categ->name}</span>
                     </a>
+        {if $login->isAdmin()}
                     <a
                         class="delete"
                         href="{path_for name="objectslend_remove_category" data=["id" => $categ->category_id]}"
@@ -94,7 +96,9 @@
                         <i class="fas fa-trash"></i>
                         <span class="sr-only">{_T string="Remove %category from database" domain="objectslend" pattern="/%category/" replace=$categ->name}</span>
                     </a>
+        {/if}
                 </td>
+    {/if}
             </tr>
         {/foreach}
     </tbody>

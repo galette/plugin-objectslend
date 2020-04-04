@@ -167,7 +167,7 @@ class Status
      */
     public function getList($as_stt = false, $fields = null)
     {
-        return $this->getStatusListList(
+        return $this->getStatusList(
             $as_stt,
             $fields,
             false,

@@ -41,9 +41,6 @@ use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Objects;
 
-//use Galette\Entity\Group;
-//use Galette\Repository\Members;
-
 /**
  * Objects list filters and paginator
  *
@@ -265,7 +262,9 @@ class ObjectsList extends Pagination
         $prefs = $prefs->getPreferences();
 
         $options = [
-            Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION'] ? _T("Name/description", "objectslend") : _T("Name", "objectslend")),
+            Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION'] ?
+                _T("Name/description", "objectslend") :
+                _T("Name", "objectslend")),
             Objects::FILTER_SERIAL  => _T("Serial number", "objectslend"),
             Objects::FILTER_ID      => _T("Id", "objectslend")
         ];

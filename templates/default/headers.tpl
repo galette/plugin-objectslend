@@ -9,7 +9,7 @@
             type: 'image',
             beforeOpen: function(p) {
                 var _img = $(p.currentTarget);
-                _img.attr('data-fullsrc', _img.attr('src').replace(/&thumb=1/, ''));
+                _img.attr('data-fullsrc', _img.attr('src').replace(/thumbnail/, 'photo'));
             }
         }).css('cursor', 'pointer').attr('title', '{_T string="Click to view fullsize image" domain="objectslend" escape="js"}');
     }

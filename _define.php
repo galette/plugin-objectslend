@@ -43,7 +43,7 @@ $this->register(
     '1.0-dev',                          //Version
     '0.9.2',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2019-03-04',                       //Date
+    '2019-06-24',                       //Date
     [   //Permissions needed - not yet implemented
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
@@ -53,23 +53,23 @@ $this->register(
         'objectslend_category_action'   => 'staff',
         'objectslend_categories'        => 'staff',
         'objectslend_filter_categories' => 'staff',
-        'objectslend_remove_category'   => 'staff',
-        'objectslend_doremove_category' => 'staff',
+        'objectslend_remove_category'   => 'admin',
+        'objectslend_doremove_category' => 'admin',
         'objectslend_status'            => 'staff',
         'objectslend_status_action'     => 'staff',
         'objectslend_statuses'          => 'staff',
         'objectslend_filter_statuses'   => 'staff',
-        'objectslend_remove_status'     => 'staff',
-        'objectslend_doremove_status'   => 'staff',
+        'objectslend_remove_status'     => 'admin',
+        'objectslend_doremove_status'   => 'admin',
         'objectslend_object'            => 'staff',
         'objectslend_object_action'     => 'staff',
         'objectslend_object_clone'      => 'staff',
         'objectslend_objects'           => 'staff',
         'objectslend_filter_objects'    => 'staff',
-        'objectslend_remove_object'     => 'staff',
-        'objectslend_doremove_object'   => 'staff',
+        'objectslend_remove_object'     => 'admin',
+        'objectslend_doremove_object'   => 'admin',
         'objectslend_batch-objectslist' => 'staff',
-        'objectslend_remove_objects'    => 'staff',
+        'objectslend_remove_objects'    => 'admin',
         'objectslend_objects_print'     => 'staff',
         'objectslend_object_print'      => 'staff'
     ]

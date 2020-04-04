@@ -123,7 +123,7 @@
                     <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->status_text}</td>
                     <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if} center">
                         {if $rt->is_home_location}
-                            <img src="{$template_subdir}images/icon-on.png" alt="{_T string="At home" domain="objectslend"}"/>
+                            <img src="{$template_subdir}images/icon-on.png" alt="{_T string="In stock" domain="objectslend" escape="html"}"/>
                         {/if}
                     </td>
                     <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">

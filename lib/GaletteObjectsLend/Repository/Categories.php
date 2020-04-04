@@ -41,6 +41,7 @@ use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate;
 use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Preferences;
@@ -311,6 +312,17 @@ class Categories
     private function buildWhereClause($select)
     {
         try {
+            //if there are filters on objects; add them
+            if ($this->filters->objects_filters instanceof ObjectsList) {
+                $objects = new Objects(
+                    $this->zdb,
+                    $this->plugins,
+                    new \GaletteObjectsLend\Entity\Preferences($this->zdb),
+                    $this->filters->objects_filters
+                );
+                $objects->buildWhereClause($select);
+            }
+
             if ($this->filters->active_filter == self::ACTIVE_CATEGORIES) {
                 $select->where('c.is_active = true');
             }
@@ -326,6 +338,10 @@ class Categories
                 $select->where(
                     'c.name LIKE ' . $token
                 );
+            }
+
+            if ($this->filters->not_empty == true) {
+                $select->having(new Predicate\Operator('objects_count', '>', '0'));
             }
         } catch (\Exception $e) {
             Analog::log(

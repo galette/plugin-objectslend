@@ -36,7 +36,7 @@
     <thead>
         <tr>
             <th class="id_row">
-                <a href="{path_for name="objectslend_statuses" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_ID"|constant]}">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_ID"|constant]}">
                     #
                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_ID')}
                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
@@ -48,7 +48,7 @@
                 </a>
             </th>
             <th>
-                <a href="{path_for name="objectslend_statuses" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_NAME"|constant]}">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_NAME"|constant]}">
                     {_T string="Status" domain="objectslend"}
                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_NAME')}
                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
@@ -60,7 +60,7 @@
                 </a>
             </th>
             <th class="id_row">
-                <a href="{path_for name="objectslend_statuses" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_ACTIVE"|constant]}">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_ACTIVE"|constant]}">
                     {_T string="Active" domain="objectslend"}
                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_ACTIVE')}
                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
@@ -72,7 +72,7 @@
                 </a>
             </th>
             <th class="id_row">
-                <a href="{path_for name="objectslend_statuses" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_STOCK"|constant]}">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_STOCK"|constant]}">
                     {_T string="Stock" domain="objectslend"}
                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_STOCK')}
                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
@@ -84,7 +84,7 @@
                 </a>
             </th>
             <th class="id_row">
-                <a href="{path_for name="objectslend_statuses" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_RENTDAYS"|constant]}">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_RENTDAYS"|constant]}">
                     {_T string="Days for rent" domain="objectslend"}
                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_RENTDAYS')}
                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
@@ -107,16 +107,16 @@
         </tr>
     </tfoot>
     <tbody>
-        {foreach from=$statuses item=sttus}
-            <tr class="{if $sttus@index is odd}even{else}odd{/if}">
+        {foreach from=$statuses item=status}
+            <tr class="{if $status@index is odd}even{else}odd{/if}">
                 <td>
-                    {$sttus->status_id}
+                    {$status->status_id}
                 </td>
                 <td>
-                    {$sttus->status_text}
+                    {$status->status_text}
                 </td>
-                <td class="center {if $sttus->is_active}use{else}delete{/if}">
-                    {if $sttus->is_active}
+                <td class="center {if $status->is_active}use{else}delete{/if}">
+                    {if $status->is_active}
                         <i class="fas fa-thumbs-up"></i>
                         <span class="sr-only">{_T string="Active" domain="objectslend"}</span>
                     {else}
@@ -124,8 +124,8 @@
                         <span class="sr-only">{_T string="Inactive" domain="objectslend"}</span>
                     {/if}
                 </td>
-                <td class="center {if $sttus->is_home_location}use{else}delete{/if}">
-                    {if $sttus->is_home_location}
+                <td class="center {if $status->is_home_location}use{else}delete{/if}">
+                    {if $status->is_home_location}
                         <i class="fas fa-thumbs-up"></i>
                         <span class="sr-only">{_T string="In stock" domain="objectslend"}</span>
                     {else}
@@ -134,8 +134,8 @@
                     {/if}
                 </td>
                 <td>
-                    {if $sttus->rent_day_number}
-                        {_T string="%days days" domain="objectslend" pattern="/%days/" replace=$sttus->rent_day_number}
+                    {if $status->rent_day_number}
+                        {_T string="%days days" domain="objectslend" pattern="/%days/" replace=$status->rent_day_number}
                     {else}
                         -
                     {/if}
@@ -143,19 +143,19 @@
                 <td class="center nowrap">
                     <a
                         class="action tooltip"
-                        href="{path_for name="objectslend_status" data=["action" => {_T string="edit" domain="routes"}, "id" => $sttus->status_id]}"
-                        title="{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$sttus->status_text}"
+                        href="{path_for name="objectslend_status" data=["action" => "edit", "id" => $status->status_id]}"
+                        title="{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$status->status_text}"
                     >
                         <i class="fas fa-edit"></i>
-                        <span class="sr-only">{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$sttus->status_text}</span>
+                        <span class="sr-only">{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$status->status_text}</span>
                     </a>
                     <a
                         class="delete tooltip"
-                        href="{path_for name="objectslend_remove_status" data=["id" => $sttus->status_id]}"
-                        title="{_T string="Remove %status from database" domain="objectslend" pattern="/%status/" replace=$sttus->status_text}"
+                        href="{path_for name="objectslend_remove_status" data=["id" => $status->status_id]}"
+                        title="{_T string="Remove %status from database" domain="objectslend" pattern="/%status/" replace=$status->status_text}"
                     >
                         <i class="fas fa-trash"></i>
-                        <span class="sr-only">{_T string="Remove %status from database" domain="objectslend" pattern="/%status/" replace=$sttus->status_text}</span>
+                        <span class="sr-only">{_T string="Remove %status from database" domain="objectslend" pattern="/%status/" replace=$status->status_text}</span>
                     </a>
                 </td>
             </tr>

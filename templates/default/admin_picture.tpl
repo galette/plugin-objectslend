@@ -5,6 +5,7 @@
         <button type="submit" name="save_categories">
             <i class="fas fa-hdd" aria-hidden="true"></i>
             {_T string="Backup categories pictures" domain="objectslend"}
+        </button>
         <button type="submit" name="save_objects">
             <i class="fas fa-hdd" aria-hidden="true"></i>
             {_T string="Backup objects pictures" domain="objectslend"}
