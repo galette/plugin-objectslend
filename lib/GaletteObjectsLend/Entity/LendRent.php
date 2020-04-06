@@ -39,7 +39,7 @@
  * @since     Available since 0.7
  */
 
-namespace GaletteObjectsLend;
+namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Entity\Adherent;
@@ -51,7 +51,7 @@ class LendRent
     const TABLE = 'rents';
     const PK = 'rent_id';
 
-    private $_fields = array(
+    private $fields = array(
         'rent_id' => 'integer',
         'object_id' => 'integer',
         'date_begin' => 'datetime',
@@ -61,22 +61,22 @@ class LendRent
         'adherent_id' => 'integer',
         'comments' => 'varchar(200)'
     );
-    private $_rent_id;
-    private $_object_id;
-    private $_date_begin;
-    private $_date_forecast;
-    private $_date_end;
-    private $_status_id;
-    private $_adherent_id;
-    private $_comments = '';
+    private $rent_id;
+    private $object_id;
+    private $date_begin;
+    private $date_forecast;
+    private $date_end;
+    private $status_id;
+    private $adherent_id;
+    private $comments = '';
     // Join sur table Status
-    private $_status_text;
-    private $_is_home_location;
+    private $status_text;
+    private $is_home_location;
     // Left join sur table adhérents
-    private $_nom_adh = '';
-    private $_prenom_adh = '';
-    private $_pseudo_adh = '';
-    private $_email_adh = '';
+    private $nom_adh = '';
+    private $prenom_adh = '';
+    private $pseudo_adh = '';
+    private $email_adh = '';
 
     /**
      * Construit un nouvel historique d'emprunt à partir de la BDD (à partir de son ID) ou vierge
@@ -87,7 +87,7 @@ class LendRent
     {
         global $zdb;
 
-        $this->_date_begin = date('Y-m-d H:i:s');
+        $this->date_begin = date('Y-m-d H:i:s');
 
         if (is_int($args)) {
             try {
@@ -95,7 +95,7 @@ class LendRent
                         ->where(array(self::PK => $args));
                 $result = $zdb->execute($select);
                 if ($result->count() == 1) {
-                    $this->_loadFromRS($result->current());
+                    $this->loadFromRS($result->current());
                 }
             } catch (\Exception $e) {
                 Analog::log(
@@ -104,8 +104,8 @@ class LendRent
                     Analog::ERROR
                 );
             }
-        } else if (is_object($args)) {
-            $this->_loadFromRS($args);
+        } elseif (is_object($args)) {
+            $this->loadFromRS($args);
         }
     }
 
@@ -116,16 +116,16 @@ class LendRent
      *
      * @return void
      */
-    private function _loadFromRS($r)
+    private function loadFromRS($r)
     {
-        $this->_rent_id = $r->rent_id;
-        $this->_object_id = $r->object_id;
-        $this->_date_begin = $r->date_begin;
-        $this->_date_forecast = $r->date_forecast;
-        $this->_date_end = $r->date_end;
-        $this->_status_id = $r->status_id;
-        $this->_adherent_id = $r->adherent_id;
-        $this->_comments = $r->comments;
+        $this->rent_id = $r->rent_id;
+        $this->object_id = $r->object_id;
+        $this->date_begin = $r->date_begin;
+        $this->date_forecast = $r->date_forecast;
+        $this->date_end = $r->date_end;
+        $this->status_id = $r->status_id;
+        $this->adherent_id = $r->adherent_id;
+        $this->comments = $r->comments;
     }
 
     /**
@@ -141,34 +141,33 @@ class LendRent
             $zdb->connection->beginTransaction();
             $values = array();
 
-            foreach ($this->_fields as $k => $v) {
-                $rk = '_' . $k;
-                $values[$k] = $this->$rk;
+            foreach ($this->fields as $k => $v) {
+                $values[$k] = $this->$k;
             }
 
-            if (!isset($this->_rent_id) || $this->_rent_id == '') {
+            if (!isset($this->rent_id) || $this->rent_id == '') {
                 unset($values[self::PK]);
                 $insert = $zdb->insert(LEND_PREFIX . self::TABLE)
                         ->values($values);
                 $result = $zdb->execute($insert);
                 if ($result->count() > 0) {
-                    if ( $zdb->isPostgres() ) {
-                        $this->_rent_id = $zdb->driver->getLastGeneratedValue(
+                    if ($zdb->isPostgres()) {
+                        $this->rent_id = $zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_rents_id_seq'
                         );
                     } else {
-                        $this->_rent_id = $zdb->driver->getLastGeneratedValue();
+                        $this->rent_id = $zdb->driver->getLastGeneratedValue();
                     }
                     Analog::log(
-                        'Rent #' . $this->_rent_id . ' added.',
+                        'Rent #' . $this->rent_id . ' added.',
                         Analog::DEBUG
                     );
                     $update = $zdb->update(LEND_PREFIX . LendObject::TABLE)
-                        ->set([self::PK => $this->_rent_id])
-                        ->where([LendObject::PK => $this->_object_id]);
+                        ->set([self::PK => $this->rent_id])
+                        ->where([LendObject::PK => $this->object_id]);
                     $zdb->execute($update);
                     Analog::log(
-                        'Rent set for object #' . $this->_object_id,
+                        'Rent set for object #' . $this->object_id,
                         Analog::DEBUG
                     );
                 } else {
@@ -177,7 +176,7 @@ class LendRent
             } else {
                 $update = $zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->_rent_id));
+                        ->where(array(self::PK => $this->rent_id));
                 $zdb->execute($update);
             }
             $zdb->connection->commit();
@@ -199,10 +198,11 @@ class LendRent
      *
      * @param integer $object_id ID de l'objet dont on souhaite l'historique d'emprunt
      * @param boolean $only_last Only retrieve last rent (for list display)
+     * @param string  $order     Order clause, defaults to 'date_begin DESC'
      *
      * @return LendRent[] Tableau d'objects emprunts
      */
-    public static function getRentsForObjectId($object_id, $only_last = false)
+    public static function getRentsForObjectId($object_id, $only_last = false, $order = 'date_begin desc')
     {
         global $zdb;
 
@@ -211,7 +211,7 @@ class LendRent
                     ->join(PREFIX_DB . Adherent::TABLE, PREFIX_DB . Adherent::TABLE . '.id_adh = ' . PREFIX_DB . LEND_PREFIX . self::TABLE . '.adherent_id', '*', 'left')
                     ->join(PREFIX_DB . LEND_PREFIX . LendStatus::TABLE, PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB . LEND_PREFIX . self::TABLE . '.status_id')
                     ->where(array('object_id' => $object_id))
-                    ->order('date_begin desc');
+                    ->order($order);
 
             if ($only_last === true) {
                 $select->offset(0)->limit(1);
@@ -222,12 +222,14 @@ class LendRent
 
             foreach ($rows as $r) {
                 $rt = new LendRent($r);
-                $rt->_status_text = $r->status_text;
-                $rt->_is_home_location = $r->is_home_location == '1' ? true : false;
-                $rt->_prenom_adh = $r->prenom_adh;
-                $rt->_nom_adh = $r->nom_adh;
-                $rt->_pseudo_adh = $r->pseudo_adh;
-                $rt->_email_adh = $r->email_adh;
+                $rt->status_text = $r->status_text;
+                $rt->status_id = $r->status_id;
+                $rt->is_home_location = $r->is_home_location == '1' ? true : false;
+                $rt->in_stock = $rt->is_home_location;
+                $rt->prenom_adh = $r->prenom_adh;
+                $rt->nom_adh = $r->nom_adh;
+                $rt->pseudo_adh = $r->pseudo_adh;
+                $rt->email_adh = $r->email_adh;
                 $rents[] = $rt;
             }
 
@@ -245,8 +247,8 @@ class LendRent
     /**
      * Ferme tous les emprunts ouverts pour un objet donné avec le commentaire indiqué
      *
-     * @param int $object_id ID de l'objet surlequel fermer les emprunts
-     * @param string $comments Commentaire à mettre sur les emprunts
+     * @param int    $object_id ID de l'objet surlequel fermer les emprunts
+     * @param string $comments  Commentaire à mettre sur les emprunts
      *
      * @return boolean True si OK, False si une erreur SQL est survenue
      */
@@ -265,7 +267,7 @@ class LendRent
             foreach ($rows as $r) {
                 $rent = new LendRent($r);
                 $rent->date_end = date('Y-m-d H:i:s');
-                $rent->comments = $comments;
+                $rent->comments = $comments; //FIXME: will replace any existing comments :/
                 $rent->store();
             }
 
@@ -320,31 +322,23 @@ class LendRent
      */
     public function __get($name)
     {
-        $rname = '_' . $name;
-        if (substr($rname, 0, 3) == '___') {
-            return false;
-        }
         switch ($name) {
             case 'date_begin':
-                $dt = new \DateTime($this->_date_begin);
-                return $dt->format('d/m/Y - H:i');
-            case 'date_begin_short':
-                $dt = new \DateTime($this->_date_begin);
-                return $dt->format('d/m/Y');
-            case 'date_forecast':
-                if ($this->_date_forecast != '') {
-                    $dt = new \DateTime($this->_date_forecast);
-                    return $dt->format('d/m/Y');
+            case 'date_end':
+                if ($this->name != '') {
+                    $dt = new \DateTime($this->$name);
+                    return $dt->format(_T('Y-m-d H:i', 'objectslend'));
                 }
                 return '';
-            case 'date_end':
-                if ($this->_date_end != '') {
-                    $dt = new \DateTime($this->_date_end);
-                    return $dt->format('d/m/Y - H:i');
+            case 'date_begin_short':
+            case 'date_forecast':
+                if ($this->$name != '') {
+                    $dt = new \DateTime($this->$name);
+                    return $dt->format(_T('Y-m-d'));
                 }
                 return '';
             default:
-                return $this->$rname;
+                return $this->$name;
         }
     }
 
@@ -358,17 +352,16 @@ class LendRent
      */
     public function __set($name, $value)
     {
-        $rname = '_' . $name;
         switch ($name) {
             case 'adherent_id':
                 if ((int)$value > 0) {
-                    $this->$rname = (int)$value;
+                    $this->$name = (int)$value;
                 } else {
-                    $this->$rname = null;
+                    $this->$name = null;
                 }
                 break;
             default:
-                $this->$rname = $value;
+                $this->$name = $value;
                 break;
         }
     }

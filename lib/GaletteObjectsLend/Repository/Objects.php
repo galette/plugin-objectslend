@@ -44,11 +44,11 @@ use Zend\Db\Sql\Expression;
 use Galette\Entity\Adherent;
 use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\ObjectsList;
-use GaletteObjectsLend\Preferences;
-use GaletteObjectsLend\LendObject;
-use GaletteObjectsLend\LendCategory;
-use GaletteObjectsLend\LendRent;
-use GaletteObjectsLend\LendStatus;
+use GaletteObjectsLend\Entity\Preferences;
+use GaletteObjectsLend\Entity\LendObject;
+use GaletteObjectsLend\Entity\LendCategory;
+use GaletteObjectsLend\Entity\LendRent;
+use GaletteObjectsLend\Entity\LendStatus;
 use Galette\Core\Plugins;
 
 /**

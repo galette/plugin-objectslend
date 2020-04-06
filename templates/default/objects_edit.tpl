@@ -73,7 +73,7 @@
             <legend class="ui-state-active ui-corner-top">{_T string="Object's photo" domain="objectslend"}</legend>
                 <p>
                     <div class="exemple">{_T string="The file must be smaller than 2 Mb and its name should not contains whitespace!"}</div>
-                    <img src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => {_T string="object" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => {_T string="object" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}]}{/if}?rand={$time}"
+                    <img src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail"]}{/if}?rand={$time}"
                         class="picture"
                         width="{$object->picture->getOptimalThumbWidth($olendsprefs)}"
                         height="{$object->picture->getOptimalThumbHeight($olendsprefs)}"

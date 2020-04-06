@@ -46,7 +46,7 @@
                         {if $olendsprefs->imagesInLists()}
                         <td class="center">
 
-                            <img src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => {_T string="object" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}, "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => {_T string="object" domain="objectslend_routes"}, "mode" => {_T string="thumbnail" domain="objectslend_routes"}]}{/if}?rand={$time}"
+                            <img src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail"]}{/if}?rand={$time}"
                                 class="picture"
                                 width="{$objt->picture->getOptimalThumbWidth($olendsprefs)}"
                                 height="{$objt->picture->getOptimalThumbHeight($olendsprefs)}"

@@ -9,11 +9,11 @@
            {_T string="Objects list" domain="objectslend"}
        </a>
    </li>-->
-   <li{if $cur_route eq "objectslend_objects"} class="selected"{/if}>
+    <li{if $cur_route eq "objectslend_objects"} class="selected"{/if}>
        <a href="{path_for name="objectslend_objects"}">
            {_T string="Objects list" domain="objectslend"}
        </a>
-   </li>
+    </li>
     {if $login->isAdmin() || $login->isStaff()}
     <li{if $cur_route eq "objectslend_object"} class="selected"{/if}>
         <a href="{path_for name="objectslend_object" data=["action" => "add"]}">{_T string="Add an object" domain="objectslend"}</a>

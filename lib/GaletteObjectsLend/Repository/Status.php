@@ -43,11 +43,11 @@ use Galette\Core\Db;
 use Zend\Db\Sql\Expression;
 use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\StatusList;
-use GaletteObjectsLend\Preferences;
-use GaletteObjectsLend\LendObject;
-use GaletteObjectsLend\LendCategory;
-use GaletteObjectsLend\LendRent;
-use GaletteObjectsLend\LendStatus;
+use GaletteObjectsLend\Entity\Preferences;
+use GaletteObjectsLend\Entity\LendObject;
+use GaletteObjectsLend\Entity\LendCategory;
+use GaletteObjectsLend\Entity\LendRent;
+use GaletteObjectsLend\Entity\LendStatus;
 use Galette\Core\Login;
 
 /**

@@ -37,7 +37,7 @@
  * @since     Available since 0.7
  */
 
-namespace GaletteObjectsLend;
+namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Core\Plugins;
@@ -361,8 +361,6 @@ class Picture extends \Galette\Core\Picture
             $this->getDefaultPicture();
             $filename = $this->file_path;
             $infos = pathinfo($this->file_path);
-            /*$filename = $this->store_path . $infos['filename'] . '_th.' . $infos['extension'];
-            $filename = $this->store_path . $infos['filename'] . '.' . $infos['extension'];*/
         }
         return $filename;
     }
@@ -371,6 +369,8 @@ class Picture extends \Galette\Core\Picture
      * Set picture thumbnail sizes
      *
      * Should override Picture::setSize(), but this one is private :/
+     *
+     * @param Preferences $prefs Preferences instance
      *
      * @return void
      */
@@ -394,6 +394,8 @@ class Picture extends \Galette\Core\Picture
     /**
      * Returns current thumbnail optimal height
      *
+     * @param Preferences $prefs Preferences instance
+     *
      * @return int optimal height
      */
     public function getOptimalThumbHeight(Preferences $prefs)
@@ -406,6 +408,8 @@ class Picture extends \Galette\Core\Picture
 
     /**
      * Returns current thumbnail optimal width
+     *
+     * @param Preferences $prefs Preferences instance
      *
      * @return int optimal width
      */

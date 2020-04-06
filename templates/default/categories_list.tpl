@@ -80,8 +80,8 @@
     {if $login->isAdmin() || $login->isStaff()}
                 <td class="center nowrap">
                     <a
-                        class="action"
-                        href="{path_for name="objectslend_category" data=["action" => {_T string="edit" domain="routes"}, "id" => $categ->category_id]}"
+                        class="tooltip action"
+                        href="{path_for name="objectslend_category" data=["action" => "edit", "id" => $categ->category_id]}"
                         title="{_T string="Edit %category" pattern="/%category/" domain="objectslend" replace=$categ->name}"
                     >
                         <i class="fas fa-edit"></i>
@@ -89,7 +89,7 @@
                     </a>
         {if $login->isAdmin()}
                     <a
-                        class="delete"
+                        class="tooltip delete"
                         href="{path_for name="objectslend_remove_category" data=["id" => $categ->category_id]}"
                         title="{_T string="Remove %category from database" domain="objectslend" pattern="/%category/" replace=$categ->name}"
                     >

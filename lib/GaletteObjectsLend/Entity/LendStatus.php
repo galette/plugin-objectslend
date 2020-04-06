@@ -9,7 +9,7 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2020 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,14 +32,13 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * @Copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   0.7
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7
  */
 
-namespace GaletteObjectsLend;
+namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Core\Db;
@@ -81,7 +80,7 @@ class LendStatus
                         ->where(self::PK . ' = ' . $args);
                 $result = $this->zdb->execute($select);
                 if ($result->count() == 1) {
-                    $this->_loadFromRS($result->current());
+                    $this->loadFromRS($result->current());
                 }
             } catch (\Exception $e) {
                 Analog::log(
@@ -90,8 +89,8 @@ class LendStatus
                     Analog::ERROR
                 );
             }
-        } else if (is_object($args)) {
-            $this->_loadFromRS($args);
+        } elseif (is_object($args)) {
+            $this->loadFromRS($args);
         }
     }
 
@@ -102,7 +101,7 @@ class LendStatus
      *
      * @return void
      */
-    private function _loadFromRS($r)
+    private function loadFromRS($r)
     {
         $this->status_id = $r->status_id;
         $this->status_text = $r->status_text;
@@ -168,7 +167,7 @@ class LendStatus
     /**
      * Renvoi tous les statuts actifs triés par nom
      *
-     * @param Db     $zdb       Database instance
+     * @param Db $zdb Database instance
      *
      * @return LendStatus[] La liste des statuts actifs triés
      */
@@ -198,7 +197,7 @@ class LendStatus
     /**
      * Renvoi tous les statuts actifs considéré comme empruntés triés par nom
      *
-     * @param Db     $zdb       Database instance
+     * @param Db $zdb Database instance
      *
      * @return LendStatus[] La liste des statuts actifs triés
      */
@@ -228,7 +227,7 @@ class LendStatus
     /**
      * Renvoi tous les statuts actifs considéré comme à la maison triés par nom
      *
-     * @param Db     $zdb       Database instance
+     * @param Db $zdb Database instance
      *
      * @return LendStatus[] La liste des statuts actifs triés
      */

@@ -38,7 +38,7 @@
  * @since     Available since 0.7
  */
 
-namespace GaletteObjectsLend;
+namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use \Zend\Db\Sql\Predicate;
@@ -84,6 +84,7 @@ class LendObject
     private $date_forecast;
     private $date_end;
     private $status_text;
+    private $status_id;
     private $is_home_location = true;
     // Requête sur l'adhérent associé au statut
     private $nom_adh = '';
@@ -92,7 +93,7 @@ class LendObject
     private $id_adh;
     private $rent_id;
     private $in_stock;
-
+    private $comments;
     private $currency = '€';
     private $picture;
     private $cat_active = true;
@@ -191,12 +192,20 @@ class LendObject
 
         //load last rent infos (status, member, and so on
         if ($this->rent_id) {
+            if (property_exists($r, 'status_id')) {
+                $this->status_id = $r->status_id;
+            }
+
             if (property_exists($r, 'status_text')) {
                 $this->status_text = $r->status_text;
             }
 
             if (property_exists($r, 'date_begin')) {
                 $this->date_begin = $r->date_begin;
+            }
+
+            if (property_exists($r, 'date_end')) {
+                $this->date_end = $r->date_end;
             }
 
             if (property_exists($r, 'date_forecast')) {
@@ -211,6 +220,8 @@ class LendObject
                 $this->in_stock = $r->is_home_location;
             }
         }
+
+        $this->category_id = $r->category_id;
 
         if ($this->object_id && $this->deps['rents'] === true) {
             $only_last = false;
@@ -315,6 +326,7 @@ class LendObject
             $object->date_forecast = $rent->date_forecast;
             $object->date_end = $rent->date_end;
             $object->status_text = $rent->status_text;
+            $object->comments = $rent->comments;
             $object->is_home_location = $rent->is_home_location == '1' ? true : false;
             $object->nom_adh = $rent->nom_adh;
             $object->prenom_adh = $rent->prenom_adh;
@@ -391,12 +403,6 @@ class LendObject
                 }
                 $dtb = new \DateTime($this->date_begin);
                 return $dtb->format('d/m/Y');
-            case 'date_end_ihm':
-                if ($this->date_end == '' || $this->date_end == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_end);
-                return $dtb->format('j M Y');
             case 'date_forecast_ihm':
                 if ($this->date_forecast == '' || $this->date_forecast == null) {
                     return '';
@@ -499,25 +505,21 @@ class LendObject
             case 'name':
                 if ($filters->field_filter == Objects::FILTER_NAME) {
                     $process = true;
-                    continue;
                 }
                 break;
             case 'serial_number':
                 if ($filters->field_filter == Objects::FILTER_SERIAL) {
                     $process = true;
-                    continue;
                 }
                 break;
             case 'dimension':
                 if ($filters->field_filter == Objects::FILTER_DIM) {
                     $process = true;
-                    continue;
                 }
                 break;
             case 'object_id':
                 if ($filters->field_filter === Objects::FILTER_ID) {
                     $process = true;
-                    continue;
                 }
                 break;
         }

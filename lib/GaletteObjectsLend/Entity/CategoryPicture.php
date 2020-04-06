@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Picture of an object
+ * Picture of a category
  *
  * PHP version 5
  *
@@ -38,15 +38,15 @@
  * @since     Available since 0.7
  */
 
-namespace GaletteObjectsLend;
+namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Core\Plugins;
 
-class ObjectPicture extends Picture
+class CategoryPicture extends Picture
 {
-    const PK = 'object_id';
-    const TABLE = 'pictures';
+    const PK = 'category_id';
+    const TABLE = 'categories_pictures';
 
     /**
      * Default constructor.
@@ -56,7 +56,7 @@ class ObjectPicture extends Picture
      */
     public function __construct(Plugins $plugins, $objectid = '')
     {
-        $this->store_path = GALETTE_PHOTOS_PATH . 'objectslend/objects/';
+        $this->store_path = GALETTE_PHOTOS_PATH . 'objectslend/categories/';
         parent::__construct($plugins, $objectid);
     }
 }

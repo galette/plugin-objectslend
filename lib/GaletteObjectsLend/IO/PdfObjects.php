@@ -41,8 +41,8 @@ use Galette\Core\Preferences;
 use Galette\Core\Login;
 use Analog\Analog;
 use GaletteObjectsLend\Filters\ObjectsList;
-use GaletteObjectsLend\LendCategory;
-use GaletteObjectsLend\Preferences as LendPreferences;
+use GaletteObjectsLend\Entity\LendCategory;
+use GaletteObjectsLend\Entity\Preferences as LendPreferences;
 
 /**
  * Object labels PDF
@@ -240,8 +240,8 @@ class PdfObjects extends Pdf
             $this->Cell($w_date, 0, $this->cut($object->date_forecast_short, $w_date), 'B', 1, 'L', $fill);
 
             if ($this->login->isAdmin() || $this->login->isStaff()) {
-                $sum_price += floatval(str_replace(array(',', ' '), array('.', ''), $object->price));
-                $grant_total += floatval(str_replace(array(',', ' '), array('.', ''), $object->price));
+                $sum_price += (float)str_replace(array(',', ' '), array('.', ''), $object->price);
+                $grant_total += (float)str_replace(array(',', ' '), array('.', ''), $object->price);
             }
         }
 

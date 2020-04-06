@@ -96,7 +96,7 @@
                             </th>
                         {if $lendsprefs.VIEW_SERIAL}
                             <th>
-                                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_SERIAL"|constant]}">
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_SERIAL"|constant]}">
                                     {_T string="Serial" domain="objectslend"}
                                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_SERIAL')}
                                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -110,7 +110,7 @@
                         {/if}
                         {if $lendsprefs.VIEW_PRICE}
                             <th>
-                                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_PRICE"|constant]}">
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_PRICE"|constant]}">
                                     {_T string="Price" domain="objectslend"}
                                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_PRICE')}
                                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -124,7 +124,7 @@
                         {/if}
                         {if $lendsprefs.VIEW_LEND_PRICE}
                             <th>
-                                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_RENTPRICE"|constant]}">
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_RENTPRICE"|constant]}">
                                     {_T string="Borrow price" domain="objectslend"}
                                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_RENTPRICE')}
                                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -143,7 +143,7 @@
                         {/if}
                         {if $lendsprefs.VIEW_WEIGHT}
                             <th>
-                                <a href="{path_for name="objectslend_objects" data=["option" => {_T string='order' domain="routes"}, "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_WEIGHT"|constant]}">
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_WEIGHT"|constant]}">
                                     {_T string="Weight" domain="objectslend"}
                                     {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_WEIGHT')}
                                         {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
@@ -230,7 +230,7 @@
                                     class="picture"
                                     width="{$object->picture->getOptimalThumbWidth($olendsprefs)}"
                                     height="{$object->picture->getOptimalThumbHeight($olendsprefs)}"
-                                    alt="{_T string="Object's photo" domain="objectslend"}"/>
+                                    alt="{_T string="Object photo" domain="objectslend"}"/>
                             </td>
     {/if}
                             <td>
@@ -251,7 +251,8 @@
                             {/if}
                             {if $lendsprefs.VIEW_LEND_PRICE}
                                 <td class="right">
-                                    {$object->rent_price}&euro;{if $object->price_per_day}<br/>{_T string="(per day)"}{/if}
+                                    {$object->rent_price}&euro;{if $object->price_per_day}
+                                    <br/>{_T string="(per day)" domain="objectslend"}{/if}
                                 </td>
                             {/if}
                             {if $lendsprefs.VIEW_DIMENSION}
@@ -287,7 +288,10 @@
                             </td>
                             {/if}
                             <td class="center {if $object->isActive()}use{else}delete{/if}">
-                                <i class="fas fa-thumbs-{if $object->isActive()}up{else}down{/if}" title="{if $object->isActive()}{_T string="Object is active" domain="objectslend"}{else}{_T string="Object is inactive" domain="objectslend"}{/if}"></i>
+                                <i
+                                    class="fas fa-thumbs-{if $object->isActive()}up{else}down{/if}"
+                                    title="{if $object->isActive()}{_T string="Object is active" domain="objectslend"}{else}{_T string="Object is inactive" domain="objectslend"}{/if}">
+                                </i>
                                 <span class="sr-only">{_T string="Active" domain="objectslend"}</span>
                                 {if $object->isActive()}
                                     <img src="{base_url}/{$template_subdir}images/icon-on.png" alt=""/>
@@ -297,7 +301,7 @@
                                 {if !$object->rent_id or $object->in_stock}
                                     {if $lendsprefs.ENABLE_MEMBER_RENT_OBJECT || $login->isAdmin() || $login->isStaff()}
                                         <a
-                                            class="take_object tooltip"
+                                            class="take_object tooltip action"
                                             href="take_object.php?object_id={$object->object_id}"
                                             title="{_T string="Take object away" domain="objectslend"}"
                                         >
@@ -426,7 +430,7 @@
                 });
                 return false;
             });
-        }
+        };
 
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
         $(function(){
@@ -437,6 +441,7 @@
             $('#nbshow').change(function() {
                 this.form.submit();
             });
+
             {* No legend?
             $('#checkboxes').after('<td class="right" colspan="3"><a href="#" id="show_legend">{_T string="Show legend"}</a></td>');
             $('#legende h1').remove();
@@ -554,13 +559,13 @@
     {if $login->isAdmin() || $login->isStaff()}
             var _checkselection = function() {
                 var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
-                if ( _checkeds == 0 ) {
+                if (_checkeds == 0) {
                     var _el = $('<div id="pleaseselect" title="{_T string="No object selected" domain="objectslend" escape="js"}">{_T string="Please make sure to select at least one object from the list to perform this action." domain="objectslend" escape="js"}</div>');
                     _el.appendTo('body').dialog({
                         modal: true,
                         buttons: {
                             Ok: function() {
-                                $(this).dialog( "close" );
+                                $(this).dialog("close");
                             }
                         },
                         close: function(event, ui){
@@ -677,5 +682,5 @@
             }
     {/if}
 {/if}
-        </script>
+</script>
 {/block}

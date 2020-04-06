@@ -44,11 +44,10 @@ use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate;
 use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\CategoriesList;
-use GaletteObjectsLend\Preferences;
-use GaletteObjectsLend\LendObject;
-use GaletteObjectsLend\LendCategory;
-use GaletteObjectsLend\LendRent;
-use GaletteObjectsLend\LendStatus;
+use GaletteObjectsLend\Filters\ObjectsList;
+use GaletteObjectsLend\Entity\Preferences;
+use GaletteObjectsLend\Entity\LendCategory;
+use GaletteObjectsLend\Entity\LendObject;
 use Galette\Core\Login;
 use Galette\Core\Plugins;
 
@@ -203,7 +202,6 @@ class Categories
                 $select::JOIN_LEFT
             );
 
-
             if ($this->filters !== false) {
                 $this->buildWhereClause($select);
             }
@@ -307,7 +305,7 @@ class Categories
      *
      * @param Select $select Original select
      *
-     * @return string SQL WHERE clause
+     * @return void
      */
     private function buildWhereClause($select)
     {

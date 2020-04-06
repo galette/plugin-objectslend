@@ -39,12 +39,13 @@
  * @since     Available since 0.7
  */
 
-namespace GaletteObjectsLend;
+namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use \Zend\Db\Sql\Predicate;
+use GaletteObjectsLend\Entity\CategoryPicture;
 
 class LendCategory
 {
@@ -190,88 +191,6 @@ class LendCategory
                 $this->zdb->execute($update);
             }
             return true;
-        } catch (\Exception $e) {
-            Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
-                Analog::ERROR
-            );
-            return false;
-        }
-    }
-
-    /**
-     * Get all active categories sort by name with number of objects associated
-     *
-     * @param boolean $noobjects Retrieve categories with no objects associated, defaults to true
-     *
-     * @return LendCategory[]
-     */
-    public static function getActiveCategories($noobjects = true)
-    {
-        global $zdb;
-
-        try {
-            $select_count = $zdb->select(LEND_PREFIX . LendObject::TABLE)
-                ->columns(array(new Predicate\Expression('count(*)')))
-                ->where(
-                    array(
-                        'is_active' => 1,
-                        new Predicate\Expression(
-                            PREFIX_DB . LEND_PREFIX . LendObject::TABLE . '.category_id = ' .
-                            PREFIX_DB . LEND_PREFIX . self::TABLE . '.' . self::PK
-                        )
-                    )
-                );
-
-            $select_sum = $zdb->select(LEND_PREFIX . LendObject::TABLE)
-                ->columns(array(new Predicate\Expression('sum(price)')))
-                ->where(
-                    array(
-                        'is_active' => 1,
-                        new Predicate\Expression(
-                            PREFIX_DB . LEND_PREFIX . LendObject::TABLE . '.category_id = ' .
-                            PREFIX_DB . LEND_PREFIX . self::TABLE . '.' . self::PK
-                        )
-                    )
-                );
-
-            $where = ['is_active' => 1];
-            $having = [];
-            if ($noobjects === false) {
-                $having[] = new Predicate\Operator(
-                    'nb',
-                    '>',
-                    '0'
-                );
-            }
-            $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                ->columns(
-                    array(
-                        '*',
-                        'nb' => new Predicate\Expression(
-                            '(' . $zdb->sql->getSqlStringForSqlObject($select_count) . ')'
-                        ),
-                        'sum' => new Predicate\Expression(
-                            '(' . $zdb->sql->getSqlStringForSqlObject($select_sum) . ')'
-                        ),
-                    )
-                )
-                ->where($where)
-                ->having($having)
-                ->order('name');
-
-            $categs = array();
-            $result = $zdb->execute($select);
-            foreach ($result as $r) {
-                $cat = new LendCategory($this->zdb, $this->plugins, $r);
-                $cat->objects_nb = $r->nb;
-                if (is_numeric($r->sum)) {
-                    $cat->objects_price_sum = $r->sum;
-                }
-                $categs[] = $cat;
-            }
-            return $categs;
         } catch (\Exception $e) {
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n" .

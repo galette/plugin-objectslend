@@ -38,18 +38,29 @@
 use Analog\Analog;
 
 use Galette\Entity\ContributionsTypes;
-use GaletteObjectsLend\Preferences;
-use GaletteObjectsLend\ObjectPicture;
-use GaletteObjectsLend\CategoryPicture;
-use GaletteObjectsLend\LendCategory;
+use Galette\Entity\Adherent;
+use Galette\Entity\Texts;
+use Galette\Entity\Contribution;
+
+use Galette\Repository\Members;
+use Galette\Repository\Contributions;
+
+use GaletteObjectsLend\Entity\Preferences;
+use GaletteObjectsLend\Entity\ObjectPicture;
+use GaletteObjectsLend\Entity\Picture;
+use GaletteObjectsLend\Entity\CategoryPicture;
+use GaletteObjectsLend\Entity\LendCategory;
+use GaletteObjectsLend\Entity\LendStatus;
+use GaletteObjectsLend\Entity\LendObject;
+use GaletteObjectsLend\Entity\LendRent;
+
 use GaletteObjectsLend\Repository\Categories;
-use GaletteObjectsLend\Filters\CategoriesList;
-use GaletteObjectsLend\Repository\Status;
-use GaletteObjectsLend\Filters\StatusList;
-use GaletteObjectsLend\LendStatus;
-use GaletteObjectsLend\LendObject;
-use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Repository\Objects;
+use GaletteObjectsLend\Repository\Status;
+
+use GaletteObjectsLend\Filters\StatusList;
+use GaletteObjectsLend\Filters\ObjectsList;
+use GaletteObjectsLend\Filters\CategoriesList;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -138,7 +149,7 @@ $this->post(
 
         if (isset($post['save_categories']) || isset($post['save_objects'])) {
             $pic_class = isset($post['save_categories']) ? 'CategoryPicture' : 'ObjectPicture';
-            $pic_class = '\GaletteObjectsLend\\' . $pic_class;
+            $pic_class = '\GaletteObjectsLend\Entity\\' . $pic_class;
             $picture = new $pic_class($this->plugins);
 
             $zip_file = GALETTE_EXPORTS_PATH . 'objectslends/';
@@ -381,7 +392,7 @@ $this->get(
     function ($request, $response, $args) {
         $id = isset($args['id']) ? $args['id'] : '';
         $type = $args['type'];
-        $class = '\GaletteObjectsLend\\' .
+        $class = '\GaletteObjectsLend\Entity\\' .
             ($type == 'category' ? 'CategoryPicture' : 'ObjectPicture');
         $picture = new $class($this->plugins, $id);
 
@@ -725,13 +736,13 @@ $this->get(
         if (count(LendStatus::getActiveHomeStatuses($this->zdb)) == 0) {
             $this->flash->addMessage(
                 'error_detected',
-                _T("You should add at last 1 status 'on site' to ensure the plugin works well!", "objectslend")
+                _T("You should add at last 1 status \"on site\" to ensure the plugin works well!", "objectslend")
             );
         }
         if (count(LendStatus::getActiveTakeAwayStatuses($this->zdb)) == 0) {
             $this->flash->addMessage(
                 'error_detected',
-                _T("You should add at last 1 status 'object borrowed' to ensure the plugin works well!", "objectslend")
+                _T("You should add at last 1 status \"object borrowed\" to ensure the plugin works well!", "objectslend")
             );
         }
 
