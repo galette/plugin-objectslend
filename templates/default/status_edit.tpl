@@ -42,7 +42,7 @@
             <i class="fas fa-save"></i>
             {_T string="Save"}
         </button>
-        <a href="status_list.php?msg=canceled" class="button">
+        <a href="{path_for name="objectslend_statuses"}" class="button">
             <i class="fas fa-th-list"></i>
             {_T string="Back to list" domain="objectslend"}
         </a>

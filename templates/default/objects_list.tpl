@@ -358,7 +358,9 @@
                         </tr>
                     {foreachelse}
                         {* FIXME: calculate colspan *}
-                        <tr><td colspan="14" class="emptylist">{_T string="No object has been found" domain="objectslend"}</td></tr>
+                        <tr>
+                            <td colspan="14" class="emptylist">{_T string="No object has been found" domain="objectslend"}</td>
+                        </tr>
                     {/foreach}
                 </tbody>
 {if $nb_objects != 0}
@@ -390,9 +392,9 @@
                                 <input type="submit" value="{_T string="Disable" domain="objectslend"}" onclick="return confirmDelete(false);">
                             </li>
                             <li>
-                                <button type="submit" id="delete">
+                                <button type="submit" name="delete" id="delete">
                                     <i class="fas fa-trash"></i>
-                                    {_T string="Delete" domain="objectslend"}
+                                    {_T string="Delete"}
                                 </button>
                             </li>
     {/if}

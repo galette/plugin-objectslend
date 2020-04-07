@@ -36,23 +36,22 @@
                 <input type="text" name="price" id="price" size="10" style="text-align: right" value="{$object->price}">
             </p>
             <p>
-                <span class="bline">{_T string="Borrow price (%currency):" domain="objectslend" pattern="/%currency/" replace=$object->getCurrency()}</span>
-                <input type="text" name="rent_price" size="10" style="text-align: right" value="{$object->rent_price}">
+                <span class="bline">{_T string="Borrow price:" domain="objectslend"}</span>
+                <input type="text" name="rent_price" size="10" style="text-align: right" value="{$object->rent_price}">&nbsp;{$object->getCurrency()}
             </p>
             <p>
-                <label class="bline tooltip" for="price_per_day" title="{_T string="- Checked = the price applies to each rental day <br/> - Unchecked = the price applies once" domain="objectslend"}">
+                <label class="bline tooltip" for="price_per_day" title="{_T string="The price applies on each rental day if checked, only once otherwise" domain="objectslend"}">
                     {_T string="Price per rental day:" domain="objectslend"}
                 </label>
-                <span class="tip">{_T string="- Checked = the price applies to each rental day <br/> - Unchecked = the price applies once" domain="objectslend"}</span>
                 <input type="checkbox" name="price_per_day" id="price_per_day" value="true"{if $object->price_per_day} checked="checked"{/if}>
             </p>
             <p>
-                <label for="dimension" class="bline">{_T string="Dimensions (cm):" domain="objectslend"}</label>
-                <input type="text" name="dimension" id="dimension" maxlength="100" size="60" value="{$object->dimension}">
+                <label for="dimension" class="bline">{_T string="Dimensions:" domain="objectslend"}</label>
+                <input type="text" name="dimension" id="dimension" maxlength="100" size="60" value="{$object->dimension}">&nbsp;{_T string="cm"}
             </p>
             <p>
-                <label for="weight" class="bline">{_T string="Weight (kg):" domain="objectslend"}</label>
-                <input type="text" name="weight" id="weight" size="10" style="text-align: right" value="{$object->weight}">
+                <label for="weight" class="bline">{_T string="Weight:" domain="objectslend"}</label>
+                <input type="text" name="weight" id="weight" size="10" style="text-align: right" value="{$object->weight}">&nbsp;{_T string="Kg"}
             </p>
             <p>
                 <label class="bline" for="is_active">{_T string="Active:" domain="objectslend"}</label>
@@ -63,7 +62,7 @@
                 <label for="1st_status" class="bline">{_T string="Where is the object?" domain="objectslend"}</label>
                 <select name="1st_status" id="1st_status">
                     {foreach from=$statuses item=sta}
-                        <option value="{$sta->status_id}"{if $sta->is_home_location} selected="selected"{/if}>{$sta->status_text}{if $sta->is_home_location} (@Galette){/if}</option>
+                        <option value="{$sta->status_id}">{$sta->status_text}{if $sta->is_home_location} ({_T string="in stock" domain="objectslend"}){/if}</option>
                     {/foreach}
                 </select>
             </p>
@@ -73,12 +72,15 @@
             <legend class="ui-state-active ui-corner-top">{_T string="Object's photo" domain="objectslend"}</legend>
                 <p>
                     <div class="exemple">{_T string="The file must be smaller than 2 Mb and its name should not contains whitespace!"}</div>
-                    <img src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail"]}{/if}?rand={$time}"
+                    <img
+                        src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail"]}{/if}?rand={$time}"
                         class="picture"
                         width="{$object->picture->getOptimalThumbWidth($olendsprefs)}"
                         height="{$object->picture->getOptimalThumbHeight($olendsprefs)}"
-                        alt="{_T string="Object photo" domain="objectslend"}"/><br/>
-                    <input type="checkbox" name="del_picture" id="del_picture" value="1"/><span class="labelalign"><label for="del_picture">{_T string="Delete image" domain="objectslend"}</label></span><br/>
+                        alt="{_T string="Object photo" domain="objectslend"}"
+                    /><br/>
+                    <input type="checkbox" name="del_picture" id="del_picture" value="1"/>
+                    <span class="labelalign"><label for="del_picture">{_T string="Delete image" domain="objectslend"}</label></span><br/>
                     <input type="file" name="picture" id="object_picture">
                 </p>
         </fieldset>
@@ -91,13 +93,13 @@
             <a href="{path_for name="objectslend_object_clone" data=["id" => $object->object_id]}" class="button">
                 <i class="fas fa-clone"></i> {_T string="Duplicate" domain="objectslend"}
             </a>
-            <a href="objects_print.php?object_id={$object->object_id}" class="button">
+            <a href="{path_for name="objectslend_print_object" data=["id" => $object->object_id]}" class="button">
                 <i class="fas fa-print"></i> {_T string="Print object" domain="objectslend"}
             </a>
         {/if}
         <p>
             <a href="{path_for name="objectslend_objects"}" class="button">
-                <i class="fas fa-th-list"></i> {_T string="Back to list"}
+                <i class="fas fa-th-list"></i> {_T string="Back to list" domain="objectslend"}
             </a>
         </p>
     </div>

@@ -82,19 +82,19 @@
                     <a
                         class="tooltip action"
                         href="{path_for name="objectslend_category" data=["action" => "edit", "id" => $categ->category_id]}"
-                        title="{_T string="Edit %category" pattern="/%category/" domain="objectslend" replace=$categ->name}"
+                        title="{_T string="Edit \"%category\"" pattern="/%category/" domain="objectslend" replace=$categ->name}"
                     >
                         <i class="fas fa-edit"></i>
-                        <span class="sr-only">{_T string="Edit %category" pattern="/%category/" domain="objectslend" replace=$categ->name}</span>
+                        <span class="sr-only">{_T string="Edit \"%category\"" pattern="/%category/" domain="objectslend" replace=$categ->name}</span>
                     </a>
         {if $login->isAdmin()}
                     <a
                         class="tooltip delete"
                         href="{path_for name="objectslend_remove_category" data=["id" => $categ->category_id]}"
-                        title="{_T string="Remove %category from database" domain="objectslend" pattern="/%category/" replace=$categ->name}"
+                        title="{_T string="Remove \"%category\"" domain="objectslend" pattern="/%category/" replace=$categ->name}"
                     >
                         <i class="fas fa-trash"></i>
-                        <span class="sr-only">{_T string="Remove %category from database" domain="objectslend" pattern="/%category/" replace=$categ->name}</span>
+                        <span class="sr-only">{_T string="Remove \"%category\"" domain="objectslend" pattern="/%category/" replace=$categ->name}</span>
                     </a>
         {/if}
                 </td>
