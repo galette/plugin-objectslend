@@ -93,7 +93,7 @@
             <a href="{path_for name="objectslend_object_clone" data=["id" => $object->object_id]}" class="button">
                 <i class="fas fa-clone"></i> {_T string="Duplicate" domain="objectslend"}
             </a>
-            <a href="{path_for name="objectslend_print_object" data=["id" => $object->object_id]}" class="button">
+            <a href="{path_for name="objectslend_object_print" data=["id" => $object->object_id]}" class="button">
                 <i class="fas fa-print"></i> {_T string="Print object" domain="objectslend"}
             </a>
         {/if}
