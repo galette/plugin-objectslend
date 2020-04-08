@@ -469,7 +469,7 @@ $this->get(
 
 //categories list filtering
 $this->post(
-    '/categorie/filter',
+    '/categories/filter',
     function ($request, $response) {
         $post = $request->getParsedBody();
         if (isset($this->session->objectslend_filter_categories)) {
