@@ -1487,7 +1487,7 @@ $this->get(
 
         $lendsprefs = new Preferences($this->zdb);
         $params = [
-            'page_title'    => str_replace('%object', $object->name, _T('Rents list for "%object"', 'objectslend')),
+            'page_title'    => str_replace('%object', $object->name, _T('Rents list for %object', 'objectslend')),
             'object'        => $object,
             'rents'         => $rents,
             'time'          => time(),
