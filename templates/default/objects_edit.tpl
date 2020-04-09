@@ -153,7 +153,7 @@
             <input type="hidden" name="object_id" value="{$object->object_id}">
             <select name="new_status">
                 {foreach from=$statuses item=sta}
-                    <option value="{$sta->status_id}"{if $sta->is_home_location} selected="selected"{/if}>{$sta->status_text}{if $sta->is_home_location} (@Galette){/if}</option>
+                    <option value="{$sta->status_id}"{if $sta->is_home_location} selected="selected"{/if}>{$sta->status_text}{if $sta->is_home_location} ({_T string="in stock"}){/if}</option>
                 {/foreach}
             </select>
         </p>

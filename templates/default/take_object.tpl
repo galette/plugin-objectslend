@@ -1,7 +1,9 @@
+{extends file="page.tpl"}
+{block name="content"}
 <form action="{if $takeorgive eq 'take'}take_object.php{else}give_object_back.php{/if}" method="post" id="form_take_object">
     <input type="hidden" name="object_id" value="{$object->object_id}">
     <div class="bigtable">
-        <fieldset class="cssform">
+        <fieldset class="galette_form">
             <legend class="ui-state-active ui-corner-top">{_T string="Object" domain="objectslend"}</legend>
             <div>
                 <p>
@@ -35,7 +37,7 @@
             <div>
                 <p>
                     <span class="bline">{_T string="Price:" domain="objectslend"}</span>
-                    {$object->price}
+                    {$object->price} {$object->currency}
                 </p>
             </div>
     {/if}
@@ -46,7 +48,7 @@
                         <input type="text" name="rent_price" id="rent_price" value="{$object->rent_price}" size="10" style="text-align: right">
                     {else}
                         <input type="hidden" name="rent_price" id="rent_price" value="{$object->rent_price}">
-                        <span id="rent_price_label">{$object->rent_price}</span>
+                        <span id="rent_price_label">{$object->rent_price}</span> {$object->currency}
                     {/if}
                 </p>
             </div>
@@ -74,7 +76,7 @@
                         <select name="id_adh" id="id_adh">
                             <option value="null">{_T string="--- Select a member ---" domain="objectslend"}</option>
                             {foreach from=$members item=mmbr}
-                                <option value="{$mmbr->id_adh}"{if $login->id eq $mmbr->id_adh} selected="selected"{/if}>{$mmbr->nom_adh} {$mmbr->prenom_adh}{if $mmbr->pseudo_adh != ''} ({$mmbr->pseudo_adh}){/if}</option>
+                                <option value="{$mmbr->id_adh}"{if $login->id eq $mmbr->id_adh} selected="selected"{/if}>{\Galette\Entity\Adherent::getNameWithCase($mmbr->nom_adh, $mmbr->prenom_adh, false, false, $mmbr->pseudo_adh)}</option>
                             {/foreach}
                         </select>
                     </p>
@@ -104,18 +106,9 @@
             </div>
             {if $lendsprefs.AUTO_GENERATE_CONTRIBUTION}
                 <div>
-                    <p>
-                        <span class="bline">{_T string="Payment type:" domain="objectslend"}</span>
-                        <select name="payment_type" id="payment_type">
-                            <option value="null">{_T string="--- Select a payment type ---" domain="objectslend"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_CASH;{/php}">{_T string="Cash"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_CREDITCARD;{/php}">{_T string="Credit card"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_CHECK;{/php}">{_T string="Check"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_TRANSFER;{/php}">{_T string="Transfer"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_PAYPAL;{/php}">{_T string="Paypal"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_OTHER;{/php}">{_T string="Other"}</option>
-                        </select>
-                    </p>
+                    {* payment type *}
+                    {assign var="ptype" value=$contribution->payment_type}
+                    {include file="forms_types/payment_types.tpl" varname="payment_type"}
                 </div>
             {/if}
     {/if}
@@ -158,9 +151,12 @@
     {/if}
     <div class="button-container" id="button_container">
         <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{else}{_T string="Give back" domain="objectslend"}{/if}">
-        <a href="objects_list.php" class="button" id="btncancel">{_T string="Cancel"}</a>
+        <a href="{path_for name="objectslend_objects"}" class="button" id="btncancel">{_T string="Cancel"}</a>
     </div>
 </form>
+{/block}
+
+{block name="javascripts"}
 <script>
 {if $takeorgive eq 'take'}
     var _init_takeobject_js = function() {
@@ -283,3 +279,4 @@
 
 {/if}
 </script>
+{/block}
