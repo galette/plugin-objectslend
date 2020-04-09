@@ -30,10 +30,10 @@ import sys
 import re
 
 # pattern definition
-translatable        = re.compile("_(T|_)\((\"[^\"]*\")(, \"([^\"]*)\")?\)")
+translatable        = re.compile("_(T|_)\((\"[^\"]*\")(, \"([^\"]*)\")\)")
 #same, with single quotes...
-translatable_single = re.compile("_(T|_)\(('[^']*')(, '([^']*)')?\)")
-tpl_translatable    = re.compile("_(T|_)\ string=(\"[^\"]*\")( domain=\"([^\"]*)\")?")
+translatable_single = re.compile("_(T|_)\(('[^']*')(, '([^']*)')\)")
+tpl_translatable    = re.compile("_(T|_)\ string=(\"[^\"]*\")( domain=\"([^\"]*)\")")
 
 # constants string
 startLoc = "#: "
