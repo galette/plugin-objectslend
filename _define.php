@@ -71,6 +71,7 @@ $this->register(
         'objectslend_batch-objectslist' => 'staff',
         'objectslend_remove_objects'    => 'admin',
         'objectslend_objects_print'     => 'staff',
-        'objectslend_object_print'      => 'staff'
+        'objectslend_object_print'      => 'staff',
+        'objectslend_show_object_lend'  => 'staff',
     ]
 );

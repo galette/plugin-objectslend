@@ -337,6 +337,12 @@
                                     <i class="fas fa-clone"></i>
                                     <span class="sr-only">{_T string="Duplicate object" domain="objectslend"}</span>
                                 </a>
+                                <a class="tooltip true"
+                                   href="{path_for name="objectslend_show_object_lend" data=["id" => $object->object_id]}"
+                                >
+                                    <i class="far fa-file-alt"></i>
+                                    <span class="sr-only">{_T string="Show object lends" domain="objectslend"}</span>
+                                </a>
                                 <a
                                     class="tooltip"
                                     href="{path_for name="objectslend_object_print" data=["id" => $object->object_id]}"

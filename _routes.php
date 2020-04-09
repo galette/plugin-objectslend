@@ -1474,3 +1474,31 @@ $this->get(
         $lendsprefs = new Preferences($this->zdb);
     }
 )->setName('objectslend_object_print')->add($authenticate);
+
+$this->get(
+    '/object/show/{id:\d+}',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $object = new LendObject(
+            $this->zdb,
+            $this->plugins,
+            (int)$args['id']
+        );
+        $rents = LendRent::getRentsForObjectId($args['id'], false, 'rent_id desc');
+
+        $lendsprefs = new Preferences($this->zdb);
+        $params = [
+            'page_title'    => str_replace('%object', $object->name, _T('Rents list for "%object"', 'objectslend')),
+            'object'        => $object,
+            'rents'         => $rents,
+            'time'          => time(),
+        ];
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']list_lent_object.tpl',
+            $params
+        );
+        return $response;
+    }
+)->setName('objectslend_show_object_lend')->add($authenticate);
