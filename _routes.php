@@ -661,7 +661,7 @@ $this->post(
         $error_detected = [];
 
         $status->status_text = $post['text'];
-        $status->is_home_location = isset($post['is_home_location']);
+        $status->in_stock = isset($post['in_stock']);
         $status->is_active = isset($post['is_active']);
         $days = trim($post['rent_day_number']);
         $status->rent_day_number = strlen($days) > 0 ? intval($days) : null;

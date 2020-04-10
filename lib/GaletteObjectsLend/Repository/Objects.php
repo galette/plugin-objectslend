@@ -289,7 +289,7 @@ class Objects
             $select->join(
                 ['s' => PREFIX_DB . LEND_PREFIX . LendStatus::TABLE],
                 'r.' . LendStatus::PK . '=s.' . LendStatus::PK,
-                ['status_id', 'status_text', 'is_home_location'],
+                ['status_id', 'status_text', 'in_stock'],
                 $select::JOIN_LEFT
             );
 

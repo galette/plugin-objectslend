@@ -284,8 +284,8 @@ class Status
                 }
                 break;
             case self::ORDERBY_STOCK:
-                if ($this->canOrderBy('is_home_location', $fields)) {
-                    $order[] = 'is_home_location ' . $this->filters->getDirection();
+                if ($this->canOrderBy('in_stock', $fields)) {
+                    $order[] = 'in_stock ' . $this->filters->getDirection();
                 }
                 break;
             case self::ORDERBY_RENTDAYS:
@@ -316,10 +316,10 @@ class Status
             }
 
             if ($this->filters->stock_filter == self::IN_STOCK) {
-                $select->where('c.is_home_location = true');
+                $select->where('c.in_stock = true');
             }
             if ($this->filters->stock_filter == self::OUT_STOCK) {
-                $select->where('c.is_home_location = false');
+                $select->where('c.in_stock = false');
             }
 
             if ($this->filters->filter_str != '') {

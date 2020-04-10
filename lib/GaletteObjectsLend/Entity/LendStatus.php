@@ -54,13 +54,13 @@ class LendStatus
     private $fields = array(
         'status_id' => 'integer',
         'status_text' => 'varchar(100)',
-        'is_home_location' => 'boolean',
+        'in_stock' => 'boolean',
         'is_active' => 'boolean',
         'rent_day_number' => 'int'
     );
     private $status_id;
     private $status_text = '';
-    private $is_home_location = false;
+    private $in_stock = false;
     private $is_active = true;
     private $rent_day_number = null;
 
@@ -105,7 +105,7 @@ class LendStatus
     {
         $this->status_id = $r->status_id;
         $this->status_text = $r->status_text;
-        $this->is_home_location = $r->is_home_location == '1' ? true : false;
+        $this->in_stock = $r->in_stock == '1' ? true : false;
         $this->is_active = $r->is_active == '1' ? true : false;
         $this->rent_day_number = $r->rent_day_number;
     }
@@ -121,7 +121,7 @@ class LendStatus
             $values = array();
 
             foreach ($this->fields as $k => $v) {
-                if (($k === 'is_active' || $k === 'is_home_location')
+                if (($k === 'is_active' || $k === 'in_stock')
                     && $this->$k === false
                 ) {
                     //Handle booleans for postgres ; bugs #18899 and #19354
@@ -205,7 +205,7 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1, 'is_home_location' => 0))
+                    ->where(array('is_active' => 1, 'in_stock' => 0))
                     ->order('status_text');
 
             $status = array();
@@ -235,7 +235,7 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1, 'is_home_location' => 1))
+                    ->where(array('is_active' => 1, 'in_stock' => 1))
                     ->order('status_text');
 
             $status = array();

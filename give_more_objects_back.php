@@ -88,7 +88,7 @@ $ajax = filter_has_var(INPUT_GET, 'mode') ? filter_input(INPUT_GET, 'mode') === 
  */
 $objects = array();
 foreach (LendObject::getMoreObjectsByIds($objects_ids) as $obj) {
-    if (!$obj->is_home_location) {
+    if (!$obj->in_stock) {
         $objects[] = $obj;
     }
 }

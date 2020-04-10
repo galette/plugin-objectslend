@@ -85,14 +85,13 @@ class LendObject
     private $date_end;
     private $status_text;
     private $status_id;
-    private $is_home_location = true;
+    private $in_stock = true;
     // Requête sur l'adhérent associé au statut
     private $nom_adh = '';
     private $prenom_adh = '';
     private $email_adh = '';
     private $id_adh;
     private $rent_id;
-    private $in_stock;
     private $comments;
     private $currency = '€';
     private $picture;
@@ -216,8 +215,8 @@ class LendObject
                 $this->id_adh = $r->{Adherent::PK};
             }
 
-            if (property_exists($r, 'is_home_location')) {
-                $this->in_stock = $r->is_home_location;
+            if (property_exists($r, 'in_stock')) {
+                $this->in_stock = $r->in_stock;
             }
         }
 
@@ -327,13 +326,13 @@ class LendObject
             $object->date_end = $rent->date_end;
             $object->status_text = $rent->status_text;
             $object->comments = $rent->comments;
-            $object->is_home_location = $rent->is_home_location == '1' ? true : false;
+            $object->in_stock = $rent->in_stock == '1' ? true : false;
             $object->nom_adh = $rent->nom_adh;
             $object->prenom_adh = $rent->prenom_adh;
             $object->email_adh = $rent->email_adh;
             $object->id_adh = $rent->id_adh;
         } else {
-            $object->is_home_location = true;
+            $object->in_stock = true;
         }
     }
 

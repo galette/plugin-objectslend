@@ -219,7 +219,7 @@ foreach ($list as $object) {
         $pdf->Cell($col_begin, 0, cut($rt->date_begin, $col_begin), 'B');
         $pdf->Cell($col_end, 0, cut($rt->date_end, $col_end), 'B');
         $pdf->Cell($col_status, 0, cut($rt->status_text, $col_status), 'B');
-        $pdf->Cell($col_home, 0, $rt->is_home_location ? '    X' : '', 'B');
+        $pdf->Cell($col_home, 0, $rt->in_stock ? '    X' : '', 'B');
         $pdf->Cell($col_adh, 0, cut($rt->nom_adh . ' ' . $rt->prenom_adh, $col_adh), 'B');
         $pdf->Cell($col_comments, 0, cut($rt->comments, $col_comments), 'B');
         $pdf->Ln();

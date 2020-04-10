@@ -124,8 +124,8 @@
                         <span class="sr-only">{_T string="Inactive" domain="objectslend"}</span>
                     {/if}
                 </td>
-                <td class="center {if $status->is_home_location}use{else}delete{/if}">
-                    {if $status->is_home_location}
+                <td class="center {if $status->in_stock}use{else}delete{/if}">
+                    {if $status->in_stock}
                         <i class="fas fa-thumbs-up"></i>
                         <span class="sr-only">{_T string="In stock" domain="objectslend"}</span>
                     {else}

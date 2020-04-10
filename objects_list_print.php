@@ -174,19 +174,19 @@ foreach ($list as $obj) {
         $pdf->SetFillColor(255, 214, 135);
     }
 
-    $pdf->Cell($w_checkbox, 0, '□', 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_name, 0, cut($obj->name, $w_name), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_description, 0, cut($obj->description, $w_description), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_serial, 0, cut($obj->serial_number, $w_serial), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_price, 0, cut($obj->price, $w_price), 'B', 0, 'R', $obj->is_home_location);
-    $pdf->Cell($w_price, 0, cut($obj->rent_price, $w_price).$obj->getCurrency(), 'B', 0, 'R', $obj->is_home_location);
-    $pdf->Cell($w_dimension, 0, cut($obj->dimension, $w_dimension), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_weight, 0, cut($obj->weight, $w_weight), 'B', 0, 'R', $obj->is_home_location);
-    $pdf->Cell($w_status, 0, cut($obj->status_text, $w_status), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_date, 0, cut($obj->date_begin_short, $w_date), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_adherent, 0, cut($obj->nom_adh . ' ' . $obj->prenom_adh, $w_adherent), 'B', 0, 'L', $obj->is_home_location);
-    $pdf->Cell($w_location, 0, $obj->date_forecast_short, 'B', 0, 'L', $obj->is_home_location);
-    //$pdf->Cell($w_location, 0, $obj->is_home_location ? 'X' : '', 'B', 0, 'C');
+    $pdf->Cell($w_checkbox, 0, '□', 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_name, 0, cut($obj->name, $w_name), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_description, 0, cut($obj->description, $w_description), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_serial, 0, cut($obj->serial_number, $w_serial), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_price, 0, cut($obj->price, $w_price), 'B', 0, 'R', $obj->in_stock);
+    $pdf->Cell($w_price, 0, cut($obj->rent_price, $w_price).$obj->getCurrency(), 'B', 0, 'R', $obj->in_stock);
+    $pdf->Cell($w_dimension, 0, cut($obj->dimension, $w_dimension), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_weight, 0, cut($obj->weight, $w_weight), 'B', 0, 'R', $obj->in_stock);
+    $pdf->Cell($w_status, 0, cut($obj->status_text, $w_status), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_date, 0, cut($obj->date_begin_short, $w_date), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_adherent, 0, cut($obj->nom_adh . ' ' . $obj->prenom_adh, $w_adherent), 'B', 0, 'L', $obj->in_stock);
+    $pdf->Cell($w_location, 0, $obj->date_forecast_short, 'B', 0, 'L', $obj->in_stock);
+    //$pdf->Cell($w_location, 0, $obj->in_stock ? 'X' : '', 'B', 0, 'C');
     $pdf->Ln();
 
     $sum_price += floatval(str_replace(array(',', ' '), array('.', ''), $obj->price));

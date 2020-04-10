@@ -9,7 +9,7 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2020 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,9 +32,8 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * @Copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   0.7
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7
  */
@@ -69,9 +68,9 @@ class LendRent
     private $status_id;
     private $adherent_id;
     private $comments = '';
+    private $in_stock;
     // Join sur table Status
     private $status_text;
-    private $is_home_location;
     // Left join sur table adhérents
     private $nom_adh = '';
     private $prenom_adh = '';
@@ -224,8 +223,7 @@ class LendRent
                 $rt = new LendRent($r);
                 $rt->status_text = $r->status_text;
                 $rt->status_id = $r->status_id;
-                $rt->is_home_location = $r->is_home_location == '1' ? true : false;
-                $rt->in_stock = $rt->is_home_location;
+                $rt->in_stock = $r->in_stock == '1' ? true : false;
                 $rt->prenom_adh = $r->prenom_adh;
                 $rt->nom_adh = $r->nom_adh;
                 $rt->pseudo_adh = $r->pseudo_adh;

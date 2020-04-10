@@ -62,7 +62,7 @@
                 <label for="1st_status" class="bline">{_T string="Where is the object?" domain="objectslend"}</label>
                 <select name="1st_status" id="1st_status">
                     {foreach from=$statuses item=sta}
-                        <option value="{$sta->status_id}">{$sta->status_text}{if $sta->is_home_location} ({_T string="in stock" domain="objectslend"}){/if}</option>
+                        <option value="{$sta->status_id}">{$sta->status_text}{if $sta->in_stock} ({_T string="in stock" domain="objectslend"}){/if}</option>
                     {/foreach}
                 </select>
             </p>
@@ -124,7 +124,7 @@
                     <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->date_end}</td>
                     <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->status_text}</td>
                     <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if} center">
-                        {if $rt->is_home_location}
+                        {if $rt->in_stock}
                             <img src="{$template_subdir}images/icon-on.png" alt="{_T string="In stock" domain="objectslend" escape="html"}"/>
                         {/if}
                     </td>
@@ -153,7 +153,7 @@
             <input type="hidden" name="object_id" value="{$object->object_id}">
             <select name="new_status">
                 {foreach from=$statuses item=sta}
-                    <option value="{$sta->status_id}"{if $sta->is_home_location} selected="selected"{/if}>{$sta->status_text}{if $sta->is_home_location} ({_T string="in stock"}){/if}</option>
+                    <option value="{$sta->status_id}"{if $sta->in_stock} selected="selected"{/if}>{$sta->status_text}{if $sta->in_stock} ({_T string="In stock"}){/if}</option>
                 {/foreach}
             </select>
         </p>

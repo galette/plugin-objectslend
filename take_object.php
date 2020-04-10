@@ -155,7 +155,7 @@ $ajax = filter_has_var(INPUT_GET, 'mode') ? filter_input(INPUT_GET, 'mode') === 
 $rents = LendRent::getRentsForObjectId($object_id);
 if (count($rents) > 0) {
     $last_rent = $rents[0];
-    if (!$last_rent->is_home_location) {
+    if (!$last_rent->in_stock) {
         header('location: objects_list.php?msg=unavailable');
     }
 }

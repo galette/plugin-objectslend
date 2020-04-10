@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS galette_lend_status CASCADE;
 CREATE TABLE galette_lend_status (
     status_id integer DEFAULT nextval('galette_lend_status_id_seq'::text) NOT NULL,
     status_text character varying(100) NOT NULL,
-    is_home_location boolean NOT NULL,
+    in_stock boolean NOT NULL,
     is_active boolean NOT NULL,
     rent_day_number integer NULL DEFAULT NULL,
     PRIMARY KEY (status_id)
@@ -137,14 +137,14 @@ CREATE TABLE galette_lend_categories_pictures (
 
 
 -- Statuses example data
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active) VALUES('Garage A (exemple)', TRUE, TRUE);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active) VALUES('Maison B (exemple)', TRUE, TRUE);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active) VALUES('Bibliotheque C (exemple)', TRUE, TRUE);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active, rent_day_number) VALUES('Location courte durée (exemple)', FALSE, TRUE, 7);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active, rent_day_number) VALUES('Location longue durée (exemple)', FALSE, TRUE, 30);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active, rent_day_number) VALUES('Reparation (exemple)', FALSE, TRUE, 14);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active) VALUES('Vendu (exemple)', FALSE, TRUE);
-INSERT INTO galette_lend_status (status_text, is_home_location, is_active) VALUES('Detruit (exemple)', FALSE, TRUE);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active) VALUES('Garage A (exemple)', TRUE, TRUE);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active) VALUES('Maison B (exemple)', TRUE, TRUE);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active) VALUES('Bibliotheque C (exemple)', TRUE, TRUE);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active, rent_day_number) VALUES('Location courte durée (exemple)', FALSE, TRUE, 7);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active, rent_day_number) VALUES('Location longue durée (exemple)', FALSE, TRUE, 30);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active, rent_day_number) VALUES('Reparation (exemple)', FALSE, TRUE, 14);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active) VALUES('Vendu (exemple)', FALSE, TRUE);
+INSERT INTO galette_lend_status (status_text, in_stock, is_active) VALUES('Detruit (exemple)', FALSE, TRUE);
 
 -- Default parameters
 INSERT INTO galette_lend_parameters

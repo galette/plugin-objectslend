@@ -225,7 +225,7 @@ class PdfObjects extends Pdf
                 $this->SetFillColor(255, 214, 135);
             }
 
-            $fill = !$object->is_home_location;
+            $fill = !$object->in_stock;
             $this->Cell($w_checkbox, 0, '□', 'B', 0, 'L', $fill);
             $this->Cell($w_name, 0, $this->cut($object->name, $w_name), 'B', 0, 'L', $fill);
             $this->Cell($w_description, 0, $this->cut($object->description, $w_description), 'B', 0, 'L', $fill);
