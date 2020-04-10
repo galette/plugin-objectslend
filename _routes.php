@@ -1175,10 +1175,10 @@ $this->get(
         $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
         $cat_filters = new GaletteObjectsLend\Filters\CategoriesList();
-        $cat_filters->is_active = true; //retrieve only active categories
+        $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
         $cat_filters->not_empty = true; //retrieve only categories with objects
         $categories = new Categories($this->zdb, $this->login, $this->plugins, $cat_filters);
-        $categories_list = $categories->getCategoriesList(true);
+        $categories_list = $categories->getCategoriesList(true, null, false);
 
         // display page
         $this->view->render(

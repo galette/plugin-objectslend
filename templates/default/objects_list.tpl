@@ -376,14 +376,14 @@
                         <ul class="selection_menu">
                             <li>{_T string="For the selection:"}</li>
                             <li>
-                                <button type="submit" name="print_list" class="tooltip use">
+                                <button type="submit" name="print_list" class="tooltip">
                                     <i class="fas fa-file-pdf"></i>
                                     {_T string="Print objects list" domain="objectslend"}
                                 </button>
                             </li>
     {if $login->isAdmin() || $login->isStaff()}
                             <li>
-                                <button type="submit" name="print_objects" class="tooltip use">
+                                <button type="submit" name="print_objects" class="tooltip">
                                     <i class="fas fa-file-pdf"></i>
                                     {_T string="Print objects cards" domain="objectslend"}
                                 </button>
@@ -393,9 +393,6 @@
                             </li>
                             <li>
                                 <input type="submit" value="{_T string="Return" domain="objectslend"}" id="objects_give_back" class="tooltip action">
-                            </li>
-                            <li>
-                                <input type="submit" value="{_T string="Disable" domain="objectslend"}" onclick="return confirmDelete(false);">
                             </li>
                             <li>
                                 <button type="submit" name="delete" id="delete">
