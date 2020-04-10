@@ -303,7 +303,7 @@ class Objects
             $select->join(
                 array('c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE),
                 'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
-                [],
+                ['cat_active'   => 'is_active'],
                 $select::JOIN_LEFT
             );
 

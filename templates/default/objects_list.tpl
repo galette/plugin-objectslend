@@ -293,9 +293,6 @@
                                     title="{if $object->isActive()}{_T string="Object is active" domain="objectslend"}{else}{_T string="Object is inactive" domain="objectslend"}{/if}">
                                 </i>
                                 <span class="sr-only">{_T string="Active" domain="objectslend"}</span>
-                                {if $object->isActive()}
-                                    <img src="{base_url}/{$template_subdir}images/icon-on.png" alt=""/>
-                                {/if}
                             </td>
                             <td class="center nowrap">
                                 {if !$object->rent_id or $object->in_stock}
