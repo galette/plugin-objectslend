@@ -251,8 +251,12 @@
                             {/if}
                             {if $lendsprefs.VIEW_LEND_PRICE}
                                 <td class="right">
-                                    {$object->rent_price}&euro;{if $object->price_per_day}
-                                    <br/>{_T string="(per day)" domain="objectslend"}{/if}
+                                    {$object->rent_price}&euro;<br/>
+                                {if $object->price_per_day}
+                                    {_T string="(per day)" domain="objectslend"}
+                                {else}
+                                    {_T string="(at once)" domain="objectslend"}
+                                {/if}
                                 </td>
                             {/if}
                             {if $lendsprefs.VIEW_DIMENSION}
@@ -379,12 +383,6 @@
                                 </button>
                             </li>
     {if $login->isAdmin() || $login->isStaff()}
-                            <li>
-                                <button type="submit" name="print_objects" class="tooltip">
-                                    <i class="fas fa-file-pdf"></i>
-                                    {_T string="Print objects cards" domain="objectslend"}
-                                </button>
-                            </li>
                             <li>
                                 <input type="submit" value="{_T string="Take out" domain="objectslend"}" id="objects_take_away" class="tooltip action">
                             </li>

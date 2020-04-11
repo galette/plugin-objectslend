@@ -47,7 +47,7 @@
             </p>
             <p>
                 <label for="dimension" class="bline">{_T string="Dimensions:" domain="objectslend"}</label>
-                <input type="text" name="dimension" id="dimension" maxlength="100" size="60" value="{$object->dimension}">&nbsp;{_T string="cm"}
+                <input type="text" name="dimension" id="dimension" maxlength="100" size="60" value="{$object->dimension}">&nbsp;{_T string="Cm"}
             </p>
             <p>
                 <label for="weight" class="bline">{_T string="Weight:" domain="objectslend"}</label>
