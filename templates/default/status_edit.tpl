@@ -13,8 +13,8 @@
             </div>
             <div>
                 <p>
-                    <label for="in_stock" class="bline tooltip" title="{_T string="Is object at home or borrowed" domain="objectslend"}">
-                        {_T string="At home:" domain="objectslend"}
+                    <label for="in_stock" class="bline tooltip" title="{_T string="Is object in stock or borrowed" domain="objectslend"}">
+                        {_T string="In stock:" domain="objectslend"}
                     </label>
                     <span class="tip">{_T string="Check if the object is available to be borrowed;<br/>uncheck if object is already borrowed and should be given back" domain="objectslend"}</span>
                     <input type="checkbox" name="in_stock" id="in_stock" value="true"{if $status->in_stock} checked="checked"{/if}>

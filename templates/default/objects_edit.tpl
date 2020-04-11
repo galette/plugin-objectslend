@@ -112,7 +112,7 @@
                 <th>{_T string="Begin date" domain="objectslend"}</th>
                 <th>{_T string="End date" domain="objectslend"}</th>
                 <th>{_T string="Status" domain="objectslend"}</th>
-                <th>{_T string="At home" domain="objectslend"}</th>
+                <th>{_T string="In stock" domain="objectslend"}</th>
                 <th>{_T string="Member" domain="objectslend"}</th>
                 <th>{_T string="Comments" domain="objectslend"}</th>
             </tr>

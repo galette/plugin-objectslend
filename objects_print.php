@@ -199,7 +199,7 @@ foreach ($list as $object) {
     $col_begin = 33;
     $col_end = 33;
     $col_status = 30;
-    $col_home = 25;
+    $col_stock = 25;
     $col_adh = 30;
     $col_comments = 40;
 
@@ -209,7 +209,7 @@ foreach ($list as $object) {
     $pdf->Cell($col_begin, 0, cut(_T("Begin", "objectslend"), $col_begin), 'B');
     $pdf->Cell($col_end, 0, cut(_T("End", "objectslend"), $col_end), 'B');
     $pdf->Cell($col_status, 0, cut(_T("Status", "objectslend"), $col_status), 'B');
-    $pdf->Cell($col_home, 0, cut(_T("On site", "objectslend"), $col_home), 'B');
+    $pdf->Cell($col_stock, 0, cut(_T("In stock", "objectslend"), $col_stock), 'B');
     $pdf->Cell($col_adh, 0, cut(_T("Member", "objectslend"), $col_adh), 'B');
     $pdf->Cell($col_comments, 0, cut(_T("Comments", "objectslend"), $col_comments), 'B');
     $pdf->Ln();
@@ -219,7 +219,7 @@ foreach ($list as $object) {
         $pdf->Cell($col_begin, 0, cut($rt->date_begin, $col_begin), 'B');
         $pdf->Cell($col_end, 0, cut($rt->date_end, $col_end), 'B');
         $pdf->Cell($col_status, 0, cut($rt->status_text, $col_status), 'B');
-        $pdf->Cell($col_home, 0, $rt->in_stock ? '    X' : '', 'B');
+        $pdf->Cell($col_stock, 0, $rt->in_stock ? '    X' : '', 'B');
         $pdf->Cell($col_adh, 0, cut($rt->nom_adh . ' ' . $rt->prenom_adh, $col_adh), 'B');
         $pdf->Cell($col_comments, 0, cut($rt->comments, $col_comments), 'B');
         $pdf->Ln();

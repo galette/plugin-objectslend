@@ -94,10 +94,10 @@ class PdfObject extends Pdf
         $this->setMargins(10, 10);
 
         // Show full page
-        //$this->SetDisplayMode('fullpage');
+        $this->SetDisplayMode('fullpage');
 
         // Disable Auto Page breaks
-        //$this->SetAutoPageBreak(false, 20);
+        $this->SetAutoPageBreak(false, 20);
     }
 
     /**
@@ -202,7 +202,7 @@ class PdfObject extends Pdf
         $col_begin = 33;
         $col_end = 33;
         $col_status = 30;
-        $col_home = 25;
+        $col_stock = 25;
         $col_adh = 30;
         $col_comments = 40;
 
@@ -212,7 +212,7 @@ class PdfObject extends Pdf
         $this->Cell($col_begin, 0, $this->stretchHead(_T("Begin", "objectslend"), $col_begin), 'B');
         $this->Cell($col_end, 0, $this->stretchHead(_T("End", "objectslend"), $col_end), 'B');
         $this->Cell($col_status, 0, $this->stretchHead(_T("Status", "objectslend"), $col_status), 'B');
-        $this->Cell($col_home, 0, $this->stretchHead(_T("On site", "objectslend"), $col_home), 'B');
+        $this->Cell($col_stock, 0, $this->stretchHead(_T("In stock", "objectslend"), $col_stock), 'B');
         $this->Cell($col_adh, 0, $this->stretchHead(_T("Member", "objectslend"), $col_adh), 'B');
         $this->Cell($col_comments, 0, $this->stretchHead(_T("Comments", "objectslend"), $col_comments), 'B');
         $this->Ln();
@@ -222,7 +222,7 @@ class PdfObject extends Pdf
             $this->Cell($col_begin, 0, $this->cut($rt->date_begin, $col_begin), 'B');
             $this->Cell($col_end, 0, $this->cut($rt->date_end, $col_end), 'B');
             $this->Cell($col_status, 0, $this->cut($rt->status_text, $col_status), 'B');
-            $this->Cell($col_home, 0, $rt->is_home_location ? '    X' : '', 'B');
+            $this->Cell($col_stock, 0, $rt->in_stock ? '    X' : '', 'B');
             $this->Cell($col_adh, 0, $this->cut($rt->nom_adh . ' ' . $rt->prenom_adh, $col_adh), 'B');
             $this->Cell($col_comments, 0, $this->cut($rt->comments, $col_comments), 'B');
             $this->Ln();
