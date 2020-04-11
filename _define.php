@@ -44,7 +44,7 @@ $this->register(
     '0.9.2',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
     '2019-06-24',                       //Date
-    [   //Permissions needed - not yet implemented
+    [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
         'objectslend_adminimages'       => 'staff',
@@ -64,8 +64,8 @@ $this->register(
         'objectslend_object'            => 'staff',
         'objectslend_object_action'     => 'staff',
         'objectslend_object_clone'      => 'staff',
-        'objectslend_objects'           => 'staff',
-        'objectslend_filter_objects'    => 'staff',
+        'objectslend_objects'           => 'member',
+        'objectslend_filter_objects'    => 'member',
         'objectslend_remove_object'     => 'admin',
         'objectslend_doremove_object'   => 'admin',
         'objectslend_batch-objectslist' => 'staff',
@@ -73,5 +73,7 @@ $this->register(
         'objectslend_objects_print'     => 'staff',
         'objectslend_object_print'      => 'staff',
         'objectslend_show_object_lend'  => 'staff',
+        'objectslend_object_take'       => 'member',
+        'objectslend_object_dotake'     => 'member'
     ]
 );

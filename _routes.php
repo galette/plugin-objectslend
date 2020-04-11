@@ -736,13 +736,13 @@ $this->get(
         if (count(LendStatus::getActiveHomeStatuses($this->zdb)) == 0) {
             $this->flash->addMessage(
                 'error_detected',
-                _T("You should add at last 1 status \"on site\" to ensure the plugin works well!", "objectslend")
+                _T("Please add add at last one status \"in stock\"!", "objectslend")
             );
         }
         if (count(LendStatus::getActiveTakeAwayStatuses($this->zdb)) == 0) {
             $this->flash->addMessage(
                 'error_detected',
-                _T("You should add at last 1 status \"object borrowed\" to ensure the plugin works well!", "objectslend")
+                _T("Please add at least one status \"object borrowed\"!", "objectslend")
             );
         }
 
@@ -1531,3 +1531,219 @@ $this->get(
         return $response;
     }
 )->setName('objectslend_show_object_lend')->add($authenticate);
+
+$this->get(
+    '/object/take/{id:\d+}',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $lendsprefs = new Preferences($this->zdb);
+
+        if (!$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT} && !($this->login->isAdmin() || $this->login->isStaff())) {
+            Analog::log(
+                'Trying to take an object without appropriate rights! (Object ' .
+                $args['id'] . ', user ' . $this->login->login .')',
+                Analog::WARNING
+            );
+            //redirect to objects list
+            $this->flash->addMessage(
+                'error_detected',
+                _T("You do not have rights to take objects!", "objectslend")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader(
+                    'Location',
+                    $this->router->pathFor('objectslend_objects')
+                );
+        }
+
+        // members
+        $m = new Members();
+        $members = $m->getSelectizedMembers(
+            $this->zdb,
+            $this->login->id
+        );
+
+        $params['members'] = [
+            'filters'   => $m->getFilters(),
+            'count'     => $m->getCount()
+        ];
+
+        $object = new LendObject(
+            $this->zdb,
+            $this->plugins,
+            (int)$args['id']
+        );
+
+        //check if object is currently available
+        $rents = LendRent::getRentsForObjectId((int)$args['id']);
+        if (count($rents) > 0) {
+            $last_rent = $rents[0];
+            if (!$last_rent->in_stock) {
+                //redirect to objects list
+                $this->flash->addMessage(
+                    'warning_detected',
+                    str_replace(
+                        '%object',
+                        $object->name,
+                        _T("%object is currently not available", "objectslend")
+                    )
+                );
+
+                return $response
+                    ->withStatus(301)
+                    ->withHeader(
+                        'Location',
+                        $this->router->pathFor('objectslend_objects')
+                    );
+            }
+        }
+
+        $rent = new LendRent();
+        $params = [
+            'page_title'    => _T("Borrow an object", "objectslend"),
+            'rent'          => $rent,
+            'object'        => $object,
+            'time'          => time(),
+            'statuses'      => LendStatus::getActiveTakeAwayStatuses($this->zdb),
+            'members'       => $members,
+            'lendsprefs'    => $lendsprefs->getpreferences(),
+            'olendsprefs'   => $lendsprefs,
+            'ajax'          => $request->isXhr(),
+            'require_calendar'  => true,
+            /*$tpl->assign('year', date('Y'));
+            $tpl->assign('month', date('m'));
+            $tpl->assign('day', date('d'));*/
+            'rent_price'    => str_replace(array( ',', ' '), array( '.', ''), $object->rent_price),
+            'takeorgive'    => 'take'
+        ];
+
+        if (count($members)) {
+            $params['members']['list'] = $members;
+        }
+
+        // display page
+        $this->view->render(
+            $response,
+            'file:[' . $module['route'] . ']take_object.tpl',
+            $params
+        );
+        return $response;
+    }
+)->setName('objectslend_object_take')->add($authenticate);
+
+$this->post(
+    '/object/take/{id:\d+}',
+    function ($request, $response, $args) use ($module, $module_id) {
+        $lendsprefs = new Preferences($this->zdb);
+        $post = $request->getParsedBody();
+
+        $object_id = (int)$args['id'];
+
+        // close olds object rents
+        LendRent::closeAllRentsForObject($object_id, '');
+
+        // Ajout d'un nouveau statut "objet loué"
+        $rent = new LendRent();
+        $rent->object_id = $object_id;
+        $rent->status_id = $post['status'];
+        $rent->date_forecast = $post['expected_return'];
+
+        if ($post[Adherent::PK] && ($this->login->isAdmin() || $this->login->isStaff())) {
+            $rent->adherent_id = $post[Adherent::PK];
+        } else {
+            $rent->adherent_id = $this->login->id;
+        }
+        $rent->store();
+
+        //retrieve object information
+        $object = new LendObject(
+            $this->zdb,
+            $this->plugins,
+            $object_id
+        );
+
+        // Add contribution
+        if ($lendsprefs->{Preferences::PARAM_AUTO_GENERATE_CONTRIBUTION}) {
+            //retrieve lend price
+            $rentprice = $object->value_rent_price;
+            if ($post['rent_price']  && ($this->login->isAdmin() || $this->login->isStaff())) {
+                $rentprice = floatval(str_replace(' ', '', str_replace(',', '.', $post['rent_price'])));
+            }
+
+            if ($rentprice > 0) {
+                $contrib = new Contribution($this->zdb, $this->login);
+
+                $info = str_replace(
+                    array(
+                        '{NAME}',
+                        '{DESCRIPTION}',
+                        '{SERIAL_NUMBER}',
+                        '{PRICE}',
+                        '{RENT_PRICE}',
+                        '{WEIGHT}',
+                        '{DIMENSION}'
+                    ),
+                    array(
+                        $object->name,
+                        $object->description,
+                        $object->serial_number,
+                        $object->price,
+                        $object->rent_price,
+                        $object->weight,
+                        $object->dimension
+                    ),
+                    $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIB_INFO_TEXT}
+                );
+
+                $values = array(
+                    'montant_cotis'         => $rentprice,
+                    ContributionsTypes::PK  => $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIBUTION_TYPE_ID},
+                    'date_enreg'            => date(_T("Y-m-d")),
+                    'date_debut_cotis'      => date(_T("Y-m-d")),
+                    'type_paiement_cotis'   => $post['payment_type'],
+                    'info_cotis'            => $info,
+                    Adherent::PK            => $rent->adherent_id
+                );
+                $contrib->check($values, array(), array());
+                $created = $contrib->store();
+                if ($created) {
+                    $this->flash->addMessage(
+                        'success_detected',
+                        _T('Contribution has been successfully stored')
+                    );
+                } else {
+                    $this->flash->addMessage(
+                        'error_detected',
+                        _T("An error occurred while storing the contribution.")
+                    );
+                }
+            }
+        }
+
+        $this->flash->addMessage(
+            'success_detected',
+            str_replace(
+                '%object',
+                $object->name,
+                _T("You have just borrowed %object :)", "objectslend")
+            )
+        );
+
+        if ($request->isXhr() || $post['mode'] == 'ajax') {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        } else {
+            // Redirection sur la liste des objets
+            return $response
+                ->withStatus(301)
+                ->withHeader(
+                    'Location',
+                    $this->router->pathFor('objectslend_objects')
+                );
+        }
+    }
+)->setName('objectslend_object_dotake')->add($authenticate);

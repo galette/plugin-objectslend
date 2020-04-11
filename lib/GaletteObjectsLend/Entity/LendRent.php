@@ -86,7 +86,11 @@ class LendRent
     {
         global $zdb;
 
-        $this->date_begin = date('Y-m-d H:i:s');
+        $date = new \DateTime();
+        $this->date_begin = $date->format('Y-m-d H:i:s');
+        $date_forecast = clone $date;
+        $date_forecast->add(new \DateInterval('P1D'));
+        $this->date_forecast = $date_forecast->format('Y-m-d');
 
         if (is_int($args)) {
             try {
@@ -356,6 +360,32 @@ class LendRent
                     $this->$name = (int)$value;
                 } else {
                     $this->$name = null;
+                }
+                break;
+            case 'date_forecast':
+            case 'date_begin_short':
+            case 'date_begin':
+            case 'date_end':
+                $fmt = "Y-m-d";
+                $tfmt = __("Y-m-d");
+                if ($name == 'date_begin' || $name == 'date_end') {
+                    $fmt .= ' H:i:s';
+                    $tfmt = __($fmt, 'objectslend');
+                }
+                try {
+                    $d = \DateTime::createFromFormat($tfmt, $value);
+                    if ($d === false) {
+                        //try with non localized date
+                        $d = \DateTime::createFromFormat($fmt, $value);
+                        if ($d === false) {
+                            throw new \Exception('Incorrect format');
+                        }
+                    }
+                } catch (\Exception $e) {
+                    Analog::log(
+                        sprintf('Invalid %1$s date %2$s, required %3$s or %4$s', $name, $forecast, $tfmt, $fmt),
+                        Analog::WARNING
+                    );
                 }
                 break;
             default:

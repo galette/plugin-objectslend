@@ -303,7 +303,7 @@
                                     {if $lendsprefs.ENABLE_MEMBER_RENT_OBJECT || $login->isAdmin() || $login->isStaff()}
                                         <a
                                             class="take_object tooltip action"
-                                            href="take_object.php?object_id={$object->object_id}"
+                                            href="{path_for name="objectslend_object_take" data=["id" => $object->object_id]}"
                                             title="{_T string="Take object away" domain="objectslend"}"
                                         >
                                             <i class="fas fa-cart-arrow-down"></i>

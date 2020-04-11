@@ -1,7 +1,12 @@
-{extends file="page.tpl"}
+{if $ajax}
+    {assign var="extend" value='ajax.tpl'}
+{else}
+    {assign var="extend" value='page.tpl'}
+{/if}
+{extends file=$extend}
+
 {block name="content"}
-<form action="{if $takeorgive eq 'take'}take_object.php{else}give_object_back.php{/if}" method="post" id="form_take_object">
-    <input type="hidden" name="object_id" value="{$object->object_id}">
+<form action="{if $takeorgive eq 'take'}{path_for name="objectslend_object_dotake" data=["id" => $object->object_id, ""]}{else}give_object_back.php{/if}" method="post" id="form_take_object">
     <div class="bigtable">
         <fieldset class="galette_form">
             <legend class="ui-state-active ui-corner-top">{_T string="Object" domain="objectslend"}</legend>
@@ -10,8 +15,8 @@
 
                     <img src="{if $object->object_id}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}{else}{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail"]}{/if}?rand={$time}"
                         class="picture fright"
-                        width="{$object->picture->getOptimalThumbWidth()}"
-                        height="{$object->picture->getOptimalThumbHeight()}"
+                        width="{$object->picture->getOptimalThumbWidth($olendsprefs)}"
+                        height="{$object->picture->getOptimalThumbHeight($olendsprefs)}"
                         alt="{_T string="Object photo" domain="objectslend"}"/>
                     <span class="bline">{_T string="Name:" domain="objectslend"}</span>
                     {$object->name}
@@ -43,9 +48,9 @@
     {/if}
             <div>
                 <p>
-                    <span class="bline">{_T string="Borrow price (%currency):" domain="objectslend" pattern="/%currency/" replace=$object->currency}</span>
+                    <span class="bline">{_T string="Borrow price:" domain="objectslend"}</span>
                     {if $login->isAdmin() || $login->isStaff()}
-                        <input type="text" name="rent_price" id="rent_price" value="{$object->rent_price}" size="10" style="text-align: right">
+                        <input type="text" name="rent_price" id="rent_price" value="{$object->rent_price}" size="10" style="text-align: right"> {$object->currency}
                     {else}
                         <input type="hidden" name="rent_price" id="rent_price" value="{$object->rent_price}">
                         <span id="rent_price_label">{$object->rent_price}</span> {$object->currency}
@@ -55,16 +60,24 @@
     {if $lendsprefs.VIEW_DIMENSION}
             <div>
                 <p>
-                    <span class="bline">{_T string="Dimensions (cm):" domain="objectslend"}</span>
-                    {$object->dimension}
+                    <span class="bline">{_T string="Dimensions:" domain="objectslend"}</span>
+        {if $object->dimension != ''}
+                    {$object->dimension} {_T string="Cm" domain="objectslend"}
+        {else}
+                    -
+        {/if}
                 </p>
             </div>
     {/if}
     {if $lendsprefs.VIEW_WEIGHT}
             <div>
                 <p>
-                    <span class="bline">{_T string="Weight (kg):" domain="objectslend"}</span>
-                    {$object->weight}
+                    <span class="bline">{_T string="Weight:" domain="objectslend"}</span>
+        {if $object->weight != ''}
+                    {$object->weight} {_T string="Kg" domain="objectslend"}
+        {else}
+                    -
+        {/if}
                 </p>
             </div>
     {/if}
@@ -72,11 +85,13 @@
             {if $login->isAdmin() || $login->isStaff()}
                 <div>
                     <p>
-                        <span class="bline">{_T string="Member:" domain="objectslend"}</span>
-                        <select name="id_adh" id="id_adh">
-                            <option value="null">{_T string="--- Select a member ---" domain="objectslend"}</option>
-                            {foreach from=$members item=mmbr}
-                                <option value="{$mmbr->id_adh}"{if $login->id eq $mmbr->id_adh} selected="selected"{/if}>{\Galette\Entity\Adherent::getNameWithCase($mmbr->nom_adh, $mmbr->prenom_adh, false, false, $mmbr->pseudo_adh)}</option>
+                        <label for="id_adh">{_T string="Member:" domain="objectslend"}</label>
+                        <select name="id_adh" id="id_adh" class="nochosen"{if isset($disabled.id_adh)} {$disabled.id_adh}{/if}>
+                            {if $adh_selected eq 0}
+                            <option value="">{_T string="Search for name or ID and pick member"}</option>
+                            {/if}
+                            {foreach $members.list as $k=>$v}
+                                <option value="{$k}"{if $login->id == $k} selected="selected"{/if}>{$v}</option>
                             {/foreach}
                         </select>
                     </p>
@@ -101,7 +116,7 @@
             <div>
                 <p>
                     <span class="bline">{_T string="Expected return:" domain="objectslend"}</span>
-                    <input type="text" id="expected_return" name="expected_return" size="8">
+                    <input type="text" id="expected_return" name="expected_return" size="8" value="{$rent->date_forecast}">
                 </p>
             </div>
             {if $lendsprefs.AUTO_GENERATE_CONTRIBUTION}
@@ -145,11 +160,14 @@
     <div class="disclaimer center">
         <input type="checkbox" name="agreement" id="agreement" value="1" required="required"/>
         <label for="agreement">{_T string="I have read and I agree with terms and conditions" domain="objectslend"}</label>
-        <span class="show_agreement" title="{_T string="Show terms and conditions" domain="objectslend"}"><img src="{$template_subdir}images/icon-down.png" alt="{_T string="Show terms and conditions" domain="objectslend"}"/></span>
+        <span class="show_agreement" title="{_T string="Show terms and conditions" domain="objectslend"}">
+
+        <img src="{base_url}/{$template_subdir}images/icon-down.png" alt="{_T string="Show terms and conditions" domain="objectslend"}"/></span>
         <div id="terms_conditions" class="left">{_T string="The items offered for rent are in good condition and verification rental contradictory to their status is at the time of withdrawal. No claims will be accepted after the release of the object. Writing by the store a list of reservation does not exempt the customer checking his retrait. The payment of rent entitles the purchaser to make normal use of the loaned object. If the object is rendered in a degraded state, the seller reserves the right to collect all or part of the security deposit. In case of deterioration of the rented beyond the standard object, a financial contribution will be required for additional cleaning caused. In case of damage, loss or theft of the rented property, the deposit will not be refunded automatically to 'the company as damages pursuant to Article 1152 of the Civil Code and without that it need for any other judicial or extra-judicial formality. In some other cases not listed above and at the discretion of the seller, the deposit check may also be collected in whole or party." domain="objectslend"}</div>
     </div>
     {/if}
     <div class="button-container" id="button_container">
+        <input type="hidden" name="mode" value="{if $ajax}ajax{/if}"/>
         <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{else}{_T string="Give back" domain="objectslend"}{/if}">
         <a href="{path_for name="objectslend_objects"}" class="button" id="btncancel">{_T string="Cancel"}</a>
     </div>
@@ -157,17 +175,19 @@
 {/block}
 
 {block name="javascripts"}
-<script>
+<script type="text/javascript">
+    {include file="js_chosen_adh.tpl"}
+
 {if $takeorgive eq 'take'}
     var _init_takeobject_js = function() {
         $('#btnsave').button('disable');
+
         $('#expected_return').datepicker({
             changeMonth: true,
             changeYear: true,
-            showOn: 'both',
-            buttonImage: '{$template_subdir}images/calendar.png',
-            buttonImageOnly: true,
-            minDate: 0,
+            showOn: 'button',
+            buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
+            //minDate: 0,
             selectOtherMonths: true,
             showOtherMonths: false,
             showWeek: true,
@@ -235,8 +255,8 @@
             return;
         }
 
-        var tomorrow = new Date({$year}, {$month} - 1, {$day} + parseInt(days));
-        $('#expected_return').val(completeZero(tomorrow.getDate()) + '/' + completeZero(tomorrow.getMonth() + 1) + '/' + tomorrow.getFullYear());
+        /*var tomorrow = new Date({$year}, {$month} - 1, {$day} + parseInt(days));
+        $('#expected_return').val(completeZero(tomorrow.getDate()) + '/' + completeZero(tomorrow.getMonth() + 1) + '/' + tomorrow.getFullYear());*/
 
         if ('1' === '{$object->price_per_day}') {
             var price_per_day = {$rent_price} * parseInt(days);
