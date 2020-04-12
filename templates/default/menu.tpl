@@ -9,7 +9,7 @@
            {_T string="Objects list" domain="objectslend"}
        </a>
    </li>-->
-    <li{if $cur_route eq "objectslend_objects"} class="selected"{/if}>
+    <li{if $cur_route eq "objectslend_objects" or $cur_route eq "objectslend_object_take" or $cur_route eq "objectslend_show_object_lend"} class="selected"{/if}>
        <a href="{path_for name="objectslend_objects"}">
            {_T string="Objects list" domain="objectslend"}
        </a>
