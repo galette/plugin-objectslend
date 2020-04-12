@@ -104,47 +104,11 @@
         </p>
     </div>
 </form>
-{if $object->object_id}
-   <table class="listing">
-        <caption>{_T string="History of object loans" domain="objectslend"}</caption>
-        <thead>
-            <tr>
-                <th>{_T string="Begin date" domain="objectslend"}</th>
-                <th>{_T string="End date" domain="objectslend"}</th>
-                <th>{_T string="Status" domain="objectslend"}</th>
-                <th>{_T string="In stock" domain="objectslend"}</th>
-                <th>{_T string="Member" domain="objectslend"}</th>
-                <th>{_T string="Comments" domain="objectslend"}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {foreach from=$rents item=rt name=rent}
-                <tr>
-                    <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->date_begin}</td>
-                    <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->date_end}</td>
-                    <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->status_text}</td>
-                    <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if} center">
-                        {if $rt->in_stock}
-                            <img src="{$template_subdir}images/icon-on.png" alt="{_T string="In stock" domain="objectslend" escape="html"}"/>
-                        {/if}
-                    </td>
-                    <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">
-                        {if $rt->nom_adh ne ''}
-                            {if $rt->email_adh ne ''}
-                                <a href="mailto:{$rt->email_adh}">{$rt->nom_adh} {$rt->prenom_adh}</a>
-                            {else}
-                                {$rt->nom_adh} {$rt->prenom_adh}
-                            {/if}
-                        {else}
-                            -
-                        {/if}
-                    </td>
-                    <td class="tbl_line_{if $smarty.foreach.rent.index is odd}even{else}odd{/if}">{$rt->comments}</td>
-                </tr>
-            {/foreach}
-        </tbody>
-    </table>
 
+{if $object->object_id}
+    <h4 class="center">{_T string="History" domain="objectslend"}</h4>
+    {include file="list_lent_object.tpl" rents=$object->rents ajax=true}
+{* FIXME: should not be here, create a specific page. *}
 <form action="{path_for name="objectslend_object_action" data=["action" => $action, "id" => $object->object_id]}" method="post" class="cssform">
     <fieldset class="cssform">
         <legend class="ui-state-active ui-corner-top">{_T string="Change status" domain="objectslend"}</legend>

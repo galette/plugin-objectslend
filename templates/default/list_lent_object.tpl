@@ -1,4 +1,9 @@
-{extends file="page.tpl"}
+{if $ajax}
+    {assign var="extend" value="ajax.tpl"}
+{else}
+    {assign var="extend" value="page.tpl"}
+{/if}
+{extends file=$extend}
 {block name="content"}
 <div class="bigtable">
     <table class="listing">
@@ -14,14 +19,16 @@
             </tr>
         </thead>
         <tbody>
-    {foreach $rents as $rent}
-            <tr>
+    {foreach from=$rents item=rent name=rentlist}
+            <tr class="{if $smarty.foreach.rentlist.index is odd}odd{else}even{/if}">
                 <td>{$rent->rent_id}</td>
-                <td>{$rent->status_text}</td>
+                <td>{$rent->status_text}{if $rent->in_stock} ({_T string="In stock" domain="objectslend"}){/if}</td>
                 <td>{$rent->date_begin|date_format:_T("Y-m-d")}</td>
                 <td>{$rent->date_forecast|date_format:_T("Y-m-d")}</td>
                 <td>{$rent->date_end|date_format:_T("Y-m-d")}</td>
-                <td>{$rent->nom_adh} {$rent->prenom_adh}</td>
+                <td>
+                    {$rent->nom_adh} {$rent->prenom_adh}
+                </td>
                 <td>{$rent->comments}</td>
             </tr>
     {foreachelse}
@@ -32,6 +39,7 @@
         </tbody>
     </table>
 </div>
+{if !$ajax}
 <div class="button-container">
     <p>
         <a href="{path_for name="objectslend_objects"}" class="button">
@@ -39,4 +47,5 @@
         </a>
     </p>
 </div>
+{/if}
 {/block}
