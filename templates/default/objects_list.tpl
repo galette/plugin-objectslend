@@ -383,12 +383,13 @@
                                 </button>
                             </li>
     {if $login->isAdmin() || $login->isStaff()}
+                            {* Not hanled from backport
                             <li>
                                 <input type="submit" value="{_T string="Take out" domain="objectslend"}" id="objects_take_away" class="tooltip action">
                             </li>
                             <li>
                                 <input type="submit" value="{_T string="Return" domain="objectslend"}" id="objects_give_back" class="tooltip action">
-                            </li>
+                            </li>*}
                             <li>
                                 <button type="submit" name="delete" id="delete">
                                     <i class="fas fa-trash"></i>
