@@ -432,6 +432,26 @@
                 return false;
             });
         };
+        var _checkselection = function() {
+            var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
+            if (_checkeds == 0) {
+                var _el = $('<div id="pleaseselect" title="{_T string="No object selected" domain="objectslend" escape="js"}">{_T string="Please make sure to select at least one object from the list to perform this action." domain="objectslend" escape="js"}</div>');
+                _el.appendTo('body').dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    close: function(event, ui){
+                        _el.remove();
+                    }
+                });
+                return false;
+            } else {
+                return true;
+            }
+        }
 
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
         $(function(){
@@ -443,7 +463,7 @@
                 this.form.submit();
             });
 
-            $('.selection_menu input[type="submit"], .selection_menu input[type="button"]').click(function(){
+            $('.selection_menu input[type="submit"], .selection_menu button').click(function(){
                 if ( this.id == 'delete' ) {
                     //mass removal is handled from 2 steps removal
                     return;
@@ -481,26 +501,6 @@
         });
 
     {if $login->isAdmin() || $login->isStaff()}
-            var _checkselection = function() {
-                var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
-                if (_checkeds == 0) {
-                    var _el = $('<div id="pleaseselect" title="{_T string="No object selected" domain="objectslend" escape="js"}">{_T string="Please make sure to select at least one object from the list to perform this action." domain="objectslend" escape="js"}</div>');
-                    _el.appendTo('body').dialog({
-                        modal: true,
-                        buttons: {
-                            Ok: function() {
-                                $(this).dialog("close");
-                            }
-                        },
-                        close: function(event, ui){
-                            _el.remove();
-                        }
-                    });
-                    return false;
-                } else {
-                    return true;
-                }
-            }
             $('#objects_take_away').click(function (e) {
                 e.preventDefault();
                 var _this = $(this);
