@@ -1521,6 +1521,7 @@ $this->get(
             'object'        => $object,
             'rents'         => $object->rents,
             'time'          => time(),
+            'ajax'          => $request->isXhr()
         ];
 
         // display page

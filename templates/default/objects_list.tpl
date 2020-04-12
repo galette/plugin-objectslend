@@ -338,7 +338,7 @@
                                     <i class="fas fa-clone"></i>
                                     <span class="sr-only">{_T string="Duplicate object" domain="objectslend"}</span>
                                 </a>
-                                <a class="tooltip true"
+                                <a class="object_hist tooltip true"
                                    href="{path_for name="objectslend_show_object_lend" data=["id" => $object->object_id]}"
                                 >
                                     <i class="far fa-file-alt"></i>
@@ -442,20 +442,6 @@
                 this.form.submit();
             });
 
-            {* No legend?
-            $('#checkboxes').after('<td class="right" colspan="3"><a href="#" id="show_legend">{_T string="Show legend"}</a></td>');
-            $('#legende h1').remove();
-            $('#legende').dialog({
-                autoOpen: false,
-                modal: true,
-                hide: 'fold',
-                width: '40%'
-            }).dialog('close');
-
-            $('#show_legend').click(function(){
-                $('#legende').dialog('open');
-                return false;
-            });*}
             $('.selection_menu input[type="submit"], .selection_menu input[type="button"]').click(function(){
                 if ( this.id == 'delete' ) {
                     //mass removal is handled from 2 steps removal
@@ -465,17 +451,17 @@
                 return _checkselection();
             });
 
-            $('.take_object').on('click', function(e) {
+            $('.object_hist').on('click', function(e) {
                 e.preventDefault();
                 var _this = $(this);
 
                 $.ajax({
-                    url: _this.attr('href') + '&mode=ajax',
+                    url: _this.attr('href'),
                     type: 'GET',
                     datatype: 'html',
                     {include file="../../../../templates/default/js_loader.tpl"},
                     success: function(res){
-                        var _el = $('<div id="lend_window" title="{_T string="Take object" domain="objectslend" escape="js"}"></div>');
+                        var _el = $('<div id="object_hist_window" title="{_T string="History of object" domain="objectslend" escape="js"}"></div>');
                         _el.appendTo('body').dialog({
                             modal: true,
                             hide: 'fold',
@@ -485,74 +471,11 @@
                                 _el.remove();
                             }
                         }).append(res);
-
-                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
-                            create: function(event, ui) {
-                                if ( $(event.target).hasClass('disabled') ) {
-                                    $(event.target).button('disable');
-                                }
-                            }
-                        });
-
-                        $('#btncancel').on('click', function(e) {
-                            e.preventDefault();
-                            $('#lend_window').dialog('close');
-                        });
-
-                        _init_takeobject_js();
-
                     },
                     error: function(){
-                        alert("{_T string="An error occured loading 'Take away' display :(" domain="objectslend" escape="js"}")
+                        alert("{_T string="An error occured loading history display :(" domain="objectslend" escape="js"}")
                     }
                 });
-            });
-
-            $('.give_object').on('click', function(e) {
-                e.preventDefault();
-                var _this = $(this);
-
-                $.ajax({
-                    url: _this.attr('href') + '&mode=ajax',
-                    type: 'GET',
-                    datatype: 'html',
-                    {include file="../../../../templates/default/js_loader.tpl"},
-                    success: function(res){
-                        var _el = $('<div id="lend_window" title="{_T string="Give object" domain="objectslend" escape="js"}"></div>');
-                        _el.appendTo('body').dialog({
-                            modal: true,
-                            hide: 'fold',
-                            width: '60%',
-                            height: 450,
-                            close: function(event, ui){
-                                _el.remove();
-                            }
-                        }).append(res);
-
-                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
-                            create: function(event, ui) {
-                                if ( $(event.target).hasClass('disabled') ) {
-                                    $(event.target).button('disable');
-                                }
-                            }
-                        });
-
-                        $('#btncancel').on('click', function(e) {
-                            e.preventDefault();
-                            $('#lend_window').dialog('close');
-                        });
-
-                        _init_giveobject_js();
-
-                    },
-                    error: function(){
-                        alert("{_T string="An error occured loading 'Give back' display :(" domain="objectslend" escape="js"}")
-                    }
-                });
-            });
-
-            $('#print_list').on('click', function(e) {
-                e.preventDefault();
             });
         });
 
