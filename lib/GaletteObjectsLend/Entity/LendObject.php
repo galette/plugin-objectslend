@@ -150,11 +150,16 @@ class LendObject
             try {
                 $select = $this->zdb->select(LEND_PREFIX . self::TABLE, 'o');
 
-                if ($this->deps['last_rent'] === true) {
+                if ($this->deps['status'] || $this->deps['last_rent'] === true) {
+                    if ($this->deps['last_rent'] === true) {
+                        $fields = ['date_begin', 'date_forecast', 'date_end','comments'];
+                    } else {
+                        $fields = [];
+                    }
                     $select->join(
                         ['r' => PREFIX_DB . LEND_PREFIX . LendRent::TABLE],
                         'o.' . LendRent::PK . '=r.' . LendRent::PK,
-                        ['date_begin', 'date_forecast', 'date_end','comments'],
+                        $fields,
                         $select::JOIN_LEFT
                     );
                 }

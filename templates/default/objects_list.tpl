@@ -271,7 +271,7 @@
                             {/if}
                             <td>
                                 {if $object->status_text}
-                                    {$object->status_text}
+                                    {$object->status_text}{if $object->in_stock} ({_T string="In stock" domain="objectslend"}){/if}
                                 {else}-{/if}
                             </td>
                             <td class="center nowrap">
@@ -303,7 +303,7 @@
                                     {if $lendsprefs.ENABLE_MEMBER_RENT_OBJECT || $login->isAdmin() || $login->isStaff()}
                                         <a
                                             class="take_object tooltip action"
-                                            href="{path_for name="objectslend_object_take" data=["id" => $object->object_id]}"
+                                            href="{path_for name="objectslend_object_take" data=["action" => "take", "id" => $object->object_id]}"
                                             title="{_T string="Take object away" domain="objectslend"}"
                                         >
                                             <i class="fas fa-cart-arrow-down"></i>
@@ -313,7 +313,7 @@
                                 {elseif $login->isAdmin() || $login->isStaff() || $login->id == $object->id_adh}
                                         <a
                                             class="give_object tooltip"
-                                            href="give_object_back.php?object_id={$object->object_id}"
+                                            href="{path_for name="objectslend_object_take" data=["action" => "return", "id" => $object->object_id]}"
                                             title="{_T string="Give object back" domain="objectslend"}"
                                         >
                                             <i class="fas fa-sign-in-alt"></i>

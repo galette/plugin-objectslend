@@ -74,6 +74,7 @@ $this->register(
         'objectslend_object_print'      => 'staff',
         'objectslend_show_object_lend'  => 'staff',
         'objectslend_object_take'       => 'member',
-        'objectslend_object_dotake'     => 'member'
+        'objectslend_object_dotake'     => 'member',
+        'objectslend_object_doreturn'   => 'staff'
     ]
 );

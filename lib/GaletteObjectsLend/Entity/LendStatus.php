@@ -225,13 +225,13 @@ class LendStatus
     }
 
     /**
-     * Renvoi tous les statuts actifs considéré comme à la maison triés par nom
+     * Return list of active in stock statuses
      *
      * @param Db $zdb Database instance
      *
-     * @return LendStatus[] La liste des statuts actifs triés
+     * @return LendStatus[]
      */
-    public static function getActiveHomeStatuses(Db $zdb)
+    public static function getActiveStockStatuses(Db $zdb)
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
@@ -245,12 +245,7 @@ class LendStatus
             }
             return $status;
         } catch (\Exception $e) {
-            Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
-                Analog::ERROR
-            );
-            return false;
+            throw $e;
         }
     }
 

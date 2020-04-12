@@ -88,9 +88,6 @@ class LendRent
 
         $date = new \DateTime();
         $this->date_begin = $date->format('Y-m-d H:i:s');
-        $date_forecast = clone $date;
-        $date_forecast->add(new \DateInterval('P1D'));
-        $this->date_forecast = $date_forecast->format('Y-m-d');
 
         if (is_int($args)) {
             try {
@@ -327,7 +324,7 @@ class LendRent
         switch ($name) {
             case 'date_begin':
             case 'date_end':
-                if ($this->name != '') {
+                if ($this->$name != '') {
                     $dt = new \DateTime($this->$name);
                     return $dt->format(_T('Y-m-d H:i', 'objectslend'));
                 }
@@ -380,10 +377,13 @@ class LendRent
                         if ($d === false) {
                             throw new \Exception('Incorrect format');
                         }
+                        $this->$prop = $d->format($fmt);
                     }
+                    $this->$prop = $d->format($tfmt);
                 } catch (\Exception $e) {
+                    $this->$name = null;
                     Analog::log(
-                        sprintf('Invalid %1$s date %2$s, required %3$s or %4$s', $name, $forecast, $tfmt, $fmt),
+                        sprintf('Invalid %1$s date %2$s, required %3$s or %4$s', $name, $value, $tfmt, $fmt),
                         Analog::WARNING
                     );
                 }

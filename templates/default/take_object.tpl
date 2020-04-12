@@ -6,7 +6,7 @@
 {extends file=$extend}
 
 {block name="content"}
-<form action="{if $takeorgive eq 'take'}{path_for name="objectslend_object_dotake" data=["id" => $object->object_id, ""]}{else}give_object_back.php{/if}" method="post" id="form_take_object">
+<form action="{if $takeorgive eq 'take'}{path_for name="objectslend_object_dotake" data=["id" => $object->object_id]}{else}{path_for name="objectslend_object_doreturn" data=["id" => $object->object_id]}{/if}" method="post" id="form_take_object">
     <div class="bigtable">
         <fieldset class="galette_form">
             <legend class="ui-state-active ui-corner-top">{_T string="Object" domain="objectslend"}</legend>
@@ -49,11 +49,17 @@
             <div>
                 <p>
                     <span class="bline">{_T string="Borrow price:" domain="objectslend"}</span>
-                    {if $login->isAdmin() || $login->isStaff()}
+                    {if $takeorgive == 'take' && ($login->isAdmin() || $login->isStaff())}
                         <input type="text" name="rent_price" id="rent_price" value="{$object->rent_price}" size="10" style="text-align: right"> {$object->currency}
                     {else}
                         <input type="hidden" name="rent_price" id="rent_price" value="{$object->rent_price}">
                         <span id="rent_price_label">{$object->rent_price}</span> {$object->currency}
+                    {/if}
+
+                    {if $object->price_per_day}
+                        {_T string="(per day)" domain="objectslend"}
+                    {else}
+                        {_T string="(at once)" domain="objectslend"}
                     {/if}
                 </p>
             </div>
@@ -116,7 +122,7 @@
             <div>
                 <p>
                     <span class="bline">{_T string="Expected return:" domain="objectslend"}</span>
-                    <input type="text" id="expected_return" name="expected_return" size="8" value="{$rent->date_forecast}">
+                    <input type="text" id="expected_return" name="expected_return" size="8" value="{$date_forecast}">
                 </p>
             </div>
             {if $lendsprefs.AUTO_GENERATE_CONTRIBUTION}
@@ -126,8 +132,7 @@
                     {include file="forms_types/payment_types.tpl" varname="payment_type"}
                 </div>
             {/if}
-    {/if}
-    {if $takeorgive eq 'give'}
+    {else}
             <div>
                 <p>
                     <span class="bline">{_T string="Status:" domain="objectslend"}</span>
@@ -142,13 +147,13 @@
             <div>
                 <p>
                     <span class="bline">{_T string="Time:" domain="objectslend"}</span>
-                    {_T string="From"} {$last_rent->date_begin_short} {_T string="to"} {$today}
+                    {_T string="From %begindate to %enddate" pattern=["/%begindate/", "/%enddate/"] replace=[$last_rent->date_begin, $smarty.now|date_format:{_T string="Y-m-d"}]}
                 </p>
             </div>
             <div>
                 <p>
                     <span class="bline">{_T string="Comments:" domain="objectslend"}</span>
-                    <textarea name="comments" id="comments" style="font-family: Cantarell,Verdana,sans-serif; font-size: 0.85em; width: 400px; height: 60px;"></textarea>
+                    <textarea name="comments" id="comments"></textarea>
                     <br/><span class="exemple"><span id="remaining">200</span>
                     {_T string="remaining characters" domain="objectslend"}</span>
                 </p>
@@ -168,7 +173,7 @@
     {/if}
     <div class="button-container" id="button_container">
         <input type="hidden" name="mode" value="{if $ajax}ajax{/if}"/>
-        <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{else}{_T string="Give back" domain="objectslend"}{/if}">
+        <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{else}{_T string="Return back" domain="objectslend"}{/if}">
         <a href="{path_for name="objectslend_objects"}" class="button" id="btncancel">{_T string="Cancel"}</a>
     </div>
 </form>
@@ -265,8 +270,7 @@
             $('#rent_price_label').html(text);
         }
     }
-{/if}
-{if $takeorgive eq 'give'}
+{else}
     var _init_giveobject_js = function() {
         $('#btnsave').button('disable');
 
