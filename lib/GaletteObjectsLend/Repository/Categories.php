@@ -339,7 +339,13 @@ class Categories
             }
 
             if ($this->filters->not_empty == true) {
-                $select->having(new Predicate\Operator('objects_count', '>', '0'));
+                $select->having(
+                    new Predicate\Operator(
+                        new Expression('COUNT(o.' . self::PK . ')'),
+                        '>',
+                        '0'
+                    )
+                );
             }
         } catch (\Exception $e) {
             Analog::log(
