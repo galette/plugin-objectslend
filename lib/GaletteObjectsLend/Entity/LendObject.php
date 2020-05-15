@@ -654,11 +654,17 @@ class LendObject
     public function delete()
     {
         try {
+            $this->zdb->connection->beginTransaction();
+            //remove rents
+            $delete = $this->zdb->delete(LEND_PREFIX . LendRent::TABLE)
+                    ->where(array(self::PK => $this->object_id));
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
                     ->where(array(self::PK => $this->object_id));
             $this->zdb->execute($delete);
+            $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
+            $zdb->connection->rollBack();
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
                     $e->getTraceAsString(),
