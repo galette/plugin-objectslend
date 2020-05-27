@@ -194,6 +194,7 @@ class Objects
             );
             $result = $this->zdb->execute($delete);
             $this->zdb->connection->commit();
+            return true;
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
 
@@ -215,6 +216,8 @@ class Objects
                 );
             }
         }
+
+        return false;
     }
 
     /**

@@ -1303,7 +1303,7 @@ $this->post(
 
             if (!is_array($post['id'])) {
                 //delete object
-                $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
+                $object = new LendObject($this->zdb, $this->plugins, (int)$post['id']);
                 $ids = (array)$post['id'];
             } else {
                 $ids = $post['id'];
