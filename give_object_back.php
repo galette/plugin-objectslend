@@ -103,7 +103,7 @@ if (count($rents) > 0) {
 $object = new LendObject($object_id);
 
 $tpl->assign('object', $object);
-$tpl->assign('statuses', LendStatus::getActiveHomeStatuses());
+$tpl->assign('statuses', LendStatus::getActiveStockStatuses());
 $tpl->assign('last_rent', $last_rent);
 $tpl->assign('today', date('d/m/Y'));
 $tpl->assign('ajax', $ajax);

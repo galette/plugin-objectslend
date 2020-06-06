@@ -95,7 +95,7 @@ foreach (LendObject::getMoreObjectsByIds($objects_ids) as $obj) {
 
 $tpl->assign('objects', $objects);
 
-$tpl->assign('statuses', LendStatus::getActiveHomeStatuses());
+$tpl->assign('statuses', LendStatus::getActiveStockStatuses());
 
 $tpl->assign('ajax', $ajax);
 $tpl->assign('lendsprefs', $lendsprefs->getpreferences());
