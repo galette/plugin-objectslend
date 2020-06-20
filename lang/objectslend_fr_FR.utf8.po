@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-19 16:19+0000\n"
+"PO-Revision-Date: 2020-06-20 07:28+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectlends-plugin/fr/>\n"
@@ -470,10 +470,10 @@ msgid ""
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
 "Texte de commentaire à ajouter sur les contributions générées. Valeur "
-"remplacées automatiquement (mettre entre accolades)&nbsp;: <br/>- NAME : "
-"Nom<br/>- DESCRIPTION: Description<br/>- SERIAL_NUMBER : Numéro de série<br/"
-">- PRICE: Prix<br/>- RENT_PRICE : Prix d'emprunt<br/>- WEIGHT : Poids<br/>- "
-"DIMENSION : Dimensions"
+"remplacées automatiquement (mettre entre accolades)&nbsp ; : <br/>- NAME : "
+"Nom<br/>- DESCRIPTION : Description<br/>- SERIAL_NUMBER : Numéro de série<br/"
+">- PRICE : Prix<br/>- RENT_PRICE : Prix d'emprunt<br/>- WEIGHT : Poids<br/>- "
+"DIMENSION : Dimensions"
 
 #: ../templates/default/preferences.tpl:39
 msgid "Images related"
@@ -802,7 +802,7 @@ msgstr "Où se trouve l'objet&nbsp;?"
 
 #: ../templates/default/objects_edit.tpl:65
 msgid "in stock"
-msgstr "in stock"
+msgstr "en stock"
 
 #: ../templates/default/objects_edit.tpl:72
 msgid "Object's photo"
