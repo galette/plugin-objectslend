@@ -1,16 +1,19 @@
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-06-20 09:16+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
+"objectslend-plugin/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.1.1\n"
 
 #: ../take_more_objects_away.php:144
 msgid "Take out several objects at once"
@@ -51,7 +54,7 @@ msgstr ""
 #: ../templates/default/category_edit.tpl:10
 #: ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: ../objects_list_print.php:135 ../objects_print.php:157
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
@@ -106,7 +109,7 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:160
 #: ../templates/default/status_list.tpl:52
 msgid "Status"
-msgstr ""
+msgstr "Stato"
 
 #: ../objects_list_print.php:142 ../objects_print.php:186
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
@@ -361,7 +364,7 @@ msgstr ""
 #: ../templates/default/status_list.tpl:64
 #: ../templates/default/status_list.tpl:121
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #: ../objects_print.php:207 ../lib/GaletteObjectsLend/IO/PdfObject.php:210
 msgid "History of object loans"
@@ -634,7 +637,7 @@ msgstr ""
 
 #: ../templates/default/menu.tpl:34
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: ../templates/default/take_object.tpl:20
 #: ../templates/default/objects_edit.tpl:80
@@ -651,7 +654,7 @@ msgstr ""
 #: ../templates/default/take_object.tpl:28
 #: ../templates/default/objects_edit.tpl:13
 msgid "Description:"
-msgstr ""
+msgstr "Descrizione:"
 
 #: ../templates/default/take_object.tpl:36
 #: ../templates/default/objects_edit.tpl:31
@@ -978,7 +981,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:124
 msgid "Inactive"
-msgstr ""
+msgstr "Inattivo"
 
 #: ../templates/default/status_list.tpl:133
 msgid "Not in stock"
@@ -1004,7 +1007,7 @@ msgstr ""
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
-msgstr ""
+msgstr "Foto:"
 
 #: ../templates/default/category_edit.tpl:31
 msgid "Category photo"
