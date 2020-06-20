@@ -4,10 +4,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-20 07:28+0000\n"
+"PO-Revision-Date: 2020-06-20 08:07+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
-"objectlends-plugin/fr/>\n"
+"objectslend-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -323,10 +323,8 @@ msgid "objects_list"
 msgstr "liste_objets"
 
 #: ../_routes.php:1496
-#, fuzzy
-#| msgid "Object card"
 msgid "object_card"
-msgstr "Fiche de l'objet"
+msgstr "fiche_objet"
 
 #: ../_routes.php:1520
 msgid "Rents list for %object"
@@ -334,23 +332,19 @@ msgstr "Liste des locations pour %object"
 
 #: ../_routes.php:1584
 msgid "You do not have rights to take objects!"
-msgstr ""
+msgstr "Vous n'avez pas le droit d'emprunter des objets !"
 
 #: ../_routes.php:1620
-#, fuzzy
-#| msgid "The object is not available!"
 msgid "%object is currently not available"
-msgstr "L'objet n'est pas disponible&nbsp;!"
+msgstr "%object est actuellement indisponible"
 
 #: ../_routes.php:1741
 msgid "You have just borrowed %object :)"
-msgstr ""
+msgstr "Vous venez d'emprunter %object :)"
 
 #: ../_routes.php:1792
-#, fuzzy
-#| msgid "Object has been returned!"
 msgid "%object has been returned :)"
-msgstr "L'objet a été retourné&nbsp;!"
+msgstr "%object a été retourné :)"
 
 #: ../give_object_back.php:55
 msgid "Give back object"
@@ -413,12 +407,12 @@ msgstr "Prix par jour de location"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
 #: ../templates/default/take_object.tpl:71
 msgid "Cm"
-msgstr ""
+msgstr "Cm"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
 #: ../templates/default/take_object.tpl:83
 msgid "Kg"
-msgstr ""
+msgstr "Kg"
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:148
 msgid "Status has not been added :("
@@ -700,7 +694,7 @@ msgstr "(par jour)"
 #: ../templates/default/take_object.tpl:62
 #: ../templates/default/objects_list.tpl:258
 msgid "(at once)"
-msgstr ""
+msgstr "(en une seule fois)"
 
 #: ../templates/default/take_object.tpl:69
 #: ../templates/default/objects_edit.tpl:49
@@ -806,10 +800,8 @@ msgid "Take away"
 msgstr "Emprunter"
 
 #: ../templates/default/take_object.tpl:176
-#, fuzzy
-#| msgid "Return"
 msgid "Return back"
-msgstr "Retour"
+msgstr "Retour arrière"
 
 #: ../templates/default/take_object.tpl:212
 msgid "You must agree with terms and conditions in order to take."
@@ -878,7 +870,7 @@ msgstr "Retour à la liste"
 
 #: ../templates/default/objects_edit.tpl:109
 msgid "History"
-msgstr ""
+msgstr "Historique"
 
 #: ../templates/default/objects_edit.tpl:114
 #: ../templates/default/objects_edit.tpl:140
@@ -890,8 +882,6 @@ msgid "No member"
 msgstr "Aucun adhérent"
 
 #: ../templates/default/status_edit.tpl:16
-#, fuzzy
-#| msgid "Is object at home or borrowed"
 msgid "Is object in stock or borrowed"
 msgstr "L'objet est-il disponible ou sorti"
 
@@ -998,17 +988,12 @@ msgid ""
 msgstr "Veuillez sélectionner au moins un objet pour effectuer cette action."
 
 #: ../templates/default/objects_list.tpl:485
-#, fuzzy
-#| msgid "History of object loans"
 msgid "History of object"
-msgstr "Historique des emprunts de l'objet"
+msgstr "Historique de l'objet"
 
 #: ../templates/default/objects_list.tpl:497
-#, fuzzy
-#| msgid "An error occured loading 'Take away' display :("
 msgid "An error occured loading history display :("
-msgstr ""
-"Une erreur est survenue à l'affichage de la fonctionnalité d'emprunt :("
+msgstr "Une erreur est survenue à l'affichage de l'historique :("
 
 #: ../templates/default/objects_list.tpl:517
 msgid "Take objects"
