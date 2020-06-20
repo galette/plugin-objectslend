@@ -1,16 +1,20 @@
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-06-20 09:16+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
+"objectslend-plugin/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.1.1\n"
 
 #: ../take_more_objects_away.php:144
 msgid "Take out several objects at once"
@@ -51,7 +55,7 @@ msgstr ""
 #: ../templates/default/category_edit.tpl:10
 #: ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
-msgstr ""
+msgstr "اسم"
 
 #: ../objects_list_print.php:135 ../objects_print.php:157
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
@@ -106,7 +110,7 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:160
 #: ../templates/default/status_list.tpl:52
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #: ../objects_list_print.php:142 ../objects_print.php:186
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
@@ -978,7 +982,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:124
 msgid "Inactive"
-msgstr ""
+msgstr "غير نَشِط"
 
 #: ../templates/default/status_list.tpl:133
 msgid "Not in stock"
