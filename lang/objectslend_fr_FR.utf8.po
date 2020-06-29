@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-20 08:07+0000\n"
+"PO-Revision-Date: 2020-06-29 06:41+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.1.1\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 #: ../take_more_objects_away.php:144
 msgid "Take out several objects at once"
@@ -262,7 +262,7 @@ msgstr "Modifier le status %status"
 
 #: ../_routes.php:636
 msgid "New status"
-msgstr "Nouveau status"
+msgstr "Nouveau statut"
 
 #: ../_routes.php:669
 msgid "An error occured while storing the status."
@@ -717,7 +717,7 @@ msgstr "Adhérent&nbsp;:"
 #: ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr "Status&nbsp;:"
+msgstr "Statut&nbsp;:"
 
 #: ../templates/default/take_object.tpl:110
 #: ../templates/default/take_object.tpl:140
@@ -1011,7 +1011,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr "status"
+msgstr "statut"
 
 #: ../templates/default/status_list.tpl:76
 msgid "Stock"
