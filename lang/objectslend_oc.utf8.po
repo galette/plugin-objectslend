@@ -1,17 +1,20 @@
 # Weblate <noreply@weblate.org>, 2020.
+# Quentin PAGÈS <quentinantonin@free.fr>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-29 16:04+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-06-30 05:34+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
+"objectslend-plugin/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 #: ../take_more_objects_away.php:144
 msgid "Take out several objects at once"
@@ -88,7 +91,7 @@ msgstr ""
 #: ../templates/default/status_edit.tpl:7 ../templates/default/objects_list.tpl:160
 #: ../templates/default/status_list.tpl:52
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #: ../objects_list_print.php:142 ../objects_print.php:186
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183 ../lib/GaletteObjectsLend/IO/PdfObject.php:189
@@ -333,7 +336,7 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:211 ../templates/default/objects_list.tpl:299
 #: ../templates/default/status_list.tpl:64 ../templates/default/status_list.tpl:121
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #: ../objects_print.php:207 ../lib/GaletteObjectsLend/IO/PdfObject.php:210
 msgid "History of object loans"
@@ -341,11 +344,11 @@ msgstr ""
 
 #: ../objects_print.php:209 ../lib/GaletteObjectsLend/IO/PdfObject.php:212
 msgid "Begin"
-msgstr ""
+msgstr "Començament"
 
 #: ../objects_print.php:210 ../lib/GaletteObjectsLend/IO/PdfObject.php:213
 msgid "End"
-msgstr ""
+msgstr "Fin"
 
 #: ../objects_print.php:212 ../lib/GaletteObjectsLend/IO/PdfObject.php:215
 #: ../templates/default/list_lent_object.tpl:25 ../templates/default/objects_list.tpl:274
@@ -586,7 +589,7 @@ msgstr ""
 
 #: ../templates/default/menu.tpl:34
 msgid "Preferences"
-msgstr ""
+msgstr "Preferéncias"
 
 #: ../templates/default/take_object.tpl:20 ../templates/default/objects_edit.tpl:80
 #: ../templates/default/objects_list.tpl:233 ../templates/default/take_more_objects_away.tpl:53
@@ -595,11 +598,11 @@ msgstr ""
 
 #: ../templates/default/take_object.tpl:21 ../templates/default/objects_edit.tpl:9
 msgid "Name:"
-msgstr ""
+msgstr "Nom:"
 
 #: ../templates/default/take_object.tpl:28 ../templates/default/objects_edit.tpl:13
 msgid "Description:"
-msgstr ""
+msgstr "Descripcion :"
 
 #: ../templates/default/take_object.tpl:36 ../templates/default/objects_edit.tpl:31
 msgid "Serial number:"
@@ -637,7 +640,7 @@ msgstr ""
 #: ../templates/default/status_edit.tpl:10 ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr ""
+msgstr "Estatut:"
 
 #: ../templates/default/take_object.tpl:110 ../templates/default/take_object.tpl:140
 #: ../templates/default/take_more_objects_away.tpl:108 ../templates/default/take_more_objects_away.tpl:137
@@ -695,7 +698,7 @@ msgstr ""
 
 #: ../templates/default/list_lent_object.tpl:15
 msgid "End date"
-msgstr ""
+msgstr "Data de fin"
 
 #: ../templates/default/list_lent_object.tpl:36
 msgid "No lend found"
@@ -872,7 +875,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr ""
+msgstr "estat"
 
 #: ../templates/default/status_list.tpl:76
 msgid "Stock"
@@ -880,7 +883,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:124
 msgid "Inactive"
-msgstr ""
+msgstr "Inactiu"
 
 #: ../templates/default/status_list.tpl:133
 msgid "Not in stock"
@@ -916,7 +919,7 @@ msgstr ""
 
 #: ../templates/default/take_more_objects_away.tpl:10
 msgid "Picture"
-msgstr ""
+msgstr "Imatge"
 
 #: ../templates/default/take_more_objects_away.tpl:97
 msgid "--- Select a member ---"
