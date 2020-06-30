@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-29 16:04+0200\n"
-"PO-Revision-Date: 2020-06-30 05:34+0000\n"
+"PO-Revision-Date: 2020-06-30 21:03+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/oc/>\n"
@@ -49,12 +49,12 @@ msgstr ""
 #: ../templates/default/list_lent_object.tpl:17 ../templates/default/objects_list.tpl:87
 #: ../templates/default/category_edit.tpl:10 ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../objects_list_print.php:135 ../objects_print.php:157
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176 ../lib/GaletteObjectsLend/IO/PdfObject.php:158
 msgid "Description"
-msgstr ""
+msgstr "Descripcion"
 
 #: ../objects_list_print.php:136 ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
 #: ../templates/default/objects_list.tpl:100 ../templates/default/take_more_objects_away.tpl:18
@@ -103,7 +103,7 @@ msgstr ""
 #: ../objects_print.php:213 ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190 ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "Member"
-msgstr ""
+msgstr "Membre"
 
 #: ../objects_list_print.php:144 ../objects_print.php:189
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185 ../lib/GaletteObjectsLend/IO/PdfObject.php:192
@@ -734,7 +734,7 @@ msgstr ""
 
 #: ../templates/default/objects_edit.tpl:83 ../templates/default/category_edit.tpl:33
 msgid "Delete image"
-msgstr ""
+msgstr "Suprimir imatge"
 
 #: ../templates/default/objects_edit.tpl:94
 msgid "Duplicate"
@@ -875,7 +875,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr "estat"
+msgstr "estatut"
 
 #: ../templates/default/status_list.tpl:76
 msgid "Stock"
