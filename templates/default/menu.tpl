@@ -1,7 +1,7 @@
+{if $login->isLogged()}
 <h1 class="nojs">
     {_T string="Objects lend" domain="objectslend"}
 </h1>
-{if $login->isLogged()}
 <ul>
    <!--<li{if $PAGENAME eq "objects_list.php" || $PAGENAME eq "take_object.php" || $PAGENAME eq "give_object_back.php"
         || $PAGENAME eq "give_more_objects_back.php" || $PAGENAME eq "take_more_objects_away.php"} class="selected"{/if}>
