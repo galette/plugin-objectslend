@@ -37,6 +37,12 @@
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7
  */
+
+use GaletteObjectsLend\LendObject;
+use GaletteObjectsLend\Preferences;
+use GaletteObjectsLend\LendRent;
+use GaletteObjectsLend\LendStatus;
+
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if (!$login->isLogged() && !($login->isAdmin() || $login->isStaff())) {
@@ -45,14 +51,13 @@ if (!$login->isLogged() && !($login->isAdmin() || $login->isStaff())) {
 }
 require_once '_config.inc.php';
 
+$lendsprefs = new Preferences($zdb);
+
 /*
  * Traitement résultats
  */
 if (filter_has_var(INPUT_POST, 'yes')) {
-    $objects_ids = filter_input(INPUT_POST, 'objects_id');
-    if (filter_has_var(INPUT_POST, 'safe_objects_ids')) {
-        $objects_ids = split(',', filter_input(INPUT_POST, 'safe_objects_ids'));
-    }
+    $objects_ids = $_POST['objects_id'];
     foreach ($objects_ids as $o_id) {
         LendRent::closeAllRentsForObject($o_id, filter_input(INPUT_POST, 'comments'));
         $rent = new LendRent();
@@ -69,53 +74,39 @@ if (filter_has_var(INPUT_POST, 'yes')) {
     }
 }
 
-$tpl->assign('page_title', _T("BACK OBJECTS.PAGE TITLE"));
+$tpl->assign('page_title', _T("Give back objects", "objectslend"));
 //Set the path to the current plugin's templates,
 //but backup main Galette's template path before
 $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 
-$objects_ids = filter_has_var(INPUT_GET, 'objects_ids') ? split(',', filter_input(INPUT_GET, 'objects_ids')) : array();
+$objects_ids = filter_has_var(INPUT_GET, 'objects_ids') ? explode(',', filter_input(INPUT_GET, 'objects_ids')) : array();
 $ajax = filter_has_var(INPUT_GET, 'mode') ? filter_input(INPUT_GET, 'mode') === 'ajax' : false;
 
 /**
  * Récupération des objets et vérification qu'ils sont bien sortis
  */
 $objects = array();
-$safe_objects_ids = array();
 foreach (LendObject::getMoreObjectsByIds($objects_ids) as $obj) {
-    if (!$obj->is_home_location) {
+    if (!$obj->in_stock) {
         $objects[] = $obj;
-        $safe_objects_ids[] = $obj->object_id;
     }
 }
 
 $tpl->assign('objects', $objects);
 
-$tpl->assign('statuses', LendStatus::getActiveHomeStatuses());
+$tpl->assign('statuses', LendStatus::getActiveStockStatuses());
 
-/**
- * Paramètres de visibilité des colonnes
- */
-$tpl->assign('view_category', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_CATEGORY));
-$tpl->assign('view_serial', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_SERIAL));
-$tpl->assign('view_thumbnail', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_THUMBNAIL));
-$tpl->assign('view_name', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_NAME));
-$tpl->assign('view_description', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_DESCRIPTION));
-$tpl->assign('view_price', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_PRICE));
-$tpl->assign('view_dimension', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_DIMENSION));
-$tpl->assign('view_weight', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_WEIGHT));
-$tpl->assign('view_lend_price', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_LEND_PRICE));
-$tpl->assign('view_object_thumb', LendParameter::getParameterValue(LendParameter::PARAM_VIEW_OBJECT_THUMB));
-$tpl->assign('thumb_max_width', LendParameter::getParameterValue(LendParameter::PARAM_THUMB_MAX_WIDTH));
-$tpl->assign('thumb_max_height', LendParameter::getParameterValue(LendParameter::PARAM_THUMB_MAX_HEIGHT));
 $tpl->assign('ajax', $ajax);
-$tpl->assign('safe_objects_ids', join(',', $safe_objects_ids));
+$tpl->assign('lendsprefs', $lendsprefs->getpreferences());
+$tpl->assign('olendsprefs', $lendsprefs);
+$tpl->assign('takeorgive', 'give');
+$tpl->assign('time', time());
 
 if ($ajax) {
-    $tpl->display('give_more_objects_back.tpl', LEND_SMARTY_PREFIX);
+    $tpl->display('take_more_objects_away.tpl', LEND_SMARTY_PREFIX);
 } else {
-    $content = $tpl->fetch('give_more_objects_back.tpl', LEND_SMARTY_PREFIX);
+    $content = $tpl->fetch('take_more_objects_away.tpl', LEND_SMARTY_PREFIX);
     $tpl->assign('content', $content);
     //Set path to main Galette's template
     $tpl->template_dir = $orig_template_path;

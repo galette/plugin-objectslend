@@ -1,491 +1,596 @@
+{extends file="page.tpl"}
+{block name="content"}
 <div id="lend_content">
-    {*
-    LISTE DES MESSAGES INFORMATIFS
-    *}
-    {if $msg_taken}
-        <div id="infobox">
-            <h1>{_T string="OBJECTS LIST.TAKEN"}</h1>
-        </div>
-    {/if}
-    {if $msg_not_taken}
-        <div id="warningbox">
-            <h1>{_T string="OBJECTS LIST.NOT TAKEN"}</h1>
-        </div>
-    {/if}
-    {if $msg_given}
-        <div id="infobox">
-            <h1>{_T string="OBJECTS LIST.GIVEN"}</h1>
-        </div>
-    {/if}
-    {if $msg_not_given}
-        <div id="warningbox">
-            <h1>{_T string="OBJECTS LIST.NOT GIVEN"}</h1>
-        </div>
-    {/if}
-    {if $msg_canceled}
-        <div id="warningbox">
-            <h1>{_T string="OBJECTS LIST.CANCELED"}</h1>
-        </div>
-    {/if}
-    {if $msg_no_right}
-        <div id="errorbox">
-            <h1>{_T string="OBJECTS LIST.NO RIGHT"}</h1>
-        </div>
-    {/if}
-    {if $msg_bad_location}
-        <div id="errorbox">
-            <h1>{_T string="OBJECTS LIST.BAD LOCATION"}</h1>
-        </div>
-    {/if}
-    {if $msg_deleted}
-        <div id="errorbox">
-            <h1>{_T string="OBJECTS LIST.DELETED"}</h1>
-        </div>
-    {/if}
-    {if $msg_disabled}
-        <div id="errorbox">
-            <h1>{_T string="OBJECTS LIST.DISABLED"}</h1>
-        </div>
-    {/if}
-    {if $ajax}
-        <script>
-            $('#infobox').css({ldelim}"position": "fixed", "top": 20, "left": "20%", "width": "60%"{rdelim}).fadeOut(6000, function () {ldelim}
-            {rdelim});
-                $('#infobox h1').css({ldelim}"background": "#04CC65"{rdelim});
-                    $('#warningbox').css({ldelim}"position": "fixed", "top": 20, "left": "20%", "width": "60%"{rdelim}).fadeOut(8000, function () {ldelim}
-            {rdelim});
-                $('#warningbox h1').css({ldelim}"background": "#FFB619"{rdelim});
-                    $('#errorbox').css({ldelim}"position": "fixed", "top": 20, "left": "20%", "width": "60%"{rdelim}).fadeOut(10000, function () {ldelim}
-            {rdelim});
-                $('#warningbox h1').css({ldelim}"background": "#CC0000"{rdelim});
-        </script>
-    {/if}
-    {*
-    TABLE DE RECHERCHE
-    *}
-    <form id="filtre" method="post" action="objects_list.php">    
+    <form id="filtre" method="POST" action="{path_for name="objectslend_filter_objects"}">
         <div id="listfilter">
-            <label for="search">{_T string="OBJECTS LIST.SEARCH"}</label>
-            <input id="search" name="search" type="text" placeholder="{_T string="OBJECTS LIST.ENTER WORD"}" value="{$search}" size="60">
-            <input id="go_search" name="go_search" type="submit" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.GO SEARCH"}">
-            <input id="reset_search" name="reset_search" type="submit" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.RESET SEARCH"}">
+            <label for="filter_str">{_T string="Search:"}&nbsp;</label>
+            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{_T string="Enter a value"}"/>&nbsp;
+            <label for="field_filter"> {_T string="in:"}&nbsp;</label>
+            <select name="field_filter" id="field_filter" onchange="form.submit()">
+                {html_options options=$field_filter_options selected=$filters->field_filter}
+            </select>
+            {if $login->isAdmin() or $login->isStaff()}
+                {_T string="Active:" domain="objectslend"}
+                <input type="radio" name="active_filter" id="filter_dc_active" value="{GaletteObjectsLend\Repository\Objects::ALL_OBJECTS}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Objects::ALL_OBJECTS')} checked="checked"{/if}>
+                <label for="filter_dc_active">{_T string="Don't care"}</label>
+                <input type="radio" name="active_filter" id="filter_yes_active" value="{GaletteObjectsLend\Repository\Objects::ACTIVE_OBJECTS}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Objects::ACTIVE_OBJECTS')} checked="checked"{/if}>
+                <label for="filter_yes_active">{_T string="Yes"}</label>
+                <input type="radio" name="active_filter" id="filter_no_active" value="{GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS')} checked="checked"{/if}>
+                <label for="filter_no_active">{_T string="No"}</label>
+            {/if}
+            <input type="submit" class="inline" value="{_T string="Filter"}"/>
+            <input name="clear_filter" type="submit" value="{_T string="Clear filter"}">
         </div>
-    </form>    
-    {*
-    TABLE DES CATEGORIES SI ELLES SONT AFFICHEES
-    *}
-    {if $view_category}
-        <div class="bigtable">
-            <table class="details">
-                <caption class="ui-state-active ui-corner-top">{_T string="OBJECTS LIST.CHOICE"}</caption>
-                <tr>
-                    {foreach from=$categories item=categ}
-                        {if $categ->objects_nb gt 0}
-                            <td style="text-align: center !important;{if $category_id eq $categ->category_id} background-color:SpringGreen;{/if}">
-                                <a href="?category_id={$categ->category_id}">
-                                    <img src="{$categ->categ_image_url}" {if $view_category_thumb}style="max-height: {$thumb_max_height}px; max-width: {$thumb_max_width}px;"{/if}
-                                         border="0" class="tooltip_lend" title="{_T string="OBJECTS LIST.CHOOSE THIS"} <i>''{$categ->name}''</i>"/>
-                                    <br/>
-                                    {$categ->name} ({$categ->objects_nb})
-                                    {if $view_price_sum && $view_price && ($login->isAdmin() || $login->isStaff())}
-                                        &middot;
-                                        {$categ->objects_price_sum} &euro;
-                                    {/if}
-                                </a>
-                            </td>
-                        {/if}
-                    {/foreach}
-                    <td style="text-align: center !important;{if $category_id eq 0} background-color:SpringGreen;{/if}">
-                        <a href="?category_id=0">
-                            <img src="picts/all.png" border="0" class="tooltip_lend" title="{_T string="OBJECTS LIST.ALL OBJECTS"}"/>
-                            <br/>
-                            {_T string="OBJECTS LIST.ALL OBJECTS"} ({$nb_all_categories})
-                            {if $view_price_sum && $view_price && ($login->isAdmin() || $login->isStaff())}
-                                &middot;
-                                {$sum_all_categories} &euro;
-                            {/if}
-                        </a>
-                    </td>
-                </tr>
-            </table>
+        <div class="infoline">
+            {$nb_objects} {if $nb_objects gt 1}{_T string="objects" domain="objectslend"}{else}{_T string="object" domain="objectslend"}{/if}
+            <div class="fright">
+                <label for="nbshow">{_T string="Records per page:"}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript>
+                    <span>
+                        <input type="submit" value="{_T string="Change"}"/>
+                    </span>
+                </noscript>
+            </div>
         </div>
+    </form>
+
+    {if $lendsprefs.VIEW_CATEGORY and $categories|@count gt 0}
+        <section id="categories">
+            <header class="ui-state-default ui-state-active">
+                {_T string="Categories" domain="objectslend"}
+            </header>
+            <div>
+                <a href="{path_for name="objectslend_objects" data=["option" => "category", "value" => 0]}"{if $filters->category_filter eq null} class="active"{/if}>
+                    <img src="{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => 0]}"
+                        alt=""/>
+                    <br/>
+                    {_T string="All"}
+                </a>
+        {foreach from=$categories item=categ}
+            {if $categ->is_active || $categ->category_id eq -1}
+                <a href="{path_for name="objectslend_objects" data=["option" => "category", "value" => $categ->category_id]}"{if $filters->category_filter eq $categ->category_id} class="active"{/if}>
+                    <img src="{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => $categ->category_id]}"
+                        width="{$categ->picture->getOptimalThumbWidth($olendsprefs)}"
+                        height="{$categ->picture->getOptimalThumbHeight($olendsprefs)}"
+                        alt=""/>
+                    <br/>
+                    {$categ->getName()}
+                    {if $lendsprefs.VIEW_LIST_PRICE_SUM && $lendsprefs.VIEW_PRICE && ($login->isAdmin() || $login->isStaff())}
+                        &middot;
+                        {$categ->objects_price_sum} &euro;
+                    {/if}
+                </a>
+            {/if}
+        {/foreach}
+
+            </div>
+        </section>
     {/if}
-    {*
-    TABLE DES OBJETS AVEC LEUR STATUT
-    *}
-    {if !$view_category || ($view_category && $category_id ne -1)}
-        {*
-        NOMBRES DE RESULTATS PAR PAGE
-        *}
-        <form action="objects_list.php" method="get">
-            <table class="infoline">
-                <tr>
-                    <td class="left">{$nb_results} {_T string="OBJECTS LIST.NB RESULTS"}</td>
-                    <td class="right">{_T string="OBJECTS LIST.NB LINES"}
-                        <select name="nb_lines" onchange="this.form.submit()">
-                            {foreach from=$nb_lines_list item=nb}
-                                <option value="{$nb}"{if $nb_lines eq $nb} selected="selected"{/if}>{$nb}</option>
-                            {/foreach}
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </form>
-        {*
-        TABLE DES OBJETS
-        *}
-        <form id="objects_list">
+
+        <form action="{path_for name="objectslend_batch-objectslist"}" method="post" id="objects_list">
             <table class="listing">
                 <thead>
                     <tr>
                         {if $login->isAdmin() || $login->isStaff()}
-                            <th>
+                            <th  class="id_row">#</th>
+                        {/if}
+                        {if $olendsprefs->imagesInLists()}
+                            <th class="id_row">
+                                {_T string="Picture"}
                             </th>
                         {/if}
-                        {if $view_thumbnail}
                             <th>
-                                {_T string="OBJECTS LIST.THUMB"}
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_NAME"|constant]}">
+                                    {_T string="Name" domain="objectslend"}
+                                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_NAME')}
+                                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                        {else}
+                                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                                        {/if}
+                                    {/if}
+                                </a>
+                            </th>
+                        {if $lendsprefs.VIEW_SERIAL}
+                            <th>
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_SERIAL"|constant]}">
+                                    {_T string="Serial" domain="objectslend"}
+                                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_SERIAL')}
+                                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                            <img src="{base_url}/{$template_subdir}images/down.png"/>
+                                        {else}
+                                            <img src="{base_url}/{$template_subdir}images/up.png"/>
+                                        {/if}
+                                    {/if}
+                                </a>
                             </th>
                         {/if}
-                        {if $view_name || $view_description}
+                        {if $lendsprefs.VIEW_PRICE}
                             <th>
-                                {if $view_name}
-                                    <a href="?tri=name{$sort_suffix}&direction={if $tri eq 'name' && $direction eq 'asc'}desc{else}asc{/if}">
-                                        {_T string="OBJECTS LIST.NAME"}
-                                    </a>
-                                    {if $tri eq 'name' && $direction eq 'asc'}
-                                        <img src="{$template_subdir}images/down.png"/>
-                                    {elseif $tri eq 'name' && $direction eq 'desc'}
-                                        <img src="{$template_subdir}images/up.png"/>
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_PRICE"|constant]}">
+                                    {_T string="Price" domain="objectslend"}
+                                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_PRICE')}
+                                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                        {else}
+                                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                                        {/if}
+                                    {/if}
+                                </a>
+                            </th>
+                        {/if}
+                        {if $lendsprefs.VIEW_LEND_PRICE}
+                            <th>
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_RENTPRICE"|constant]}">
+                                    {_T string="Borrow price" domain="objectslend"}
+                                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_RENTPRICE')}
+                                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                        {else}
+                                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                                        {/if}
+                                    {/if}
+                                </a>
+                            </th>
+                        {/if}
+                        {if $lendsprefs.VIEW_DIMENSION}
+                            <th>
+                                {_T string="Dimensions" domain="objectslend"}
+                            </th>
+                        {/if}
+                        {if $lendsprefs.VIEW_WEIGHT}
+                            <th>
+                                <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_WEIGHT"|constant]}">
+                                    {_T string="Weight" domain="objectslend"}
+                                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_WEIGHT')}
+                                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                        {else}
+                                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                                        {/if}
+                                    {/if}
+                                </a>
+                            </th>
+                        {/if}
+                        <th>
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS"|constant]}">
+                                {_T string="Status" domain="objectslend"}
+                                {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS')}
+                                    {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                    {else}
+                                <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
                                     {/if}
                                 {/if}
-                                {if $view_name && $view_description}
-                                    /
-                                {/if}
-                                {if $view_description}
-                                    <a href="?tri=description{$sort_suffix}&direction={if $tri eq 'description' && $direction eq 'asc'}desc{else}asc{/if}">
-                                        {_T string="OBJECTS LIST.DESCRIPTION"}
-                                    </a>
-                                    {if $tri eq 'description' && $direction eq 'asc'} 
-                                        <img src="{$template_subdir}images/down.png"/>
-                                    {elseif $tri eq 'description' && $direction eq 'desc'}
-                                        <img src="{$template_subdir}images/up.png"/>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_BDATE"|constant]}">
+                                {_T string="Since" domain="objectslend"}
+                                {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_BDATE')}
+                                    {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                    {else}
+                                <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
                                     {/if}
                                 {/if}
-                            </th>
-                        {/if}
-                        {if $view_serial}
-                            <th>
-                                <a href="?tri=serial_number{$sort_suffix}&direction={if $tri eq 'serial_number' && $direction eq 'asc'}desc{else}asc{/if}">
-                                    {_T string="OBJECTS LIST.SERIAL"}
-                                </a>
-                                {if $tri eq 'serial_number' && $direction eq 'asc'} 
-                                    <img src="{$template_subdir}images/down.png"/>
-                                {elseif $tri eq 'serial_number' && $direction eq 'desc'} 
-                                    <img src="{$template_subdir}images/up.png"/>
-                                {/if}
-                            </th>
-                        {/if}
-                        {if $view_price}
-                            <th>
-                                <a href="?tri=price{$sort_suffix}&direction={if $tri eq 'price' && $direction eq 'asc'}desc{else}asc{/if}">
-                                    {_T string="OBJECTS LIST.PRICE"}
-                                </a>
-                                {if $tri eq 'price' && $direction eq 'asc'} 
-                                    <img src="{$template_subdir}images/down.png"/>
-                                {elseif $tri eq 'price' && $direction eq 'desc'} 
-                                    <img src="{$template_subdir}images/up.png"/>
-                                {/if}
-                            </th>
-                        {/if}
-                        {if $view_lend_price}
-                            <th>
-                                <a href="?tri=rent_price{$sort_suffix}&direction={if $tri eq 'rent_price' && $direction eq 'asc'}desc{else}asc{/if}">
-                                    {_T string="OBJECTS LIST.RENT PRICE"}
-                                </a>
-                                {if $tri eq 'rent_price' && $direction eq 'asc'} 
-                                    <img src="{$template_subdir}images/down.png"/>
-                                {elseif $tri eq 'rent_price' && $direction eq 'desc'}
-                                    <img src="{$template_subdir}images/up.png"/>
-                                {/if}
-                            </th>
-                        {/if}
-                        {if $view_dimension}
-                            <th>
-                                <a href="?tri=dimension{$sort_suffix}&direction={if $tri eq 'dimension' && $direction eq 'asc'}desc{else}asc{/if}">
-                                    {_T string="OBJECTS LIST.DIMENSION"}
-                                </a>
-                                {if $tri eq 'dimension' && $direction eq 'asc'}
-                                    <img src="{$template_subdir}images/down.png"/>
-                                {elseif $tri eq 'dimension' && $direction eq 'desc'}
-                                    <img src="{$template_subdir}images/up.png"/>
-                                {/if}
-                            </th>
-                        {/if}
-                        {if $view_weight }
-                            <th>
-                                <a href="?tri=weight{$sort_suffix}&direction={if $tri eq 'weight' && $direction eq 'asc'}desc{else}asc{/if}">
-                                    {_T string="OBJECTS LIST.WEIGHT"}
-                                </a>
-                                {if $tri eq 'weight' && $direction eq 'asc'}
-                                    <img src="{$template_subdir}images/down.png"/>
-                                {elseif $tri eq 'weight' && $direction eq 'desc'}
-                                    <img src="{$template_subdir}images/up.png"/>
-                                {/if}
-                            </th>
-                        {/if} 
-                        <th>
-                            <a href="?tri=status_text{$sort_suffix}&direction={if $tri eq 'status_text' && $direction eq 'asc'}desc{else}asc{/if}">
-                                {_T string="OBJECTS LIST.STATUS TEXT"}
                             </a>
-                            {if $tri eq 'status_text' && $direction eq 'asc'}
-                                <img src="{$template_subdir}images/down.png"/>
-                            {elseif $tri eq 'status_text' && $direction eq 'desc'}
-                                <img src="{$template_subdir}images/up.png"/>
-                            {/if}
                         </th>
                         <th>
-                            <a href="?tri=date_begin{$sort_suffix}&direction={if $tri eq 'date_begin' && $direction eq 'asc'}desc{else}asc{/if}">
-                                {_T string="OBJECTS LIST.DATE BEGIN"}
-                            </a>
-                            {if $tri eq 'date_begin' && $direction eq 'asc'}
-                                <img src="{$template_subdir}images/down.png"/>
-                            {elseif $tri eq 'date_begin' && $direction eq 'desc'}
-                                <img src="{$template_subdir}images/up.png"/>
-                            {/if}
-                        </th>
-                        <th>
-                            <a href="?tri=nom_adh{$sort_suffix}&direction={if $tri eq 'nom_adh' && $direction eq 'asc'}desc{else}asc{/if}">
-                                {_T string="OBJECTS LIST.ADHERENT"}
-                            </a>
-                            {if $tri eq 'nom_adh' && $direction eq 'asc'}
-                                <img src="{$template_subdir}images/down.png"/>
-                            {elseif $tri eq 'nom_adh' && $direction eq 'desc'}
-                                <img src="{$template_subdir}images/up.png"/>
-                            {/if}
-                        </th>
-                        {if $view_date_forecast}
-                            <th>
-                                <a href="?tri=forecast{$sort_suffix}&direction={if $tri eq 'forecast' && $direction eq 'asc'}desc{else}asc{/if}">
-                                    {_T string="OBJECTS LIST.DATE FORECAST"}
-                                </a>
-                                {if $tri eq 'forecast' && $direction eq 'asc'}
-                                    <img src="{$template_subdir}images/down.png"/>
-                                {elseif $tri eq 'forecast' && $direction eq 'desc'}
-                                    <img src="{$template_subdir}images/up.png"/>
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_MEMBER"|constant]}">
+                                {_T string="By" domain="objectslend"}
+                                {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_MEMBER')}
+                                    {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                    {else}
+                                <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                                    {/if}
                                 {/if}
-                            </th>
-                        {/if}
-                        <th>
-                            {_T string="OBJECTS LIST.ACTION"}
+                            </a>
                         </th>
+                        {if $lendsprefs.VIEW_DATE_FORECAST}
+                        <th>
+                            <a href="{path_for name="objectslend_objects" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Objects::ORDERBY_FDATE"|constant]}">
+                                {_T string="Return" domain="objectslend"}
+                                {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Objects::ORDERBY_FDATE')}
+                                    {if $filters->ordered eq constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC')}
+                                <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                                    {else}
+                                <img src="{{base_url}/$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                                    {/if}
+                                {/if}
+                            </a>
+
+                        </th>
+                        {/if}
                         {if $login->isAdmin() || $login->isStaff()}
-                            <th>
-                                {_T string="OBJECTS LIST.IS ACTIVE"}
-                            </th>
-                            <th>
+                            <th class="id_row">
+                                {_T string="Active" domain="objectslend"}
                             </th>
                         {/if}
+                        <th class="actions_row">
+                            {_T string="Actions"}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach from=$objects item=objt}
-                        <tr class="{if $objt@index is odd}even{else}odd{/if}">
+                    {foreach from=$objects item=object}
+                        <tr class="{if $object@index is odd}even{else}odd{/if}">
                             {if $login->isAdmin() || $login->isStaff()}
-                                <td align="center">
-                                    <input type="checkbox" name="object_ids" value="{$objt->object_id}" onchange="enableButtons();">
-                                </td>
-                            {/if}
-                            {if $view_thumbnail eq '1'}
-                                <td align="center">
-                                    {if $objt->draw_image}
-                                        <img src="{$objt->object_image_url}" 
-                                             class="tooltip_lend" title="{$objt->tooltip_title}"
-                                             {if $view_object_thumb}style="max-height: {$thumb_max_height}px; max-width: {$thumb_max_width}px;"{/if}/>
-                                    {/if}
-                                </td>
-                            {/if}
-                            {if $view_name || $view_description}
-                                <td>
-                                    {if $view_name}
-                                        <b>{$objt->search_name}</b>
-                                    {/if}
-                                    {if $view_name && $view_description}
-                                        <br/>
-                                    {/if}
-                                    {if $view_description}    
-                                        {$objt->search_description}   
-                                    {/if} 
-                                </td>
-                            {/if}
-                            {if $view_serial}
-                                <td>
-                                    {$objt->search_serial_number}
-                                </td>
-                            {/if}
-                            {if $view_price}
-                                <td align="right">
-                                    {$objt->price}&euro;
-                                </td>
-                            {/if}
-                            {if $view_lend_price eq '1'}
-                                <td align="right"> 
-                                    {$objt->rent_price}&euro;
-                                    {if $objt->price_per_day}
-                                        {_T string="OBJECTS LIST.RENT PRICE PER DAY"}
-                                    {/if}
-                                </td>
-                            {/if}
-                            {if $view_dimension}
-                                <td>
-                                    {$objt->search_dimension}
-                                </td>
-                            {/if}
-                            {if $view_weight eq '1'}
-                                <td>
-                                    {$objt->weight}
-                                </td>
-                            {/if}    
-                            <td>
-                                {$objt->status_text}
+                                <td class="center">
+                                    <input type="checkbox" name="object_ids[]" value="{$object->object_id}">
                             </td>
-                            <td align="center">
-                                <span style="white-space: nowrap">{$objt->date_begin_ihm}</span>
+                        {/if}
+    {if $olendsprefs->imagesInLists()}
+                        <td class="center">
+                            <img src="{path_for name="objectslend_photo" data=["type" => "object", "mode" => "thumbnail", "id" => $object->object_id]}"
+                                    class="picture"
+                                    width="{$object->picture->getOptimalThumbWidth($olendsprefs)}"
+                                    height="{$object->picture->getOptimalThumbHeight($olendsprefs)}"
+                                    alt="{_T string="Object photo" domain="objectslend"}"/>
                             </td>
+    {/if}
                             <td>
-                                {if $objt->nom_adh ne ''}
-                                    <a href="mailto:{$objt->email_adh}">{$objt->nom_adh} {$objt->prenom_adh}</a>
+                                <strong>{$object->displayName($filters)}</strong>
+                                {if $lendsprefs.VIEW_DESCRIPTION}
+                                    <br/>{$object->displayDescription($filters)}
                                 {/if}
                             </td>
-                            {if $view_date_forecast}
-                                <td align="center">
-                                    <span style="white-space: nowrap">{$objt->date_forecast_ihm}</span>
+                            {if $lendsprefs.VIEW_SERIAL}
+                                <td>
+                                    {$object->displaySerial($filters)}
                                 </td>
                             {/if}
-                            <td align="center">
-                                {if $objt->is_home_location}
-                                    {if $enable_member_take || $login->isAdmin() || $login->isStaff()}
-                                        <a onclick="take_object({$objt->object_id});" style="cursor: pointer;" {*href="take_object.php?object_id={$objt->object_id}"*}>
-                                            <img src="picts/bag.png" alt="{_T string="OBJECTS LIST.TAKE AWAY"}" class="tooltip_lend" title="{_T string="OBJECTS LIST.TAKE AWAY"}"/>
+                            {if $lendsprefs.VIEW_PRICE}
+                                <td class="right nowrap">
+                                    {$object->price}&euro;
+                                </td>
+                            {/if}
+                            {if $lendsprefs.VIEW_LEND_PRICE}
+                                <td class="right">
+                                    {$object->rent_price}&euro;<br/>
+                                {if $object->price_per_day}
+                                    {_T string="(per day)" domain="objectslend"}
+                                {else}
+                                    {_T string="(at once)" domain="objectslend"}
+                                {/if}
+                                </td>
+                            {/if}
+                            {if $lendsprefs.VIEW_DIMENSION}
+                                <td>
+                                    {$object->displayDimension($filters)}
+                                </td>
+                            {/if}
+                            {if $lendsprefs.VIEW_WEIGHT}
+                                <td>
+                                    {$object->weight}
+                                </td>
+                            {/if}
+                            <td>
+                                {if $object->status_text}
+                                    {$object->status_text}{if $object->in_stock} ({_T string="In stock" domain="objectslend"}){/if}
+                                {else}-{/if}
+                            </td>
+                            <td class="center nowrap">
+                                {if $object->date_begin}
+                                    {$object->date_begin|date_format:_T("Y-m-d")}
+                                {else}-{/if}
+                            </td>
+                            <td>
+                                {if $object->id_adh}
+                                    <a href="{path_for name="member" data=["id" => $object->id_adh]}">{memberName id=$object->id_adh}</a>
+                                {else}-{/if}
+                            </td>
+                            {if $lendsprefs.VIEW_DATE_FORECAST}
+                            <td class="center nowrap">
+                                {if $object->date_forecast}
+                                    {$object->date_forecast|date_format:_T("Y-m-d")}
+                                {else}-{/if}
+                            </td>
+                            {/if}
+                            <td class="center {if $object->isActive()}use{else}delete{/if}">
+                                <i
+                                    class="fas fa-thumbs-{if $object->isActive()}up{else}down{/if}"
+                                    title="{if $object->isActive()}{_T string="Object is active" domain="objectslend"}{else}{_T string="Object is inactive" domain="objectslend"}{/if}">
+                                </i>
+                                <span class="sr-only">{_T string="Active" domain="objectslend"}</span>
+                            </td>
+                            <td class="center nowrap">
+                                {if !$object->rent_id or $object->in_stock}
+                                    {if $lendsprefs.ENABLE_MEMBER_RENT_OBJECT || $login->isAdmin() || $login->isStaff()}
+                                        <a
+                                            class="take_object tooltip action"
+                                            href="{path_for name="objectslend_object_take" data=["action" => "take", "id" => $object->object_id]}"
+                                            title="{_T string="Take object away" domain="objectslend"}"
+                                        >
+                                            <i class="fas fa-cart-arrow-down"></i>
+                                            <span class="sr-only">{_T string="Take away" domain="objectslend"}</span>
                                         </a>
                                     {/if}
-                                {elseif $login->isAdmin() || $login->isStaff() || $login->id == $objt->id_adh}
-                                    <a onclick="give_object_back({$objt->object_id});" style="cursor: pointer;" {*href="give_object_back.php?object_id={$objt->object_id}"*}>
-                                        <img src="picts/cabinet.png" alt="{_T string="OBJECTS LIST.REPLACE"}" class="tooltip_lend" title="{_T string="OBJECTS LIST.REPLACE"}">
-                                    </a>
+                                {elseif $login->isAdmin() || $login->isStaff() || $login->id == $object->id_adh}
+                                        <a
+                                            class="give_object tooltip"
+                                            href="{path_for name="objectslend_object_take" data=["action" => "return", "id" => $object->object_id]}"
+                                            title="{_T string="Give object back" domain="objectslend"}"
+                                        >
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            <span class="sr-only">{_T string="Give back" domain="objectslend"}</span>
+                                        </a>
                                 {/if}
+
+    {if $login->isAdmin() || $login->isStaff()}
+                                <a
+                                    class="tooltip action"
+                                    href="{path_for name="objectslend_object" data=["action" => "edit", "id" => $object->object_id]}"
+                                    title="{_T string="Edit the object" domain="objectslend"}"
+                                >
+                                    <i class="fas fa-edit"></i>
+                                    <span class="sr-only">{_T string="Edit the object" domain="objectslend"}</span>
+                                </a>
+                                <a
+                                    class="tooltip"
+                                    href="{path_for name="objectslend_object_clone" data=["id" => $object->object_id]}"
+                                    title="{_T string="Duplicate object" domain="objectslend"}"
+                                >
+                                    <i class="fas fa-clone"></i>
+                                    <span class="sr-only">{_T string="Duplicate object" domain="objectslend"}</span>
+                                </a>
+                                <a class="object_hist tooltip true"
+                                   href="{path_for name="objectslend_show_object_lend" data=["id" => $object->object_id]}"
+                                >
+                                    <i class="far fa-file-alt"></i>
+                                    <span class="sr-only">{_T string="Show object lends" domain="objectslend"}</span>
+                                </a>
+                                <a
+                                    class="tooltip"
+                                    href="{path_for name="objectslend_object_print" data=["id" => $object->object_id]}"
+                                    title="{_T string="Object card in PDF" domain="objectslend"}"
+                                >
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span class="sr-only">{_T string="Object card in PDF" domain="objectslend"}</span>
+                                </a>
+                                <a
+                                    class="delete tooltip"
+                                    href="{path_for name="objectslend_remove_object" data=["id" => $object->object_id]}"
+                                    title="{_T string="Remove %object from database" domain="objectslend" pattern="/%object/" replace=$object->name}"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                    <span class="sr-only">{_T string="Remove %object from database" domain="objectslend" pattern="/%object/" replace=$object->name}</span>
+                                </a>
                             </td>
-                            {if $login->isAdmin() || $login->isStaff()}
-                                <td align="center">
-                                    {if $objt->is_active}
-                                        <img src="picts/check.png" alt="{_T string="OBJECTS LIST.IS ACTIVE"}" title="{_T string="OBJECTS LIST.IS ACTIVE"}"/>
-                                    {/if}
-                                </td>
-                                <td align="center">
-                                    <a href="objects_edit.php?object_id={$objt->object_id}">
-                                        <img src="picts/edit.png" class="tooltip_lend" title="{_T string="OBJECTS LIST.EDIT"}" border="0"/>
-                                    </a>
-                                    <a href="objects_edit.php?clone_object_id={$objt->object_id}">
-                                        <img src="picts/copy.png" class="tooltip_lend" title="{_T string="OBJECTS LIST.COPY"}" border="0"/>
-                                    </a>                    
-                                    <a href="objects_print.php?object_id={$objt->object_id}">
-                                        <img src="picts/pdf24.png" class="tooltip_lend" title="{_T string="OBJECTS LIST.PDF"}" border="0"/>
-                                    </a>
-                                </td>
-                            {/if}
+    {/if}
+                        </tr>
+                    {foreachelse}
+                        {* FIXME: calculate colspan *}
+                        <tr>
+                            <td colspan="14" class="emptylist">{_T string="No object has been found" domain="objectslend"}</td>
                         </tr>
                     {/foreach}
                 </tbody>
-            </table>
-        </form>
-        {if $login->isAdmin() || $login->isStaff()}
-            <a id="checkAll" style="cursor: pointer;">
-                {_T string="OBJECTS LIST.CHECK"}
-            </a>
-            -
-            <a id="uncheckAll" style="cursor: pointer;">
-                {_T string="OBJECTS LIST.UNCHECK"}
-            </a>
-            -
-            <a id="invertAll" style="cursor: pointer;">
-                {_T string="OBJECTS LIST.INVERT"}
-            </a>
-        {/if}
-        {*
-        PAGINATION
-        *}
-        <p align="center">{$pagination}</p>
-    {/if}
-    {*
-    BOUTON POUR AJOUTER UN NOUVEL OBJET
-    *}
-    <p>
-        &nbsp;
-    </p>
-    <form action="objects_edit.php?object_id=new" method="get">
-        <input type="hidden" name="actual_page" id="actual_page" value="{$page}">
-        <div class="button-container">
-            <input type="submit" id="objects_print" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.PRINT"}" onclick="return printObjectList('{$tri}', '{$category_id}');">
-            {if $login->isAdmin() || $login->isStaff()}
-                <input type="submit" id="objects_record_print" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.SINGLE PRINT"}" onclick="return printObjectRecords();" style="display: none;">
-                <input type="submit" id="object_create" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.CREATE"}">
-                <input type="submit" id="objects_take_away" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.MORE AWAY"}" style="display: none;">
-                <input type="submit" id="objects_give_back" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.GIVE BACK"}" style="display: none;">
-                <input type="submit" id="objects_disable" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.DISABLE"}" onclick="return confirmDelete(false);" style="display: none;">
-                <input type="submit" id="objects_delete" class="ui-button ui-widget ui-state-default ui-corner-all" value="{_T string="OBJECTS LIST.DELETE"}" onclick="return confirmDelete(true);" style="display: none;">
-            {/if}
-        </div>
-    </form>
-    <script>
-        function printObjectList(tri, category_id) {
-            var baseurl = 'objects_list_print.php';
-
-            if ($(':checkbox:checked').length > 0) {
-                var objectsIds = '';
-                $(':checkbox:checked').each(function () {
-                    objectsIds += $(this).val() + ',';
-                });
-                baseurl += '?ids=' + objectsIds;
-            } else {
-                baseurl += '?tri=' + tri;
-                if (category_id.length > 0 || category_id > 0) {
-                    baseurl += '&category_id=' + category_id;
-                }
-            }
-
-            window.location = baseurl;
-            return false;
-        }
-    </script>
+{if $nb_objects != 0}
+            <tfoot>
+                <tr>
+                    <td colspan="14" id="table_footer">
+                        <ul class="selection_menu">
+                            <li>{_T string="For the selection:"}</li>
+                            <li>
+                                <button type="submit" name="print_list" class="tooltip">
+                                    <i class="fas fa-file-pdf"></i>
+                                    {_T string="Print objects list" domain="objectslend"}
+                                </button>
+                            </li>
     {if $login->isAdmin() || $login->isStaff()}
-        <script>
-            function confirmDelete(isDelete) {
-                var nbSelected = $(':checkbox:checked').length;
-                if (!nbSelected) {
-                    return false;
-                }
-                var objectsIds = '';
-                $(':checkbox:checked').each(function () {
-                    objectsIds += $(this).val() + ',';
+                            {* Not hanled from backport
+                            <li>
+                                <input type="submit" value="{_T string="Take out" domain="objectslend"}" id="objects_take_away" class="tooltip action">
+                            </li>
+                            <li>
+                                <input type="submit" value="{_T string="Return" domain="objectslend"}" id="objects_give_back" class="tooltip action">
+                            </li>*}
+                            <li>
+                                <button type="submit" name="delete" id="delete">
+                                    <i class="fas fa-trash"></i>
+                                    {_T string="Delete"}
+                                </button>
+                            </li>
+    {/if}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="14" class="center">
+                        {_T string="Pages:"}<br/>
+                        <ul class="pages">{$pagination}</ul>
+                    </td>
+                </tr>
+            </tfoot>
+{/if}
+            </table>
+    </form>
+</div>
+{/block}
+
+{block name="javascripts"}
+<script type="text/javascript">
+{if $nb_objects != 0}
+        var _is_checked = true;
+        var _bind_check = function(){
+            $('#checkall').click(function(){
+                $('table.listing :checkbox[name="object_ids[]"]').each(function(){
+                    this.checked = _is_checked;
                 });
-
-                var msg = isDelete ? '{_T string="OBJECTS LIST.CONFIRM DELETE"}' : '{_T string="OBJECTS LIST.CONFIRM DISABLE"}';
-                msg = $('<div/>').html(msg).text();
-                msg = msg.replace('$0', nbSelected);
-                if (nbSelected > 0 && confirm(msg)) {
-                    window.location = 'objects_delete.php?' + (isDelete ? 'delete' : 'disable') + '=1&objects_ids=' + objectsIds;
-                }
-                return false;
-            }
-
-            $('#objects_take_away').click(function () {
-                take_more_objects();
+                _is_checked = !_is_checked;
                 return false;
             });
-
-            $('#objects_give_back').click(function () {
-                give_more_objects_back();
+            $('#checkinvert').click(function(){
+                $('table.listing :checkbox[name="object_ids[]"]').each(function(){
+                    this.checked = !$(this).is(':checked');
+                });
                 return false;
+            });
+        };
+        var _checkselection = function() {
+            var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
+            if (_checkeds == 0) {
+                var _el = $('<div id="pleaseselect" title="{_T string="No object selected" domain="objectslend" escape="js"}">{_T string="Please make sure to select at least one object from the list to perform this action." domain="objectslend" escape="js"}</div>');
+                _el.appendTo('body').dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    close: function(event, ui){
+                        _el.remove();
+                    }
+                });
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
+        $(function(){
+            {include file="js_removal.tpl"}
+            {include file="js_removal.tpl" selector="#delete" deleteurl="'{path_for name="objectslend_batch-objectslist"}'" extra_check="if (!_checkselection()) {ldelim}return false;{rdelim}" extra_data="delete: true, object_ids: $('#objects_list input[type=\"checkbox\"]:checked').map(function(){ return $(this).val(); }).get()" method="POST"}
+            $('#table_footer').parent().before('<tr><td id="checkboxes" colspan="4"><span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span></td></tr>');
+            _bind_check();
+            $('#nbshow').change(function() {
+                this.form.submit();
+            });
+
+            $('.selection_menu input[type="submit"], .selection_menu button').click(function(){
+                if ( this.id == 'delete' ) {
+                    //mass removal is handled from 2 steps removal
+                    return;
+                }
+
+                return _checkselection();
+            });
+
+            $('.object_hist').on('click', function(e) {
+                e.preventDefault();
+                var _this = $(this);
+
+                $.ajax({
+                    url: _this.attr('href'),
+                    type: 'GET',
+                    datatype: 'html',
+                    {include file="../../../../templates/default/js_loader.tpl"},
+                    success: function(res){
+                        var _el = $('<div id="object_hist_window" title="{_T string="History of object" domain="objectslend" escape="js"}"></div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '60%',
+                            height: 450,
+                            close: function(event, ui){
+                                _el.remove();
+                            }
+                        }).append(res);
+                    },
+                    error: function(){
+                        alert("{_T string="An error occured loading history display :(" domain="objectslend" escape="js"}")
+                    }
+                });
+            });
+        });
+
+    {if $login->isAdmin() || $login->isStaff()}
+            $('#objects_take_away').click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+
+                $.ajax({
+                    url: 'take_more_objects_away.php?mode=ajax',
+                    type: 'GET',
+                    data: {
+                        object_ids: get_checked_objets_ids()
+                    },
+                    datatype: 'html',
+                    {include file="../../../../templates/default/js_loader.tpl"},
+                    success: function(res){
+                        var _el = $('<div id="lend_window" title="{_T string="Take objects" domain="objectslend" escape="js"}"></div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '60%',
+                            height: 450,
+                            close: function(event, ui){
+                                _el.remove();
+                            }
+                        }).append(res);
+
+                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
+                            create: function(event, ui) {
+                                if ( $(event.target).hasClass('disabled') ) {
+                                    $(event.target).button('disable');
+                                }
+                            }
+                        });
+
+                        $('#btncancel').on('click', function(e) {
+                            e.preventDefault();
+                            $('#lend_window').dialog('close');
+                        });
+
+                        _init_takeobject_js();
+
+                    },
+                    error: function(){
+                        alert("{_T string="An error occured loading 'Take away' display :(" domain="objectslend" escape="js"}")
+                    }
+                });
+            });
+
+            $('#objects_give_back').click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+
+                $.ajax({
+                    url: 'give_more_objects_back.php?mode=ajax',
+                    type: 'GET',
+                    data: {
+                        object_ids: get_checked_objets_ids()
+                    },
+                    datatype: 'html',
+                    {include file="../../../../templates/default/js_loader.tpl"},
+                    success: function(res){
+                        var _el = $('<div id="lend_window" title="{_T string="Give back objects" domain="objectslend" escape="js"}"></div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '60%',
+                            height: 450,
+                            close: function(event, ui){
+                                _el.remove();
+                            }
+                        }).append(res);
+
+                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
+                            create: function(event, ui) {
+                                if ( $(event.target).hasClass('disabled') ) {
+                                    $(event.target).button('disable');
+                                }
+                            }
+                        });
+
+                        $('#btncancel').on('click', function(e) {
+                            e.preventDefault();
+                            $('#lend_window').dialog('close');
+                        });
+
+                        _init_giveobject_js();
+
+                    },
+                    error: function(){
+                        alert("{_T string="An error occured loading 'Give back' display :(" domain="objectslend" escape="js"}")
+                    }
+                });
             });
 
             function statusObjects(isAway) {
@@ -496,54 +601,10 @@
                 $(':checkbox:checked').each(function () {
                     objectsIds += $(this).val() + ',';
                 });
-                window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?objects_ids=' + objectsIds;
+                window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?object_ids=' + objectsIds;
                 return false;
             }
-
-            function enableButtons() {
-                var visible = $(':checkbox').is(':checked');
-                $('#objects_record_print').css('display', visible ? 'inline' : 'none');
-                $('#objects_disable').css('display', visible ? 'inline' : 'none');
-                $('#objects_delete').css('display', visible ? 'inline' : 'none');
-                $('#objects_give_back').css('display', visible ? 'inline' : 'none');
-                $('#objects_take_away').css('display', visible ? 'inline' : 'none');
-            }
-
-            function printObjectRecords() {
-                var baseurl = 'objects_print.php';
-
-                if ($(':checkbox:checked').length > 0) {
-                    var objectsIds = '';
-                    $(':checkbox:checked').each(function () {
-                        objectsIds += $(this).val() + ',';
-                    });
-                    baseurl += '?ids=' + objectsIds;
-
-                    window.location = baseurl;
-                }
-                return false;
-            }
-
-            $('#checkAll').click(function () {
-                $(':checkbox').attr('checked', 'checked');
-                enableButtons();
-            });
-
-            $('#uncheckAll').click(function () {
-                $(':checkbox').removeAttr('checked');
-                enableButtons();
-            });
-
-            $('#invertAll').click(function () {
-                $(':checkbox').each(function () {
-                    if ($(this).is(':checked')) {
-                        $(this).removeAttr('checked');
-                    } else {
-                        $(this).attr('checked', 'checked');
-                    }
-                });
-                enableButtons();
-            });
-        </script>
     {/if}
-</div>
+{/if}
+</script>
+{/block}

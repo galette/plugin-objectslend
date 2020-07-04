@@ -37,13 +37,5 @@
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7
  */
-define('LEND_PREFIX', 'lend_');
-define('LEND_SMARTY_PREFIX', 'plugins|lend');
 
-require_once 'classes/lendObject.class.php';
-require_once 'classes/lendRent.class.php';
-require_once 'classes/lendStatus.class.php';
-require_once 'classes/lendPicture.class.php';
-require_once 'classes/lendParameter.class.php';
-require_once 'classes/lendCategory.class.php';
-require_once 'classes/lendPDF.class.php';
+define('LEND_PREFIX', 'lend_');

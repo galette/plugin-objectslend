@@ -1,142 +1,178 @@
-{if $msg_saved}
-    <div id="infobox">
-        <h1>{_T string="STATUS LIST.SAVED"}</h1>
-    </div>
-{/if}
-{if $msg_canceled}
-    <div id="warningbox">
-        <h1>{_T string="STATUS LIST.CANCELED"}</h1>
-    </div>
-{/if}
-{if $msg_deleted}
-    <div id="errorbox">
-        <h1>{_T string="STATUS LIST.DELETED"}</h1>
-    </div>
-{/if}
-{if $msg_galette_location_needed}
-    <div id="errorbox">
-        <h1>{_T string="STATUS LIST.GALETTE LOCATION NEEDED"}</h1>
-    </div>
-{/if}
-{if $msg_away_needed}
-    <div id="errorbox">
-        <h1>{_T string="STATUS LIST.AWAY NEEDED"}</h1>
-    </div>
-{/if}
-<p>
-    {$nb_status} {_T string="STATUS LIST.NB RESULT"}
-</p>
+{extends file="page.tpl"}
+{block name="content"}
+    <form id="filtre" method="POST" action="{path_for name="objectslend_filter_statuses"}">
+        <div id="listfilter">
+            <label for="filter_str">{_T string="Search:"}&nbsp;</label>
+            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{_T string="Enter a value"}"/>&nbsp;
+            {_T string="Active:" domain="objectslend"}
+            <input type="radio" name="active_filter" id="filter_dc_active" value="{GaletteObjectsLend\Repository\Status::ALL}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::ALL')} checked="checked"{/if}>
+            <label for="filter_dc_active" >{_T string="Don't care"}</label>
+            <input type="radio" name="active_filter" id="filter_yes_active" value="{GaletteObjectsLend\Repository\Status::ACTIVE}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::ACTIVE')} checked="checked"{/if}>
+            <label for="filter_yes_active" >{_T string="Yes"}</label>
+            <input type="radio" name="active_filter" id="filter_no_active" value="{GaletteObjectsLend\Repository\Status::INACTIVE}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::INACTIVE')} checked="checked"{/if}>
+            <label for="filter_no_active" >{_T string="No"}</label>
+            {_T string="In stock:" domain="objectslend"}
+            <input type="radio" name="stock_filter" id="filter_dc_stock" value="{GaletteObjectsLend\Repository\Status::DC_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::DC_STOCK')} checked="checked"{/if}>
+            <label for="filter_dc_stock" >{_T string="Don't care"}</label>
+            <input type="radio" name="stock_filter" id="filter_yes_stock" value="{GaletteObjectsLend\Repository\Status::IN_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::IN_STOCK')} checked="checked"{/if}>
+            <label for="filter_yes_stock" >{_T string="Yes"}</label>
+            <input type="radio" name="stock_filter" id="filter_no_stock" value="{GaletteObjectsLend\Repository\Status::OUT_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::OUT_STOCK')} checked="checked"{/if}>
+            <label for="filter_no_stock" >{_T string="No"}</label>
+            <input type="submit" class="inline" value="{_T string="Filter"}"/>
+            <input name="clear_filter" type="submit" value="{_T string="Clear filter"}">
+        </div>
+        <div class="infoline">
+            {$nb_status} {_T string="status" domain="objectslend"}
+            <div class="fright">
+                <label for="nbshow">{_T string="Records per page:"}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+            </div>
+        </div>
+    </form>
 <table class="listing">
     <thead>
         <tr>
-            <th>
-                <a href="?tri=status_id&direction={if $tri eq 'status_id' && $direction eq 'asc'}desc{else}asc{/if}">
+            <th class="id_row">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_ID"|constant]}">
                     #
+                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_ID')}
+                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
+                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                        {else}
+                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                        {/if}
+                    {/if}
                 </a>
-                {if $tri eq 'status_id' && $direction eq 'asc'} 
-                    <img src="{$template_subdir}images/down.png"/>
-                {elseif $tri eq 'status_id' && $direction eq 'desc'}
-                    <img src="{$template_subdir}images/up.png"/>
-                {/if}
             </th>
             <th>
-                <a href="?tri=status_text&direction={if $tri eq 'status_text' && $direction eq 'asc'}desc{else}asc{/if}">
-                    {_T string="STATUS LIST.TEXT"}
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_NAME"|constant]}">
+                    {_T string="Status" domain="objectslend"}
+                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_NAME')}
+                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
+                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                        {else}
+                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                        {/if}
+                    {/if}
                 </a>
-                {if $tri eq 'status_text' && $direction eq 'asc'} 
-                    <img src="{$template_subdir}images/down.png"/>
-                {elseif $tri eq 'status_text' && $direction eq 'desc'}
-                    <img src="{$template_subdir}images/up.png"/>
-                {/if}
             </th>
-            <th>
-                <a href="?tri=is_home_location&direction={if $tri eq 'is_home_location' && $direction eq 'asc'}desc{else}asc{/if}">
-                    {_T string="STATUS LIST.IS GALETTE LOCATION"}
+            <th class="id_row">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_ACTIVE"|constant]}">
+                    {_T string="Active" domain="objectslend"}
+                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_ACTIVE')}
+                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
+                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                        {else}
+                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                        {/if}
+                    {/if}
                 </a>
-                {if $tri eq 'is_home_location' && $direction eq 'asc'}
-                    <img src="{$template_subdir}images/down.png"/>
-                {elseif $tri eq 'is_home_location' && $direction eq 'desc'}
-                    <img src="{$template_subdir}images/up.png"/>
-                {/if}
             </th>
-            <th>
-                <a href="?tri=is_active&direction={if $tri eq 'is_active' && $direction eq 'asc'}desc{else}asc{/if}">
-                    {_T string="STATUS LIST.IS ACTIVE"}
+            <th class="id_row">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_STOCK"|constant]}">
+                    {_T string="Stock" domain="objectslend"}
+                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_STOCK')}
+                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
+                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                        {else}
+                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                        {/if}
+                    {/if}
                 </a>
-                {if $tri eq 'is_active' && $direction eq 'asc'}
-                    <img src="{$template_subdir}images/down.png"/>
-                {elseif $tri eq 'is_active' && $direction eq 'desc'}
-                    <img src="{$template_subdir}images/up.png"/>
-                {/if}
             </th>
-            <th>
-                <a href="?tri=rent_day_number&direction={if $tri eq 'rent_day_number' && $direction eq 'asc'}desc{else}asc{/if}">
-                    {_T string="STATUS LIST.RENT DAY NUMBER"}
+            <th class="id_row">
+                <a href="{path_for name="objectslend_statuses" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Status::ORDERBY_RENTDAYS"|constant]}">
+                    {_T string="Days for rent" domain="objectslend"}
+                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Status::ORDERBY_RENTDAYS')}
+                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\StatusList::ORDER_ASC')}
+                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                        {else}
+                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                        {/if}
+                    {/if}
                 </a>
-                {if $tri eq 'rent_day_number' && $direction eq 'asc'}
-                    <img src="{$template_subdir}images/down.png"/>
-                {elseif $tri eq 'rent_day_number' && $direction eq 'desc'}
-                    <img src="{$template_subdir}images/up.png"/>
-                {/if}
             </th>
-            <th>
-                {_T string="STATUS LIST.EDIT SHORT"}
-            </th>
-            <th>
-                {_T string="STATUS LIST.DELETE SHORT"}
-            </th>
+            <th class="actions_row">{_T string="Actions"}</th>
         </tr>
     </thead>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="center">
+                {_T string="Pages:"}<br/>
+                <ul class="pages">{$pagination}</ul>
+            </td>
+        </tr>
+    </tfoot>
     <tbody>
-        {foreach from=$statuses item=sttus}
-            <tr class="{if $sttus@index is odd}even{else}odd{/if}">
+        {foreach from=$statuses item=status}
+            <tr class="{if $status@index is odd}even{else}odd{/if}">
                 <td>
-                    {$sttus->status_id}
+                    {$status->status_id}
                 </td>
                 <td>
-                    {$sttus->status_text}
+                    {$status->status_text}
                 </td>
-                <td align="center">
-                    {if $sttus->is_home_location}
-                        <img src="picts/check.png"/>
+                <td class="center {if $status->is_active}use{else}delete{/if}">
+                    {if $status->is_active}
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="sr-only">{_T string="Active" domain="objectslend"}</span>
+                    {else}
+                        <i class="fas fa-thumbs-down"></i>
+                        <span class="sr-only">{_T string="Inactive" domain="objectslend"}</span>
                     {/if}
                 </td>
-                <td align="center">
-                    {if $sttus->is_active}
-                        <img src="picts/check.png"/>
+                <td class="center {if $status->in_stock}use{else}delete{/if}">
+                    {if $status->in_stock}
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="sr-only">{_T string="In stock" domain="objectslend"}</span>
+                    {else}
+                        <i class="fas fa-thumbs-down"></i>
+                        <span class="sr-only">{_T string="Not in stock" domain="objectslend"}</span>
                     {/if}
                 </td>
                 <td>
-                    {$sttus->rent_day_number}
+                    {if $status->rent_day_number}
+                        {_T string="%days days" domain="objectslend" pattern="/%days/" replace=$status->rent_day_number}
+                    {else}
+                        -
+                    {/if}
                 </td>
-                <td align="center">
-                    <a href="status_edit.php?status_id={$sttus->status_id}">
-                        <img src="picts/edit.png" title="{_T string="STATUS LIST.EDIT"}" border="0"/>
+                <td class="center nowrap">
+                    <a
+                        class="action tooltip"
+                        href="{path_for name="objectslend_status" data=["action" => "edit", "id" => $status->status_id]}"
+                        title="{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$status->status_text}"
+                    >
+                        <i class="fas fa-edit"></i>
+                        <span class="sr-only">{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$status->status_text}</span>
                     </a>
-                </td>
-                <td align="center">
-                    <a href="javascript:void(0)">
-                        <img src="picts/delete.png" title="{_T string="STATUS LIST.DELETE"}" border="0" onClick="confirmDelete('{$sttus->status_text}', '{$sttus->status_id}')"/>
+                    <a
+                        class="delete tooltip"
+                        href="{path_for name="objectslend_remove_status" data=["id" => $status->status_id]}"
+                        title="{_T string="Remove %status from database" domain="objectslend" pattern="/%status/" replace=$status->status_text}"
+                    >
+                        <i class="fas fa-trash"></i>
+                        <span class="sr-only">{_T string="Remove %status from database" domain="objectslend" pattern="/%status/" replace=$status->status_text}</span>
                     </a>
                 </td>
             </tr>
+        {foreachelse}
+            <tr><td colspan="6" class="emptylist">{_T string="No status has been found" domain="objectslend"}</td></tr>
         {/foreach}
     </tbody>
 </table>
-<p>
-    &nbsp;
-</p>
-<form action="status_edit.php?status_id=new" method="get">
-    <div class="button-container">
-        <input type="submit" id="status_create" value="{_T string="STATUS LIST.CREATE"}">
-    </div>
-</form>
-<script>
-    function confirmDelete(nom, status_id) {
-        var msg = $('<div/>').html('{_T string="STATUS LIST.CONFIRM DELETE"}').text();
-        if (confirm(msg + nom + ' ?')) {
-            window.location = 'status_delete.php?status_id=' + status_id;
-        }
-        return false;
-    }
-</script>
+{/block}
+
+{block name="javascripts"}
+    <script type="text/javascript">
+        $(function(){
+            {include file="js_removal.tpl"}
+            $('#nbshow').change(function() {
+                this.form.submit();
+            });
+        });
+    </script>
+{/block}

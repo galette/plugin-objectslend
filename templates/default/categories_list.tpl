@@ -1,65 +1,62 @@
-{if $msg_saved}
-    <div id="infobox">
-        <h1>{_T string="CATEGORIES LIST.SAVED"}</h1>
-    </div>
-{/if}
-{if $msg_canceled}
-    <div id="warningbox">
-        <h1>{_T string="CATEGORIES LIST.CANCELED"}</h1>
-    </div>
-{/if}
-{if $msg_deleted}
-    <div id="errorbox">
-        <h1>{_T string="CATEGORIES LIST.DELETED"}</h1>
-    </div>
-{/if}
-<p>
-    {$nb_categories} {_T string="CATEGORIES LIST.NB RESULT"}
-</p>
+{extends file="page.tpl"}
+{block name="content"}
+    <form id="filtre" method="POST" action="{path_for name="objectslend_filter_categories"}">
+        <div id="listfilter">
+            <label for="filter_str">{_T string="Search:"}&nbsp;</label>
+            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{_T string="Enter a value"}"/>&nbsp;
+            {_T string="Active:" domain="objectslend"}
+            <input type="radio" name="active_filter" id="filter_dc_active" value="{GaletteObjectsLend\Repository\Categories::ALL_CATEGORIES}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Categories::ALL_CATEGORIES')} checked="checked"{/if}>
+            <label for="filter_dc_active" >{_T string="Don't care"}</label>
+            <input type="radio" name="active_filter" id="filter_yes_active" value="{GaletteObjectsLend\Repository\Categories::ACTIVE_CATEGORIES}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Categories::ACTIVE_CATEGORIES')} checked="checked"{/if}>
+            <label for="filter_yes_active" >{_T string="Yes"}</label>
+            <input type="radio" name="active_filter" id="filter_no_active" value="{GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES')} checked="checked"{/if}>
+            <label for="filter_no_active" >{_T string="No"}</label>
+            <input type="submit" class="inline" value="{_T string="Filter"}"/>
+            <input name="clear_filter" type="submit" value="{_T string="Clear filter"}">
+        </div>
+        <div class="infoline">
+            {$nb_categories} {if $nb_categories != 1}{_T string="categories" domain="objectslend"}{else}{_T string="category" domain="objectslend"}{/if}
+            <div class="fright">
+                <label for="nbshow">{_T string="Records per page:"}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+            </div>
+        </div>
+    </form>
 <table class="listing">
     <thead>
         <tr>
+            <th class="id_row">&nbsp;</th>
             <th>
-                <a href="?tri=category_id&direction={if $tri eq 'category_id' && $direction eq 'asc'}desc{else}asc{/if}">
-                    #
+                <a href="{path_for name="objectslend_categories" data=["option" => "order", "value" => "GaletteObjectsLend\Repository\Categories::ORDERBY_NAME"|constant]}">
+                    {_T string="Name" domain="objectslend"}
+                    {if $filters->orderby eq constant('GaletteObjectsLend\Repository\Categories::ORDERBY_NAME')}
+                        {if $filters->ordered eq constant('GaletteObjectsLend\Filters\CategoriesList::ORDER_ASC')}
+                    <img src="{base_url}/{$template_subdir}images/down.png" width="10" height="6" alt=""/>
+                        {else}
+                    <img src="{base_url}/{$template_subdir}images/up.png" width="10" height="6" alt=""/>
+                        {/if}
+                    {/if}
                 </a>
-                {if $tri eq 'category_id' && $direction eq 'asc'} 
-                    <img src="{$template_subdir}images/down.png">
-                {elseif $tri eq 'category_id' && $direction eq 'desc'} 
-                    <img src="{$template_subdir}images/up.png">
-                {/if}
             </th>
-            <th>
-                {_T string="CATEGORIES LIST.IMAGE"}
+            <th class="id_row">
+                {_T string="Active"}
             </th>
-            <th>
-                <a href="?tri=name&direction={if $tri eq 'name' && $direction eq 'asc'}desc{else}asc{/if}">
-                    {_T string="CATEGORIES LIST.TEXT"}
-                </a>
-                {if $tri eq 'name' && $direction eq 'asc'} 
-                    <img src="{$template_subdir}images/down.png">
-                {elseif $tri eq 'name' && $direction eq 'desc'} 
-                    <img src="{$template_subdir}images/up.png">
-                {/if}
-            </th>
-            <th>
-                <a href="?tri=is_active&direction={if $tri eq 'is_active' && $direction eq 'asc'}desc{else}asc{/if}">
-                    {_T string="CATEGORIES LIST.IS ACTIVE"}
-                </a>
-                {if $tri eq 'is_active' && $direction eq 'asc'} 
-                    <img src="{$template_subdir}images/down.png">
-                {elseif $tri eq 'is_active' && $direction eq 'desc'}
-                    <img src="{$template_subdir}images/up.png">
-                {/if}
-            </th>
-            <th>
-                {_T string="STATUS LIST.EDIT SHORT"}
-            </th>
-            <th>
-                {_T string="STATUS LIST.DELETE SHORT"}
+            <th class="actions_row">
+                {_T string="Actions"}
             </th>
         </tr>
     </thead>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="center">
+                {_T string="Pages:"}<br/>
+                <ul class="pages">{$pagination}</ul>
+            </td>
+        </tr>
+    </tfoot>
     <tbody>
         {foreach from=$categories item=categ}
             <tr class="{if $categ@index is odd}even{else}odd{/if}">
@@ -67,46 +64,54 @@
                     {$categ->category_id}
                 </td>
                 <td>
-                    {if $categ->categ_image_url ne ''}
-                        <img src="{$categ->categ_image_url}" {if $view_category_thumb}style="max-width: {$thumb_max_width}px; max-height: {$thumb_max_height}px;"{/if}/>
-                    {/if}
-                </td>
-                <td>
+    {if $olendsprefs->imagesInLists()}
+                    <img src="{path_for name="objectslend_photo" data=["type" => "category", "mode" => "thumbnail", "id" => $categ->category_id]}"
+                        class="picture"
+                        width="{$categ->picture->getOptimalThumbWidth($olendsprefs)}"
+                        height="{$categ->picture->getOptimalThumbHeight($olendsprefs)}"
+                        alt=""/>
+    {/if}
                     {$categ->name}
                 </td>
-                <td align="center">
-                    {if $categ->is_active}
-                        <img src="picts/check.png"/>
-                    {/if}
+                <td class="center {if $categ->is_active}use{else}delete{/if}">
+                    <i class="fas fa-thumbs-{if $categ->is_active}up{else}down{/if}"></i>
+                    <span class="sr-only">{_T string="Active"}</span>
                 </td>
-                <td align="center">
-                    <a href="category_edit.php?category_id={$categ->category_id}">
-                        <img src="picts/edit.png" title="{_T string="CATEGORIES LIST.EDIT"}" border="0"/>
+    {if $login->isAdmin() || $login->isStaff()}
+                <td class="center nowrap">
+                    <a
+                        class="tooltip action"
+                        href="{path_for name="objectslend_category" data=["action" => "edit", "id" => $categ->category_id]}"
+                        title="{_T string="Edit \"%category\"" pattern="/%category/" domain="objectslend" replace=$categ->name}"
+                    >
+                        <i class="fas fa-edit"></i>
+                        <span class="sr-only">{_T string="Edit \"%category\"" pattern="/%category/" domain="objectslend" replace=$categ->name}</span>
                     </a>
-                </td>
-                <td align="center">
-                    <a href="javascript:void(0)">
-                        <img src="picts/delete.png" title="{_T string="CATEGORIES LIST.DELETE"}" border="0" onClick="confirmDelete('{$categ->name}', '{$categ->category_id}')"/>
+        {if $login->isAdmin()}
+                    <a
+                        class="tooltip delete"
+                        href="{path_for name="objectslend_remove_category" data=["id" => $categ->category_id]}"
+                        title="{_T string="Remove \"%category\"" domain="objectslend" pattern="/%category/" replace=$categ->name}"
+                    >
+                        <i class="fas fa-trash"></i>
+                        <span class="sr-only">{_T string="Remove \"%category\"" domain="objectslend" pattern="/%category/" replace=$categ->name}</span>
                     </a>
+        {/if}
                 </td>
+    {/if}
             </tr>
         {/foreach}
     </tbody>
 </table>
-<p>
-    &nbsp;
-</p>
-<form action="category_edit.php?status_id=new" method="get">
-    <div class="button-container">
-        <input type="submit" id="status_create" value="{_T string="CATEGORIES LIST.CREATE"}">
-    </div>
-</form>
-<script>
-    function confirmDelete(nom, categ_id) {
-        var msg = $('<div/>').html('{_T string="CATEGORIES LIST.CONFIRM DELETE"}').text();
-        if (confirm(msg + nom + ' ?')) {
-            window.location = 'category_delete.php?category_id=' + categ_id;
-        }
-        return false;
-    }
-</script>
+{/block}
+
+{block name="javascripts"}
+    <script type="text/javascript">
+        $(function(){
+            {include file="js_removal.tpl"}
+            $('#nbshow').change(function() {
+                this.form.submit();
+            });
+        });
+    </script>
+{/block}

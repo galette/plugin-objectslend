@@ -1,0 +1,437 @@
+<?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * Plugin's Pictures
+ *
+ * PHP version 5
+ *
+ * Copyright © 2013-2016 Mélissa Djebel
+ * Copyright © 2017-2018 The Galette Team
+ *
+ * This file is part of Galette (http://galette.tuxfamily.org).
+ *
+ * ObjectsLend is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ObjectsLend is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @category  Plugins
+ * @package   ObjectsLend
+ *
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
+
+namespace GaletteObjectsLend\Entity;
+
+use Analog\Analog;
+use Galette\Core\Plugins;
+
+/**
+ * Picture handling
+ *
+ * @name      Picture
+ * @category  Entity
+ * @package   ObjectsLend
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
+class Picture extends \Galette\Core\Picture
+{
+    protected $tbl_prefix = LEND_PREFIX;
+
+    protected $max_width = 800;
+    protected $max_height = 800;
+
+    protected $thumb_max_width;
+    protected $thumb_max_height;
+
+    protected $thumb_optimal_height;
+    protected $thumb_optimal_width;
+
+    protected $plugins;
+
+    /**
+     * Default constructor.
+     *
+     * @param Plugins $plugins  Plugins
+     * @param int     $objectid Object id
+     */
+    public function __construct(Plugins $plugins, $objectid = '')
+    {
+        $this->plugins = $plugins;
+
+        if (!file_exists($this->store_path)) {
+            if (!mkdir($this->store_path, 0755, true)) {
+                Analog::log(
+                    'Unable to create photo dir `' . $this->store_path . '`.',
+                    Analog::ERROR
+                );
+            } else {
+                Analog::log(
+                    'New directory `' . $this->store_path . '` has been created',
+                    Analog::INFO
+                );
+            }
+        } elseif (!is_dir($this->store_path)) {
+            Analog::log(
+                'Unable to store plugin images, since `' . $this->store_path .
+                '` is not a directory.',
+                Analog::WARNING
+            );
+        }
+
+        parent::__construct($objectid);
+    }
+
+    /**
+     * Gets the default picture to show, anyways
+     *
+     * @see Logo::getDefaultPicture()
+     *
+     * @return void
+     */
+    protected function getDefaultPicture()
+    {
+        $this->file_path = realpath(
+            $this->plugins->getTemplatesPathFromName('Galette Objects Lend') .
+            '/../../webroot/images/default.png'
+        );
+        $this->format = 'png';
+        $this->mime = 'image/png';
+        $this->has_picture = false;
+    }
+
+    /**
+     * Display a thumbnail image, create it if necessary
+     *
+     * @param Preferences $prefs Preferences instance
+     * @return void
+     */
+    public function displayThumb(Preferences $prefs)
+    {
+        $this->setThumbSizes($prefs);
+        header('Content-type: ' . $this->getMime());
+        readfile($this->getThumbPath());
+    }
+
+    /**
+     * Create thumbnail image
+     * @see \Galette\Core\Picture::resizeImage()
+     *
+     * @param string $source the source image
+     * @param string $ext    file's extension
+     * @param string $dest   the destination image.
+     *                       If null, we'll use the source image. Defaults to null
+     *
+     * @return void
+     */
+    private function createThumb($source, $ext, $dest = null)
+    {
+        $class = get_class($this);
+
+        if (function_exists("gd_info")) {
+            $gdinfo = gd_info();
+            $h = $this->thumb_max_height;
+            $w = $this->thumb_max_width;
+            if ($dest == null) {
+                $dest = $source;
+            }
+
+            switch (strtolower($ext)) {
+                case 'jpg':
+                    if (!$gdinfo['JPEG Support']) {
+                        Analog::log(
+                            '[' . $class . '] GD has no JPEG Support - ' .
+                            'pictures could not be resized!',
+                            Analog::ERROR
+                        );
+                        return false;
+                    }
+                    break;
+                case 'png':
+                    if (!$gdinfo['PNG Support']) {
+                        Analog::log(
+                            '[' . $class . '] GD has no PNG Support - ' .
+                            'pictures could not be resized!',
+                            Analog::ERROR
+                        );
+                        return false;
+                    }
+                    break;
+                case 'gif':
+                    if (!$gdinfo['GIF Create Support']) {
+                        Analog::log(
+                            '[' . $class . '] GD has no GIF Support - ' .
+                            'pictures could not be resized!',
+                            Analog::ERROR
+                        );
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+
+            list($cur_width, $cur_height, $cur_type, $curattr)
+                = getimagesize($source);
+
+            $ratio = $cur_width / $cur_height;
+
+            // calculate image size according to ratio
+            if ($cur_width > $cur_height) {
+                $h = $w / $ratio;
+            } else {
+                $w = $h * $ratio;
+            }
+
+            $thumb = imagecreatetruecolor($w, $h);
+            switch ($ext) {
+                case 'jpg':
+                    $image = ImageCreateFromJpeg($source);
+                    imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
+                    imagejpeg($thumb, $dest);
+                    break;
+                case 'png':
+                    $image = ImageCreateFromPng($source);
+                    // Turn off alpha blending and set alpha flag. That prevent alpha
+                    // transparency to be saved as an arbitrary color (black in my tests)
+                    imagealphablending($thumb, false);
+                    imagealphablending($image, false);
+                    imagesavealpha($thumb, true);
+                    imagesavealpha($image, true);
+                    imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
+                    imagepng($thumb, $dest);
+                    break;
+                case 'gif':
+                    $image = ImageCreateFromGif($source);
+                    imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
+                    imagegif($thumb, $dest);
+                    break;
+            }
+        } else {
+            Analog::log(
+                '[' . $class . '] GD is not present - ' .
+                'pictures could not be resized!',
+                Analog::ERROR
+            );
+        }
+    }
+
+    /**
+     * Deletes a picture, from both database and filesystem
+     *
+     * @param boolean $transaction Whether to use a transaction here or not
+     *
+     * @return boolean true if image was successfully deleted, false otherwise
+     */
+    public function delete($transaction = true)
+    {
+        //find and delete any thumb
+        $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
+        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
+
+        $thumb = $filename . '_th.' . $ext;
+
+        if (file_exists($thumb)) {
+            unlink($thumb);
+        }
+
+        return parent::delete($transaction);
+    }
+
+    /**
+     * Stores an image on the disk and in the database
+     *
+     * @param object $file the uploaded file
+     * @param bool   $ajax not used
+     *
+     * @return true|false result of the storage process
+     */
+    public function store($file, $ajax = false)
+    {
+        $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
+        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
+        $thumb = $filename . '_th.' . $ext;
+
+        if (is_file($thumb)) {
+            unlink($thumb);
+        }
+
+        return parent::store($file);
+    }
+
+    /**
+     * Restore objects images from database blob
+     *
+     * @param array $success Success messages
+     * @param array $error   Error messages
+     *
+     * @return void
+     */
+    public function restorePictures(&$success, &$error)
+    {
+        global $zdb;
+
+        try {
+            $select_all = $zdb->select($this->tbl_prefix . static::TABLE);
+            $results = $zdb->execute($select_all);
+            $success[] = str_replace(
+                '%count',
+                count($results),
+                _T("Found %count pictures in database")
+            );
+            foreach ($results as $picture) {
+                $path = realpath($this->store_path . $picture->{static::PK} . '.' . $picture->format);
+                if (file_exists($path)) {
+                    unlink($path);
+                    $success[] = str_replace(
+                        '%path',
+                        $path,
+                        _T("Picture '%path' deleted")
+                    );
+                }
+
+                file_put_contents($path, $picture->picture);
+                $success[] = str_replace(
+                    '%path',
+                    $path,
+                    _T("Picture '%path' written")
+                );
+            }
+        } catch (\Exception $e) {
+            Analog::log(
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
+                $e->getTraceAsString(),
+                Analog::ERROR
+            );
+            $error[] = _T("An error occured :(");
+        }
+    }
+
+    /**
+     * Get thumbnail file path
+     *
+     * @return string
+     */
+    public function getThumbPath()
+    {
+        if ($this->has_picture) {
+            $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+            $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
+            $filename .= '_th.' . $ext;
+        } else {
+            $this->getDefaultPicture();
+            $filename = $this->file_path;
+            $infos = pathinfo($this->file_path);
+        }
+        return $filename;
+    }
+
+    /**
+     * Set picture thumbnail sizes
+     *
+     * Should override Picture::setSize(), but this one is private :/
+     *
+     * @param Preferences $prefs Preferences instance
+     *
+     * @return void
+     */
+    private function setThumbSizes(Preferences $prefs)
+    {
+        $thumb = $this->getThumbPath();
+        $this->thumb_max_width = $prefs->getThumbWidth();
+        $this->thumb_max_height = $prefs->getThumbHeight();
+
+        // Create if missing
+        if (!is_file($thumb)) {
+            $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+            $this->createThumb($this->file_path, $ext, $thumb);
+        } else {
+            //resize if too small/large
+            if (function_exists("gd_info")) {
+                list($cur_width, $cur_height, $cur_type, $curattr)
+                    = getimagesize($thumb);
+
+                if (
+                    $cur_height != $this->getOptimalHeight()
+                    && $cur_height < $this->thumb_max_height
+                    && $cur_width != $this->getOptimalWidth()
+                    && $cur_width < $this->thumb_max_width
+                    || $cur_width > $this->thumb_max_width
+                    || $cur_height > $this->thumb_max_height
+                ) {
+                    Analog::log(
+                        'Picture thumbnail must be generated again.',
+                        Analog::INFO
+                    );
+                    unlink($thumb);
+                    $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+                    $this->createThumb($this->file_path, $ext, $thumb);
+                }
+            }
+        }
+
+        list($width, $height) = getimagesize($thumb);
+        $this->thumb_optimal_height = $height;
+        $this->thumb_optimal_width = $width;
+    }
+
+    /**
+     * Returns current thumbnail optimal height
+     *
+     * @param Preferences $prefs Preferences instance
+     *
+     * @return int optimal height
+     */
+    public function getOptimalThumbHeight(Preferences $prefs)
+    {
+        if (!$this->thumb_optimal_height) {
+            $this->setThumbSizes($prefs);
+        }
+        return round($this->thumb_optimal_height);
+    }
+
+    /**
+     * Returns current thumbnail optimal width
+     *
+     * @param Preferences $prefs Preferences instance
+     *
+     * @return int optimal width
+     */
+    public function getOptimalThumbWidth(Preferences $prefs)
+    {
+        if (!$this->thumb_optimal_width) {
+            $this->setThumbSizes($prefs);
+        }
+        return round($this->thumb_optimal_width);
+    }
+
+    /**
+     * Get storage directory
+     *
+     * @return string
+     */
+    public function getDir()
+    {
+        return $this->store_path;
+    }
+}
