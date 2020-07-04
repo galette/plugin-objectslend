@@ -37,4 +37,5 @@
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7
  */
+
 define('LEND_PREFIX', 'lend_');

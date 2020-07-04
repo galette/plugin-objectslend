@@ -34,8 +34,7 @@
  * @copyright 2013-2016 Mélissa Djebel
  * @Copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7
+ * @link      https://galette.eu
  */
 
 namespace GaletteObjectsLend\Entity;
@@ -43,11 +42,24 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use Galette\Core\Db;
 
+/**
+ * Lend status management
+ *
+ * @name      LendStatus
+ * @category  Entity
+ * @package   ObjectsLend
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
 class LendStatus
 {
 
-    const TABLE = 'status';
-    const PK = 'status_id';
+    public const TABLE = 'status';
+    public const PK = 'status_id';
 
     private $zdb;
 
@@ -121,7 +133,8 @@ class LendStatus
             $values = array();
 
             foreach ($this->fields as $k => $v) {
-                if (($k === 'is_active' || $k === 'in_stock')
+                if (
+                    ($k === 'is_active' || $k === 'in_stock')
                     && $this->$k === false
                 ) {
                     //Handle booleans for postgres ; bugs #18899 and #19354

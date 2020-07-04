@@ -31,10 +31,9 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   0.7
- * @link      http://galette.tuxfamily.org
+ * @link      https://galette.eu
  * @since     Available since 0.7
  */
 
@@ -43,6 +42,19 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use Galette\Core\Plugins;
 
+/**
+ * Picture for objects
+ *
+ * @name      ObjectPicture
+ * @category  Entity
+ * @package   ObjectsLend
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
 class ObjectPicture extends Picture
 {
     const PK = 'object_id';

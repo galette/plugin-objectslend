@@ -192,7 +192,8 @@ class PdfObjects extends Pdf
         $row = 0;
 
         foreach ($objects as $object) {
-            if ($this->lendsprefs->{LendPreferences::PARAM_VIEW_CATEGORY}
+            if (
+                $this->lendsprefs->{LendPreferences::PARAM_VIEW_CATEGORY}
                 && $current_category !== $object->category_id
             ) {
                 $this->SetFont('', 'B');

@@ -34,8 +34,7 @@
  * @copyright 2013-2016 Mélissa Djebel
  * @Copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7
+ * @link      https://galette.eu
  */
 
 namespace GaletteObjectsLend\Entity;
@@ -44,11 +43,24 @@ use Analog\Analog;
 use Galette\Entity\Adherent;
 use Galette\Repository\Members;
 
+/**
+ * Rents
+ *
+ * @name      LendRent
+ * @category  Entity
+ * @package   ObjectsLend
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
 class LendRent
 {
 
-    const TABLE = 'rents';
-    const PK = 'rent_id';
+    public const TABLE = 'rents';
+    public const PK = 'rent_id';
 
     private $fields = array(
         'rent_id' => 'integer',
@@ -208,10 +220,19 @@ class LendRent
 
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->join(PREFIX_DB . Adherent::TABLE, PREFIX_DB . Adherent::TABLE . '.id_adh = ' . PREFIX_DB . LEND_PREFIX . self::TABLE . '.adherent_id', '*', 'left')
-                    ->join(PREFIX_DB . LEND_PREFIX . LendStatus::TABLE, PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB . LEND_PREFIX . self::TABLE . '.status_id')
-                    ->where(array('object_id' => $object_id))
-                    ->order($order);
+                ->join(
+                    PREFIX_DB . Adherent::TABLE,
+                    PREFIX_DB . Adherent::TABLE . '.id_adh = ' . PREFIX_DB . LEND_PREFIX . self::TABLE . '.adherent_id',
+                    '*',
+                    'left'
+                )
+                ->join(
+                    PREFIX_DB . LEND_PREFIX . LendStatus::TABLE,
+                    PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB .
+                        LEND_PREFIX . self::TABLE . '.status_id'
+                )
+                ->where(array('object_id' => $object_id))
+                ->order($order);
 
             if ($only_last === true) {
                 $select->offset(0)->limit(1);

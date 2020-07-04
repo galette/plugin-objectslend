@@ -32,26 +32,38 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @Copyright © 2017-2018 The Galette Team
+ * @copyright 2017-2018 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7
+ * @link      https://galette.eu
  */
 
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use \Laminas\Db\Sql\Predicate;
+use Laminas\Db\Sql\Predicate;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Repository\Objects;
 
+/**
+ * Object
+ *
+ * @name      LendObject
+ * @category  Entity
+ * @package   ObjectsLend
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
 class LendObject
 {
-    const TABLE = 'objects';
-    const PK = 'object_id';
+    public const TABLE = 'objects';
+    public const PK = 'object_id';
 
     private $fields = array(
         'object_id' => 'integer',
@@ -308,7 +320,8 @@ class LendObject
             $values = array();
 
             foreach ($this->fields as $k => $v) {
-                if (($k === 'is_active' || $k === 'price_per_day')
+                if (
+                    ($k === 'is_active' || $k === 'price_per_day')
                     && $this->$k === false
                 ) {
                     //Handle booleans for postgres ; bugs #18899 and #19354

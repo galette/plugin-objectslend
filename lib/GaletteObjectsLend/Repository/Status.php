@@ -37,7 +37,6 @@
 namespace GaletteObjectsLend\Repository;
 
 use Galette\Entity\DynamicFields;
-
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\Sql\Expression;

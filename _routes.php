@@ -36,15 +36,12 @@
  */
 
 use Analog\Analog;
-
 use Galette\Entity\ContributionsTypes;
 use Galette\Entity\Adherent;
 use Galette\Entity\Texts;
 use Galette\Entity\Contribution;
-
 use Galette\Repository\Members;
 use Galette\Repository\Contributions;
-
 use GaletteObjectsLend\Entity\Preferences;
 use GaletteObjectsLend\Entity\ObjectPicture;
 use GaletteObjectsLend\Entity\Picture;
@@ -53,11 +50,9 @@ use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendStatus;
 use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Entity\LendRent;
-
 use GaletteObjectsLend\Repository\Categories;
 use GaletteObjectsLend\Repository\Objects;
 use GaletteObjectsLend\Repository\Status;
-
 use GaletteObjectsLend\Filters\StatusList;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Filters\CategoriesList;
@@ -211,7 +206,7 @@ $this->post(
                     } else {
                         Analog::log(
                             'A request has been made to get file named `' .
-                            $zip_filename .'` that does not exists.',
+                            $zip_filename . '` that does not exists.',
                             Analog::WARNING
                         );
                         $error_detected[] = str_replace(
@@ -323,7 +318,7 @@ $this->post(
             // picture upload
             if (isset($_FILES['picture'])) {
                 if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
-                    if ($_FILES['picture']['tmp_name'] !='') {
+                    if ($_FILES['picture']['tmp_name'] != '') {
                         if (is_uploaded_file($_FILES['picture']['tmp_name'])) {
                             $res = $category->picture->store($_FILES['picture']);
                             if ($res < 0) {
@@ -925,7 +920,7 @@ $this->get(
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_object', ['action' =>'add'])
+                    $this->router->pathFor('objectslend_object', ['action' => 'add'])
                 );
         }
 
@@ -1065,7 +1060,7 @@ $this->post(
             // picture upload
             if (isset($_FILES['picture'])) {
                 if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
-                    if ($_FILES['picture']['tmp_name'] !='') {
+                    if ($_FILES['picture']['tmp_name'] != '') {
                         if (is_uploaded_file($_FILES['picture']['tmp_name'])) {
                             $res = $object->picture->store($_FILES['picture']);
                             if ($res < 0) {
@@ -1570,12 +1565,13 @@ $this->get(
         $params['last_rent'] = $last_rent;
 
         if ($action == 'take') {
-            if (!$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+            if (
+                !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
                 && !($this->login->isAdmin() || $this->login->isStaff())
             ) {
                 Analog::log(
                     'Trying to take an object without appropriate rights! (Object ' .
-                    $args['id'] . ', user ' . $this->login->login .')',
+                    $args['id'] . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
                 //redirect to objects list

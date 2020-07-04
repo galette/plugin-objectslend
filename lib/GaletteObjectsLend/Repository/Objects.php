@@ -37,7 +37,6 @@
 namespace GaletteObjectsLend\Repository;
 
 use Galette\Entity\DynamicFields;
-
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\Sql\Expression;
@@ -198,7 +197,8 @@ class Objects
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
 
-            if ($e instanceof \Zend_Db_Statement_Exception
+            if (
+                $e instanceof \Zend_Db_Statement_Exception
                 && $e->getCode() == 23000
             ) {
                 Analog::log(

@@ -48,7 +48,7 @@ $this->register(
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
         'objectslend_adminimages'       => 'staff',
-        'objectslend_adminimages_action'=> 'staff',
+        'objectslend_adminimages_action' => 'staff',
         'objectslend_category'          => 'staff',
         'objectslend_category_action'   => 'staff',
         'objectslend_categories'        => 'staff',

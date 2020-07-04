@@ -31,10 +31,9 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2018 The Galette Team
+ * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7
+ * @link      https://galette.eu
  */
 
 namespace GaletteObjectsLend\Entity;
@@ -42,6 +41,19 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use Galette\Core\Plugins;
 
+/**
+ * Picture handling
+ *
+ * @name      Picture
+ * @category  Entity
+ * @package   ObjectsLend
+ * @author    Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author    Johan Cwiklinski <johan@x-tnd.be>
+ * @copyright 2013-2016 Mélissa Djebel
+ * @copyright 2017-2020 The Galette Team
+ * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
+ * @link      https://galette.eu
+ */
 class Picture extends \Galette\Core\Picture
 {
     protected $tbl_prefix = LEND_PREFIX;
@@ -185,10 +197,10 @@ class Picture extends \Galette\Core\Picture
             $ratio = $cur_width / $cur_height;
 
             // calculate image size according to ratio
-            if ($cur_width>$cur_height) {
-                $h = $w/$ratio;
+            if ($cur_width > $cur_height) {
+                $h = $w / $ratio;
             } else {
-                $w = $h*$ratio;
+                $w = $h * $ratio;
             }
 
             $thumb = imagecreatetruecolor($w, $h);
@@ -359,7 +371,8 @@ class Picture extends \Galette\Core\Picture
                 list($cur_width, $cur_height, $cur_type, $curattr)
                     = getimagesize($thumb);
 
-                if ($cur_height != $this->getOptimalHeight()
+                if (
+                    $cur_height != $this->getOptimalHeight()
                     && $cur_height < $this->thumb_max_height
                     && $cur_width != $this->getOptimalWidth()
                     && $cur_width < $this->thumb_max_width
