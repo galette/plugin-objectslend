@@ -132,21 +132,21 @@ foreach ($list as $object) {
     if ($object->picture->hasPicture()) {
         $pic = $object->picture;
         // Set picture size to max width 30 mm or max height 30 mm
-        $ratio = $pic->getOptimalThumbWidth()/$pic->getOptimalThumbHeight();
+        $ratio = $pic->getOptimalThumbWidth() / $pic->getOptimalThumbHeight();
         if ($ratio < 1) {
             if ($pic->getOptimalThumbHeight() > 16) {
                 $hpic = 30;
             } else {
                 $hpic = $pic->getOptimalThumbHeight();
             }
-            $wpic = round($hpic*$ratio);
+            $wpic = round($hpic * $ratio);
         } else {
             if ($pic->getOptimalThumbWidth() > 16) {
                 $wpic = 30;
             } else {
                 $wlogo = $pic->getOptimalThumbWidth();
             }
-            $hpic = round($wpic/$ratio);
+            $hpic = round($wpic / $ratio);
         }
 
         $pdf->Image($object->picture->getThumbPath(), 10, 10, $wpic, $hpic);

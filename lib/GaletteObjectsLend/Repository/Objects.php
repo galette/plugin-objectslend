@@ -276,8 +276,8 @@ class Objects
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE, 'o');
 
-            $fieldsList = ( $fields != null )
-                            ? (( !is_array($fields) || count($fields) < 1 ) ? (array)'*'
+            $fieldsList = ($fields != null)
+                            ? ((!is_array($fields) || count($fields) < 1) ? (array)'*'
                             : $fields) : (array)'*';
 
             $select->columns($fieldsList);
@@ -285,7 +285,7 @@ class Objects
             $select->join(
                 ['r' => PREFIX_DB . LEND_PREFIX . LendRent::TABLE],
                 'o.' . LendRent::PK . '=r.' . LendRent::PK,
-                ['date_begin', 'date_forecast', 'date_end','comments'],
+                ['date_begin', 'date_forecast', 'date_end', 'comments'],
                 $select::JOIN_LEFT
             );
 
@@ -491,14 +491,14 @@ class Objects
                         } else {
                             $sep = ', " ", ';
                             $pre = 'CONCAT(';
-                            $post=')';
+                            $post = ')';
                         }
 
                         if ($this->prefs->getPreferences()['VIEW_DESCRIPTION']) {
                             $select->where(
                                 '(' .
                                 $pre . 'LOWER(o.name)' . $sep .
-                                'LOWER(o.description)' . $post  . ' LIKE ' .
+                                'LOWER(o.description)' . $post . ' LIKE ' .
                                 $token . ')'
                             );
                         } else {
@@ -549,7 +549,7 @@ class Objects
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name  . ' while it is not in ' .
+                'Trying to order by ' . $field_name . ' while it is not in ' .
                 'selected fields.',
                 Analog::WARNING
             );

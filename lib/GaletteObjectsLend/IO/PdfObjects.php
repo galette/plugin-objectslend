@@ -57,7 +57,7 @@ use GaletteObjectsLend\Entity\Preferences as LendPreferences;
  */
 class PdfObjects extends Pdf
 {
-    const LIST_FONT = self::FONT_SIZE-2;
+    const LIST_FONT = self::FONT_SIZE - 2;
 
     private $zdb;
     private $lendsprefs;
@@ -231,7 +231,7 @@ class PdfObjects extends Pdf
             $this->Cell($w_description, 0, $this->cut($object->description, $w_description), 'B', 0, 'L', $fill);
             $this->Cell($w_serial, 0, $this->cut($object->serial_number, $w_serial), 'B', 0, 'L', $fill);
             $this->Cell($w_price, 0, $this->cut($object->price, $w_price), 'B', 0, 'R', $fill);
-            $this->Cell($w_price, 0, $this->cut($object->rent_price, $w_price).$object->currency, 'B', 0, 'R', $fill);
+            $this->Cell($w_price, 0, $this->cut($object->rent_price, $w_price) . $object->currency, 'B', 0, 'R', $fill);
             $this->Cell($w_dimension, 0, $this->cut($object->dimension, $w_dimension), 'B', 0, 'L', $fill);
             $this->Cell($w_weight, 0, $this->cut($object->weight, $w_weight), 'B', 0, 'R', $fill);
             $this->Cell($w_status, 0, $this->cut($object->status_text, $w_status), 'B', 0, 'L', $fill);

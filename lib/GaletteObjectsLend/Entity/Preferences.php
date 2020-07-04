@@ -309,7 +309,7 @@ class Preferences
         } catch (\Exception $e) {
             Analog::log(
                 'ObjectsLend Preferences cannot be loaded. Plugin should not work without ' .
-                'it. Exiting. '  . $e->getMessage(),
+                'it. Exiting. ' . $e->getMessage(),
                 Analog::URGENT
             );
             return false;

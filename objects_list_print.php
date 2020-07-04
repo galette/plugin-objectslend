@@ -179,7 +179,7 @@ foreach ($list as $obj) {
     $pdf->Cell($w_description, 0, cut($obj->description, $w_description), 'B', 0, 'L', $obj->in_stock);
     $pdf->Cell($w_serial, 0, cut($obj->serial_number, $w_serial), 'B', 0, 'L', $obj->in_stock);
     $pdf->Cell($w_price, 0, cut($obj->price, $w_price), 'B', 0, 'R', $obj->in_stock);
-    $pdf->Cell($w_price, 0, cut($obj->rent_price, $w_price).$obj->getCurrency(), 'B', 0, 'R', $obj->in_stock);
+    $pdf->Cell($w_price, 0, cut($obj->rent_price, $w_price) . $obj->getCurrency(), 'B', 0, 'R', $obj->in_stock);
     $pdf->Cell($w_dimension, 0, cut($obj->dimension, $w_dimension), 'B', 0, 'L', $obj->in_stock);
     $pdf->Cell($w_weight, 0, cut($obj->weight, $w_weight), 'B', 0, 'R', $obj->in_stock);
     $pdf->Cell($w_status, 0, cut($obj->status_text, $w_status), 'B', 0, 'L', $obj->in_stock);

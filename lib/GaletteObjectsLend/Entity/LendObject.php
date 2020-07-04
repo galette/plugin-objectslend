@@ -152,7 +152,7 @@ class LendObject
 
                 if ($this->deps['status'] || $this->deps['last_rent'] === true) {
                     if ($this->deps['last_rent'] === true) {
-                        $fields = ['date_begin', 'date_forecast', 'date_end','comments'];
+                        $fields = ['date_begin', 'date_forecast', 'date_end', 'comments'];
                     } else {
                         $fields = [];
                     }
@@ -191,7 +191,7 @@ class LendObject
                     );
                 }
 
-                $select->where(array('o.'.self::PK => $args));
+                $select->where(array('o.' . self::PK => $args));
                 $results = $this->zdb->execute($select);
                 if ($results->count() == 1) {
                     $this->loadFromRS($results->current());

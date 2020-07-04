@@ -59,7 +59,7 @@ $lendsprefs = new Preferences($zdb);
 if (!$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT} && !($login->isAdmin() || $login->isStaff())) {
     Analog::log(
         'Trying to take an object without appropriate rights! (Object ' .
-        $_GET['object_id'] . ', user ' . $login->login .')',
+        $_GET['object_id'] . ', user ' . $login->login . ')',
         Analog::WARNING
     );
     header('location: objects_list.php');
@@ -172,7 +172,7 @@ $tpl->assign('require_calendar', true);
 $tpl->assign('year', date('Y'));
 $tpl->assign('month', date('m'));
 $tpl->assign('day', date('d'));
-$tpl->assign('rent_price', str_replace(array( ',', ' '), array( '.', ''), $object->rent_price));
+$tpl->assign('rent_price', str_replace(array(',', ' '), array('.', ''), $object->rent_price));
 $tpl->assign('time', time());
 $tpl->assign('takeorgive', 'take');
 

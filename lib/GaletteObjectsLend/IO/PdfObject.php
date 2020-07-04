@@ -140,14 +140,14 @@ class PdfObject extends Pdf
                 } else {
                     $hpic = $th;
                 }
-                $wpic = round($hpic*$ratio);
+                $wpic = round($hpic * $ratio);
             } else {
                 if ($tw > 16) {
                     $wpic = 30;
                 } else {
                     $wlogo = $tw;
                 }
-                $hpic = round($wpic/$ratio);
+                $hpic = round($wpic / $ratio);
             }
 
             $this->Image($object->picture->getThumbPath(), 10, 10, $wpic, $hpic);
@@ -182,7 +182,7 @@ class PdfObject extends Pdf
             $this->addCell(_T("Dimensions", "objectslend"), $object->dimension . ' ' . _T('Cm', 'objectslend'), $wpic);
         }
         if ($this->lprefs->{LPreferences::PARAM_VIEW_WEIGHT}) {
-            $this->addCell(_T("Weight", "objectslend"), $object->weight . ' '. _T('Kg', 'objectslend'), $wpic);
+            $this->addCell(_T("Weight", "objectslend"), $object->weight . ' ' . _T('Kg', 'objectslend'), $wpic);
         }
         $this->addCell(_T("Active", "objectslend"), $object->is_active ? 'X' : '', $wpic);
         $this->addCell(_T("Location", "objectslend"), $object->status_text, $wpic);

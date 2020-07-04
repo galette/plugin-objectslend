@@ -45,7 +45,7 @@ use Galette\Core\Preferences as CorePreferences;
 
 class LendPDF extends \Galette\IO\Pdf
 {
-   /**
+    /**
      * Main constructor, set creator and author
      *
      * @param Preferences $prefs Preferences

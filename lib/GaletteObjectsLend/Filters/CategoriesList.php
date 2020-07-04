@@ -126,7 +126,7 @@ class CategoriesList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[CategoriesList] Unable to get proprety `' .$name . '`',
+                    '[CategoriesList] Unable to get proprety `' . $name . '`',
                     Analog::WARNING
                 );
             }

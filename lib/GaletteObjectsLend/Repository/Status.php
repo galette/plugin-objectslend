@@ -188,8 +188,8 @@ class Status
     private function buildSelect($fields, $photos, $count = false)
     {
         try {
-            $fieldsList = ( $fields != null )
-                            ? (( !is_array($fields) || count($fields) < 1 ) ? (array)'*'
+            $fieldsList = ($fields != null)
+                            ? ((!is_array($fields) || count($fields) < 1) ? (array)'*'
                             : $fields) : (array)'*';
 
             $select = $this->zdb->select(LEND_PREFIX . self::TABLE, 'c');
@@ -356,7 +356,7 @@ class Status
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name  . ' while it is not in ' .
+                'Trying to order by ' . $field_name . ' while it is not in ' .
                 'selected fields.',
                 Analog::WARNING
             );

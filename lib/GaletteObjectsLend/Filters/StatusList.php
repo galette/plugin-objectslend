@@ -115,7 +115,7 @@ class StatusList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[StatusList] Unable to get proprety `' .$name . '`',
+                    '[StatusList] Unable to get proprety `' . $name . '`',
                     Analog::WARNING
                 );
             }

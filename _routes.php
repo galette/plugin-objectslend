@@ -315,8 +315,8 @@ $this->post(
         $error_detected = [];
 
         /**
-        * Store changes
-        */
+         * Store changes
+         */
         $category->name = $post['name'];
         $category->is_active = $post['is_active'] == 'true';
         if ($category->store()) {

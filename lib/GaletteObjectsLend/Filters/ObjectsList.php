@@ -129,7 +129,7 @@ class ObjectsList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[ObjectsList] Unable to get proprety `' .$name . '`',
+                    '[ObjectsList] Unable to get proprety `' . $name . '`',
                     Analog::WARNING
                 );
             }
@@ -263,8 +263,7 @@ class ObjectsList extends Pagination
 
         $options = [
             Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION'] ?
-                _T("Name/description", "objectslend") :
-                _T("Name", "objectslend")),
+                _T("Name/description", "objectslend") : _T("Name", "objectslend")),
             Objects::FILTER_SERIAL  => _T("Serial number", "objectslend"),
             Objects::FILTER_ID      => _T("Id", "objectslend")
         ];
