@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-29 06:41+0000\n"
+"PO-Revision-Date: 2020-07-12 09:08+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
@@ -496,7 +496,7 @@ msgstr "Générer une contribution&nbsp;:"
 
 #: ../templates/default/preferences.tpl:22
 msgid "Contribution type:"
-msgstr "Type de contribution&nbsp;:"
+msgstr "Type de contribution :"
 
 #: ../templates/default/preferences.tpl:24
 msgid "Choose a contribution type"
@@ -664,12 +664,12 @@ msgstr "Photo de l'objet"
 #: ../templates/default/take_object.tpl:21
 #: ../templates/default/objects_edit.tpl:9
 msgid "Name:"
-msgstr "Nom&nbsp;:"
+msgstr "Nom :"
 
 #: ../templates/default/take_object.tpl:28
 #: ../templates/default/objects_edit.tpl:13
 msgid "Description:"
-msgstr "Description&nbsp;:"
+msgstr "Description :"
 
 #: ../templates/default/take_object.tpl:36
 #: ../templates/default/objects_edit.tpl:31
@@ -717,7 +717,7 @@ msgstr "Adhérent&nbsp;:"
 #: ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr "Statut&nbsp;:"
+msgstr "Statut :"
 
 #: ../templates/default/take_object.tpl:110
 #: ../templates/default/take_object.tpl:140
@@ -1045,7 +1045,7 @@ msgstr "Est actif"
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
-msgstr "Image&nbsp;:"
+msgstr "Image :"
 
 #: ../templates/default/category_edit.tpl:31
 msgid "Category photo"
@@ -1065,7 +1065,7 @@ msgstr "--- Choisissez un adhérent ---"
 
 #: ../templates/default/take_more_objects_away.tpl:118
 msgid "Payment type:"
-msgstr "Type de paiement&nbsp;:"
+msgstr "Type de paiement :"
 
 #: ../templates/default/take_more_objects_away.tpl:120
 msgid "--- Select a payment type ---"
