@@ -958,6 +958,22 @@ $this->get(
             'statuses'      => $slist
         ];
 
+        // members
+        $m = new Members();
+        $members = $m->getSelectizedMembers(
+            $this->zdb,
+            ($this->login->isSuperadmin() ? null : $this->login->id)
+        );
+
+        $params['members'] = [
+            'filters'   => $m->getFilters(),
+            'count'     => $m->getCount()
+        ];
+
+        if (count($members)) {
+            $params['members']['list'] = $members;
+        }
+
         // display page
         $this->view->render(
             $response,
@@ -1592,7 +1608,7 @@ $this->get(
             $m = new Members();
             $members = $m->getSelectizedMembers(
                 $this->zdb,
-                $this->login->id
+                ($this->login->isSuperadmin() ? null : $this->login->id)
             );
 
             $params['members'] = [

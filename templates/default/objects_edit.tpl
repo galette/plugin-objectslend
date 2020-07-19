@@ -127,10 +127,10 @@
         </p>
         <p>
             <label class="bline" for="new_adh">{_T string="Member"}</label>
-            <select name="new_adh">
-                <option value="null">{_T string="No member" domain="objectslend"}</option>
-                {foreach from=$adherents item=adh}
-                    <option value="{$adh->id}">{$adh->name} {$adh->surname}</option>
+            <select name="new_adh" class="nochosen">
+                <option value="">{_T string="No member" domain="objectslend"}</option>
+                {foreach $members.list as $k=>$v}
+                    <option value="{$k}"{if $login->id == $k} selected="selected"{/if}>{$v}</option>
                 {/foreach}
             </select>
         </p>
