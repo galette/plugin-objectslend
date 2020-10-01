@@ -64,16 +64,16 @@ use Galette\Core\Plugins;
  */
 class Categories
 {
-    const TABLE = LendCategory::TABLE;
-    const PK = LendCategory::PK;
+    public const TABLE = LendCategory::TABLE;
+    public const PK = LendCategory::PK;
 
-    const ALL_CATEGORIES = 0;
-    const ACTIVE_CATEGORIES = 1;
-    const INACTIVE_CATEGORIES = 2;
+    public const ALL_CATEGORIES = 0;
+    public const ACTIVE_CATEGORIES = 1;
+    public const INACTIVE_CATEGORIES = 2;
 
-    const FILTER_NAME = 0;
+    public const FILTER_NAME = 0;
 
-    const ORDERBY_NAME = 0;
+    public const ORDERBY_NAME = 0;
 
     private $filters = false;
     private $count = null;

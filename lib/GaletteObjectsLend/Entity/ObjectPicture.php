@@ -57,8 +57,8 @@ use Galette\Core\Plugins;
  */
 class ObjectPicture extends Picture
 {
-    const PK = 'object_id';
-    const TABLE = 'pictures';
+    public const PK = 'object_id';
+    public const TABLE = 'pictures';
 
     /**
      * Default constructor.
