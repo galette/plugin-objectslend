@@ -1,11 +1,12 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Stefanie Schreiner <stefanie-schreiner@hotmail.de>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2020-06-28 06:21+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2020-10-24 13:26+0000\n"
+"Last-Translator: Stefanie Schreiner <stefanie-schreiner@hotmail.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/de/>\n"
 "Language: de_DE\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.3.2-dev\n"
 
 #: ../take_more_objects_away.php:144
 msgid "Take out several objects at once"
@@ -822,7 +823,7 @@ msgstr "Bild löschen"
 
 #: ../templates/default/objects_edit.tpl:94
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplizieren"
 
 #: ../templates/default/objects_edit.tpl:97
 msgid "Print object"
