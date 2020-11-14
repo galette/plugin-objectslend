@@ -277,7 +277,7 @@ class Preferences
                     [
                         'value_numeric'     => $value,
                         'date_modification' => date('Y-m-d H:i:s'),
-                        'where1'            => $key
+                        self::PK            => $key
                     ]
                 );
             }
