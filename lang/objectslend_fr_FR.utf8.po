@@ -1,12 +1,11 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
-# J. Lavoie <j.lavoie@net-c.ca>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-11-12 15:28+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2020-07-12 09:08+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
 "Language: fr_FR\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 #: ../take_more_objects_away.php:144
 msgid "Take out several objects at once"
@@ -366,7 +365,7 @@ msgstr "Numéro de série"
 #: ../templates/default/status_list.tpl:64
 #: ../templates/default/status_list.tpl:121
 msgid "Active"
-msgstr "Active"
+msgstr "Actif"
 
 #: ../objects_print.php:207 ../lib/GaletteObjectsLend/IO/PdfObject.php:210
 msgid "History of object loans"
