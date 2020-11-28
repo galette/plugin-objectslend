@@ -173,7 +173,7 @@ foreach ($list as $object) {
             $object->rent_price,
             $wpic
         );
-        addCell($pdf, _, "objectslend"T("Price per rental day", "objectslend"), $object->price_per_day, $wpic);
+        addCell($pdf, _T("Price per rental day", "objectslend"), $object->price_per_day, $wpic);
     }
     if ($lendsprefs->{Preferences::PARAM_VIEW_DIMENSION}) {
         addCell($pdf, _T("Dimensions", "objectslend"), $object->dimension, $wpic);
