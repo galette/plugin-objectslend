@@ -206,12 +206,12 @@ class Picture extends \Galette\Core\Picture
             $thumb = imagecreatetruecolor($w, $h);
             switch ($ext) {
                 case 'jpg':
-                    $image = ImageCreateFromJpeg($source);
+                    $image = imagecreatefromjpeg($source);
                     imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
                     imagejpeg($thumb, $dest);
                     break;
                 case 'png':
-                    $image = ImageCreateFromPng($source);
+                    $image = imagecreatefrompng($source);
                     // Turn off alpha blending and set alpha flag. That prevent alpha
                     // transparency to be saved as an arbitrary color (black in my tests)
                     imagealphablending($thumb, false);
@@ -222,7 +222,7 @@ class Picture extends \Galette\Core\Picture
                     imagepng($thumb, $dest);
                     break;
                 case 'gif':
-                    $image = ImageCreateFromGif($source);
+                    $image = imagecreatefromgif($source);
                     imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
                     imagegif($thumb, $dest);
                     break;

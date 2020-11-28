@@ -168,8 +168,8 @@ class CategoriesList extends Pagination
                         default:
                             Analog::log(
                                 '[CategoriesList] Value for active filter should be either ' .
-                                CategoriesLend::ACTIVE . ' or ' .
-                                CategoriesLend::INACTIVE . ' (' . $value . ' given)',
+                                Categories::ACTIVE . ' or ' .
+                                Categories::INACTIVE . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;

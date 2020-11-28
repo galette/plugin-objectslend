@@ -40,7 +40,7 @@ use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate;
+use Laminas\Db\Sql\Predicate\Operator;
 use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Filters\ObjectsList;
@@ -339,7 +339,7 @@ class Categories
 
             if ($this->filters->not_empty == true) {
                 $select->having(
-                    new Predicate\Operator(
+                    new Operator(
                         new Expression('COUNT(o.' . self::PK . ')'),
                         '>',
                         '0'

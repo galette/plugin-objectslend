@@ -193,8 +193,8 @@ class ObjectsList extends Pagination
                         default:
                             Analog::log(
                                 '[ObjectsList] Value for active filter should be either ' .
-                                ObjectsLend::ACTIVE . ' or ' .
-                                ObjectsLend::INACTIVE . ' (' . $value . ' given)',
+                                Objects::ACTIVE . ' or ' .
+                                Objects::INACTIVE . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
