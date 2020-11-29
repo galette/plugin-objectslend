@@ -15,94 +15,120 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.2-dev\n"
 
-#: ../take_more_objects_away.php:144
-msgid "Take out several objects at once"
-msgstr "Emprunter plusieurs objets en une seule fois"
+#: ../_routes.php:76
+msgid "ObjectsLend preferences"
+msgstr "Préférences ObjectsLend"
 
-#: ../objects_list_print.php:88 ../objects_list_print.php:98
-#: ../_routes.php:1189 ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
-#: ../templates/default/menu.tpl:9 ../templates/default/menu.tpl:14
-msgid "Objects list"
-msgstr "Liste des objets"
+#: ../_routes.php:102
+msgid "Preferences have been successfully stored!"
+msgstr "Les préférences ont été sauvegardées avec succès&nbsp;!"
 
-#: ../objects_list_print.php:102
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
-msgid "Printed on %date"
-msgstr "Imprimé le %date"
+#: ../_routes.php:131 ../templates/default/menu.tpl:37
+msgid "Pictures administration"
+msgstr "Administration images"
 
-#: ../objects_list_print.php:106
-msgid "Selected category: %category"
-msgstr "Catégorie sélectionnée : %category"
+#: ../_routes.php:160
+msgid "Unable to create backup directory `%dir`"
+msgstr "Impossible de créer le dossier de sauvegarde « %dir »"
 
-#: ../objects_list_print.php:111 ../templates/default/objects_list.tpl:25
-msgid "objects"
-msgstr "objets"
+#: ../_routes.php:177
+msgid "File already exists."
+msgstr "Le fichier existe déjà."
 
-#: ../objects_list_print.php:113 ../templates/default/objects_list.tpl:25
-msgid "object"
-msgstr "objet"
+#: ../_routes.php:178
+msgid "Zip archive inconsistent."
+msgstr "Archive Zip incohérente."
 
-#: ../objects_list_print.php:134 ../objects_print.php:155
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
-#: ../templates/default/categories_list.tpl:34
-#: ../templates/default/list_lent_object.tpl:17
-#: ../templates/default/objects_list.tpl:87
-#: ../templates/default/category_edit.tpl:10
-#: ../templates/default/take_more_objects_away.tpl:14
-msgid "Name"
-msgstr "Nom"
+#: ../_routes.php:179
+msgid "Invalid argument."
+msgstr "Argument invalide."
 
-#: ../objects_list_print.php:135 ../objects_print.php:157
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
-msgid "Description"
-msgstr "Description"
+#: ../_routes.php:180
+msgid "Memory allocation failure."
+msgstr "Échec d'allocation mémoire."
 
-#: ../objects_list_print.php:136
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
-#: ../templates/default/objects_list.tpl:100
-#: ../templates/default/take_more_objects_away.tpl:18
-msgid "Serial"
-msgstr "Num. série"
+#: ../_routes.php:181
+msgid "No such file."
+msgstr "Le fichier n'existe pas."
 
-#: ../objects_list_print.php:137 ../objects_print.php:167
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
-#: ../templates/default/objects_list.tpl:114
-#: ../templates/default/take_more_objects_away.tpl:23
-msgid "Price"
-msgstr "Prix"
+#: ../_routes.php:182
+msgid "Not a zip archive."
+msgstr "Pas une archive zip."
 
-#: ../objects_list_print.php:138
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
-#: ../templates/default/objects_list.tpl:128
-#: ../templates/default/take_more_objects_away.tpl:28
-msgid "Borrow price"
-msgstr "Prix loccation"
+#: ../_routes.php:183
+msgid "Can't open file."
+msgstr "Le fichier ne peut être ouvert."
 
-#: ../objects_list_print.php:139 ../objects_print.php:179
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:273
-#: ../templates/default/objects_list.tpl:141
-#: ../templates/default/take_more_objects_away.tpl:33
-msgid "Dimensions"
-msgstr "Dimensions"
+#: ../_routes.php:184
+msgid "Read error."
+msgstr "Erreur de lecture."
 
-#: ../objects_list_print.php:140 ../objects_print.php:182
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
-#: ../templates/default/objects_list.tpl:147
-#: ../templates/default/take_more_objects_away.tpl:38
-msgid "Weight"
-msgstr "Poids"
+#: ../_routes.php:185
+msgid "Seek error."
+msgstr "Erreur de seek."
 
-#: ../objects_list_print.php:141 ../_routes.php:836 ../objects_print.php:211
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
+#: ../_routes.php:192
+msgid "Unknown error."
+msgstr "Erreur inconnue."
+
+#: ../_routes.php:215
+msgid "File %filename does not exists"
+msgstr "Le fichier %filename n'existe pas"
+
+#: ../_routes.php:280
+msgid "Edit category"
+msgstr "Modifier la catégorie"
+
+#: ../_routes.php:282
+msgid "New category"
+msgstr "Nouvelle catégorie"
+
+#: ../_routes.php:342 ../_routes.php:1100
+msgid "Delete failed"
+msgstr "La suppression a échoué"
+
+#: ../_routes.php:350
+msgid "An error occured while storing the category."
+msgstr "Une erreur est survenue à l'enregistrement de la catégorie."
+
+#: ../_routes.php:372
+msgid "Category has been saved"
+msgstr "La catégorie a été enregistrée"
+
+#: ../_routes.php:452
+msgid "Categories list"
+msgstr "Liste des catégories"
+
+#: ../_routes.php:521 ../lib/GaletteObjectsLend/IO/PdfObject.php:161
+#: ../templates/default/category_edit.tpl:7
+msgid "Category"
+msgstr "Catégorie"
+
+#: ../_routes.php:524
+msgid "Remove category %1$s"
+msgstr "Supprimer la catégorie %1$s"
+
+#: ../_routes.php:628
+msgid "Edit status %status"
+msgstr "Modifier le status %status"
+
+#: ../_routes.php:631
+msgid "New status"
+msgstr "Nouveau statut"
+
+#: ../_routes.php:664
+msgid "An error occured while storing the status."
+msgstr "Une erreur est survenue à l'enregistrement du statut."
+
+#: ../_routes.php:686
+msgid "Status has been saved"
+msgstr "Le status a été enregistré"
+
+#: ../_routes.php:755
+msgid "Status list"
+msgstr "Liste des status"
+
+#: ../_routes.php:831 ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
 #: ../templates/default/list_lent_object.tpl:13
 #: ../templates/default/status_edit.tpl:7
@@ -111,21 +137,153 @@ msgstr "Poids"
 msgid "Status"
 msgstr "Statut"
 
-#: ../objects_list_print.php:142 ../objects_print.php:186
+#: ../_routes.php:834
+msgid "Remove status %1$s"
+msgstr "Supprimer le statut %1$s"
+
+#: ../_routes.php:939
+msgid "Edit object"
+msgstr "Modifier l'objet"
+
+#: ../_routes.php:941
+msgid "New object"
+msgstr "Nouvel objet"
+
+#: ../_routes.php:998
+msgid "Successfully cloned from #%id.<br/>You can now edit it."
+msgstr "Clôné avec succès depuis #%id.<br/>Vous pouvez mainenant le modifier."
+
+#: ../_routes.php:1004
+msgid "An error occured cloning object :("
+msgstr "Une erreur est survenue au clonage de l'objet :("
+
+#: ../_routes.php:1054
+msgid "Object has been successfully stored!"
+msgstr "L'objet a été sauvegardé avec succès&nbsp;!"
+
+#: ../_routes.php:1108
+msgid "Something went wrong saving object :("
+msgstr ""
+"Quelque chose n'a pas fonctionné lors de l'enregistrement de l'objet :("
+
+#: ../_routes.php:1130
+msgid "Object has been saved"
+msgstr "L'objet a été enregistré"
+
+#: ../_routes.php:1200 ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
+#: ../templates/default/menu.tpl:9 ../templates/default/menu.tpl:14
+msgid "Objects list"
+msgstr "Liste des objets"
+
+#: ../_routes.php:1272 ../templates/default/take_object.tpl:12
+#: ../templates/default/objects_edit.tpl:7
+msgid "Object"
+msgstr "Objet"
+
+#: ../_routes.php:1275
+msgid "Remove object %1$s"
+msgstr "Supprimer l'objet %1$s"
+
+#: ../_routes.php:1478
+msgid "objects_list"
+msgstr "liste_objets"
+
+#: ../_routes.php:1507
+msgid "object_card"
+msgstr "fiche_objet"
+
+#: ../_routes.php:1531
+msgid "Rents list for %object"
+msgstr "Liste des locations pour %object"
+
+#: ../_routes.php:1556
+msgid "Borrow an object"
+msgstr "Emprunter un objet"
+
+#: ../_routes.php:1596
+msgid "You do not have rights to take objects!"
+msgstr "Vous n'avez pas le droit d'emprunter des objets !"
+
+#: ../_routes.php:1632
+msgid "%object is currently not available"
+msgstr "%object est actuellement indisponible"
+
+#: ../_routes.php:1753
+msgid "You have just borrowed %object :)"
+msgstr "Vous venez d'emprunter %object :)"
+
+#: ../_routes.php:1804
+msgid "%object has been returned :)"
+msgstr "%object a été retourné :)"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
+msgid "Printed on %date"
+msgstr "Imprimé le %date"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
+#: ../templates/default/categories_list.tpl:34
+#: ../templates/default/list_lent_object.tpl:17
+#: ../templates/default/objects_list.tpl:87
+#: ../templates/default/category_edit.tpl:10
+#: ../templates/default/take_more_objects_away.tpl:14
+msgid "Name"
+msgstr "Nom"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
+msgid "Description"
+msgstr "Description"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
+#: ../templates/default/objects_list.tpl:100
+#: ../templates/default/take_more_objects_away.tpl:18
+msgid "Serial"
+msgstr "Num. série"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
+#: ../templates/default/objects_list.tpl:114
+#: ../templates/default/take_more_objects_away.tpl:23
+msgid "Price"
+msgstr "Prix"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
+#: ../templates/default/objects_list.tpl:128
+#: ../templates/default/take_more_objects_away.tpl:28
+msgid "Borrow price"
+msgstr "Prix loccation"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272
+#: ../templates/default/objects_list.tpl:141
+#: ../templates/default/take_more_objects_away.tpl:33
+msgid "Dimensions"
+msgstr "Dimensions"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
+#: ../templates/default/objects_list.tpl:147
+#: ../templates/default/take_more_objects_away.tpl:38
+msgid "Weight"
+msgstr "Poids"
+
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 #: ../templates/default/objects_list.tpl:172
 msgid "Since"
 msgstr "Depuis"
 
-#: ../objects_list_print.php:143 ../objects_print.php:187
-#: ../objects_print.php:213 ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "Member"
 msgstr "Adhérent"
 
-#: ../objects_list_print.php:144 ../objects_print.php:189
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 #: ../templates/default/list_lent_object.tpl:16
@@ -135,270 +293,26 @@ msgstr "Adhérent"
 msgid "Return"
 msgstr "Retour"
 
-#: ../objects_list_print.php:145 ../objects_print.php:185
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
-msgid "Location"
-msgstr "Emplacement"
-
-#: ../objects_list_print.php:204
-msgid "Sum:"
-msgstr "Somme :"
-
-#: ../objects_list_print.php:212
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:261
-msgid "Borrowed"
-msgstr "Emprunté"
-
-#: ../objects_list_print.php:215
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:263
-msgid "Available"
-msgstr "Disponible"
-
-#: ../take_object.php:55 ../_routes.php:1545
-msgid "Borrow an object"
-msgstr "Emprunter un objet"
-
-#: ../give_more_objects_back.php:77 ../templates/default/objects_list.tpl:563
-msgid "Give back objects"
-msgstr "Retourner des objets"
-
-#: ../_routes.php:81
-msgid "ObjectsLend preferences"
-msgstr "Préférences ObjectsLend"
-
-#: ../_routes.php:107
-msgid "Preferences have been successfully stored!"
-msgstr "Les préférences ont été sauvegardées avec succès&nbsp;!"
-
-#: ../_routes.php:136 ../templates/default/menu.tpl:37
-msgid "Pictures administration"
-msgstr "Administration images"
-
-#: ../_routes.php:165
-msgid "Unable to create backup directory `%dir`"
-msgstr "Impossible de créer le dossier de sauvegarde « %dir »"
-
-#: ../_routes.php:182
-msgid "File already exists."
-msgstr "Le fichier existe déjà."
-
-#: ../_routes.php:183
-msgid "Zip archive inconsistent."
-msgstr "Archive Zip incohérente."
-
-#: ../_routes.php:184
-msgid "Invalid argument."
-msgstr "Argument invalide."
-
-#: ../_routes.php:185
-msgid "Memory allocation failure."
-msgstr "Échec d'allocation mémoire."
-
-#: ../_routes.php:186
-msgid "No such file."
-msgstr "Le fichier n'existe pas."
-
-#: ../_routes.php:187
-msgid "Not a zip archive."
-msgstr "Pas une archive zip."
-
-#: ../_routes.php:188
-msgid "Can't open file."
-msgstr "Le fichier ne peut être ouvert."
-
-#: ../_routes.php:189
-msgid "Read error."
-msgstr "Erreur de lecture."
-
-#: ../_routes.php:190
-msgid "Seek error."
-msgstr "Erreur de seek."
-
-#: ../_routes.php:197
-msgid "Unknown error."
-msgstr "Erreur inconnue."
-
-#: ../_routes.php:220
-msgid "File %filename does not exists"
-msgstr "Le fichier %filename n'existe pas"
-
-#: ../_routes.php:285
-msgid "Edit category"
-msgstr "Modifier la catégorie"
-
-#: ../_routes.php:287
-msgid "New category"
-msgstr "Nouvelle catégorie"
-
-#: ../_routes.php:347 ../_routes.php:1089
-msgid "Delete failed"
-msgstr "La suppression a échoué"
-
-#: ../_routes.php:355
-msgid "An error occured while storing the category."
-msgstr "Une erreur est survenue à l'enregistrement de la catégorie."
-
-#: ../_routes.php:377
-msgid "Category has been saved"
-msgstr "La catégorie a été enregistrée"
-
-#: ../_routes.php:457
-msgid "Categories list"
-msgstr "Liste des catégories"
-
-#: ../_routes.php:526 ../objects_print.php:161
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:161
-#: ../templates/default/category_edit.tpl:7
-msgid "Category"
-msgstr "Catégorie"
-
-#: ../_routes.php:529
-msgid "Remove category %1$s"
-msgstr "Supprimer la catégorie %1$s"
-
-#: ../_routes.php:633
-msgid "Edit status %status"
-msgstr "Modifier le status %status"
-
-#: ../_routes.php:636
-msgid "New status"
-msgstr "Nouveau statut"
-
-#: ../_routes.php:669
-msgid "An error occured while storing the status."
-msgstr "Une erreur est survenue à l'enregistrement du statut."
-
-#: ../_routes.php:691
-msgid "Status has been saved"
-msgstr "Le status a été enregistré"
-
-#: ../_routes.php:760
-msgid "Status list"
-msgstr "Liste des status"
-
-#: ../_routes.php:839
-msgid "Remove status %1$s"
-msgstr "Supprimer le statut %1$s"
-
-#: ../_routes.php:944
-msgid "Edit object"
-msgstr "Modifier l'objet"
-
-#: ../_routes.php:946
-msgid "New object"
-msgstr "Nouvel objet"
-
-#: ../_routes.php:987
-msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr "Clôné avec succès depuis #%id.<br/>Vous pouvez mainenant le modifier."
-
-#: ../_routes.php:993
-msgid "An error occured cloning object :("
-msgstr "Une erreur est survenue au clonage de l'objet :("
-
-#: ../_routes.php:1043
-msgid "Object has been successfully stored!"
-msgstr "L'objet a été sauvegardé avec succès&nbsp;!"
-
-#: ../_routes.php:1097
-msgid "Something went wrong saving object :("
-msgstr ""
-"Quelque chose n'a pas fonctionné lors de l'enregistrement de l'objet :("
-
-#: ../_routes.php:1119
-msgid "Object has been saved"
-msgstr "L'objet a été enregistré"
-
-#: ../_routes.php:1261 ../templates/default/take_object.tpl:12
-#: ../templates/default/objects_edit.tpl:7
-msgid "Object"
-msgstr "Objet"
-
-#: ../_routes.php:1264
-msgid "Remove object %1$s"
-msgstr "Supprimer l'objet %1$s"
-
-#: ../_routes.php:1467
-msgid "objects_list"
-msgstr "liste_objets"
-
-#: ../_routes.php:1496
-msgid "object_card"
-msgstr "fiche_objet"
-
-#: ../_routes.php:1520
-msgid "Rents list for %object"
-msgstr "Liste des locations pour %object"
-
-#: ../_routes.php:1584
-msgid "You do not have rights to take objects!"
-msgstr "Vous n'avez pas le droit d'emprunter des objets !"
-
-#: ../_routes.php:1620
-msgid "%object is currently not available"
-msgstr "%object est actuellement indisponible"
-
-#: ../_routes.php:1741
-msgid "You have just borrowed %object :)"
-msgstr "Vous venez d'emprunter %object :)"
-
-#: ../_routes.php:1792
-msgid "%object has been returned :)"
-msgstr "%object a été retourné :)"
-
-#: ../give_object_back.php:55
-msgid "Give back object"
-msgstr "Retourner un objet"
-
-#: ../objects_print.php:120
-msgid "Object card"
-msgstr "Fiche de l'objet"
-
-#: ../objects_print.php:164 ../lib/GaletteObjectsLend/IO/PdfObject.php:164
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
-msgid "Serial number"
-msgstr "Numéro de série"
-
-#: ../objects_print.php:184 ../lib/GaletteObjectsLend/IO/PdfObject.php:187
-#: ../templates/default/objects_list.tpl:211
-#: ../templates/default/objects_list.tpl:299
-#: ../templates/default/status_list.tpl:64
-#: ../templates/default/status_list.tpl:121
-msgid "Active"
-msgstr "Actif"
-
-#: ../objects_print.php:207 ../lib/GaletteObjectsLend/IO/PdfObject.php:210
-msgid "History of object loans"
-msgstr "Historique des emprunts de l'objet"
-
-#: ../objects_print.php:209 ../lib/GaletteObjectsLend/IO/PdfObject.php:212
-msgid "Begin"
-msgstr "Début"
-
-#: ../objects_print.php:210 ../lib/GaletteObjectsLend/IO/PdfObject.php:213
-msgid "End"
-msgstr "Fin"
-
-#: ../objects_print.php:212 ../lib/GaletteObjectsLend/IO/PdfObject.php:215
-#: ../templates/default/list_lent_object.tpl:25
-#: ../templates/default/objects_list.tpl:274
-#: ../templates/default/status_list.tpl:130
-msgid "In stock"
-msgstr "En stock"
-
-#: ../objects_print.php:214 ../lib/GaletteObjectsLend/IO/PdfObject.php:217
-#: ../templates/default/list_lent_object.tpl:18
-#: ../templates/default/objects_edit.tpl:125
-msgid "Comments"
-msgstr "Commentaires"
-
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:212
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:213
 msgid "Category: %category"
 msgstr "Catégorie : %category"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:254
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:255
 msgid "Total:"
 msgstr "Total :"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:262
+msgid "Borrowed"
+msgstr "Emprunté"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:264
+msgid "Available"
+msgstr "Disponible"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:164
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
+msgid "Serial number"
+msgstr "Numéro de série"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:176
 msgid "Price per rental day"
@@ -414,27 +328,64 @@ msgstr "Cm"
 msgid "Kg"
 msgstr "Kg"
 
-#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:148
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:187
+#: ../templates/default/objects_list.tpl:211
+#: ../templates/default/objects_list.tpl:299
+#: ../templates/default/status_list.tpl:64
+#: ../templates/default/status_list.tpl:121
+msgid "Active"
+msgstr "Actif"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
+msgid "Location"
+msgstr "Emplacement"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:210
+msgid "History of object loans"
+msgstr "Historique des emprunts de l'objet"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:212
+msgid "Begin"
+msgstr "Début"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
+msgid "End"
+msgstr "Fin"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
+#: ../templates/default/list_lent_object.tpl:25
+#: ../templates/default/objects_list.tpl:274
+#: ../templates/default/status_list.tpl:130
+msgid "In stock"
+msgstr "En stock"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
+#: ../templates/default/list_lent_object.tpl:18
+#: ../templates/default/objects_edit.tpl:125
+msgid "Comments"
+msgstr "Commentaires"
+
+#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:161
 msgid "Status has not been added :("
 msgstr "Le status n'a pas été enregistré :("
 
-#: ../lib/GaletteObjectsLend/Entity/Preferences.php:284
+#: ../lib/GaletteObjectsLend/Entity/Preferences.php:295
 msgid "Unable to store preferences :("
 msgstr "Impossible d'enregistrer les préférences :("
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:174
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:186
 msgid "Rent has not been added"
 msgstr "La location n'a pas été enregistrée :("
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:329
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:350
 msgid "Y-m-d H:i"
 msgstr "d/m/Y H:i"
 
-#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:249
+#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
 msgid "No category"
 msgstr "Aucune catégorie"
 
-#: ../lib/GaletteObjectsLend/Entity/LendObject.php:335
+#: ../lib/GaletteObjectsLend/Entity/LendObject.php:348
 msgid "Object has not been added :("
 msgstr "L'objet n'a pas été ajouté :("
 
@@ -442,7 +393,7 @@ msgstr "L'objet n'a pas été ajouté :("
 msgid "Name/description"
 msgstr "Nom/description"
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:269
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
 #: ../templates/default/list_lent_object.tpl:12
 msgid "Id"
 msgstr "Id"
@@ -626,7 +577,7 @@ msgstr "Restaurer les images des catégories depuis la base"
 msgid "Click to view fullsize image"
 msgstr "Cliquer pour voir l'image en pleine taille"
 
-#: ../templates/default/menu.tpl:2
+#: ../templates/default/menu.tpl:3
 msgid "Objects lend"
 msgstr "Prêt d'objets"
 
@@ -912,6 +863,14 @@ msgstr "Jours de location"
 msgid "used to compute return date"
 msgstr "utilisé pour calculer la date de retour"
 
+#: ../templates/default/objects_list.tpl:25
+msgid "objects"
+msgstr "objets"
+
+#: ../templates/default/objects_list.tpl:25
+msgid "object"
+msgstr "objet"
+
 #: ../templates/default/objects_list.tpl:43
 msgid "Categories"
 msgstr "Catégories"
@@ -1004,6 +963,10 @@ msgid "An error occured loading 'Take away' display :("
 msgstr ""
 "Une erreur est survenue à l'affichage de la fonctionnalité d'emprunt :("
 
+#: ../templates/default/objects_list.tpl:563
+msgid "Give back objects"
+msgstr "Retourner des objets"
+
 #: ../templates/default/objects_list.tpl:591
 msgid "An error occured loading 'Give back' display :("
 msgstr ""
@@ -1070,6 +1033,21 @@ msgstr "Type de paiement :"
 #: ../templates/default/take_more_objects_away.tpl:120
 msgid "--- Select a payment type ---"
 msgstr "--- Choisissez un type de paiement ---"
+
+#~ msgid "Take out several objects at once"
+#~ msgstr "Emprunter plusieurs objets en une seule fois"
+
+#~ msgid "Selected category: %category"
+#~ msgstr "Catégorie sélectionnée : %category"
+
+#~ msgid "Sum:"
+#~ msgstr "Somme :"
+
+#~ msgid "Give back object"
+#~ msgstr "Retourner un objet"
+
+#~ msgid "Object card"
+#~ msgstr "Fiche de l'objet"
 
 #~ msgid "On site"
 #~ msgstr "Sur site"
