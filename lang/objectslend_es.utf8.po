@@ -1,12 +1,13 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Berto Te <Bertote@3fpj.com>, 2021.
+# Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-02-02 15:00+0000\n"
-"Last-Translator: Berto Te <Bertote@3fpj.com>\n"
+"PO-Revision-Date: 2021-02-05 23:42+0000\n"
+"Last-Translator: Eunice Soria <eunice.soria.es@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -136,7 +137,7 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:160
 #: ../templates/default/status_list.tpl:52
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: ../_routes.php:834
 msgid "Remove status %1$s"
