@@ -2,13 +2,14 @@
 # Berto Te <Bertote@3fpj.com>, 2021.
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 # Toni Martínez <yagstyle@gmail.com>, 2021.
+# Alonso Arteaga <alon.arte.r@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-02-16 17:50+0000\n"
-"Last-Translator: Toni Martínez <yagstyle@gmail.com>\n"
+"PO-Revision-Date: 2021-02-27 00:50+0000\n"
+"Last-Translator: Alonso Arteaga <alon.arte.r@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -444,7 +445,7 @@ msgstr ""
 
 #: ../templates/default/preferences.tpl:22
 msgid "Contribution type:"
-msgstr ""
+msgstr "Tipo de Contribuidor:"
 
 #: ../templates/default/preferences.tpl:24
 msgid "Choose a contribution type"
@@ -681,7 +682,7 @@ msgstr ""
 #: ../templates/default/take_object.tpl:155
 #: ../templates/default/take_more_objects_away.tpl:146
 msgid "Comments:"
-msgstr ""
+msgstr "Comentarios:"
 
 #: ../templates/default/take_object.tpl:158
 #: ../templates/default/take_more_objects_away.tpl:149
@@ -993,7 +994,7 @@ msgstr ""
 
 #: ../templates/default/take_more_objects_away.tpl:118
 msgid "Payment type:"
-msgstr ""
+msgstr "Tipo de pago:"
 
 #: ../templates/default/take_more_objects_away.tpl:120
 msgid "--- Select a payment type ---"
