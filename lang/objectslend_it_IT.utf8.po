@@ -1,12 +1,13 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Luca De Filippo <luca.defilippo@translationcommons.org>, 2020.
+# Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2020-12-15 14:29+0000\n"
-"Last-Translator: Luca De Filippo <luca.defilippo@translationcommons.org>\n"
+"PO-Revision-Date: 2021-03-20 10:18+0000\n"
+"Last-Translator: Alessandro Mandelli <mandelli.alessandro@ngi.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
 "Language: it_IT\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.5.2-dev\n"
 
 #: ../_routes.php:76
 msgid "ObjectsLend preferences"
@@ -565,7 +566,7 @@ msgstr ""
 
 #: ../templates/default/menu.tpl:3
 msgid "Objects lend"
-msgstr ""
+msgstr "Prestiti oggetti"
 
 #: ../templates/default/menu.tpl:19
 msgid "Add an object"
