@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-05-01 19:32+0000\n"
+"PO-Revision-Date: 2021-05-10 11:33+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
@@ -339,7 +339,7 @@ msgstr "Діяльний"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
 msgid "Location"
-msgstr ""
+msgstr "Місцеперебування"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:210
 msgid "History of object loans"
@@ -968,7 +968,7 @@ msgstr ""
 
 #: ../templates/default/category_edit.tpl:16
 msgid "Is active"
-msgstr ""
+msgstr "Діє"
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
