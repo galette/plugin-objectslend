@@ -123,14 +123,25 @@ class Picture extends \Galette\Core\Picture
     /**
      * Display a thumbnail image, create it if necessary
      *
-     * @param Preferences $prefs Preferences instance
+     * @param Response    $response Reponse
+     * @param Preferences $prefs    Preferences instance
+     *
      * @return void
      */
-    public function displayThumb(Preferences $prefs)
+    public function displayThumb(\Slim\Http\Response $response, Preferences $prefs)
     {
         $this->setThumbSizes($prefs);
-        header('Content-type: ' . $this->getMime());
-        readfile($this->getThumbPath());
+        $response = $response->withHeader('Content-Type', $this->mime)
+            ->withHeader('Content-Transfer-Encoding', 'binary')
+            ->withHeader('Expires', '0')
+            ->withHeader('Cache-Control', 'must-revalidate')
+            ->withHeader('Pragma', 'public');
+
+        $stream = fopen('php://memory', 'r+');
+        fwrite($stream, file_get_contents($this->getThumbPath()));
+        rewind($stream);
+
+        return $response->withBody(new \Slim\Http\Stream($stream));
     }
 
     /**

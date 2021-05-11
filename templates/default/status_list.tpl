@@ -143,7 +143,7 @@
                 <td class="center nowrap">
                     <a
                         class="action tooltip"
-                        href="{path_for name="objectslend_status" data=["action" => "edit", "id" => $status->status_id]}"
+                        href="{path_for name="objectslend_status_edit" data=["id" => $status->status_id]}"
                         title="{_T string="Edit %status" domain="objectslend" pattern="/%status/" replace=$status->status_text}"
                     >
                         <i class="fas fa-edit"></i>

@@ -128,7 +128,7 @@
             {if $lendsprefs.AUTO_GENERATE_CONTRIBUTION}
                 <div>
                     {* payment type *}
-                    {assign var="ptype" value=$contribution->payment_type}
+                    {assign var="current" value=$contribution->payment_type}
                     {include file="forms_types/payment_types.tpl" varname="payment_type"}
                 </div>
             {/if}
@@ -260,11 +260,8 @@
             return;
         }
 
-        /*var tomorrow = new Date({$year}, {$month} - 1, {$day} + parseInt(days));
-        $('#expected_return').val(completeZero(tomorrow.getDate()) + '/' + completeZero(tomorrow.getMonth() + 1) + '/' + tomorrow.getFullYear());*/
-
         if ('1' === '{$object->price_per_day}') {
-            var price_per_day = {$rent_price} * parseInt(days);
+            var price_per_day = {$object->price_per_day} * parseInt(days);
             var text = price_per_day.toFixed(2).replace(".", ",");
             $('#rent_price').val(text);
             $('#rent_price_label').html(text);

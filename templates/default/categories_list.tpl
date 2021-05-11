@@ -81,7 +81,7 @@
                 <td class="center nowrap">
                     <a
                         class="tooltip action"
-                        href="{path_for name="objectslend_category" data=["action" => "edit", "id" => $categ->category_id]}"
+                        href="{path_for name="objectslend_category_edit" data=["id" => $categ->category_id]}"
                         title="{_T string="Edit \"%category\"" pattern="/%category/" domain="objectslend" replace=$categ->name}"
                     >
                         <i class="fas fa-edit"></i>
@@ -99,6 +99,10 @@
         {/if}
                 </td>
     {/if}
+            </tr>
+        {foreachelse}
+            <tr>
+                <td colspan="4">{_T string="No category" domain="objectslend"}</td>
             </tr>
         {/foreach}
     </tbody>
