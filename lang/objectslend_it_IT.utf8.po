@@ -17,206 +17,133 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.5.2-dev\n"
 
-#: ../_routes.php:76
-msgid "ObjectsLend preferences"
-msgstr ""
-
-#: ../_routes.php:102
-msgid "Preferences have been successfully stored!"
-msgstr ""
-
-#: ../_routes.php:131 ../templates/default/menu.tpl:37
-msgid "Pictures administration"
-msgstr ""
-
-#: ../_routes.php:160
-msgid "Unable to create backup directory `%dir`"
-msgstr ""
-
-#: ../_routes.php:177
-msgid "File already exists."
-msgstr ""
-
-#: ../_routes.php:178
-msgid "Zip archive inconsistent."
-msgstr ""
-
-#: ../_routes.php:179
-msgid "Invalid argument."
-msgstr ""
-
-#: ../_routes.php:180
-msgid "Memory allocation failure."
-msgstr ""
-
-#: ../_routes.php:181
-msgid "No such file."
-msgstr ""
-
-#: ../_routes.php:182
-msgid "Not a zip archive."
-msgstr ""
-
-#: ../_routes.php:183
-msgid "Can't open file."
-msgstr ""
-
-#: ../_routes.php:184
-msgid "Read error."
-msgstr ""
-
-#: ../_routes.php:185
-msgid "Seek error."
-msgstr ""
-
-#: ../_routes.php:192
-msgid "Unknown error."
-msgstr ""
-
-#: ../_routes.php:215
-msgid "File %filename does not exists"
-msgstr ""
-
-#: ../_routes.php:280
-msgid "Edit category"
-msgstr ""
-
-#: ../_routes.php:282
-msgid "New category"
-msgstr ""
-
-#: ../_routes.php:342 ../_routes.php:1100
-msgid "Delete failed"
-msgstr "Rimozione fallita"
-
-#: ../_routes.php:350
-msgid "An error occured while storing the category."
-msgstr ""
-
-#: ../_routes.php:372
-msgid "Category has been saved"
-msgstr ""
-
-#: ../_routes.php:452
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
 msgstr ""
 
-#: ../_routes.php:521 ../lib/GaletteObjectsLend/IO/PdfObject.php:161
-#: ../templates/default/category_edit.tpl:7
-msgid "Category"
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:224
+msgid "Edit category"
 msgstr ""
 
-#: ../_routes.php:524
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:226
+msgid "New category"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
+msgid "Delete failed"
+msgstr "Rimozione fallita"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:298
+msgid "An error occured while storing the category."
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:321
+msgid "Category has been saved"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:374
 msgid "Remove category %1$s"
 msgstr ""
 
-#: ../_routes.php:628
-msgid "Edit status %status"
-msgstr ""
-
-#: ../_routes.php:631
-msgid "New status"
-msgstr ""
-
-#: ../_routes.php:664
-msgid "An error occured while storing the status."
-msgstr ""
-
-#: ../_routes.php:686
-msgid "Status has been saved"
-msgstr ""
-
-#: ../_routes.php:755
-msgid "Status list"
-msgstr ""
-
-#: ../_routes.php:831 ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
-#: ../templates/default/list_lent_object.tpl:13
-#: ../templates/default/status_edit.tpl:7
-#: ../templates/default/objects_list.tpl:160
-#: ../templates/default/status_list.tpl:52
-msgid "Status"
-msgstr "Stato"
-
-#: ../_routes.php:834
-msgid "Remove status %1$s"
-msgstr ""
-
-#: ../_routes.php:939
-msgid "Edit object"
-msgstr ""
-
-#: ../_routes.php:941
-msgid "New object"
-msgstr ""
-
-#: ../_routes.php:998
-msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr ""
-
-#: ../_routes.php:1004
-msgid "An error occured cloning object :("
-msgstr ""
-
-#: ../_routes.php:1054
-msgid "Object has been successfully stored!"
-msgstr ""
-
-#: ../_routes.php:1108
-msgid "Something went wrong saving object :("
-msgstr ""
-
-#: ../_routes.php:1130
-msgid "Object has been saved"
-msgstr ""
-
-#: ../_routes.php:1200 ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
 #: ../templates/default/menu.tpl:9 ../templates/default/menu.tpl:14
 msgid "Objects list"
 msgstr ""
 
-#: ../_routes.php:1272 ../templates/default/take_object.tpl:12
-#: ../templates/default/objects_edit.tpl:7
-msgid "Object"
-msgstr ""
-
-#: ../_routes.php:1275
-msgid "Remove object %1$s"
-msgstr ""
-
-#: ../_routes.php:1478
-msgid "objects_list"
-msgstr ""
-
-#: ../_routes.php:1507
-msgid "object_card"
-msgstr ""
-
-#: ../_routes.php:1531
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:253
 msgid "Rents list for %object"
 msgstr ""
 
-#: ../_routes.php:1556
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:346
+msgid "Edit object"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:348
+msgid "New object"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:432
+msgid "Object has been successfully stored!"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:486
+msgid "Something went wrong saving object :("
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:512
+msgid "Object has been saved"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:543
+msgid "Successfully cloned from #%id.<br/>You can now edit it."
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:549
+msgid "An error occured cloning object :("
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:579
 msgid "Borrow an object"
 msgstr ""
 
-#: ../_routes.php:1596
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:621
 msgid "You do not have rights to take objects!"
 msgstr ""
 
-#: ../_routes.php:1632
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:657
 msgid "%object is currently not available"
 msgstr ""
 
-#: ../_routes.php:1753
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:785
 msgid "You have just borrowed %object :)"
 msgstr ""
 
-#: ../_routes.php:1804
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:843
 msgid "%object has been returned :)"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:929
+msgid "Remove object %1$s"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
+msgid "You are about to remove %count objects."
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
+msgid "Status list"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:247
+msgid "Edit status %status"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:250
+msgid "New status"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:290
+msgid "An error occured while storing the status."
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:316
+msgid "Status has been saved"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:369
+msgid "Remove status %1$s"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/MainController.php:88
+msgid "ObjectsLend preferences"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/MainController.php:120
+msgid "Preferences have been successfully stored!"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
@@ -273,6 +200,15 @@ msgstr ""
 msgid "Weight"
 msgstr ""
 
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
+#: ../templates/default/list_lent_object.tpl:13
+#: ../templates/default/status_edit.tpl:7
+#: ../templates/default/objects_list.tpl:160
+#: ../templates/default/status_list.tpl:52
+msgid "Status"
+msgstr "Stato"
+
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 #: ../templates/default/objects_list.tpl:172
@@ -308,6 +244,11 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:264
 msgid "Available"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:161
+#: ../templates/default/category_edit.tpl:7
+msgid "Category"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:164
@@ -370,7 +311,7 @@ msgstr ""
 msgid "Status has not been added :("
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/Preferences.php:295
+#: ../lib/GaletteObjectsLend/Entity/Preferences.php:271
 msgid "Unable to store preferences :("
 msgstr ""
 
@@ -383,6 +324,7 @@ msgid "Y-m-d H:i"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
+#: ../templates/default/categories_list.tpl:105
 msgid "No category"
 msgstr ""
 
@@ -591,6 +533,11 @@ msgstr ""
 #: ../templates/default/menu.tpl:34
 msgid "Preferences"
 msgstr "Preferenze"
+
+#: ../templates/default/take_object.tpl:12
+#: ../templates/default/objects_edit.tpl:7
+msgid "Object"
+msgstr ""
 
 #: ../templates/default/take_object.tpl:20
 #: ../templates/default/objects_edit.tpl:80
