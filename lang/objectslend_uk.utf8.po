@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-05-13 09:33+0000\n"
+"PO-Revision-Date: 2021-05-19 13:05+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
@@ -111,10 +111,8 @@ msgid "Remove object %1$s"
 msgstr "Вилучити об'єкт %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
-#, fuzzy
-#| msgid "You have just borrowed %object :)"
 msgid "You are about to remove %count objects."
-msgstr "Ви щойно позичили %object :)"
+msgstr "Ви ось-ось видалите %count об'єктів."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
