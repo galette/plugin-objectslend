@@ -64,27 +64,27 @@ use Galette\Core\Plugins;
  */
 class Objects
 {
-    const TABLE = LendObject::TABLE;
-    const PK = LendObject::PK;
+    public const TABLE = LendObject::TABLE;
+    public const PK = LendObject::PK;
 
-    const ALL_OBJECTS = 0;
-    const ACTIVE_OBJECTS = 1;
-    const INACTIVE_OBJECTS = 2;
+    public const ALL_OBJECTS = 0;
+    public const ACTIVE_OBJECTS = 1;
+    public const INACTIVE_OBJECTS = 2;
 
-    const FILTER_NAME = 0;
-    const FILTER_SERIAL = 1;
-    const FILTER_DIM = 2;
-    const FILTER_ID = 3;
+    public const FILTER_NAME = 0;
+    public const FILTER_SERIAL = 1;
+    public const FILTER_DIM = 2;
+    public const FILTER_ID = 3;
 
-    const ORDERBY_NAME = 0;
-    const ORDERBY_SERIAL = 1;
-    const ORDERBY_PRICE = 2;
-    const ORDERBY_RENTPRICE = 3;
-    const ORDERBY_WEIGHT = 4;
-    const ORDERBY_STATUS = 5;
-    const ORDERBY_BDATE = 6;
-    const ORDERBY_FDATE = 7;
-    const ORDERBY_MEMBER = 8;
+    public const ORDERBY_NAME = 0;
+    public const ORDERBY_SERIAL = 1;
+    public const ORDERBY_PRICE = 2;
+    public const ORDERBY_RENTPRICE = 3;
+    public const ORDERBY_WEIGHT = 4;
+    public const ORDERBY_STATUS = 5;
+    public const ORDERBY_BDATE = 6;
+    public const ORDERBY_FDATE = 7;
+    public const ORDERBY_MEMBER = 8;
 
     private $filters = false;
     private $count = null;
@@ -197,10 +197,7 @@ class Objects
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
 
-            if (
-                $e instanceof \Zend_Db_Statement_Exception
-                && $e->getCode() == 23000
-            ) {
+            if ($e->getCode() == 23000) {
                 Analog::log(
                     'Object mays still have existing dependencies in the ' .
                     'database.' .

@@ -123,14 +123,25 @@ class Picture extends \Galette\Core\Picture
     /**
      * Display a thumbnail image, create it if necessary
      *
-     * @param Preferences $prefs Preferences instance
+     * @param Response    $response Reponse
+     * @param Preferences $prefs    Preferences instance
+     *
      * @return void
      */
-    public function displayThumb(Preferences $prefs)
+    public function displayThumb(\Slim\Http\Response $response, Preferences $prefs)
     {
         $this->setThumbSizes($prefs);
-        header('Content-type: ' . $this->getMime());
-        readfile($this->getThumbPath());
+        $response = $response->withHeader('Content-Type', $this->mime)
+            ->withHeader('Content-Transfer-Encoding', 'binary')
+            ->withHeader('Expires', '0')
+            ->withHeader('Cache-Control', 'must-revalidate')
+            ->withHeader('Pragma', 'public');
+
+        $stream = fopen('php://memory', 'r+');
+        fwrite($stream, file_get_contents($this->getThumbPath()));
+        rewind($stream);
+
+        return $response->withBody(new \Slim\Http\Stream($stream));
     }
 
     /**
@@ -206,12 +217,12 @@ class Picture extends \Galette\Core\Picture
             $thumb = imagecreatetruecolor($w, $h);
             switch ($ext) {
                 case 'jpg':
-                    $image = ImageCreateFromJpeg($source);
+                    $image = imagecreatefromjpeg($source);
                     imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
                     imagejpeg($thumb, $dest);
                     break;
                 case 'png':
-                    $image = ImageCreateFromPng($source);
+                    $image = imagecreatefrompng($source);
                     // Turn off alpha blending and set alpha flag. That prevent alpha
                     // transparency to be saved as an arbitrary color (black in my tests)
                     imagealphablending($thumb, false);
@@ -222,7 +233,7 @@ class Picture extends \Galette\Core\Picture
                     imagepng($thumb, $dest);
                     break;
                 case 'gif':
-                    $image = ImageCreateFromGif($source);
+                    $image = imagecreatefromgif($source);
                     imagecopyresampled($thumb, $image, 0, 0, 0, 0, $w, $h, $cur_width, $cur_height);
                     imagegif($thumb, $dest);
                     break;

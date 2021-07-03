@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-<form action="{path_for name="objectslend_object_action" data=["action" => $action, "id" => $object->object_id]}" method="post" enctype="multipart/form-data">
+<form action="{if $object->object_id}{path_for name="objectslend_object_action_edit" data=["id" => $object->object_id]}{else}{path_for name="objectslend_object_action_add"}{/if}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="object_id" value="{$object->object_id}">
     <div class="bigtable">
         <fieldset class="cssform">
@@ -109,7 +109,7 @@
     <h4 class="center">{_T string="History" domain="objectslend"}</h4>
     {include file="list_lent_object.tpl" rents=$object->rents ajax=true}
 {* FIXME: should not be here, create a specific page. *}
-<form action="{path_for name="objectslend_object_action" data=["action" => $action, "id" => $object->object_id]}" method="post" class="cssform">
+<form action="{if $object->object_id}{path_for name="objectslend_object_action_edit" data=["id" => $object->object_id]}{else}{path_for name="objectslend_object_action_add"}{/if}" method="post" class="cssform">
     <fieldset class="cssform">
         <legend class="ui-state-active ui-corner-top">{_T string="Change status" domain="objectslend"}</legend>
         <p>
@@ -127,10 +127,10 @@
         </p>
         <p>
             <label class="bline" for="new_adh">{_T string="Member"}</label>
-            <select name="new_adh">
-                <option value="null">{_T string="No member" domain="objectslend"}</option>
-                {foreach from=$adherents item=adh}
-                    <option value="{$adh->id}">{$adh->name} {$adh->surname}</option>
+            <select name="new_adh" class="nochosen">
+                <option value="">{_T string="No member" domain="objectslend"}</option>
+                {foreach $members.list as $k=>$v}
+                    <option value="{$k}"{if $login->id == $k} selected="selected"{/if}>{$v}</option>
                 {/foreach}
             </select>
         </p>

@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-<form action="{path_for name="objectslend_status_action" data=["action" => $action, "id" => $status->status_id]}" method="post">
+<form action="{if $status->status_id}{path_for name="objectslend_status_action_edit" data=["id" => $status->status_id]}{else}{path_for name="objectslend_status_action_add"}{/if}" method="post">
     <input type="hidden" name="status_id" value="{$status->status_id}">
     <div class="bigtable">
         <fieldset class="cssform">

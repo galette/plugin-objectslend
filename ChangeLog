@@ -1,3 +1,7 @@
+* 2021-07-03 - 1.1.0
+- Galette 0.9.5 compatible
+- Remove images administration
+
 * 2020-07-04 - 1.0.0
 - Rework all pages
 - Use Galette core capabilities instead of SQL queries

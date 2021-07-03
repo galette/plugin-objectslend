@@ -1,6 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
-<form action="{path_for name="objectslend_category_action" data=["action" => $action, "id" => $category->category_id]}" method="post" enctype="multipart/form-data">
+<form action="{if $category->category_id}{path_for name="objectslend_category_action_edit" data=["id" => $category->category_id]}{else}{path_for name="objectslend_category_action_add"}{/if}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="category_id" value="{$category->category_id}">
     <div class="bigtable">
         <fieldset class="cssform">

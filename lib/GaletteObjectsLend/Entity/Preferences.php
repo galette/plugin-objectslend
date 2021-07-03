@@ -119,22 +119,10 @@ class Preferences
     public const PARAM_VIEW_DATE_FORECAST = 'VIEW_DATE_FORECAST';
 
     /**
-     * Paramètre : voir une miniature pour l'image des catégories
-     * Valeur : 0 = false / 1 = true
-     */
-    public const PARAM_VIEW_CATEGORY_THUMB = 'VIEW_CATEGORY_THUMB';
-
-    /**
      * Parametre : voir la somme des prix sur la liste des objects
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_LIST_PRICE_SUM = 'VIEW_LIST_PRICE_SUM';
-
-    /**
-     * Paramètre : voir une miniature pour l'image des objets
-     * Valeur : 0 = false / 1 = true
-     */
-    public const PARAM_VIEW_OBJECT_THUMB = 'VIEW_OBJECT_THUMB';
 
     /**
      * Paramètre : largeur max d'une miniature (appliquée aux objets/catégories)
@@ -171,18 +159,6 @@ class Preferences
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_ENABLE_MEMBER_RENT_OBJECT = 'ENABLE_MEMBER_RENT_OBJECT';
-
-    /**
-     * Parametre : Liste des nombres d'objets par page, separes par des ';'
-     * Valeur : w;x;y;z
-     */
-    public const PARAM_OBJECTS_PER_PAGE_NUMBER_LIST = 'OBJECTS_PER_PAGE_NUMBER_LIST';
-
-    /**
-     * Parametre : Valeur par defaut pour le nombre d'objets par page - c'est mieux si c'est une valeur du dessus
-     * Valeur : n
-     */
-    public const PARAM_OBJECTS_PER_PAGE_DEFAULT = 'OBJECTS_PER_PAGE_DEFAULT';
 
     /**
      * Default constructor
@@ -269,7 +245,7 @@ class Preferences
             )->where->equalTo(self::PK, ':' . self::PK);
             $stmt = $this->zdb->sql->prepareStatementForSqlObject($update);
 
-            foreach ($this->prefs as $key => $value) {
+            foreach ($data as $key => $value) {
                 if ($key === 'GENERATED_CONTRIB_INFO_TEXT') {
                     continue;
                 }
@@ -277,7 +253,7 @@ class Preferences
                     [
                         'value_numeric'     => $value,
                         'date_modification' => date('Y-m-d H:i:s'),
-                        'where1'            => $key
+                        self::PK            => $key
                     ]
                 );
             }
@@ -366,7 +342,6 @@ class Preferences
      */
     public function showFullsize()
     {
-        //TODO: would replace VIEW_OBJECT_THUMB and VIEW_CATEGORY_THUMB (I guess)
         return $this->prefs['VIEW_FULLSIZE'];
     }
 }

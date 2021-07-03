@@ -324,7 +324,7 @@
     {if $login->isAdmin() || $login->isStaff()}
                                 <a
                                     class="tooltip action"
-                                    href="{path_for name="objectslend_object" data=["action" => "edit", "id" => $object->object_id]}"
+                                    href="{path_for name="objectslend_object_edit" data=["id" => $object->object_id]}"
                                     title="{_T string="Edit the object" domain="objectslend"}"
                                 >
                                     <i class="fas fa-edit"></i>

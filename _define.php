@@ -40,29 +40,35 @@ $this->register(
     'Galette Objects Lend',             //Name
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
-    '1.0.0',                            //Version
-    '0.9.4',                            //Galette version compatibility
+    '1.1.0',                            //Version
+    '0.9.5',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2020-07-04',                       //Date
+    '2021-07-03',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
         'objectslend_adminimages'       => 'staff',
         'objectslend_adminimages_action' => 'staff',
-        'objectslend_category'          => 'staff',
-        'objectslend_category_action'   => 'staff',
+        'objectslend_category_add'      => 'staff',
+        'objectslend_category_edit'     => 'staff',
+        'objectslend_category_action_add' => 'staff',
+        'objectslend_category_action_edit' => 'staff',
         'objectslend_categories'        => 'staff',
         'objectslend_filter_categories' => 'staff',
         'objectslend_remove_category'   => 'admin',
         'objectslend_doremove_category' => 'admin',
-        'objectslend_status'            => 'staff',
-        'objectslend_status_action'     => 'staff',
+        'objectslend_status_add'        => 'staff',
+        'objectslend_status_edit'       => 'staff',
+        'objectslend_status_action_add' => 'staff',
+        'objectslend_status_action_edit' => 'staff',
         'objectslend_statuses'          => 'staff',
         'objectslend_filter_statuses'   => 'staff',
         'objectslend_remove_status'     => 'admin',
         'objectslend_doremove_status'   => 'admin',
-        'objectslend_object'            => 'staff',
-        'objectslend_object_action'     => 'staff',
+        'objectslend_object_add'        => 'staff',
+        'objectslend_object_edit'       => 'staff',
+        'objectslend_object_action_add' => 'staff',
+        'objectslend_object_action_edit' => 'staff',
         'objectslend_object_clone'      => 'staff',
         'objectslend_objects'           => 'member',
         'objectslend_filter_objects'    => 'member',

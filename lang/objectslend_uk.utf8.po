@@ -1,11 +1,12 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2020-06-29 06:41+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2021-05-19 13:05+0000\n"
+"Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
@@ -14,95 +15,191 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
-#: ../take_more_objects_away.php:144
-msgid "Take out several objects at once"
-msgstr ""
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
+msgid "Categories list"
+msgstr "Список категорій"
 
-#: ../objects_list_print.php:88 ../objects_list_print.php:98
-#: ../_routes.php:1189 ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:224
+msgid "Edit category"
+msgstr "Редагувати категорію"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:226
+msgid "New category"
+msgstr "Нова категорія"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
+msgid "Delete failed"
+msgstr "Не вдалося видалити"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:298
+msgid "An error occured while storing the category."
+msgstr "Під час зберігання категорії сталася помилка."
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:321
+msgid "Category has been saved"
+msgstr "Категорію збережено"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:374
+msgid "Remove category %1$s"
+msgstr "Вилучити категорію %1$s"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
 #: ../templates/default/menu.tpl:9 ../templates/default/menu.tpl:14
 msgid "Objects list"
-msgstr ""
+msgstr "Список об'єктів"
 
-#: ../objects_list_print.php:102
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:253
+msgid "Rents list for %object"
+msgstr "Список орендаторів %object"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:346
+msgid "Edit object"
+msgstr "Редагувати об'єкт"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:348
+msgid "New object"
+msgstr "Новий об'єкт"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:432
+msgid "Object has been successfully stored!"
+msgstr "Об'єкт успішно збережено!"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:486
+msgid "Something went wrong saving object :("
+msgstr "Під час збереження об’єкта щось пішло не так :("
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:512
+msgid "Object has been saved"
+msgstr "Об'єкт збережено"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:543
+msgid "Successfully cloned from #%id.<br/>You can now edit it."
+msgstr "Успішно клоновано з #%id.<br>Тепер можна редагувати."
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:549
+msgid "An error occured cloning object :("
+msgstr "Під час клонування об'єкта сталася помилка :("
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:579
+msgid "Borrow an object"
+msgstr "Позичити об'єкт"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:621
+msgid "You do not have rights to take objects!"
+msgstr "Ви не маєте прав брати об'єкти!"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:657
+msgid "%object is currently not available"
+msgstr "Об'єкт %object зараз недоступний"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:785
+msgid "You have just borrowed %object :)"
+msgstr "Ви щойно позичили %object :)"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:843
+msgid "%object has been returned :)"
+msgstr "%object повернено :)"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:929
+msgid "Remove object %1$s"
+msgstr "Вилучити об'єкт %1$s"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
+msgid "You are about to remove %count objects."
+msgstr "Ви ось-ось видалите %count об'єктів."
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
+msgid "Status list"
+msgstr "Список станів"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:247
+msgid "Edit status %status"
+msgstr "Редагувати стан %status"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:250
+msgid "New status"
+msgstr "Новий стан"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:290
+msgid "An error occured while storing the status."
+msgstr "Під час зберігання стану сталася помилка."
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:316
+msgid "Status has been saved"
+msgstr "Стан збережено"
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:369
+msgid "Remove status %1$s"
+msgstr "Вилучити стан %1$s"
+
+#: ../lib/GaletteObjectsLend/Controllers/MainController.php:88
+msgid "ObjectsLend preferences"
+msgstr "Налаштування ObjectsLend"
+
+#: ../lib/GaletteObjectsLend/Controllers/MainController.php:120
+msgid "Preferences have been successfully stored!"
+msgstr "Налаштування успішно збережено!"
+
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
 msgid "Printed on %date"
-msgstr ""
+msgstr "Надруковано %date"
 
-#: ../objects_list_print.php:106
-msgid "Selected category: %category"
-msgstr ""
-
-#: ../objects_list_print.php:111 ../templates/default/objects_list.tpl:25
-msgid "objects"
-msgstr ""
-
-#: ../objects_list_print.php:113 ../templates/default/objects_list.tpl:25
-msgid "object"
-msgstr ""
-
-#: ../objects_list_print.php:134 ../objects_print.php:155
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
 #: ../templates/default/categories_list.tpl:34
 #: ../templates/default/list_lent_object.tpl:17
 #: ../templates/default/objects_list.tpl:87
 #: ../templates/default/category_edit.tpl:10
 #: ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
-msgstr ""
+msgstr "Ім'я"
 
-#: ../objects_list_print.php:135 ../objects_print.php:157
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
 msgid "Description"
-msgstr ""
+msgstr "Опис"
 
-#: ../objects_list_print.php:136
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
 #: ../templates/default/objects_list.tpl:100
 #: ../templates/default/take_more_objects_away.tpl:18
 msgid "Serial"
-msgstr ""
+msgstr "Серійний номер"
 
-#: ../objects_list_print.php:137 ../objects_print.php:167
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
 #: ../templates/default/objects_list.tpl:114
 #: ../templates/default/take_more_objects_away.tpl:23
 msgid "Price"
-msgstr ""
+msgstr "Ціна"
 
-#: ../objects_list_print.php:138
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
 #: ../templates/default/objects_list.tpl:128
 #: ../templates/default/take_more_objects_away.tpl:28
 msgid "Borrow price"
-msgstr ""
+msgstr "Ціна позики"
 
-#: ../objects_list_print.php:139 ../objects_print.php:179
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:273
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272
 #: ../templates/default/objects_list.tpl:141
 #: ../templates/default/take_more_objects_away.tpl:33
 msgid "Dimensions"
-msgstr ""
+msgstr "Габарити"
 
-#: ../objects_list_print.php:140 ../objects_print.php:182
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
 #: ../templates/default/objects_list.tpl:147
 #: ../templates/default/take_more_objects_away.tpl:38
 msgid "Weight"
-msgstr ""
+msgstr "Вага"
 
-#: ../objects_list_print.php:141 ../_routes.php:836 ../objects_print.php:211
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
 #: ../templates/default/list_lent_object.tpl:13
@@ -110,23 +207,20 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:160
 #: ../templates/default/status_list.tpl:52
 msgid "Status"
-msgstr ""
+msgstr "Стан"
 
-#: ../objects_list_print.php:142 ../objects_print.php:186
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 #: ../templates/default/objects_list.tpl:172
 msgid "Since"
-msgstr ""
+msgstr "З"
 
-#: ../objects_list_print.php:143 ../objects_print.php:187
-#: ../objects_print.php:213 ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "Member"
-msgstr ""
+msgstr "Член"
 
-#: ../objects_list_print.php:144 ../objects_print.php:189
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 #: ../templates/default/list_lent_object.tpl:16
@@ -134,318 +228,118 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:197
 #: ../templates/default/objects_list.tpl:391
 msgid "Return"
-msgstr ""
+msgstr "Повернути"
 
-#: ../objects_list_print.php:145 ../objects_print.php:185
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
-msgid "Location"
-msgstr ""
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:213
+msgid "Category: %category"
+msgstr "Категорія: %category"
 
-#: ../objects_list_print.php:204
-msgid "Sum:"
-msgstr ""
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:255
+msgid "Total:"
+msgstr "Всього:"
 
-#: ../objects_list_print.php:212
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:261
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:262
 msgid "Borrowed"
-msgstr ""
+msgstr "Позичено"
 
-#: ../objects_list_print.php:215
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:263
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:264
 msgid "Available"
-msgstr ""
+msgstr "Доступно"
 
-#: ../take_object.php:55 ../_routes.php:1545
-msgid "Borrow an object"
-msgstr ""
-
-#: ../give_more_objects_back.php:77 ../templates/default/objects_list.tpl:563
-msgid "Give back objects"
-msgstr ""
-
-#: ../_routes.php:81
-msgid "ObjectsLend preferences"
-msgstr ""
-
-#: ../_routes.php:107
-msgid "Preferences have been successfully stored!"
-msgstr ""
-
-#: ../_routes.php:136 ../templates/default/menu.tpl:37
-msgid "Pictures administration"
-msgstr ""
-
-#: ../_routes.php:165
-msgid "Unable to create backup directory `%dir`"
-msgstr ""
-
-#: ../_routes.php:182
-msgid "File already exists."
-msgstr ""
-
-#: ../_routes.php:183
-msgid "Zip archive inconsistent."
-msgstr ""
-
-#: ../_routes.php:184
-msgid "Invalid argument."
-msgstr ""
-
-#: ../_routes.php:185
-msgid "Memory allocation failure."
-msgstr ""
-
-#: ../_routes.php:186
-msgid "No such file."
-msgstr ""
-
-#: ../_routes.php:187
-msgid "Not a zip archive."
-msgstr ""
-
-#: ../_routes.php:188
-msgid "Can't open file."
-msgstr ""
-
-#: ../_routes.php:189
-msgid "Read error."
-msgstr ""
-
-#: ../_routes.php:190
-msgid "Seek error."
-msgstr ""
-
-#: ../_routes.php:197
-msgid "Unknown error."
-msgstr ""
-
-#: ../_routes.php:220
-msgid "File %filename does not exists"
-msgstr ""
-
-#: ../_routes.php:285
-msgid "Edit category"
-msgstr ""
-
-#: ../_routes.php:287
-msgid "New category"
-msgstr ""
-
-#: ../_routes.php:347 ../_routes.php:1089
-msgid "Delete failed"
-msgstr ""
-
-#: ../_routes.php:355
-msgid "An error occured while storing the category."
-msgstr ""
-
-#: ../_routes.php:377
-msgid "Category has been saved"
-msgstr ""
-
-#: ../_routes.php:457
-msgid "Categories list"
-msgstr ""
-
-#: ../_routes.php:526 ../objects_print.php:161
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:161
 #: ../templates/default/category_edit.tpl:7
 msgid "Category"
-msgstr ""
+msgstr "Категорія"
 
-#: ../_routes.php:529
-msgid "Remove category %1$s"
-msgstr ""
-
-#: ../_routes.php:633
-msgid "Edit status %status"
-msgstr ""
-
-#: ../_routes.php:636
-msgid "New status"
-msgstr "Новий стан"
-
-#: ../_routes.php:669
-msgid "An error occured while storing the status."
-msgstr ""
-
-#: ../_routes.php:691
-msgid "Status has been saved"
-msgstr ""
-
-#: ../_routes.php:760
-msgid "Status list"
-msgstr ""
-
-#: ../_routes.php:839
-msgid "Remove status %1$s"
-msgstr ""
-
-#: ../_routes.php:944
-msgid "Edit object"
-msgstr ""
-
-#: ../_routes.php:946
-msgid "New object"
-msgstr ""
-
-#: ../_routes.php:987
-msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr ""
-
-#: ../_routes.php:993
-msgid "An error occured cloning object :("
-msgstr ""
-
-#: ../_routes.php:1043
-msgid "Object has been successfully stored!"
-msgstr ""
-
-#: ../_routes.php:1097
-msgid "Something went wrong saving object :("
-msgstr ""
-
-#: ../_routes.php:1119
-msgid "Object has been saved"
-msgstr ""
-
-#: ../_routes.php:1261 ../templates/default/take_object.tpl:12
-#: ../templates/default/objects_edit.tpl:7
-msgid "Object"
-msgstr ""
-
-#: ../_routes.php:1264
-msgid "Remove object %1$s"
-msgstr ""
-
-#: ../_routes.php:1467
-msgid "objects_list"
-msgstr ""
-
-#: ../_routes.php:1496
-msgid "object_card"
-msgstr ""
-
-#: ../_routes.php:1520
-msgid "Rents list for %object"
-msgstr ""
-
-#: ../_routes.php:1584
-msgid "You do not have rights to take objects!"
-msgstr ""
-
-#: ../_routes.php:1620
-msgid "%object is currently not available"
-msgstr ""
-
-#: ../_routes.php:1741
-msgid "You have just borrowed %object :)"
-msgstr ""
-
-#: ../_routes.php:1792
-msgid "%object has been returned :)"
-msgstr ""
-
-#: ../give_object_back.php:55
-msgid "Give back object"
-msgstr ""
-
-#: ../objects_print.php:120
-msgid "Object card"
-msgstr ""
-
-#: ../objects_print.php:164 ../lib/GaletteObjectsLend/IO/PdfObject.php:164
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:164
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
 msgid "Serial number"
-msgstr ""
+msgstr "Серійний номер"
 
-#: ../objects_print.php:184 ../lib/GaletteObjectsLend/IO/PdfObject.php:187
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:176
+msgid "Price per rental day"
+msgstr "Ціна за день оренди"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
+#: ../templates/default/take_object.tpl:71
+msgid "Cm"
+msgstr "См"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
+#: ../templates/default/take_object.tpl:83
+msgid "Kg"
+msgstr "Кг"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:187
 #: ../templates/default/objects_list.tpl:211
 #: ../templates/default/objects_list.tpl:299
 #: ../templates/default/status_list.tpl:64
 #: ../templates/default/status_list.tpl:121
 msgid "Active"
-msgstr ""
+msgstr "Діяльний"
 
-#: ../objects_print.php:207 ../lib/GaletteObjectsLend/IO/PdfObject.php:210
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
+msgid "Location"
+msgstr "Місцеперебування"
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:210
 msgid "History of object loans"
-msgstr ""
+msgstr "Історія позик об'єктів"
 
-#: ../objects_print.php:209 ../lib/GaletteObjectsLend/IO/PdfObject.php:212
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:212
 msgid "Begin"
-msgstr ""
+msgstr "Початок"
 
-#: ../objects_print.php:210 ../lib/GaletteObjectsLend/IO/PdfObject.php:213
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
 msgid "End"
-msgstr ""
+msgstr "Кінець"
 
-#: ../objects_print.php:212 ../lib/GaletteObjectsLend/IO/PdfObject.php:215
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
 #: ../templates/default/list_lent_object.tpl:25
 #: ../templates/default/objects_list.tpl:274
 #: ../templates/default/status_list.tpl:130
 msgid "In stock"
-msgstr ""
+msgstr "В наявності"
 
-#: ../objects_print.php:214 ../lib/GaletteObjectsLend/IO/PdfObject.php:217
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
 #: ../templates/default/list_lent_object.tpl:18
 #: ../templates/default/objects_edit.tpl:125
 msgid "Comments"
-msgstr ""
+msgstr "Коментарі"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:212
-msgid "Category: %category"
-msgstr ""
-
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:254
-msgid "Total:"
-msgstr ""
-
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:176
-msgid "Price per rental day"
-msgstr ""
-
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
-#: ../templates/default/take_object.tpl:71
-msgid "Cm"
-msgstr ""
-
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
-#: ../templates/default/take_object.tpl:83
-msgid "Kg"
-msgstr ""
-
-#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:148
+#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:161
 msgid "Status has not been added :("
-msgstr ""
+msgstr "Стан не додано :("
 
-#: ../lib/GaletteObjectsLend/Entity/Preferences.php:284
+#: ../lib/GaletteObjectsLend/Entity/Preferences.php:271
 msgid "Unable to store preferences :("
-msgstr ""
+msgstr "Не вдалося зберегти налаштування :("
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:174
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:186
 msgid "Rent has not been added"
-msgstr ""
+msgstr "Оренда не додана"
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:329
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:350
 msgid "Y-m-d H:i"
-msgstr ""
+msgstr "Y-m-d H:i"
 
-#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:249
+#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
+#: ../templates/default/categories_list.tpl:105
 msgid "No category"
-msgstr ""
+msgstr "Немає категорії"
 
-#: ../lib/GaletteObjectsLend/Entity/LendObject.php:335
+#: ../lib/GaletteObjectsLend/Entity/LendObject.php:348
 msgid "Object has not been added :("
-msgstr ""
+msgstr "Об'єкт не додано :("
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
 msgid "Name/description"
-msgstr ""
+msgstr "Назва/опис"
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:269
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
 #: ../templates/default/list_lent_object.tpl:12
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: ../templates/default/categories_list.tpl:7
 #: ../templates/default/objects_edit.tpl:57
@@ -453,19 +347,19 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:13
 #: ../templates/default/status_list.tpl:7
 msgid "Active:"
-msgstr ""
+msgstr "Діяльний:"
 
 #: ../templates/default/categories_list.tpl:18
 msgid "categories"
-msgstr ""
+msgstr "категорії"
 
 #: ../templates/default/categories_list.tpl:18
 msgid "category"
-msgstr ""
+msgstr "категорія"
 
 #: ../templates/default/preferences.tpl:6
 msgid "Plugin preferences"
-msgstr ""
+msgstr "Налаштування розширення"
 
 #: ../templates/default/preferences.tpl:8
 #: ../templates/default/preferences.tpl:9
@@ -473,37 +367,40 @@ msgid ""
 "Allow a member (not staff neither admin) to borrow an object. If set to "
 "'No', only admin and staff members can access the 'Take object' page"
 msgstr ""
+"Дозволити користувачеві (не співробітники й не адміністратору) брати об'єкт. "
+"Якщо встановлено значення \"Ні\", тільки адміністратори та співробітники "
+"можуть отримати доступ до сторінки \"Взяти об'єкт\""
 
 #: ../templates/default/preferences.tpl:8
 msgid "Members can borrow:"
-msgstr ""
+msgstr "Члени можуть позичити:"
 
 #: ../templates/default/preferences.tpl:15
 #: ../templates/default/preferences.tpl:16
 msgid ""
 "Automatically generate a contribution for the member of the amount of the "
 "rental price of the object"
-msgstr ""
+msgstr "Самоутворення внеску для члена в розмірі вартості оренди об'єкта"
 
 #: ../templates/default/preferences.tpl:15
 msgid "Generate contribution:"
-msgstr ""
+msgstr "Утворити внесок:"
 
 #: ../templates/default/preferences.tpl:22
 msgid "Contribution type:"
-msgstr ""
+msgstr "Тип внеску:"
 
 #: ../templates/default/preferences.tpl:24
 msgid "Choose a contribution type"
-msgstr ""
+msgstr "Виберіть тип внеску"
 
 #: ../templates/default/preferences.tpl:32
 msgid "Comment text to add on generated contribution"
-msgstr ""
+msgstr "Текст коментаря, який потрібно додати до створеного внеску"
 
 #: ../templates/default/preferences.tpl:32
 msgid "Contribution text:"
-msgstr ""
+msgstr "Текст внеску:"
 
 #: ../templates/default/preferences.tpl:33
 msgid ""
@@ -512,190 +409,202 @@ msgid ""
 "Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- "
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
+"Текст коментаря для додавання до утвореного внеску. Автоматично замінювані "
+"значення (внесені у фігурні дужки): <br>- NAME: Назва<br>- DESCRIPTION: "
+"Опис<br>- SERIAL_NUMBER: Серійний номер<br>- PRICE: Ціна<br>- RENT_PRICE: "
+"Ціна позики<br>- WEIGHT: Вага<br>- DIMENSION: Габарити"
 
 #: ../templates/default/preferences.tpl:39
 msgid "Images related"
-msgstr ""
+msgstr "Пов'язані зображення"
 
 #: ../templates/default/preferences.tpl:41
 msgid "Max thumb height (in px)"
-msgstr ""
+msgstr "Максимальна висота ескізу (в пікселях)"
 
 #: ../templates/default/preferences.tpl:45
 msgid "Max thumb width (in px)"
-msgstr ""
+msgstr "Максимальна ширина ескізу (в пікселях)"
 
 #: ../templates/default/preferences.tpl:49
 msgid "Images in lists:"
-msgstr ""
+msgstr "Зображення у списках:"
 
 #: ../templates/default/preferences.tpl:50
 msgid "Display images in objects and categories lists"
-msgstr ""
+msgstr "Показ зображень у списках об’єктів та категорій"
 
 #: ../templates/default/preferences.tpl:55
 msgid "Show fullsize image or just thumbs"
-msgstr ""
+msgstr "Показувати повнорозмірне чи ескізне зображення"
 
 #: ../templates/default/preferences.tpl:55
 msgid "Enable fullsize:"
-msgstr ""
+msgstr "Увімкнути повний розмір:"
 
 #: ../templates/default/preferences.tpl:56
 msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
+"Дозволяє переглядати повнорозмірні зображення за натискання на ескіз. <br> "
+"Якщо вимкнено, показуватимуться лише ескізи, але повні зображення будуть "
+"зберігатися."
 
 #: ../templates/default/preferences.tpl:62
 msgid "Display preferences"
-msgstr ""
+msgstr "Налаштування відображення"
 
 #: ../templates/default/preferences.tpl:64
 msgid "View category:"
-msgstr ""
+msgstr "Показ категорії:"
 
 #: ../templates/default/preferences.tpl:69
 msgid "View forecast return date:"
-msgstr ""
+msgstr "Показ приблизної дати повернення:"
 
 #: ../templates/default/preferences.tpl:74
 msgid "View description"
-msgstr ""
+msgstr "Показ опису:"
 
 #: ../templates/default/preferences.tpl:79
 msgid "View dimensions:"
-msgstr ""
+msgstr "Показ габаритів:"
 
 #: ../templates/default/preferences.tpl:84
 msgid "View borrow price:"
-msgstr ""
+msgstr "Показ ціни позики:"
 
 #: ../templates/default/preferences.tpl:89
 #: ../templates/default/preferences.tpl:90
 msgid "View the objects buy price sum on the list under the category"
-msgstr ""
+msgstr "Показ суми цін на покупку об’єктів у списку під категорією"
 
 #: ../templates/default/preferences.tpl:89
 msgid "View price sum:"
-msgstr ""
+msgstr "Показ суми ціни:"
 
 #: ../templates/default/preferences.tpl:95
 msgid "View buy price:"
-msgstr ""
+msgstr "Показ ціни придбання:"
 
 #: ../templates/default/preferences.tpl:100
 msgid "View serial number:"
-msgstr ""
+msgstr "Показ серійного номера:"
 
 #: ../templates/default/preferences.tpl:105
 msgid "View weight"
-msgstr ""
+msgstr "Показ ваги"
 
 #: ../templates/default/admin_picture.tpl:7
 msgid "Backup categories pictures"
-msgstr ""
+msgstr "Резервне копіювання зображень категорій"
 
 #: ../templates/default/admin_picture.tpl:11
 msgid "Backup objects pictures"
-msgstr ""
+msgstr "Резервне копіювання зображень об'єктів"
 
 #: ../templates/default/admin_picture.tpl:15
 msgid "Restore objects pictures from database"
-msgstr ""
+msgstr "Відновлення зображень об'єктів із бази даних"
 
 #: ../templates/default/admin_picture.tpl:19
 msgid "Restore categories pictures from database"
-msgstr ""
+msgstr "Відновлення зображень категорій із бази даних"
 
 #: ../templates/default/headers.tpl:14
 msgid "Click to view fullsize image"
-msgstr ""
+msgstr "Клацніть, щоб переглянути повне зображення"
 
-#: ../templates/default/menu.tpl:2
+#: ../templates/default/menu.tpl:3
 msgid "Objects lend"
-msgstr ""
+msgstr "Objects lend"
 
 #: ../templates/default/menu.tpl:19
 msgid "Add an object"
-msgstr ""
+msgstr "Додати об’єкт"
 
 #: ../templates/default/menu.tpl:22
 msgid "Borrow status"
-msgstr ""
+msgstr "Стан позики"
 
 #: ../templates/default/menu.tpl:25
 msgid "Add a status"
-msgstr ""
+msgstr "Додати стан"
 
 #: ../templates/default/menu.tpl:28
 msgid "Object categories"
-msgstr ""
+msgstr "Категорії об'єктів"
 
 #: ../templates/default/menu.tpl:31
 msgid "Add a category"
-msgstr ""
+msgstr "Додати категорію"
 
 #: ../templates/default/menu.tpl:34
 msgid "Preferences"
-msgstr ""
+msgstr "Налаштування"
+
+#: ../templates/default/take_object.tpl:12
+#: ../templates/default/objects_edit.tpl:7
+msgid "Object"
+msgstr "Об'єкт"
 
 #: ../templates/default/take_object.tpl:20
 #: ../templates/default/objects_edit.tpl:80
 #: ../templates/default/objects_list.tpl:233
 #: ../templates/default/take_more_objects_away.tpl:53
 msgid "Object photo"
-msgstr ""
+msgstr "Світлина об'єкта"
 
 #: ../templates/default/take_object.tpl:21
 #: ../templates/default/objects_edit.tpl:9
 msgid "Name:"
-msgstr ""
+msgstr "Ім'я:"
 
 #: ../templates/default/take_object.tpl:28
 #: ../templates/default/objects_edit.tpl:13
 msgid "Description:"
-msgstr ""
+msgstr "Опис:"
 
 #: ../templates/default/take_object.tpl:36
 #: ../templates/default/objects_edit.tpl:31
 msgid "Serial number:"
-msgstr ""
+msgstr "Серійний номер:"
 
 #: ../templates/default/take_object.tpl:44
 #: ../templates/default/objects_edit.tpl:35
 msgid "Price:"
-msgstr ""
+msgstr "Ціна:"
 
 #: ../templates/default/take_object.tpl:51
 #: ../templates/default/objects_edit.tpl:39
 msgid "Borrow price:"
-msgstr ""
+msgstr "Ціна позики:"
 
 #: ../templates/default/take_object.tpl:60
 #: ../templates/default/objects_list.tpl:256
 msgid "(per day)"
-msgstr ""
+msgstr "(на добу)"
 
 #: ../templates/default/take_object.tpl:62
 #: ../templates/default/objects_list.tpl:258
 msgid "(at once)"
-msgstr ""
+msgstr "(одразу)"
 
 #: ../templates/default/take_object.tpl:69
 #: ../templates/default/objects_edit.tpl:49
 msgid "Dimensions:"
-msgstr ""
+msgstr "Габарити:"
 
 #: ../templates/default/take_object.tpl:81
 #: ../templates/default/objects_edit.tpl:53
 msgid "Weight:"
-msgstr ""
+msgstr "Вага:"
 
 #: ../templates/default/take_object.tpl:94
 #: ../templates/default/take_more_objects_away.tpl:95
 msgid "Member:"
-msgstr ""
+msgstr "Член:"
 
 #: ../templates/default/take_object.tpl:108
 #: ../templates/default/take_object.tpl:138
@@ -703,46 +612,46 @@ msgstr ""
 #: ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr ""
+msgstr "Стан:"
 
 #: ../templates/default/take_object.tpl:110
 #: ../templates/default/take_object.tpl:140
 #: ../templates/default/take_more_objects_away.tpl:108
 #: ../templates/default/take_more_objects_away.tpl:137
 msgid "--- Select a status ---"
-msgstr ""
+msgstr "--- Виберіть стан ---"
 
 #: ../templates/default/take_object.tpl:115
 #: ../templates/default/status_list.tpl:138
 msgid "%days days"
-msgstr ""
+msgstr "%days днів"
 
 #: ../templates/default/take_object.tpl:124
 msgid "Expected return:"
-msgstr ""
+msgstr "Очікуване повернення:"
 
 #: ../templates/default/take_object.tpl:149
 msgid "Time:"
-msgstr ""
+msgstr "Час:"
 
 #: ../templates/default/take_object.tpl:155
 #: ../templates/default/take_more_objects_away.tpl:146
 msgid "Comments:"
-msgstr ""
+msgstr "Коментарі:"
 
 #: ../templates/default/take_object.tpl:158
 #: ../templates/default/take_more_objects_away.tpl:149
 msgid "remaining characters"
-msgstr ""
+msgstr "інші символи"
 
 #: ../templates/default/take_object.tpl:167
 msgid "I have read and I agree with terms and conditions"
-msgstr ""
+msgstr "Я прочитав і погоджуюсь з умовами"
 
 #: ../templates/default/take_object.tpl:168
 #: ../templates/default/take_object.tpl:170
 msgid "Show terms and conditions"
-msgstr ""
+msgstr "Показати терміни та умови використання"
 
 #: ../templates/default/take_object.tpl:171
 msgid ""
@@ -761,224 +670,258 @@ msgid ""
 "other cases not listed above and at the discretion of the seller, the "
 "deposit check may also be collected in whole or party."
 msgstr ""
+"Об'єкти, що пропонуються в оренду, знаходяться в хорошому стані, і перевірка "
+"оренди, що суперечить їх станом, проводиться на мить отримання. Після "
+"отримання об'єкта претензії не приймаються. Написання магазином списку "
+"бронювання не звільняє покупця від перевірки його отримання. Оплата оренди "
+"дає право покупцеві на нормальне використання взятого у тимчасове "
+"користування об'єкта. У разі надання об'єкта в погіршеному стані продавець "
+"залишає за собою право стягнути весь або частину застави. У разі погіршення "
+"стану орендованого об'єкта понад стандартного, потрібен фінансовий внесок за "
+"додаткове очищення тощо.\n"
+"Згідно зі статтею 590 Цивільного кодексу України:\n"
+"\"1. Заставодержатель набуває право звернення стягнення на предмет застави в "
+"разі, коли зобов'язання не буде виконано у встановлений строк (термін), якщо "
+"інше не встановлено договором або законом.\n"
+"2. Заставодержатель набуває право звернення стягнення на предмет застави в "
+"разі, коли зобов'язання не буде виконано у встановлений строк (термін), якщо "
+"інше не встановлено договором або законом.\"."
 
 #: ../templates/default/take_object.tpl:176
 #: ../templates/default/objects_list.tpl:310
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Take away"
-msgstr ""
+msgstr "Забрати"
 
 #: ../templates/default/take_object.tpl:176
 msgid "Return back"
-msgstr ""
+msgstr "Повернути назад"
 
 #: ../templates/default/take_object.tpl:212
 msgid "You must agree with terms and conditions in order to take."
-msgstr ""
+msgstr "Ви повинні погодитися з умовами для того, щоб узяти."
 
 #: ../templates/default/list_lent_object.tpl:14
 msgid "Begin date"
-msgstr ""
+msgstr "Дата початку"
 
 #: ../templates/default/list_lent_object.tpl:15
 msgid "End date"
-msgstr ""
+msgstr "Дата завершення"
 
 #: ../templates/default/list_lent_object.tpl:36
 msgid "No lend found"
-msgstr ""
+msgstr "Позику не знайдено"
 
 #: ../templates/default/objects_edit.tpl:18
 msgid "Category:"
-msgstr ""
+msgstr "Категорія:"
 
 #: ../templates/default/objects_edit.tpl:20
 msgid "--- Select a category ---"
-msgstr ""
+msgstr "--- Виберіть категорію ---"
 
 #: ../templates/default/objects_edit.tpl:43
 msgid "The price applies on each rental day if checked, only once otherwise"
 msgstr ""
+"Ціна застосовується в кожен день оренди, якщо зазначено, в іншому випадку "
+"тільки один раз"
 
 #: ../templates/default/objects_edit.tpl:44
 msgid "Price per rental day:"
-msgstr ""
+msgstr "Ціна за день оренди:"
 
 #: ../templates/default/objects_edit.tpl:62
 msgid "Where is the object?"
-msgstr ""
+msgstr "Де знаходиться об'єкт?"
 
 #: ../templates/default/objects_edit.tpl:65
 msgid "in stock"
-msgstr ""
+msgstr "в наявності"
 
 #: ../templates/default/objects_edit.tpl:72
 msgid "Object's photo"
-msgstr ""
+msgstr "Світлина об'єкта"
 
 #: ../templates/default/objects_edit.tpl:83
 #: ../templates/default/category_edit.tpl:33
 msgid "Delete image"
-msgstr ""
+msgstr "Видалити зображення"
 
 #: ../templates/default/objects_edit.tpl:94
 msgid "Duplicate"
-msgstr ""
+msgstr "Подвоїти"
 
 #: ../templates/default/objects_edit.tpl:97
 msgid "Print object"
-msgstr ""
+msgstr "Друк об'єкта"
 
 #: ../templates/default/objects_edit.tpl:102
 #: ../templates/default/status_edit.tpl:47
 #: ../templates/default/category_edit.tpl:47
 msgid "Back to list"
-msgstr ""
+msgstr "Повернутися до списку"
 
 #: ../templates/default/objects_edit.tpl:109
 msgid "History"
-msgstr ""
+msgstr "Історія"
 
 #: ../templates/default/objects_edit.tpl:114
 #: ../templates/default/objects_edit.tpl:140
 msgid "Change status"
-msgstr ""
+msgstr "Змінити стан"
 
 #: ../templates/default/objects_edit.tpl:131
 msgid "No member"
-msgstr ""
+msgstr "Немає члена"
 
 #: ../templates/default/status_edit.tpl:16
 msgid "Is object in stock or borrowed"
-msgstr ""
+msgstr "Є об'єктом на складі або позиченим"
 
 #: ../templates/default/status_edit.tpl:17
 #: ../templates/default/status_list.tpl:14
 msgid "In stock:"
-msgstr ""
+msgstr "В наявності:"
 
 #: ../templates/default/status_edit.tpl:19
 msgid ""
 "Check if the object is available to be borrowed;<br/>uncheck if object is "
 "already borrowed and should be given back"
 msgstr ""
+"Перевірте, чи доступний об'єкт для позичення;<br>зніміть прапорець, якщо "
+"об'єкт вже позичений і повинен бути повернений."
 
 #: ../templates/default/status_edit.tpl:31
 #: ../templates/default/status_edit.tpl:34
 msgid "Number of days to rent per default"
-msgstr ""
+msgstr "Типова кількість днів оренди"
 
 #: ../templates/default/status_edit.tpl:32
 #: ../templates/default/status_list.tpl:88
 msgid "Days for rent"
-msgstr ""
+msgstr "Дні оренди"
 
 #: ../templates/default/status_edit.tpl:34
 msgid "used to compute return date"
-msgstr ""
+msgstr "використовується для обчислення дати повернення"
+
+#: ../templates/default/objects_list.tpl:25
+msgid "objects"
+msgstr "об'єктів"
+
+#: ../templates/default/objects_list.tpl:25
+msgid "object"
+msgstr "об'єкт"
 
 #: ../templates/default/objects_list.tpl:43
 msgid "Categories"
-msgstr ""
+msgstr "Категорії"
 
 #: ../templates/default/objects_list.tpl:184
 msgid "By"
-msgstr ""
+msgstr "Автор"
 
 #: ../templates/default/objects_list.tpl:297
 msgid "Object is active"
-msgstr ""
+msgstr "Об'єкт діяльний"
 
 #: ../templates/default/objects_list.tpl:297
 msgid "Object is inactive"
-msgstr ""
+msgstr "Об'єкт бездіяльний"
 
 #: ../templates/default/objects_list.tpl:307
 msgid "Take object away"
-msgstr ""
+msgstr "Забрати об'єкт"
 
 #: ../templates/default/objects_list.tpl:317
 msgid "Give object back"
-msgstr ""
+msgstr "Повернути об'єкт назад"
 
 #: ../templates/default/objects_list.tpl:320
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Give back"
-msgstr ""
+msgstr "Повернути назад"
 
 #: ../templates/default/objects_list.tpl:328
 #: ../templates/default/objects_list.tpl:331
 msgid "Edit the object"
-msgstr ""
+msgstr "Редагувати цей об'єкт"
 
 #: ../templates/default/objects_list.tpl:336
 #: ../templates/default/objects_list.tpl:339
 msgid "Duplicate object"
-msgstr ""
+msgstr "Подвоїти об'єкт"
 
 #: ../templates/default/objects_list.tpl:345
 msgid "Show object lends"
-msgstr ""
+msgstr "Показати позичання об'єкта"
 
 #: ../templates/default/objects_list.tpl:350
 #: ../templates/default/objects_list.tpl:353
 msgid "Object card in PDF"
-msgstr ""
+msgstr "Картка об’єкта в PDF"
 
 #: ../templates/default/objects_list.tpl:358
 #: ../templates/default/objects_list.tpl:361
 msgid "Remove %object from database"
-msgstr ""
+msgstr "Вилучити %object із бази даних"
 
 #: ../templates/default/objects_list.tpl:369
 msgid "No object has been found"
-msgstr ""
+msgstr "Об'єкт не знайдено"
 
 #: ../templates/default/objects_list.tpl:382
 msgid "Print objects list"
-msgstr ""
+msgstr "Друк списку об'єктів"
 
 #: ../templates/default/objects_list.tpl:388
 msgid "Take out"
-msgstr ""
+msgstr "Вийняти"
 
 #: ../templates/default/objects_list.tpl:438
 msgid "No object selected"
-msgstr ""
+msgstr "Не вибрано жодного об’єкта"
 
 #: ../templates/default/objects_list.tpl:438
 msgid ""
 "Please make sure to select at least one object from the list to perform this "
 "action."
 msgstr ""
+"Для виконання цієї дії обов'язково виберіть хоча б один об'єкт зі списку."
 
 #: ../templates/default/objects_list.tpl:485
 msgid "History of object"
-msgstr ""
+msgstr "Історія об'єкта"
 
 #: ../templates/default/objects_list.tpl:497
 msgid "An error occured loading history display :("
-msgstr ""
+msgstr "Під час завантаження відображення історії сталася помилки :("
 
 #: ../templates/default/objects_list.tpl:517
 msgid "Take objects"
-msgstr ""
+msgstr "Взяти об'єкти"
 
 #: ../templates/default/objects_list.tpl:545
 msgid "An error occured loading 'Take away' display :("
-msgstr ""
+msgstr "Під час завантаження відображення \"Забрати\" сталася помилка :("
+
+#: ../templates/default/objects_list.tpl:563
+msgid "Give back objects"
+msgstr "Повернути назад об'єкти"
 
 #: ../templates/default/objects_list.tpl:591
 msgid "An error occured loading 'Give back' display :("
 msgstr ""
+"Під час завантаження відображення \"Повернути назад\" сталася помилка :("
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr ""
+msgstr "стан"
 
 #: ../templates/default/status_list.tpl:76
 msgid "Stock"
-msgstr ""
+msgstr "В наявності"
 
 #: ../templates/default/status_list.tpl:124
 msgid "Inactive"
@@ -986,50 +929,95 @@ msgstr "Незадіяний"
 
 #: ../templates/default/status_list.tpl:133
 msgid "Not in stock"
-msgstr ""
+msgstr "Немає в наявності"
 
 #: ../templates/default/status_list.tpl:147
 #: ../templates/default/status_list.tpl:150
 msgid "Edit %status"
-msgstr ""
+msgstr "Редагувати %status"
 
 #: ../templates/default/status_list.tpl:155
 #: ../templates/default/status_list.tpl:158
 msgid "Remove %status from database"
-msgstr ""
+msgstr "Вилучити стан %status з бази даних"
 
 #: ../templates/default/status_list.tpl:163
 msgid "No status has been found"
-msgstr ""
+msgstr "Стан не знайдено"
 
 #: ../templates/default/category_edit.tpl:16
 msgid "Is active"
-msgstr ""
+msgstr "Діє"
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
-msgstr ""
+msgstr "Зображення:"
 
 #: ../templates/default/category_edit.tpl:31
 msgid "Category photo"
-msgstr ""
+msgstr "Світлина категорії"
 
 #: ../templates/default/take_more_objects_away.tpl:4
 msgid "Objects"
-msgstr ""
+msgstr "Об'єкти"
 
 #: ../templates/default/take_more_objects_away.tpl:10
 msgid "Picture"
-msgstr ""
+msgstr "Зображення"
 
 #: ../templates/default/take_more_objects_away.tpl:97
 msgid "--- Select a member ---"
-msgstr ""
+msgstr "--- Виберіть члена ---"
 
 #: ../templates/default/take_more_objects_away.tpl:118
 msgid "Payment type:"
-msgstr ""
+msgstr "Тип платежу:"
 
 #: ../templates/default/take_more_objects_away.tpl:120
 msgid "--- Select a payment type ---"
-msgstr ""
+msgstr "--- Виберіть тип платежу ---"
+
+#~ msgid "Pictures administration"
+#~ msgstr "Управління зображеннями"
+
+#~ msgid "Unable to create backup directory `%dir`"
+#~ msgstr "Не вдається створити каталог резервних копій `%dir`"
+
+#~ msgid "File already exists."
+#~ msgstr "Файл уже існує."
+
+#~ msgid "Zip archive inconsistent."
+#~ msgstr "Zip-архів несумісний."
+
+#~ msgid "Invalid argument."
+#~ msgstr "Неприпустимий аргумент."
+
+#~ msgid "Memory allocation failure."
+#~ msgstr "Помилка виділення пам'яті."
+
+#~ msgid "No such file."
+#~ msgstr "Такого файлу немає."
+
+#~ msgid "Not a zip archive."
+#~ msgstr "Не zip-архів."
+
+#~ msgid "Can't open file."
+#~ msgstr "Не вдається відкрити файл."
+
+#~ msgid "Read error."
+#~ msgstr "Помилка читання."
+
+#~ msgid "Seek error."
+#~ msgstr "Помилка пошуку."
+
+#~ msgid "Unknown error."
+#~ msgstr "Невідома помилка."
+
+#~ msgid "File %filename does not exists"
+#~ msgstr "Файлу %filename не існує"
+
+#~ msgid "objects_list"
+#~ msgstr "objects_list"
+
+#~ msgid "object_card"
+#~ msgstr "object_card"

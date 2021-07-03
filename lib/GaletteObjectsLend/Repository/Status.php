@@ -63,24 +63,24 @@ use Galette\Core\Login;
  */
 class Status
 {
-    const TABLE = LendStatus::TABLE;
-    const PK = LendStatus::PK;
+    public const TABLE = LendStatus::TABLE;
+    public const PK = LendStatus::PK;
 
-    const ALL = 0;
-    const ACTIVE = 1;
-    const INACTIVE = 2;
+    public const ALL = 0;
+    public const ACTIVE = 1;
+    public const INACTIVE = 2;
 
-    const DC_STOCK = 0;
-    const IN_STOCK = 1;
-    const OUT_STOCK = 2;
+    public const DC_STOCK = 0;
+    public const IN_STOCK = 1;
+    public const OUT_STOCK = 2;
 
-    const FILTER_NAME = 0;
+    public const FILTER_NAME = 0;
 
-    const ORDERBY_ID = 0;
-    const ORDERBY_NAME = 1;
-    const ORDERBY_ACTIVE = 2;
-    const ORDERBY_STOCK = 3;
-    const ORDERBY_RENTDAYS = 4;
+    public const ORDERBY_ID = 0;
+    public const ORDERBY_NAME = 1;
+    public const ORDERBY_ACTIVE = 2;
+    public const ORDERBY_STOCK = 3;
+    public const ORDERBY_RENTDAYS = 4;
 
     private $filters = false;
     private $count = null;
