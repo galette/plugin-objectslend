@@ -1,11 +1,11 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
-# ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020.
+# ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2020-11-03 06:26+0000\n"
+"PO-Revision-Date: 2021-10-23 05:24+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.3.2-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -549,7 +549,7 @@ msgstr ""
 #: ../templates/default/take_object.tpl:21
 #: ../templates/default/objects_edit.tpl:9
 msgid "Name:"
-msgstr ""
+msgstr "الإسم:"
 
 #: ../templates/default/take_object.tpl:28
 #: ../templates/default/objects_edit.tpl:13
@@ -602,7 +602,7 @@ msgstr ""
 #: ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr ""
+msgstr "الحالة:"
 
 #: ../templates/default/take_object.tpl:110
 #: ../templates/default/take_object.tpl:140
@@ -627,7 +627,7 @@ msgstr ""
 #: ../templates/default/take_object.tpl:155
 #: ../templates/default/take_more_objects_away.tpl:146
 msgid "Comments:"
-msgstr ""
+msgstr "تعليقات:"
 
 #: ../templates/default/take_object.tpl:158
 #: ../templates/default/take_more_objects_away.tpl:149
@@ -919,7 +919,7 @@ msgstr ""
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
-msgstr ""
+msgstr "صورة:"
 
 #: ../templates/default/category_edit.tpl:31
 msgid "Category photo"
