@@ -3,13 +3,14 @@
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 # Toni Martínez <yagstyle@gmail.com>, 2021.
 # Alonso Arteaga <alon.arte.r@gmail.com>, 2021.
+# noelia <zizizhuji1@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-02-27 00:50+0000\n"
-"Last-Translator: Alonso Arteaga <alon.arte.r@gmail.com>\n"
+"PO-Revision-Date: 2021-08-22 22:34+0000\n"
+"Last-Translator: noelia <zizizhuji1@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -887,7 +888,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr ""
+msgstr "Estado"
 
 #: ../templates/default/status_list.tpl:76
 msgid "Stock"

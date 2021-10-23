@@ -1,21 +1,16 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
-# ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-10-23 05:24+0000\n"
-"Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
-"objectslend-plugin/ar/>\n"
-"Language: ar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-17 10:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ota\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Translate Toolkit 3.3.6\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -29,8 +24,7 @@ msgstr ""
 msgid "New category"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290 ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
 msgid "Delete failed"
 msgstr ""
 
@@ -46,10 +40,8 @@ msgstr ""
 msgid "Remove category %1$s"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166 ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101 ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
 #: ../templates/default/menu.tpl:9 ../templates/default/menu.tpl:14
 msgid "Objects list"
 msgstr ""
@@ -150,83 +142,62 @@ msgstr ""
 msgid "Printed on %date"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
-#: ../templates/default/categories_list.tpl:34
-#: ../templates/default/list_lent_object.tpl:17
-#: ../templates/default/objects_list.tpl:87
-#: ../templates/default/category_edit.tpl:10
-#: ../templates/default/take_more_objects_away.tpl:14
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175 ../lib/GaletteObjectsLend/IO/PdfObject.php:156
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266 ../templates/default/categories_list.tpl:34
+#: ../templates/default/list_lent_object.tpl:17 ../templates/default/objects_list.tpl:87
+#: ../templates/default/category_edit.tpl:10 ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
-msgstr "اسم"
+msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176 ../lib/GaletteObjectsLend/IO/PdfObject.php:158
 msgid "Description"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
-#: ../templates/default/objects_list.tpl:100
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177 ../templates/default/objects_list.tpl:100
 #: ../templates/default/take_more_objects_away.tpl:18
 msgid "Serial"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
-#: ../templates/default/objects_list.tpl:114
-#: ../templates/default/take_more_objects_away.tpl:23
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178 ../lib/GaletteObjectsLend/IO/PdfObject.php:167
+#: ../templates/default/objects_list.tpl:114 ../templates/default/take_more_objects_away.tpl:23
 msgid "Price"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
-#: ../templates/default/objects_list.tpl:128
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179 ../templates/default/objects_list.tpl:128
 #: ../templates/default/take_more_objects_away.tpl:28
 msgid "Borrow price"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272
-#: ../templates/default/objects_list.tpl:141
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180 ../lib/GaletteObjectsLend/IO/PdfObject.php:182
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272 ../templates/default/objects_list.tpl:141
 #: ../templates/default/take_more_objects_away.tpl:33
 msgid "Dimensions"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
-#: ../templates/default/objects_list.tpl:147
-#: ../templates/default/take_more_objects_away.tpl:38
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181 ../lib/GaletteObjectsLend/IO/PdfObject.php:185
+#: ../templates/default/objects_list.tpl:147 ../templates/default/take_more_objects_away.tpl:38
 msgid "Weight"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
-#: ../templates/default/list_lent_object.tpl:13
-#: ../templates/default/status_edit.tpl:7
-#: ../templates/default/objects_list.tpl:160
-#: ../templates/default/status_list.tpl:52
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182 ../lib/GaletteObjectsLend/IO/PdfObject.php:214
+#: ../templates/default/list_lent_object.tpl:13 ../templates/default/status_edit.tpl:7
+#: ../templates/default/objects_list.tpl:160 ../templates/default/status_list.tpl:52
 msgid "Status"
-msgstr "الصفة"
+msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183 ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 #: ../templates/default/objects_list.tpl:172
 msgid "Since"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184 ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "Member"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
-#: ../templates/default/list_lent_object.tpl:16
-#: ../templates/default/list_lent_object.tpl:46
-#: ../templates/default/objects_list.tpl:197
-#: ../templates/default/objects_list.tpl:391
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185 ../lib/GaletteObjectsLend/IO/PdfObject.php:192
+#: ../templates/default/list_lent_object.tpl:16 ../templates/default/list_lent_object.tpl:46
+#: ../templates/default/objects_list.tpl:197 ../templates/default/objects_list.tpl:391
 msgid "Return"
 msgstr ""
 
@@ -246,13 +217,11 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:161
-#: ../templates/default/category_edit.tpl:7
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:161 ../templates/default/category_edit.tpl:7
 msgid "Category"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:164
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:164 ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
 msgid "Serial number"
 msgstr ""
 
@@ -260,20 +229,16 @@ msgstr ""
 msgid "Price per rental day"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
-#: ../templates/default/take_object.tpl:71
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182 ../templates/default/take_object.tpl:71
 msgid "Cm"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
-#: ../templates/default/take_object.tpl:83
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185 ../templates/default/take_object.tpl:83
 msgid "Kg"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:187
-#: ../templates/default/objects_list.tpl:211
-#: ../templates/default/objects_list.tpl:299
-#: ../templates/default/status_list.tpl:64
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:187 ../templates/default/objects_list.tpl:211
+#: ../templates/default/objects_list.tpl:299 ../templates/default/status_list.tpl:64
 #: ../templates/default/status_list.tpl:121
 msgid "Active"
 msgstr ""
@@ -294,15 +259,12 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
-#: ../templates/default/list_lent_object.tpl:25
-#: ../templates/default/objects_list.tpl:274
-#: ../templates/default/status_list.tpl:130
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215 ../templates/default/list_lent_object.tpl:25
+#: ../templates/default/objects_list.tpl:274 ../templates/default/status_list.tpl:130
 msgid "In stock"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
-#: ../templates/default/list_lent_object.tpl:18
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217 ../templates/default/list_lent_object.tpl:18
 #: ../templates/default/objects_edit.tpl:125
 msgid "Comments"
 msgstr ""
@@ -323,8 +285,7 @@ msgstr ""
 msgid "Y-m-d H:i"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
-#: ../templates/default/categories_list.tpl:105
+#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260 ../templates/default/categories_list.tpl:105
 msgid "No category"
 msgstr ""
 
@@ -336,15 +297,12 @@ msgstr ""
 msgid "Name/description"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
-#: ../templates/default/list_lent_object.tpl:12
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268 ../templates/default/list_lent_object.tpl:12
 msgid "Id"
 msgstr ""
 
-#: ../templates/default/categories_list.tpl:7
-#: ../templates/default/objects_edit.tpl:57
-#: ../templates/default/status_edit.tpl:25
-#: ../templates/default/objects_list.tpl:13
+#: ../templates/default/categories_list.tpl:7 ../templates/default/objects_edit.tpl:57
+#: ../templates/default/status_edit.tpl:25 ../templates/default/objects_list.tpl:13
 #: ../templates/default/status_list.tpl:7
 msgid "Active:"
 msgstr ""
@@ -361,22 +319,16 @@ msgstr ""
 msgid "Plugin preferences"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:8
-#: ../templates/default/preferences.tpl:9
-msgid ""
-"Allow a member (not staff neither admin) to borrow an object. If set to "
-"'No', only admin and staff members can access the 'Take object' page"
+#: ../templates/default/preferences.tpl:8 ../templates/default/preferences.tpl:9
+msgid "Allow a member (not staff neither admin) to borrow an object. If set to 'No', only admin and staff members can access the 'Take object' page"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:8
 msgid "Members can borrow:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:15
-#: ../templates/default/preferences.tpl:16
-msgid ""
-"Automatically generate a contribution for the member of the amount of the "
-"rental price of the object"
+#: ../templates/default/preferences.tpl:15 ../templates/default/preferences.tpl:16
+msgid "Automatically generate a contribution for the member of the amount of the rental price of the object"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:15
@@ -400,11 +352,7 @@ msgid "Contribution text:"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:33
-msgid ""
-"Comment text to add on generated contribution. Automatically replaced values "
-"(put into curly brackets): <br/>- NAME: Name<br/>- DESCRIPTION: "
-"Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- "
-"RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
+msgid "Comment text to add on generated contribution. Automatically replaced values (put into curly brackets): <br/>- NAME: Name<br/>- DESCRIPTION: Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:39
@@ -436,9 +384,7 @@ msgid "Enable fullsize:"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:56
-msgid ""
-"Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
-"only thumbnails will be displayed, but full images are still kept."
+msgid "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, only thumbnails will be displayed, but full images are still kept."
 msgstr ""
 
 #: ../templates/default/preferences.tpl:62
@@ -465,8 +411,7 @@ msgstr ""
 msgid "View borrow price:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:89
-#: ../templates/default/preferences.tpl:90
+#: ../templates/default/preferences.tpl:89 ../templates/default/preferences.tpl:90
 msgid "View the objects buy price sum on the list under the category"
 msgstr ""
 
@@ -534,85 +479,67 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:12
-#: ../templates/default/objects_edit.tpl:7
+#: ../templates/default/take_object.tpl:12 ../templates/default/objects_edit.tpl:7
 msgid "Object"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:20
-#: ../templates/default/objects_edit.tpl:80
-#: ../templates/default/objects_list.tpl:233
-#: ../templates/default/take_more_objects_away.tpl:53
+#: ../templates/default/take_object.tpl:20 ../templates/default/objects_edit.tpl:80
+#: ../templates/default/objects_list.tpl:233 ../templates/default/take_more_objects_away.tpl:53
 msgid "Object photo"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:21
-#: ../templates/default/objects_edit.tpl:9
+#: ../templates/default/take_object.tpl:21 ../templates/default/objects_edit.tpl:9
 msgid "Name:"
-msgstr "الإسم:"
+msgstr ""
 
-#: ../templates/default/take_object.tpl:28
-#: ../templates/default/objects_edit.tpl:13
+#: ../templates/default/take_object.tpl:28 ../templates/default/objects_edit.tpl:13
 msgid "Description:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:36
-#: ../templates/default/objects_edit.tpl:31
+#: ../templates/default/take_object.tpl:36 ../templates/default/objects_edit.tpl:31
 msgid "Serial number:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:44
-#: ../templates/default/objects_edit.tpl:35
+#: ../templates/default/take_object.tpl:44 ../templates/default/objects_edit.tpl:35
 msgid "Price:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:51
-#: ../templates/default/objects_edit.tpl:39
+#: ../templates/default/take_object.tpl:51 ../templates/default/objects_edit.tpl:39
 msgid "Borrow price:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:60
-#: ../templates/default/objects_list.tpl:256
+#: ../templates/default/take_object.tpl:60 ../templates/default/objects_list.tpl:256
 msgid "(per day)"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:62
-#: ../templates/default/objects_list.tpl:258
+#: ../templates/default/take_object.tpl:62 ../templates/default/objects_list.tpl:258
 msgid "(at once)"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:69
-#: ../templates/default/objects_edit.tpl:49
+#: ../templates/default/take_object.tpl:69 ../templates/default/objects_edit.tpl:49
 msgid "Dimensions:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:81
-#: ../templates/default/objects_edit.tpl:53
+#: ../templates/default/take_object.tpl:81 ../templates/default/objects_edit.tpl:53
 msgid "Weight:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:94
-#: ../templates/default/take_more_objects_away.tpl:95
+#: ../templates/default/take_object.tpl:94 ../templates/default/take_more_objects_away.tpl:95
 msgid "Member:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:108
-#: ../templates/default/take_object.tpl:138
-#: ../templates/default/status_edit.tpl:10
-#: ../templates/default/take_more_objects_away.tpl:106
+#: ../templates/default/take_object.tpl:108 ../templates/default/take_object.tpl:138
+#: ../templates/default/status_edit.tpl:10 ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr "الحالة:"
+msgstr ""
 
-#: ../templates/default/take_object.tpl:110
-#: ../templates/default/take_object.tpl:140
-#: ../templates/default/take_more_objects_away.tpl:108
-#: ../templates/default/take_more_objects_away.tpl:137
+#: ../templates/default/take_object.tpl:110 ../templates/default/take_object.tpl:140
+#: ../templates/default/take_more_objects_away.tpl:108 ../templates/default/take_more_objects_away.tpl:137
 msgid "--- Select a status ---"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:115
-#: ../templates/default/status_list.tpl:138
+#: ../templates/default/take_object.tpl:115 ../templates/default/status_list.tpl:138
 msgid "%days days"
 msgstr ""
 
@@ -624,13 +551,11 @@ msgstr ""
 msgid "Time:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:155
-#: ../templates/default/take_more_objects_away.tpl:146
+#: ../templates/default/take_object.tpl:155 ../templates/default/take_more_objects_away.tpl:146
 msgid "Comments:"
-msgstr "تعليقات:"
+msgstr ""
 
-#: ../templates/default/take_object.tpl:158
-#: ../templates/default/take_more_objects_away.tpl:149
+#: ../templates/default/take_object.tpl:158 ../templates/default/take_more_objects_away.tpl:149
 msgid "remaining characters"
 msgstr ""
 
@@ -638,31 +563,15 @@ msgstr ""
 msgid "I have read and I agree with terms and conditions"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:168
-#: ../templates/default/take_object.tpl:170
+#: ../templates/default/take_object.tpl:168 ../templates/default/take_object.tpl:170
 msgid "Show terms and conditions"
 msgstr ""
 
 #: ../templates/default/take_object.tpl:171
-msgid ""
-"The items offered for rent are in good condition and verification rental "
-"contradictory to their status is at the time of withdrawal. No claims will "
-"be accepted after the release of the object. Writing by the store a list of "
-"reservation does not exempt the customer checking his retrait. The payment "
-"of rent entitles the purchaser to make normal use of the loaned object. If "
-"the object is rendered in a degraded state, the seller reserves the right to "
-"collect all or part of the security deposit. In case of deterioration of the "
-"rented beyond the standard object, a financial contribution will be required "
-"for additional cleaning caused. In case of damage, loss or theft of the "
-"rented property, the deposit will not be refunded automatically to 'the "
-"company as damages pursuant to Article 1152 of the Civil Code and without "
-"that it need for any other judicial or extra-judicial formality. In some "
-"other cases not listed above and at the discretion of the seller, the "
-"deposit check may also be collected in whole or party."
+msgid "The items offered for rent are in good condition and verification rental contradictory to their status is at the time of withdrawal. No claims will be accepted after the release of the object. Writing by the store a list of reservation does not exempt the customer checking his retrait. The payment of rent entitles the purchaser to make normal use of the loaned object. If the object is rendered in a degraded state, the seller reserves the right to collect all or part of the security deposit. In case of deterioration of the rented beyond the standard object, a financial contribution will be required for additional cleaning caused. In case of damage, loss or theft of the rented property, the deposit will not be refunded automatically to 'the company as damages pursuant to Article 1152 of the Civil Code and without that it need for any other judicial or extra-judicial formality. In some other cases not listed above and at the discretion of the seller, the deposit check may also be collected in whole or party."
 msgstr ""
 
-#: ../templates/default/take_object.tpl:176
-#: ../templates/default/objects_list.tpl:310
+#: ../templates/default/take_object.tpl:176 ../templates/default/objects_list.tpl:310
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Take away"
 msgstr ""
@@ -715,8 +624,7 @@ msgstr ""
 msgid "Object's photo"
 msgstr ""
 
-#: ../templates/default/objects_edit.tpl:83
-#: ../templates/default/category_edit.tpl:33
+#: ../templates/default/objects_edit.tpl:83 ../templates/default/category_edit.tpl:33
 msgid "Delete image"
 msgstr ""
 
@@ -728,8 +636,7 @@ msgstr ""
 msgid "Print object"
 msgstr ""
 
-#: ../templates/default/objects_edit.tpl:102
-#: ../templates/default/status_edit.tpl:47
+#: ../templates/default/objects_edit.tpl:102 ../templates/default/status_edit.tpl:47
 #: ../templates/default/category_edit.tpl:47
 msgid "Back to list"
 msgstr ""
@@ -738,8 +645,7 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: ../templates/default/objects_edit.tpl:114
-#: ../templates/default/objects_edit.tpl:140
+#: ../templates/default/objects_edit.tpl:114 ../templates/default/objects_edit.tpl:140
 msgid "Change status"
 msgstr ""
 
@@ -751,24 +657,19 @@ msgstr ""
 msgid "Is object in stock or borrowed"
 msgstr ""
 
-#: ../templates/default/status_edit.tpl:17
-#: ../templates/default/status_list.tpl:14
+#: ../templates/default/status_edit.tpl:17 ../templates/default/status_list.tpl:14
 msgid "In stock:"
 msgstr ""
 
 #: ../templates/default/status_edit.tpl:19
-msgid ""
-"Check if the object is available to be borrowed;<br/>uncheck if object is "
-"already borrowed and should be given back"
+msgid "Check if the object is available to be borrowed;<br/>uncheck if object is already borrowed and should be given back"
 msgstr ""
 
-#: ../templates/default/status_edit.tpl:31
-#: ../templates/default/status_edit.tpl:34
+#: ../templates/default/status_edit.tpl:31 ../templates/default/status_edit.tpl:34
 msgid "Number of days to rent per default"
 msgstr ""
 
-#: ../templates/default/status_edit.tpl:32
-#: ../templates/default/status_list.tpl:88
+#: ../templates/default/status_edit.tpl:32 ../templates/default/status_list.tpl:88
 msgid "Days for rent"
 msgstr ""
 
@@ -808,18 +709,15 @@ msgstr ""
 msgid "Give object back"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:320
-#: ../templates/default/take_more_objects_away.tpl:156
+#: ../templates/default/objects_list.tpl:320 ../templates/default/take_more_objects_away.tpl:156
 msgid "Give back"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:328
-#: ../templates/default/objects_list.tpl:331
+#: ../templates/default/objects_list.tpl:328 ../templates/default/objects_list.tpl:331
 msgid "Edit the object"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:336
-#: ../templates/default/objects_list.tpl:339
+#: ../templates/default/objects_list.tpl:336 ../templates/default/objects_list.tpl:339
 msgid "Duplicate object"
 msgstr ""
 
@@ -827,13 +725,11 @@ msgstr ""
 msgid "Show object lends"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:350
-#: ../templates/default/objects_list.tpl:353
+#: ../templates/default/objects_list.tpl:350 ../templates/default/objects_list.tpl:353
 msgid "Object card in PDF"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:358
-#: ../templates/default/objects_list.tpl:361
+#: ../templates/default/objects_list.tpl:358 ../templates/default/objects_list.tpl:361
 msgid "Remove %object from database"
 msgstr ""
 
@@ -854,9 +750,7 @@ msgid "No object selected"
 msgstr ""
 
 #: ../templates/default/objects_list.tpl:438
-msgid ""
-"Please make sure to select at least one object from the list to perform this "
-"action."
+msgid "Please make sure to select at least one object from the list to perform this action."
 msgstr ""
 
 #: ../templates/default/objects_list.tpl:485
@@ -893,19 +787,17 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:124
 msgid "Inactive"
-msgstr "غير نَشِط"
+msgstr ""
 
 #: ../templates/default/status_list.tpl:133
 msgid "Not in stock"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:147
-#: ../templates/default/status_list.tpl:150
+#: ../templates/default/status_list.tpl:147 ../templates/default/status_list.tpl:150
 msgid "Edit %status"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:155
-#: ../templates/default/status_list.tpl:158
+#: ../templates/default/status_list.tpl:155 ../templates/default/status_list.tpl:158
 msgid "Remove %status from database"
 msgstr ""
 
@@ -919,7 +811,7 @@ msgstr ""
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
-msgstr "صورة:"
+msgstr ""
 
 #: ../templates/default/category_edit.tpl:31
 msgid "Category photo"
