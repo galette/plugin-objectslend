@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-10-23 05:24+0000\n"
+"PO-Revision-Date: 2021-10-24 09:43+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -159,7 +159,7 @@ msgstr ""
 #: ../templates/default/category_edit.tpl:10
 #: ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
-msgstr "اسم"
+msgstr "الإسم"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
@@ -885,7 +885,7 @@ msgstr ""
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr ""
+msgstr "الحالة"
 
 #: ../templates/default/status_list.tpl:76
 msgid "Stock"
