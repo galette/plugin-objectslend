@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2021-10-24 09:43+0000\n"
+"PO-Revision-Date: 2021-10-24 10:43+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -164,7 +164,7 @@ msgstr "الإسم"
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
 #: ../templates/default/objects_list.tpl:100
