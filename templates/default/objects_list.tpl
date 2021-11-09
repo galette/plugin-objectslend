@@ -33,6 +33,7 @@
                         <input type="submit" value="{_T string="Change"}"/>
                     </span>
                 </noscript>
+                {include file="forms_types/csrf.tpl"}
             </div>
         </div>
     </form>
@@ -404,6 +405,7 @@
                     <td colspan="14" class="center">
                         {_T string="Pages:"}<br/>
                         <ul class="pages">{$pagination}</ul>
+                        {include file="forms_types/csrf.tpl"}
                     </td>
                 </tr>
             </tfoot>

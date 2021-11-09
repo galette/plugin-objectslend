@@ -155,6 +155,7 @@
     <div class="button-container" id="button_container">
         <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{/if}{if $takeorgive eq 'give'}{_T string="Give back" domain="objectslend"}{/if}">
         <a href="objects_list.php" class="button" id="btncancel">{_T string="Cancel"}</a>
+        {include file="forms_types/csrf.tpl"}
     </div>
 </form>
 

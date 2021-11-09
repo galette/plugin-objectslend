@@ -18,6 +18,7 @@
             <i class="far fa-hdd" aria-hidden="true"></i>
             {_T string="Restore categories pictures from database" domain="objectslend"}
         </button>
+        {include file="forms_types/csrf.tpl"}
     </div>
 </form>
 {/block}
