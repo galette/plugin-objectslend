@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2021-05-18 06:33+0000\n"
+"PO-Revision-Date: 2021-11-21 21:09+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -121,11 +121,11 @@ msgstr "Vous allez supprimer %count objets."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:135
 msgid "Please add add at last one status \"in stock\"!"
-msgstr ""
+msgstr "Veuillez ajouter au moins un statut « en stock » !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr ""
+msgstr "Veuillez ajouter au moins un statut « objet sorti » !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
@@ -250,7 +250,7 @@ msgstr "Fiche de l'objet"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:93
 msgid "Labels"
-msgstr ""
+msgstr "Étiquettes"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 msgid "Category"
@@ -351,17 +351,15 @@ msgstr "catégorie"
 
 #: ../templates/default/categories_list.tpl:86
 #: ../templates/default/categories_list.tpl:89
-#, fuzzy, php-format
-#| msgid "Edit %category"
+#, php-format
 msgid "Edit \"%category\""
-msgstr "Modifier %category"
+msgstr "Modifier « %category »"
 
 #: ../templates/default/categories_list.tpl:95
 #: ../templates/default/categories_list.tpl:98
-#, fuzzy, php-format
-#| msgid "Remove category %1$s"
+#, php-format
 msgid "Remove \"%category\""
-msgstr "Supprimer la catégorie %1$s"
+msgstr "Supprimer « %category »"
 
 #: ../templates/default/preferences.tpl:6
 msgid "Plugin preferences"
