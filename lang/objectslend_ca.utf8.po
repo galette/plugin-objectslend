@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-19 05:47+0200\n"
+"POT-Creation-Date: 2021-11-21 22:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -38,6 +38,7 @@ msgid "Category has been saved"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:374
+#, php-format
 msgid "Remove category %1$s"
 msgstr ""
 
@@ -45,11 +46,11 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
-#: ../templates/default/menu.tpl:9 ../templates/default/menu.tpl:14
 msgid "Objects list"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:253
+#, php-format
 msgid "Rents list for %object"
 msgstr ""
 
@@ -90,23 +91,36 @@ msgid "You do not have rights to take objects!"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:657
+#, php-format
 msgid "%object is currently not available"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:785
+#, php-format
 msgid "You have just borrowed %object :)"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:843
+#, php-format
 msgid "%object has been returned :)"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:929
+#, php-format
 msgid "Remove object %1$s"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
+#, php-format
 msgid "You are about to remove %count objects."
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:135
+msgid "Please add add at last one status \"in stock\"!"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
+msgid "Please add at least one status \"object borrowed\"!"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
@@ -114,6 +128,7 @@ msgid "Status list"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:247
+#, php-format
 msgid "Edit status %status"
 msgstr ""
 
@@ -130,6 +145,7 @@ msgid "Status has been saved"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:369
+#, php-format
 msgid "Remove status %1$s"
 msgstr ""
 
@@ -142,90 +158,68 @@ msgid "Preferences have been successfully stored!"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
+#, php-format
 msgid "Printed on %date"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:157
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
-#: ../templates/default/categories_list.tpl:34
-#: ../templates/default/list_lent_object.tpl:17
-#: ../templates/default/objects_list.tpl:87
-#: ../templates/default/category_edit.tpl:10
-#: ../templates/default/take_more_objects_away.tpl:14
 msgid "Name"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:159
 msgid "Description"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
-#: ../templates/default/objects_list.tpl:100
-#: ../templates/default/take_more_objects_away.tpl:18
 msgid "Serial"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
-#: ../templates/default/objects_list.tpl:114
-#: ../templates/default/take_more_objects_away.tpl:23
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:168
 msgid "Price"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
-#: ../templates/default/objects_list.tpl:128
-#: ../templates/default/take_more_objects_away.tpl:28
 msgid "Borrow price"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272
-#: ../templates/default/objects_list.tpl:141
-#: ../templates/default/take_more_objects_away.tpl:33
 msgid "Dimensions"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
-#: ../templates/default/objects_list.tpl:147
-#: ../templates/default/take_more_objects_away.tpl:38
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
 msgid "Weight"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
-#: ../templates/default/list_lent_object.tpl:13
-#: ../templates/default/status_edit.tpl:7
-#: ../templates/default/objects_list.tpl:160
-#: ../templates/default/status_list.tpl:52
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
 msgid "Status"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
-#: ../templates/default/objects_list.tpl:172
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 msgid "Since"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:191
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
 msgid "Member"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
-#: ../templates/default/list_lent_object.tpl:16
-#: ../templates/default/list_lent_object.tpl:46
-#: ../templates/default/objects_list.tpl:197
-#: ../templates/default/objects_list.tpl:391
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "Return"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:213
+#, php-format
 msgid "Category: %category"
 msgstr ""
 
@@ -241,64 +235,65 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:161
-#: ../templates/default/category_edit.tpl:7
+#. TRANS: this is a filename
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:79
+msgid "object_card"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:91
+msgid "Object card"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:93
+msgid "Labels"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 msgid "Category"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:164
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:165
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
 msgid "Serial number"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:176
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:177
 msgid "Price per rental day"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
-#: ../templates/default/take_object.tpl:71
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
 msgid "Cm"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
-#: ../templates/default/take_object.tpl:83
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
 msgid "Kg"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:187
-#: ../templates/default/objects_list.tpl:211
-#: ../templates/default/objects_list.tpl:299
-#: ../templates/default/status_list.tpl:64
-#: ../templates/default/status_list.tpl:121
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
 msgid "Active"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 msgid "Location"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:210
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:211
 msgid "History of object loans"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:212
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
 msgid "Begin"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
 msgid "End"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
-#: ../templates/default/list_lent_object.tpl:25
-#: ../templates/default/objects_list.tpl:274
-#: ../templates/default/status_list.tpl:130
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "In stock"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
-#: ../templates/default/list_lent_object.tpl:18
-#: ../templates/default/objects_edit.tpl:125
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:218
 msgid "Comments"
 msgstr ""
 
@@ -319,7 +314,6 @@ msgid "Y-m-d H:i"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
-#: ../templates/default/categories_list.tpl:105
 msgid "No category"
 msgstr ""
 
@@ -332,14 +326,13 @@ msgid "Name/description"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
-#: ../templates/default/list_lent_object.tpl:12
 msgid "Id"
 msgstr ""
 
 #: ../templates/default/categories_list.tpl:7
 #: ../templates/default/objects_edit.tpl:57
 #: ../templates/default/status_edit.tpl:25
-#: ../templates/default/objects_list.tpl:13
+#: ../templates/default/objects_list.tpl:14
 #: ../templates/default/status_list.tpl:7
 msgid "Active:"
 msgstr ""
@@ -350,6 +343,18 @@ msgstr ""
 
 #: ../templates/default/categories_list.tpl:18
 msgid "category"
+msgstr ""
+
+#: ../templates/default/categories_list.tpl:86
+#: ../templates/default/categories_list.tpl:89
+#, php-format
+msgid "Edit \"%category\""
+msgstr ""
+
+#: ../templates/default/categories_list.tpl:95
+#: ../templates/default/categories_list.tpl:98
+#, php-format
+msgid "Remove \"%category\""
 msgstr ""
 
 #: ../templates/default/preferences.tpl:6
@@ -536,7 +541,7 @@ msgstr ""
 
 #: ../templates/default/take_object.tpl:20
 #: ../templates/default/objects_edit.tpl:80
-#: ../templates/default/objects_list.tpl:233
+#: ../templates/default/objects_list.tpl:235
 #: ../templates/default/take_more_objects_away.tpl:53
 msgid "Object photo"
 msgstr ""
@@ -567,12 +572,12 @@ msgid "Borrow price:"
 msgstr ""
 
 #: ../templates/default/take_object.tpl:60
-#: ../templates/default/objects_list.tpl:256
+#: ../templates/default/objects_list.tpl:258
 msgid "(per day)"
 msgstr ""
 
 #: ../templates/default/take_object.tpl:62
-#: ../templates/default/objects_list.tpl:258
+#: ../templates/default/objects_list.tpl:260
 msgid "(at once)"
 msgstr ""
 
@@ -607,7 +612,8 @@ msgid "--- Select a status ---"
 msgstr ""
 
 #: ../templates/default/take_object.tpl:115
-#: ../templates/default/status_list.tpl:138
+#: ../templates/default/status_list.tpl:139
+#, php-format
 msgid "%days days"
 msgstr ""
 
@@ -657,7 +663,7 @@ msgid ""
 msgstr ""
 
 #: ../templates/default/take_object.tpl:176
-#: ../templates/default/objects_list.tpl:310
+#: ../templates/default/objects_list.tpl:312
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Take away"
 msgstr ""
@@ -666,19 +672,19 @@ msgstr ""
 msgid "Return back"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:212
+#: ../templates/default/take_object.tpl:213
 msgid "You must agree with terms and conditions in order to take."
 msgstr ""
 
-#: ../templates/default/list_lent_object.tpl:14
+#: ../templates/default/list_lent_object.tpl:15
 msgid "Begin date"
 msgstr ""
 
-#: ../templates/default/list_lent_object.tpl:15
+#: ../templates/default/list_lent_object.tpl:16
 msgid "End date"
 msgstr ""
 
-#: ../templates/default/list_lent_object.tpl:36
+#: ../templates/default/list_lent_object.tpl:37
 msgid "No lend found"
 msgstr ""
 
@@ -729,16 +735,16 @@ msgstr ""
 msgid "Back to list"
 msgstr ""
 
-#: ../templates/default/objects_edit.tpl:109
+#: ../templates/default/objects_edit.tpl:110
 msgid "History"
 msgstr ""
 
-#: ../templates/default/objects_edit.tpl:114
-#: ../templates/default/objects_edit.tpl:140
+#: ../templates/default/objects_edit.tpl:115
+#: ../templates/default/objects_edit.tpl:141
 msgid "Change status"
 msgstr ""
 
-#: ../templates/default/objects_edit.tpl:131
+#: ../templates/default/objects_edit.tpl:132
 msgid "No member"
 msgstr ""
 
@@ -763,7 +769,7 @@ msgid "Number of days to rent per default"
 msgstr ""
 
 #: ../templates/default/status_edit.tpl:32
-#: ../templates/default/status_list.tpl:88
+#: ../templates/default/status_list.tpl:89
 msgid "Days for rent"
 msgstr ""
 
@@ -771,110 +777,107 @@ msgstr ""
 msgid "used to compute return date"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:25
+#: ../templates/default/objects_list.tpl:26
 msgid "objects"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:25
+#: ../templates/default/objects_list.tpl:26
 msgid "object"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:43
+#: ../templates/default/objects_list.tpl:45
 msgid "Categories"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:184
+#: ../templates/default/objects_list.tpl:186
 msgid "By"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:297
+#: ../templates/default/objects_list.tpl:299
 msgid "Object is active"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:297
+#: ../templates/default/objects_list.tpl:299
 msgid "Object is inactive"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:307
+#: ../templates/default/objects_list.tpl:309
 msgid "Take object away"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:317
+#: ../templates/default/objects_list.tpl:319
 msgid "Give object back"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:320
+#: ../templates/default/objects_list.tpl:322
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Give back"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:328
-#: ../templates/default/objects_list.tpl:331
+#: ../templates/default/objects_list.tpl:330
+#: ../templates/default/objects_list.tpl:333
 msgid "Edit the object"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:336
-#: ../templates/default/objects_list.tpl:339
+#: ../templates/default/objects_list.tpl:338
+#: ../templates/default/objects_list.tpl:341
 msgid "Duplicate object"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:345
+#: ../templates/default/objects_list.tpl:347
 msgid "Show object lends"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:350
-#: ../templates/default/objects_list.tpl:353
+#: ../templates/default/objects_list.tpl:352
+#: ../templates/default/objects_list.tpl:355
 msgid "Object card in PDF"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:358
-#: ../templates/default/objects_list.tpl:361
+#: ../templates/default/objects_list.tpl:360
+#: ../templates/default/objects_list.tpl:363
+#, php-format
 msgid "Remove %object from database"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:369
+#: ../templates/default/objects_list.tpl:371
 msgid "No object has been found"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:382
+#: ../templates/default/objects_list.tpl:384
 msgid "Print objects list"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:388
-msgid "Take out"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:438
+#: ../templates/default/objects_list.tpl:441
 msgid "No object selected"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:438
+#: ../templates/default/objects_list.tpl:441
 msgid ""
 "Please make sure to select at least one object from the list to perform this "
 "action."
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:485
+#: ../templates/default/objects_list.tpl:488
 msgid "History of object"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:497
+#: ../templates/default/objects_list.tpl:500
 msgid "An error occured loading history display :("
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:517
+#: ../templates/default/objects_list.tpl:520
 msgid "Take objects"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:545
+#: ../templates/default/objects_list.tpl:548
 msgid "An error occured loading 'Take away' display :("
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:563
+#: ../templates/default/objects_list.tpl:566
 msgid "Give back objects"
 msgstr ""
 
-#: ../templates/default/objects_list.tpl:591
+#: ../templates/default/objects_list.tpl:594
 msgid "An error occured loading 'Give back' display :("
 msgstr ""
 
@@ -882,29 +885,31 @@ msgstr ""
 msgid "status"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:76
+#: ../templates/default/status_list.tpl:77
 msgid "Stock"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:124
+#: ../templates/default/status_list.tpl:125
 msgid "Inactive"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:133
+#: ../templates/default/status_list.tpl:134
 msgid "Not in stock"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:147
-#: ../templates/default/status_list.tpl:150
+#: ../templates/default/status_list.tpl:148
+#: ../templates/default/status_list.tpl:151
+#, php-format
 msgid "Edit %status"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:155
-#: ../templates/default/status_list.tpl:158
+#: ../templates/default/status_list.tpl:156
+#: ../templates/default/status_list.tpl:159
+#, php-format
 msgid "Remove %status from database"
 msgstr ""
 
-#: ../templates/default/status_list.tpl:163
+#: ../templates/default/status_list.tpl:164
 msgid "No status has been found"
 msgstr ""
 
