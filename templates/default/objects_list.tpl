@@ -1,5 +1,6 @@
 {extends file="page.tpl"}
 {block name="content"}
+    {assign var=dformat value={_T string="Y-m-d"}}
 <div id="lend_content">
     <form id="filtre" method="POST" action="{path_for name="objectslend_filter_objects"}">
         <div id="listfilter">
@@ -277,7 +278,7 @@
                             </td>
                             <td class="center nowrap">
                                 {if $object->date_begin}
-                                    {$object->date_begin|date_format:_T("Y-m-d")}
+                                    {$object->date_begin|date_format:$dformat}
                                 {else}-{/if}
                             </td>
                             <td>
@@ -288,7 +289,7 @@
                             {if $lendsprefs.VIEW_DATE_FORECAST}
                             <td class="center nowrap">
                                 {if $object->date_forecast}
-                                    {$object->date_forecast|date_format:_T("Y-m-d")}
+                                    {$object->date_forecast|date_format:$dformat}
                                 {else}-{/if}
                             </td>
                             {/if}
