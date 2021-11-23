@@ -369,6 +369,7 @@ class ObjectsController extends AbstractPluginController
         $m = new Members();
         $members = $m->getSelectizedMembers(
             $this->zdb,
+            $this->login,
             ($this->login->isSuperadmin() ? null : $this->login->id)
         );
 
@@ -633,6 +634,7 @@ class ObjectsController extends AbstractPluginController
             $m = new Members();
             $members = $m->getSelectizedMembers(
                 $this->zdb,
+                $this->login,
                 ($this->login->isSuperadmin() ? null : $this->login->id)
             );
 
