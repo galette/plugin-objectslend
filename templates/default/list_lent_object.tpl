@@ -5,6 +5,7 @@
 {/if}
 {extends file=$extend}
 {block name="content"}
+    {assign var=dformat value={_T string="Y-m-d"}}
 <div class="bigtable">
     <table class="listing">
         <thead>
@@ -23,9 +24,9 @@
             <tr class="{if $smarty.foreach.rentlist.index is odd}odd{else}even{/if}">
                 <td>{$rent->rent_id}</td>
                 <td>{$rent->status_text}{if $rent->in_stock} ({_T string="In stock" domain="objectslend"}){/if}</td>
-                <td>{$rent->date_begin|date_format:_T("Y-m-d")}</td>
-                <td>{$rent->date_forecast|date_format:_T("Y-m-d")}</td>
-                <td>{$rent->date_end|date_format:_T("Y-m-d")}</td>
+                <td>{$rent->date_begin|date_format:$dformat}</td>
+                <td>{$rent->date_forecast|date_format:$dformat}</td>
+                <td>{$rent->date_end|date_format:$dformat}</td>
                 <td>
                     {$rent->nom_adh} {$rent->prenom_adh}
                 </td>

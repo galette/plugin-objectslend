@@ -118,12 +118,12 @@
                         <span class="bline">{_T string="Payment type:" domain="objectslend"}</span>
                         <select name="payment_type" id="payment_type" onchange="validStatus()" style="width: 350px">
                             <option value="null">{_T string="--- Select a payment type ---" domain="objectslend"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_CASH;{/php}">{_T string="Cash"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_CREDITCARD;{/php}">{_T string="Credit card"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_CHECK;{/php}">{_T string="Check"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_TRANSFER;{/php}">{_T string="Transfer"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_PAYPAL;{/php}">{_T string="Paypal"}</option>
-                            <option value="{php}echo Galette\Entity\Contribution::PAYMENT_OTHER;{/php}">{_T string="Other"}</option>
+                            <option value="{Galette\Entity\Contribution::PAYMENT_CASH}">{_T string="Cash"}</option>
+                            <option value="{Galette\Entity\Contribution::PAYMENT_CREDITCARD}">{_T string="Credit card"}</option>
+                            <option value="{Galette\Entity\Contribution::PAYMENT_CHECK}">{_T string="Check"}</option>
+                            <option value="{Galette\Entity\Contribution::PAYMENT_TRANSFER}">{_T string="Transfer"}</option>
+                            <option value="{Galette\Entity\Contribution::PAYMENT_PAYPAL}">{_T string="Paypal"}</option>
+                            <option value="{Galette\Entity\Contribution::PAYMENT_OTHER}">{_T string="Other"}</option>
                         </select>
                     </p>
                 </div>
@@ -155,6 +155,7 @@
     <div class="button-container" id="button_container">
         <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{/if}{if $takeorgive eq 'give'}{_T string="Give back" domain="objectslend"}{/if}">
         <a href="objects_list.php" class="button" id="btncancel">{_T string="Cancel"}</a>
+        {include file="forms_types/csrf.tpl"}
     </div>
 </form>
 

@@ -175,6 +175,7 @@
         <input type="hidden" name="mode" value="{if $ajax}ajax{/if}"/>
         <input type="submit" id="btnsave" name="yes" value="{if $takeorgive eq 'take'}{_T string="Take away" domain="objectslend"}{else}{_T string="Return back" domain="objectslend"}{/if}">
         <a href="{path_for name="objectslend_objects"}" class="button" id="btncancel">{_T string="Cancel"}</a>
+        {include file="forms_types/csrf.tpl"}
     </div>
 </form>
 {/block}

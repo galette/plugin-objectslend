@@ -46,6 +46,7 @@
             <i class="fas fa-th-list"></i>
             {_T string="Back to list" domain="objectslend"}
         </a>
+        {include file="forms_types/csrf.tpl"}
     </div>
 </form>
 {/block}

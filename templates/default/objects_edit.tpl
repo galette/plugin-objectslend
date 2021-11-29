@@ -101,6 +101,7 @@
             <a href="{path_for name="objectslend_objects"}" class="button">
                 <i class="fas fa-th-list"></i> {_T string="Back to list" domain="objectslend"}
             </a>
+            {include file="forms_types/csrf.tpl"}
         </p>
     </div>
 </form>
@@ -139,6 +140,7 @@
         <button type="submit" name="status" class="action">
             <i class="fas fa-save fa-fw"></i> {_T string="Change status" domain="objectslend"}
         </button>
+        {include file="forms_types/csrf.tpl"}
     </div>
 </form>
 {/if}

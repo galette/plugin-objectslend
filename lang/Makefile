@@ -38,9 +38,12 @@ mo :
 	  done \
 	done
 
-extract : ${PHP_SOURCES} Makefile xgettext.py
-	./xgettext.py ${PHP_SOURCES}
-	@echo "Generating en_US:"
+extract : ${PHP_SOURCES} Makefile
+	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o objectslend_php.pot;
+	../../../vendor/bin/smarty-xgettext --domain objectslend -o objectslend_tpl.pot ../templates/default/; \
+	msgcat -o objectslend.pot --use-first objectslend_php.pot objectslend_tpl.pot; \
+	rm objectslend_php.pot objectslend_tpl.pot; \
+	echo "Generating en_US:"
 	@for d in ${DOMAINS}; do \
 	  LANG=C msgen $$d.pot -o $${d}_en_US.po; \
 	done
