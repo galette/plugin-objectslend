@@ -1,11 +1,12 @@
 # Sineline <sineline@gmail.com>, 2022.
+# Arnau Isern <arnauisern84@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2022-01-07 12:57+0000\n"
-"Last-Translator: Sineline <sineline@gmail.com>\n"
+"PO-Revision-Date: 2022-01-10 19:57+0000\n"
+"Last-Translator: Arnau Isern <arnauisern84@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
 "Language: ca\n"
@@ -17,15 +18,15 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
-msgstr ""
+msgstr "Llista de categories"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:224
 msgid "Edit category"
-msgstr ""
+msgstr "Editar categoria"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:226
 msgid "New category"
-msgstr ""
+msgstr "Nova categoria"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
@@ -34,23 +35,23 @@ msgstr "Ha fallat la supressió"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:298
 msgid "An error occured while storing the category."
-msgstr ""
+msgstr "Hi ha ocorregut un error mentre s'emmagatzemava la categoria."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:321
 msgid "Category has been saved"
-msgstr ""
+msgstr "La categoria ha sigut guardada"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:374
 #, php-format
 msgid "Remove category %1$s"
-msgstr ""
+msgstr "Esborrar categoria%1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
 msgid "Objects list"
-msgstr ""
+msgstr "Llista d'objectes"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:253
 #, php-format
@@ -59,59 +60,59 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:346
 msgid "Edit object"
-msgstr ""
+msgstr "Editar objecte"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:348
 msgid "New object"
-msgstr ""
+msgstr "Nou objecte"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:432
 msgid "Object has been successfully stored!"
-msgstr ""
+msgstr "L'objecte s'ha guardat amb èxit!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:486
 msgid "Something went wrong saving object :("
-msgstr ""
+msgstr "Alguna cosa ha anat malament guardant l'objecte :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:512
 msgid "Object has been saved"
-msgstr ""
+msgstr "L'objecte s'ha guardat"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:543
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr ""
+msgstr "Duplicat amb èxit des de #%id. Ara ho pots editar."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:549
 msgid "An error occured cloning object :("
-msgstr ""
+msgstr "Hi ha ocorregut un error duplicant l'objecte :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:579
 msgid "Borrow an object"
-msgstr ""
+msgstr "Demanar prestat un objecte"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:621
 msgid "You do not have rights to take objects!"
-msgstr ""
+msgstr "No tens dret a emportar-te objectes!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:657
 #, php-format
 msgid "%object is currently not available"
-msgstr ""
+msgstr "%objecte actualment no està disponible"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:785
 #, php-format
 msgid "You have just borrowed %object :)"
-msgstr ""
+msgstr "Acabes d'agafar prestat %objecte :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:843
 #, php-format
 msgid "%object has been returned :)"
-msgstr ""
+msgstr "%objecte ha sigut tornat :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:929
 #, php-format
 msgid "Remove object %1$s"
-msgstr ""
+msgstr "Eliminar objecte %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
 #, php-format
@@ -124,11 +125,11 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr ""
+msgstr "Si us plau afegeix com a mínim un estat \"objecte prestat\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
-msgstr ""
+msgstr "Llista de estats"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:247
 #, php-format
