@@ -1,11 +1,11 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
-# ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020, 2021.
+# ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2021-10-24 14:00+0000\n"
+"PO-Revision-Date: 2022-02-01 14:56+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -32,7 +32,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
 msgid "Delete failed"
-msgstr ""
+msgstr "فشل الحذف"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:298
 msgid "An error occured while storing the category."
