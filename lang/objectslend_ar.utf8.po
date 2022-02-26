@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2022-02-01 14:56+0000\n"
+"PO-Revision-Date: 2022-02-27 18:58+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.11.1-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -276,7 +276,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
 msgid "Active"
-msgstr ""
+msgstr "نشط"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 msgid "Location"
@@ -724,7 +724,7 @@ msgstr ""
 #: ../templates/default/objects_edit.tpl:83
 #: ../templates/default/category_edit.tpl:33
 msgid "Delete image"
-msgstr ""
+msgstr "حذف الصورة"
 
 #: ../templates/default/objects_edit.tpl:94
 msgid "Duplicate"
