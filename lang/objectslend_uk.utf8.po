@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
+# Ostap <ostapbataj79@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2021-10-27 07:29+0000\n"
-"Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
+"PO-Revision-Date: 2022-03-21 09:59+0000\n"
+"Last-Translator: Ostap <ostapbataj79@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -254,7 +255,7 @@ msgstr "object_card"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:93
 msgid "Labels"
-msgstr ""
+msgstr "Мітки"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 msgid "Category"
