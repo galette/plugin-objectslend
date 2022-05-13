@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2022-04-13 18:11+0000\n"
+"PO-Revision-Date: 2022-05-13 15:18+0000\n"
 "Last-Translator: Cow <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -36,11 +36,11 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
 msgid "Delete failed"
-msgstr "Falló la eliminación"
+msgstr "Eliminación errónea"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:298
 msgid "An error occured while storing the category."
-msgstr ""
+msgstr "Ocurrió un error al almacenar la categoría."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:321
 msgid "Category has been saved"
