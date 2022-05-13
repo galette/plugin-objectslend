@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2022-05-13 15:18+0000\n"
+"PO-Revision-Date: 2022-05-14 17:19+0000\n"
 "Last-Translator: Cow <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
-msgstr ""
+msgstr "Índice de categorías"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:224
 msgid "Edit category"
-msgstr ""
+msgstr "Editar categoría"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:226
 msgid "New category"
-msgstr ""
+msgstr "Crear categoría"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
@@ -44,132 +44,132 @@ msgstr "Ocurrió un error al almacenar la categoría."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:321
 msgid "Category has been saved"
-msgstr ""
+msgstr "La categoría ha sido guardada"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:374
 #, php-format
 msgid "Remove category %1$s"
-msgstr ""
+msgstr "Eliminar categoría %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
 msgid "Objects list"
-msgstr ""
+msgstr "Índice de objetos"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:253
 #, php-format
 msgid "Rents list for %object"
-msgstr ""
+msgstr "Listado de rentas para %objeto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:346
 msgid "Edit object"
-msgstr ""
+msgstr "Editar objeto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:348
 msgid "New object"
-msgstr ""
+msgstr "Crear objeto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:432
 msgid "Object has been successfully stored!"
-msgstr ""
+msgstr "El objeto ha sido almacenado correctamente."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:486
 msgid "Something went wrong saving object :("
-msgstr ""
+msgstr "Algo fue mal al guardar objeto :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:512
 msgid "Object has been saved"
-msgstr ""
+msgstr "El objeto ha sido guardado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:543
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr ""
+msgstr "Clonado correcto desde nº %id.<br>Ahora puede editarlo."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:549
 msgid "An error occured cloning object :("
-msgstr ""
+msgstr "Ha ocurrido un error al clonar objeto :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:579
 msgid "Borrow an object"
-msgstr ""
+msgstr "Alquilar un objeto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:621
 msgid "You do not have rights to take objects!"
-msgstr ""
+msgstr "No tiene derechos para tomar objetos."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:657
 #, php-format
 msgid "%object is currently not available"
-msgstr ""
+msgstr "%objet no está disponible actualmente"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:785
 #, php-format
 msgid "You have just borrowed %object :)"
-msgstr ""
+msgstr "Ha alquilado %object :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:843
 #, php-format
 msgid "%object has been returned :)"
-msgstr ""
+msgstr "%object ha sido devuelto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:929
 #, php-format
 msgid "Remove object %1$s"
-msgstr ""
+msgstr "Quita objeto %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
 #, php-format
 msgid "You are about to remove %count objects."
-msgstr ""
+msgstr "Va a quitar %count objetos."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:135
 msgid "Please add add at last one status \"in stock\"!"
-msgstr ""
+msgstr "Agregue al final un estado «en almacenaje»."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr ""
+msgstr "Añada un estado «objeto alquilado»."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
-msgstr ""
+msgstr "Índice de estado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:247
 #, php-format
 msgid "Edit status %status"
-msgstr ""
+msgstr "Editar estado %status"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:250
 msgid "New status"
-msgstr ""
+msgstr "Estado nuevo"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:290
 msgid "An error occured while storing the status."
-msgstr ""
+msgstr "Ha ocurrido un error mientras almacenada el estado."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:316
 msgid "Status has been saved"
-msgstr ""
+msgstr "El estado ha sido guardado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:369
 #, php-format
 msgid "Remove status %1$s"
-msgstr ""
+msgstr "Eliminar estado %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:88
 msgid "ObjectsLend preferences"
-msgstr ""
+msgstr "Preferencias de ObjectLend"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:120
 msgid "Preferences have been successfully stored!"
-msgstr ""
+msgstr "Las preferencias han sigo almacenadas correctamente."
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
 #, php-format
 msgid "Printed on %date"
-msgstr ""
+msgstr "Escrito el %d"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:157
@@ -184,27 +184,27 @@ msgstr "Descripción"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
 msgid "Serial"
-msgstr ""
+msgstr "Serie"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:168
 msgid "Price"
-msgstr ""
+msgstr "Precio"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
 msgid "Borrow price"
-msgstr ""
+msgstr "Precio de alquiler"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272
 msgid "Dimensions"
-msgstr ""
+msgstr "Dimensiones"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
 msgid "Weight"
-msgstr ""
+msgstr "Ponderación"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
@@ -214,35 +214,35 @@ msgstr "Estado"
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 msgid "Since"
-msgstr ""
+msgstr "Desde"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:191
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
 msgid "Member"
-msgstr ""
+msgstr "Miembro"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "Return"
-msgstr ""
+msgstr "Devolución"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:213
 #, php-format
 msgid "Category: %category"
-msgstr ""
+msgstr "Categoría: %c"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:255
 msgid "Total:"
-msgstr ""
+msgstr "Total:"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:262
 msgid "Borrowed"
-msgstr ""
+msgstr "Alquilado"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:264
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:79
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:91
 msgid "Object card"
-msgstr ""
+msgstr "Tarjeta objeto"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:93
 msgid "Labels"
@@ -259,24 +259,24 @@ msgstr "Etiquetas"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:165
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
 msgid "Serial number"
-msgstr ""
+msgstr "Nº de serie"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:177
 msgid "Price per rental day"
-msgstr ""
+msgstr "Precio por día beneficiario"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
 msgid "Cm"
-msgstr ""
+msgstr "Cm"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
 msgid "Kg"
-msgstr ""
+msgstr "Kg"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
 msgid "Active"
@@ -284,59 +284,59 @@ msgstr "Activo"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 msgid "Location"
-msgstr ""
+msgstr "Lugar"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:211
 msgid "History of object loans"
-msgstr ""
+msgstr "Histórico de objeto alquilado"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
 msgid "Begin"
-msgstr ""
+msgstr "Comienzo"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
 msgid "End"
-msgstr "Fin"
+msgstr "Final"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "In stock"
-msgstr ""
+msgstr "Almacenado"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:218
 msgid "Comments"
-msgstr ""
+msgstr "Comentarios"
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:161
 msgid "Status has not been added :("
-msgstr ""
+msgstr "Estado que no ha sido añadido :("
 
 #: ../lib/GaletteObjectsLend/Entity/Preferences.php:271
 msgid "Unable to store preferences :("
-msgstr ""
+msgstr "Imposible almacenar preferencias :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendRent.php:186
 msgid "Rent has not been added"
-msgstr ""
+msgstr "La renta no ha sido añadida"
 
 #: ../lib/GaletteObjectsLend/Entity/LendRent.php:350
 msgid "Y-m-d H:i"
-msgstr ""
+msgstr "A-m-d H:i"
 
 #: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
 msgid "No category"
-msgstr ""
+msgstr "Ninguna categoría"
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:348
 msgid "Object has not been added :("
-msgstr ""
+msgstr "El objeto no ha sido agregado :("
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
 msgid "Name/description"
-msgstr ""
+msgstr "Nombre/descripción"
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: ../templates/default/categories_list.tpl:7
 #: ../templates/default/objects_edit.tpl:57
@@ -344,31 +344,31 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:14
 #: ../templates/default/status_list.tpl:7
 msgid "Active:"
-msgstr ""
+msgstr "Activo:"
 
 #: ../templates/default/categories_list.tpl:18
 msgid "categories"
-msgstr ""
+msgstr "categorías"
 
 #: ../templates/default/categories_list.tpl:18
 msgid "category"
-msgstr ""
+msgstr "categoría"
 
 #: ../templates/default/categories_list.tpl:86
 #: ../templates/default/categories_list.tpl:89
 #, php-format
 msgid "Edit \"%category\""
-msgstr ""
+msgstr "Editar «%categoría»"
 
 #: ../templates/default/categories_list.tpl:95
 #: ../templates/default/categories_list.tpl:98
 #, php-format
 msgid "Remove \"%category\""
-msgstr ""
+msgstr "Eliminar «%categoría»"
 
 #: ../templates/default/preferences.tpl:6
 msgid "Plugin preferences"
-msgstr ""
+msgstr "Preferencias de complemento"
 
 #: ../templates/default/preferences.tpl:8
 #: ../templates/default/preferences.tpl:9
@@ -376,10 +376,13 @@ msgid ""
 "Allow a member (not staff neither admin) to borrow an object. If set to "
 "'No', only admin and staff members can access the 'Take object' page"
 msgstr ""
+"Permite un miembro (no el personal ni administración) alquilar un objeto. Si "
+"fija a «No», solamente los miembros admin y staff pueden acceder a la página "
+"«Tomar objeto»"
 
 #: ../templates/default/preferences.tpl:8
 msgid "Members can borrow:"
-msgstr ""
+msgstr "Miembros pueden alquilar:"
 
 #: ../templates/default/preferences.tpl:15
 #: ../templates/default/preferences.tpl:16
@@ -387,26 +390,28 @@ msgid ""
 "Automatically generate a contribution for the member of the amount of the "
 "rental price of the object"
 msgstr ""
+"Genera automáticamente una contribución para el miembro de la cantidad del "
+"precio de renta del objeto"
 
 #: ../templates/default/preferences.tpl:15
 msgid "Generate contribution:"
-msgstr ""
+msgstr "Generar contribución:"
 
 #: ../templates/default/preferences.tpl:22
 msgid "Contribution type:"
-msgstr "Tipo de Contribuidor:"
+msgstr "Tipo de contribuidor:"
 
 #: ../templates/default/preferences.tpl:24
 msgid "Choose a contribution type"
-msgstr ""
+msgstr "Elija un tipo de contribuidor"
 
 #: ../templates/default/preferences.tpl:32
 msgid "Comment text to add on generated contribution"
-msgstr ""
+msgstr "Texto de comentario para añadir en la contribución generada"
 
 #: ../templates/default/preferences.tpl:32
 msgid "Contribution text:"
-msgstr ""
+msgstr "Texto de contribución:"
 
 #: ../templates/default/preferences.tpl:33
 msgid ""
@@ -415,129 +420,138 @@ msgid ""
 "Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- "
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
+"Texto de comentario para añadir en la contribución generada. Automáticamente "
+"sustituyó valores (puesto entre corchetes): <br>- NAME: Nombre<br>- "
+"DESCRIPTION: Descripción<br>-SERIAL_NUMBER: Número serial<br>- PRICE: "
+"Precio<br>- RENT_PRICE: Precio alquiler<br>- WEIGHT: Ponderación<br>- "
+"DIMENSION: Dimensiones"
 
 #: ../templates/default/preferences.tpl:39
 msgid "Images related"
-msgstr ""
+msgstr "Imágenes relacionadas"
 
 #: ../templates/default/preferences.tpl:41
 msgid "Max thumb height (in px)"
-msgstr ""
+msgstr "Altura máx. de huella (en píxel)"
 
 #: ../templates/default/preferences.tpl:45
 msgid "Max thumb width (in px)"
-msgstr ""
+msgstr "Anchura máx. de huella (en píxel)"
 
 #: ../templates/default/preferences.tpl:49
 msgid "Images in lists:"
-msgstr ""
+msgstr "Imágenes en listados:"
 
 #: ../templates/default/preferences.tpl:50
 msgid "Display images in objects and categories lists"
-msgstr ""
+msgstr "Representa imágenes en índices de objetos y categorías"
 
 #: ../templates/default/preferences.tpl:55
 msgid "Show fullsize image or just thumbs"
-msgstr ""
+msgstr "Muestra imagen en tamaño completo a tan solo en huellas"
 
 #: ../templates/default/preferences.tpl:55
 msgid "Enable fullsize:"
-msgstr ""
+msgstr "Activa tamaño completo:"
 
 #: ../templates/default/preferences.tpl:56
 msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
+"Permitirá ver imagen en pantalla completa pulsando en huellas.<br>Si "
+"deshabilitó, solamente huelllas serán representadas, pero las imágenes "
+"completas aún están conservadas."
 
 #: ../templates/default/preferences.tpl:62
 msgid "Display preferences"
-msgstr ""
+msgstr "Preferencias de pantalla"
 
 #: ../templates/default/preferences.tpl:64
 msgid "View category:"
-msgstr ""
+msgstr "Categoría de vista:"
 
 #: ../templates/default/preferences.tpl:69
 msgid "View forecast return date:"
-msgstr ""
+msgstr "Revisión de vista devuelta en fecha:"
 
 #: ../templates/default/preferences.tpl:74
 msgid "View description"
-msgstr ""
+msgstr "Descripción de vista"
 
 #: ../templates/default/preferences.tpl:79
 msgid "View dimensions:"
-msgstr ""
+msgstr "Dimensiones de vista:"
 
 #: ../templates/default/preferences.tpl:84
 msgid "View borrow price:"
-msgstr ""
+msgstr "Vista de precio alquilado:"
 
 #: ../templates/default/preferences.tpl:89
 #: ../templates/default/preferences.tpl:90
 msgid "View the objects buy price sum on the list under the category"
 msgstr ""
+"Vea los objetos sumados del precio comprados en el índice bajo la categoría"
 
 #: ../templates/default/preferences.tpl:89
 msgid "View price sum:"
-msgstr ""
+msgstr "Vea el sumatorio de precio:"
 
 #: ../templates/default/preferences.tpl:95
 msgid "View buy price:"
-msgstr ""
+msgstr "Vea el precio comprado:"
 
 #: ../templates/default/preferences.tpl:100
 msgid "View serial number:"
-msgstr ""
+msgstr "Vea el número de serie:"
 
 #: ../templates/default/preferences.tpl:105
 msgid "View weight"
-msgstr ""
+msgstr "Ver ponderación"
 
 #: ../templates/default/admin_picture.tpl:7
 msgid "Backup categories pictures"
-msgstr ""
+msgstr "Respaldar cuadros de categorías"
 
 #: ../templates/default/admin_picture.tpl:11
 msgid "Backup objects pictures"
-msgstr ""
+msgstr "Respaldar pinturas de objetos"
 
 #: ../templates/default/admin_picture.tpl:15
 msgid "Restore objects pictures from database"
-msgstr ""
+msgstr "Restaurar pinturas de objetos desde BdD"
 
 #: ../templates/default/admin_picture.tpl:19
 msgid "Restore categories pictures from database"
-msgstr ""
+msgstr "Restaurar categorías de pinturas desde BdD"
 
 #: ../templates/default/headers.tpl:14
 msgid "Click to view fullsize image"
-msgstr ""
+msgstr "Pulse para ver imagen a tamaño completo"
 
 #: ../templates/default/menu.tpl:3
 msgid "Objects lend"
-msgstr ""
+msgstr "Lente de objetos"
 
 #: ../templates/default/menu.tpl:19
 msgid "Add an object"
-msgstr ""
+msgstr "Añade un objeto"
 
 #: ../templates/default/menu.tpl:22
 msgid "Borrow status"
-msgstr ""
+msgstr "Estado alquilado"
 
 #: ../templates/default/menu.tpl:25
 msgid "Add a status"
-msgstr ""
+msgstr "Añade un estado"
 
 #: ../templates/default/menu.tpl:28
 msgid "Object categories"
-msgstr ""
+msgstr "Categorías de objeto"
 
 #: ../templates/default/menu.tpl:31
 msgid "Add a category"
-msgstr ""
+msgstr "Añadir una categoría"
 
 #: ../templates/default/menu.tpl:34
 msgid "Preferences"
@@ -546,19 +560,19 @@ msgstr "Preferencias"
 #: ../templates/default/take_object.tpl:12
 #: ../templates/default/objects_edit.tpl:7
 msgid "Object"
-msgstr ""
+msgstr "Objeto"
 
 #: ../templates/default/take_object.tpl:20
 #: ../templates/default/objects_edit.tpl:80
 #: ../templates/default/objects_list.tpl:235
 #: ../templates/default/take_more_objects_away.tpl:53
 msgid "Object photo"
-msgstr ""
+msgstr "Objeto de foto"
 
 #: ../templates/default/take_object.tpl:21
 #: ../templates/default/objects_edit.tpl:9
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 #: ../templates/default/take_object.tpl:28
 #: ../templates/default/objects_edit.tpl:13
@@ -568,42 +582,42 @@ msgstr "Descripción:"
 #: ../templates/default/take_object.tpl:36
 #: ../templates/default/objects_edit.tpl:31
 msgid "Serial number:"
-msgstr ""
+msgstr "Número serial:"
 
 #: ../templates/default/take_object.tpl:44
 #: ../templates/default/objects_edit.tpl:35
 msgid "Price:"
-msgstr ""
+msgstr "Precio:"
 
 #: ../templates/default/take_object.tpl:51
 #: ../templates/default/objects_edit.tpl:39
 msgid "Borrow price:"
-msgstr ""
+msgstr "Precio alquilado:"
 
 #: ../templates/default/take_object.tpl:60
 #: ../templates/default/objects_list.tpl:258
 msgid "(per day)"
-msgstr ""
+msgstr "(por día)"
 
 #: ../templates/default/take_object.tpl:62
 #: ../templates/default/objects_list.tpl:260
 msgid "(at once)"
-msgstr ""
+msgstr "(una vez)"
 
 #: ../templates/default/take_object.tpl:69
 #: ../templates/default/objects_edit.tpl:49
 msgid "Dimensions:"
-msgstr ""
+msgstr "Dimensiones:"
 
 #: ../templates/default/take_object.tpl:81
 #: ../templates/default/objects_edit.tpl:53
 msgid "Weight:"
-msgstr ""
+msgstr "Ponderación:"
 
 #: ../templates/default/take_object.tpl:94
 #: ../templates/default/take_more_objects_away.tpl:95
 msgid "Member:"
-msgstr ""
+msgstr "Miembro:"
 
 #: ../templates/default/take_object.tpl:108
 #: ../templates/default/take_object.tpl:138
@@ -611,28 +625,28 @@ msgstr ""
 #: ../templates/default/take_more_objects_away.tpl:106
 #: ../templates/default/take_more_objects_away.tpl:135
 msgid "Status:"
-msgstr ""
+msgstr "Estado:"
 
 #: ../templates/default/take_object.tpl:110
 #: ../templates/default/take_object.tpl:140
 #: ../templates/default/take_more_objects_away.tpl:108
 #: ../templates/default/take_more_objects_away.tpl:137
 msgid "--- Select a status ---"
-msgstr ""
+msgstr "--- Seleccione un estado ---"
 
 #: ../templates/default/take_object.tpl:115
 #: ../templates/default/status_list.tpl:139
 #, php-format
 msgid "%days days"
-msgstr ""
+msgstr "%d días"
 
 #: ../templates/default/take_object.tpl:124
 msgid "Expected return:"
-msgstr ""
+msgstr "Devolución esperada:"
 
 #: ../templates/default/take_object.tpl:149
 msgid "Time:"
-msgstr ""
+msgstr "Hora:"
 
 #: ../templates/default/take_object.tpl:155
 #: ../templates/default/take_more_objects_away.tpl:146
@@ -642,16 +656,16 @@ msgstr "Comentarios:"
 #: ../templates/default/take_object.tpl:158
 #: ../templates/default/take_more_objects_away.tpl:149
 msgid "remaining characters"
-msgstr ""
+msgstr "caracteres remanentes"
 
 #: ../templates/default/take_object.tpl:167
 msgid "I have read and I agree with terms and conditions"
-msgstr ""
+msgstr "He leído y esto de acuerdo con los términos y condiciones"
 
 #: ../templates/default/take_object.tpl:168
 #: ../templates/default/take_object.tpl:170
 msgid "Show terms and conditions"
-msgstr ""
+msgstr "Muestra los términos y condiciones"
 
 #: ../templates/default/take_object.tpl:171
 msgid ""
@@ -675,15 +689,17 @@ msgstr ""
 #: ../templates/default/objects_list.tpl:312
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Take away"
-msgstr ""
+msgstr "Lárgate"
 
 #: ../templates/default/take_object.tpl:176
 msgid "Return back"
-msgstr ""
+msgstr "Devolver"
 
 #: ../templates/default/take_object.tpl:213
+#, fuzzy
 msgid "You must agree with terms and conditions in order to take."
 msgstr ""
+"Debe estar de acuerdo con los términos y condiciones con el fin de aceptar"
 
 #: ../templates/default/list_lent_object.tpl:15
 msgid "Begin date"
@@ -695,208 +711,214 @@ msgstr "Fecha de finalización"
 
 #: ../templates/default/list_lent_object.tpl:37
 msgid "No lend found"
-msgstr ""
+msgstr "Ningún préstamo encontrado"
 
 #: ../templates/default/objects_edit.tpl:18
 msgid "Category:"
-msgstr ""
+msgstr "Categoría:"
 
 #: ../templates/default/objects_edit.tpl:20
 msgid "--- Select a category ---"
-msgstr ""
+msgstr "--- Seleccionar una categoría ---"
 
 #: ../templates/default/objects_edit.tpl:43
 msgid "The price applies on each rental day if checked, only once otherwise"
 msgstr ""
+"El precio se aplica en cada día rentado si se marcó, solamente uno en otro "
+"caso"
 
 #: ../templates/default/objects_edit.tpl:44
 msgid "Price per rental day:"
-msgstr ""
+msgstr "Precio por día alquilado:"
 
 #: ../templates/default/objects_edit.tpl:62
 msgid "Where is the object?"
-msgstr ""
+msgstr "¿Dónde está el objeto?"
 
 #: ../templates/default/objects_edit.tpl:65
 msgid "in stock"
-msgstr ""
+msgstr "en almacén"
 
 #: ../templates/default/objects_edit.tpl:72
 msgid "Object's photo"
-msgstr ""
+msgstr "Foto de objeto"
 
 #: ../templates/default/objects_edit.tpl:83
 #: ../templates/default/category_edit.tpl:33
 msgid "Delete image"
-msgstr ""
+msgstr "Borrar imagen"
 
 #: ../templates/default/objects_edit.tpl:94
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplicar"
 
 #: ../templates/default/objects_edit.tpl:97
 msgid "Print object"
-msgstr ""
+msgstr "Imprimir objeto"
 
 #: ../templates/default/objects_edit.tpl:102
 #: ../templates/default/status_edit.tpl:47
 #: ../templates/default/category_edit.tpl:47
 msgid "Back to list"
-msgstr ""
+msgstr "Volver al índice"
 
 #: ../templates/default/objects_edit.tpl:110
 msgid "History"
-msgstr ""
+msgstr "Historial"
 
 #: ../templates/default/objects_edit.tpl:115
 #: ../templates/default/objects_edit.tpl:141
 msgid "Change status"
-msgstr ""
+msgstr "Cambiar estado"
 
 #: ../templates/default/objects_edit.tpl:132
 msgid "No member"
-msgstr ""
+msgstr "Ningún miembro"
 
 #: ../templates/default/status_edit.tpl:16
 msgid "Is object in stock or borrowed"
-msgstr ""
+msgstr "Este objeto está almacenado o alquilado"
 
 #: ../templates/default/status_edit.tpl:17
 #: ../templates/default/status_list.tpl:14
 msgid "In stock:"
-msgstr ""
+msgstr "Almacenado:"
 
 #: ../templates/default/status_edit.tpl:19
 msgid ""
 "Check if the object is available to be borrowed;<br/>uncheck if object is "
 "already borrowed and should be given back"
 msgstr ""
+"Marque si el objeto está disponible para ser alquilado;<br>desmarque si el "
+"objeto ya está alquilado y debería ser devuelto"
 
 #: ../templates/default/status_edit.tpl:31
 #: ../templates/default/status_edit.tpl:34
 msgid "Number of days to rent per default"
-msgstr ""
+msgstr "Número de días para alquilar por defecto"
 
 #: ../templates/default/status_edit.tpl:32
 #: ../templates/default/status_list.tpl:89
 msgid "Days for rent"
-msgstr ""
+msgstr "Días para alquilar"
 
 #: ../templates/default/status_edit.tpl:34
 msgid "used to compute return date"
-msgstr ""
+msgstr "utilizado para calcular la fecha de devolución"
 
 #: ../templates/default/objects_list.tpl:26
 msgid "objects"
-msgstr ""
+msgstr "objetos"
 
 #: ../templates/default/objects_list.tpl:26
 msgid "object"
-msgstr ""
+msgstr "objeto"
 
 #: ../templates/default/objects_list.tpl:45
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 #: ../templates/default/objects_list.tpl:186
 msgid "By"
-msgstr ""
+msgstr "Por"
 
 #: ../templates/default/objects_list.tpl:299
 msgid "Object is active"
-msgstr ""
+msgstr "Objeto está activo"
 
 #: ../templates/default/objects_list.tpl:299
 msgid "Object is inactive"
-msgstr ""
+msgstr "Objeto no está activo"
 
 #: ../templates/default/objects_list.tpl:309
 msgid "Take object away"
-msgstr ""
+msgstr "Llevar objeto"
 
 #: ../templates/default/objects_list.tpl:319
 msgid "Give object back"
-msgstr ""
+msgstr "Devolver objeto"
 
 #: ../templates/default/objects_list.tpl:322
 #: ../templates/default/take_more_objects_away.tpl:156
 msgid "Give back"
-msgstr ""
+msgstr "Devolver"
 
 #: ../templates/default/objects_list.tpl:330
 #: ../templates/default/objects_list.tpl:333
 msgid "Edit the object"
-msgstr ""
+msgstr "Edita el objeto"
 
 #: ../templates/default/objects_list.tpl:338
 #: ../templates/default/objects_list.tpl:341
 msgid "Duplicate object"
-msgstr ""
+msgstr "Duplicar objeto"
 
 #: ../templates/default/objects_list.tpl:347
 msgid "Show object lends"
-msgstr ""
+msgstr "Mostrar objeto prestado"
 
 #: ../templates/default/objects_list.tpl:352
 #: ../templates/default/objects_list.tpl:355
 msgid "Object card in PDF"
-msgstr ""
+msgstr "Tarjeta de objeto en *.pdf"
 
 #: ../templates/default/objects_list.tpl:360
 #: ../templates/default/objects_list.tpl:363
 #, php-format
 msgid "Remove %object from database"
-msgstr ""
+msgstr "Quitar %object desde BdD"
 
 #: ../templates/default/objects_list.tpl:371
 msgid "No object has been found"
-msgstr ""
+msgstr "No se ha encontrado ningún objeto"
 
 #: ../templates/default/objects_list.tpl:384
 msgid "Print objects list"
-msgstr ""
+msgstr "Índice de objetos escritos"
 
 #: ../templates/default/objects_list.tpl:441
 msgid "No object selected"
-msgstr ""
+msgstr "Ningún objeto seleccionado"
 
 #: ../templates/default/objects_list.tpl:441
 msgid ""
 "Please make sure to select at least one object from the list to perform this "
 "action."
 msgstr ""
+"Asegúrese seleccionar al menos un objetos desde el índice para realizar esta "
+"operación."
 
 #: ../templates/default/objects_list.tpl:488
 msgid "History of object"
-msgstr ""
+msgstr "Historial de objeto"
 
 #: ../templates/default/objects_list.tpl:500
 msgid "An error occured loading history display :("
-msgstr ""
+msgstr "Ha ocurrido un error al cargar la pantalla histórica :("
 
 #: ../templates/default/objects_list.tpl:520
 msgid "Take objects"
-msgstr ""
+msgstr "Coger objetos"
 
 #: ../templates/default/objects_list.tpl:548
 msgid "An error occured loading 'Take away' display :("
-msgstr ""
+msgstr "Ha ocurrido un error al cargar la pantalla «Apartar» :("
 
 #: ../templates/default/objects_list.tpl:566
 msgid "Give back objects"
-msgstr ""
+msgstr "Devolver objetos"
 
 #: ../templates/default/objects_list.tpl:594
 msgid "An error occured loading 'Give back' display :("
-msgstr ""
+msgstr "Ha ocurrido un error al cargar la pantalla «Devolver» :("
 
 #: ../templates/default/status_list.tpl:25
 msgid "status"
-msgstr "Estado"
+msgstr "estado"
 
 #: ../templates/default/status_list.tpl:77
 msgid "Stock"
-msgstr ""
+msgstr "Mercancía"
 
 #: ../templates/default/status_list.tpl:125
 msgid "Inactive"
@@ -904,27 +926,27 @@ msgstr "Inactivo"
 
 #: ../templates/default/status_list.tpl:134
 msgid "Not in stock"
-msgstr ""
+msgstr "No dentro del almacenaje"
 
 #: ../templates/default/status_list.tpl:148
 #: ../templates/default/status_list.tpl:151
 #, php-format
 msgid "Edit %status"
-msgstr ""
+msgstr "Editar %s"
 
 #: ../templates/default/status_list.tpl:156
 #: ../templates/default/status_list.tpl:159
 #, php-format
 msgid "Remove %status from database"
-msgstr ""
+msgstr "Quitar estado %s desde BdD"
 
 #: ../templates/default/status_list.tpl:164
 msgid "No status has been found"
-msgstr ""
+msgstr "No ha sido encontrado ningún estado"
 
 #: ../templates/default/category_edit.tpl:16
 msgid "Is active"
-msgstr ""
+msgstr "Está activo"
 
 #: ../templates/default/category_edit.tpl:26
 msgid "Picture:"
@@ -932,24 +954,24 @@ msgstr "Foto:"
 
 #: ../templates/default/category_edit.tpl:31
 msgid "Category photo"
-msgstr ""
+msgstr "Categoría de foto"
 
 #: ../templates/default/take_more_objects_away.tpl:4
 msgid "Objects"
-msgstr ""
+msgstr "Objetos"
 
 #: ../templates/default/take_more_objects_away.tpl:10
 msgid "Picture"
-msgstr ""
+msgstr "Foto"
 
 #: ../templates/default/take_more_objects_away.tpl:97
 msgid "--- Select a member ---"
-msgstr ""
+msgstr "--- Seleccione un miembro ---"
 
 #: ../templates/default/take_more_objects_away.tpl:118
 msgid "Payment type:"
-msgstr "Tipo de pago:"
+msgstr "Tipo de remuneración:"
 
 #: ../templates/default/take_more_objects_away.tpl:120
 msgid "--- Select a payment type ---"
-msgstr ""
+msgstr "--- Seleccione un tipo de remuneración ---"
