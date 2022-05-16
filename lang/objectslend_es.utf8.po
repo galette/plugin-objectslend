@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2022-05-14 17:19+0000\n"
+"PO-Revision-Date: 2022-05-17 18:19+0000\n"
 "Last-Translator: Cow <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -280,7 +280,7 @@ msgstr "Kg"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
 msgid "Active"
-msgstr "Activo"
+msgstr "Activa"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 msgid "Location"
@@ -922,7 +922,7 @@ msgstr "Mercancía"
 
 #: ../templates/default/status_list.tpl:125
 msgid "Inactive"
-msgstr "Inactivo"
+msgstr "Inactiva"
 
 #: ../templates/default/status_list.tpl:134
 msgid "Not in stock"
