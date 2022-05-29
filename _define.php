@@ -8,7 +8,7 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2021 The Galette Team
+ * Copyright © 2017-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -31,7 +31,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -40,10 +40,10 @@ $this->register(
     'Galette Objects Lend',             //Name
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
-    '1.2.0',                            //Version
-    '0.9.6',                            //Galette version compatibility
+    '2.0.0',                            //Version
+    '1.0.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2021-11-29',                       //Date
+    '2022-05-29',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
