@@ -93,7 +93,7 @@ class MainController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']preferences.tpl',
+            $this->getTemplate('preferences'),
             $params
         );
         return $response;
