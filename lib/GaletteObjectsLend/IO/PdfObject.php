@@ -187,10 +187,10 @@ class PdfObject extends Pdf
         }
         $this->addCell(_T("Active", "objectslend"), $object->is_active ? 'X' : '', $wpic);
         $this->addCell(_T("Location", "objectslend"), $object->status_text, $wpic);
-        $this->addCell(_T("Since", "objectslend"), $object->date_begin_ihm, $wpic);
+        $this->addCell(_T("Since", "objectslend"), $object->date_begin, $wpic);
         $this->addCell(_T("Member", "objectslend"), $object->member->sname, $wpic);
         if ($this->lprefs->{LPreferences::PARAM_VIEW_DATE_FORECAST}) {
-            $this->addCell(_T("Return", "objectslend"), $object->date_forecast_ihm, $wpic);
+            $this->addCell(_T("Return", "objectslend"), $object->date_forecast, $wpic);
         }
 
         if ($this->GetY() < $hpic) {

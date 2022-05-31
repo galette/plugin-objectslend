@@ -1,0 +1,628 @@
+{% extends 'page.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% block content %}
+    {% set dformat = _T("Y-m-d") %}
+<div id="lend_content">
+    <form id="filtre" method="POST" action="{{ path_for("objectslend_filter_objects") }}">
+        <div id="listfilter">
+            <label for="filter_str">{{ _T("Search:") }}&nbsp;</label>
+            <input type="text" name="filter_str" id="filter_str" value="{{ filters.filter_str }}" type="search" placeholder="{{ _T("Enter a value") }}"/>&nbsp;
+            <label for="field_filter"> {{ _T("in:") }}&nbsp;</label>
+            <select name="field_filter" id="field_filter" onchange="form.submit()">
+                {html_options options=$field_filter_options selected=$filters->field_filter}
+            </select>
+            {% if login.isAdmin() or login.isStaff() %}
+                {{ _T("Active:", "objectslend") }}
+                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ALL_OBJECTS') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Objects::ALL_OBJECTS') %} checked="checked"{% endif %}>
+                <label for="filter_dc_active">{{ _T("Don't care") }}</label>
+                <input type="radio" name="active_filter" id="filter_yes_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ACTIVE_OBJECTS') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Objects::ACTIVE_OBJECTS') %} checked="checked"{% endif %}>
+                <label for="filter_yes_active">{{ _T("Yes") }}</label>
+                <input type="radio" name="active_filter" id="filter_no_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::INACTIVE_OBJECTS') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Objects::INACTIVE_OBJECTS') %} checked="checked"{% endif %}>
+                <label for="filter_no_active">{{ _T("No") }}</label>
+            {% endif %}
+            <input type="submit" class="inline" value="{{ _T("Filter") }}"/>
+            <input name="clear_filter" type="submit" value="{{ _T("Clear filter") }}">
+        </div>
+        <div class="infoline">
+            {{ nb_objects }} {% if nb_objects > 1 %}{{ _T("objects", "objectslend") }}{% else %}{{ _T("object", "objectslend") }}{% endif %}
+            <div class="fright">
+                <label for="nbshow">{{ _T("Records per page:") }}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript>
+                    <span>
+                        <input type="submit" value="{{ _T("Change") }}"/>
+                    </span>
+                </noscript>
+                {% include "components/forms/csrf.html.twig" %}
+            </div>
+        </div>
+    </form>
+
+    {% if lendsprefs.VIEW_CATEGORY and categories|length > 0 %}
+        <section id="categories">
+            <header class="ui-state-default ui-state-active">
+                {{ _T("Categories", "objectslend") }}
+            </header>
+            <div>
+                <a href="{{ path_for("objectslend_objects", {"option": "category", "value": 0} )}}"{% if filters.category_filter == null %} class="active"{% endif %}>
+                    <img src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": 0}) }}"
+                        alt=""/>
+                    <br/>
+                    {{ _T("All") }}
+                </a>
+        {% for categ in categories %}
+            {% if categ.isActive() or categ.getId() == -1 %}
+                <a href="{{ path_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}"{% if filters.category_filter == categ.getId() %} class="active"{% endif %}>
+                    <img src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
+                        width="{{ categ.getPicture().getOptimalThumbWidth(olendsprefs) }}"
+                        height="{{ categ.getPicture().getOptimalThumbHeight(olendsprefs) }}"
+                        alt=""/>
+                    <br/>
+                    {{ categ.getName() }}
+                    {% if lendsprefs.VIEW_LIST_PRICE_SUM and lendsprefs.VIEW_PRICE and (login.isAdmin() or login.isStaff()) %}
+                        &middot;
+                        {{ categ.getSum() }} &euro;
+                    {% endif %}
+                </a>
+            {% endif %}
+        {% endfor %}
+
+            </div>
+        </section>
+    {% endif %}
+
+        <form action="{{ path_for("objectslend_batch-objectslist") }}" method="post" id="objects_list">
+            <table class="listing">
+                <thead>
+                    <tr>
+                        {% if login.isAdmin() or login.isStaff() %}
+                            <th  class="id_row">#</th>
+                        {% endif %}
+                        {% if olendsprefs.imagesInLists() %}
+                            <th class="id_row">
+                                {{ _T("Picture") }}
+                            </th>
+                        {% endif %}
+                            <th>
+                                <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_NAME")}) }}">
+                                    {{ _T("Name", "objectslend") }}
+                                    {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_NAME') %}
+                                        {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                    <i class="ui angle down icon tooltip"></i>
+                                        {% else %}
+                                    <i class="ui angle up icon tooltip"></i>
+                                        {% endif %}
+                                    {% endif %}
+                                </a>
+                            </th>
+                        {% if lendsprefs.VIEW_SERIAL %}
+                            <th>
+                                <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_SERIAL")}) }}">
+                                    {{ _T("Serial", "objectslend") }}
+                                    {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_SERIAL') %}
+                                        {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                            <img src="{base_url}/{$template_subdir}images/down.png"/>
+                                        {% else %}
+                                            <img src="{base_url}/{$template_subdir}images/up.png"/>
+                                        {% endif %}
+                                    {% endif %}
+                                </a>
+                            </th>
+                        {% endif %}
+                        {% if lendsprefs.VIEW_PRICE %}
+                            <th>
+                                <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_PRICE")}) }}">
+                                    {{ _T("Price", "objectslend") }}
+                                    {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_PRICE') %}
+                                        {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                    <i class="ui angle down icon tooltip"></i>
+                                        {% else %}
+                                    <i class="ui angle up icon tooltip"></i>
+                                        {% endif %}
+                                    {% endif %}
+                                </a>
+                            </th>
+                        {% endif %}
+                        {% if lendsprefs.VIEW_LEND_PRICE %}
+                            <th>
+                                <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_RENTPRICE")}) }}">
+                                    {{ _T("Borrow price", "objectslend") }}
+                                    {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_RENTPRICE') %}
+                                        {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                    <i class="ui angle down icon tooltip"></i>
+                                        {% else %}
+                                    <i class="ui angle up icon tooltip"></i>
+                                        {% endif %}
+                                    {% endif %}
+                                </a>
+                            </th>
+                        {% endif %}
+                        {% if lendsprefs.VIEW_DIMENSION %}
+                            <th>
+                                {{ _T("Dimensions", "objectslend") }}
+                            </th>
+                        {% endif %}
+                        {% if lendsprefs.VIEW_WEIGHT %}
+                            <th>
+                                <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_WEIGHT")}) }}">
+                                    {{ _T("Weight", "objectslend") }}
+                                    {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_WEIGHT') %}
+                                        {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                    <i class="ui angle down icon tooltip"></i>
+                                        {% else %}
+                                    <i class="ui angle up icon tooltip"></i>
+                                        {% endif %}
+                                    {% endif %}
+                                </a>
+                            </th>
+                        {% endif %}
+                        <th>
+                            <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_STATUS")}) }}">
+                                {{ _T("Status", "objectslend") }}
+                                {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_STATUS') %}
+                                    {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                <i class="ui angle down icon tooltip"></i>
+                                    {% else %}
+                                <i class="ui angle up icon tooltip"></i>
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_BDATE")}) }}">
+                                {{ _T("Since", "objectslend") }}
+                                {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_BDATE') %}
+                                    {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                <i class="ui angle down icon tooltip"></i>
+                                    {% else %}
+                                <i class="ui angle up icon tooltip"></i>
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_MEMBER")}) }}">
+                                {{ _T("By", "objectslend") }}
+                                {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_MEMBER') %}
+                                    {% if filters.ordered == constant('GaletteObjectsLendFiltersObjectsList::ORDER_ASC') %}
+                                <i class="ui angle down icon tooltip"></i>
+                                    {% else %}
+                                <i class="ui angle up icon tooltip"></i>
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        {% if lendsprefs.VIEW_DATE_FORECAST %}
+                        <th>
+                            <a href="{{ path_for("objectslend_objects", {"option": "order", "value": constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_FDATE")}) }}">
+                                {{ _T("Return", "objectslend") }}
+                                {% if filters.orderby == constant('GaletteObjectsLend\\Repository\\Objects::ORDERBY_FDATE') %}
+                                    {% if filters.ordered == constant('GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC') %}
+                                        <i class="ui angle down icon tooltip"></i>
+                                    {% else %}
+                                        <i class="ui angle up icon tooltip"></i>
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                        </th>
+                        {% endif %}
+                        {% if login.isAdmin() or login.isStaff() %}
+                            <th class="id_row">
+                                {{ _T("Active", "objectslend") }}
+                            </th>
+                        {% endif %}
+                        <th class="actions_row">
+                            {{ _T("Actions") }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in objects %}
+                        <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
+                            {% if login.isAdmin() or login.isStaff() %}
+                                <td class="center">
+                                    <input type="checkbox" name="object_ids[]" value="{$object->object_id}">
+                            </td>
+                        {% endif %}
+    {% if olendsprefs.imagesInLists() %}
+                        <td class="center">
+                            <img src="{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.getId()}) }}"
+                                    class="picture"
+                                    width="{{ object.getPicture().getOptimalThumbWidth(olendsprefs) }}"
+                                    height="{{ object.getPicture().getOptimalThumbHeight(olendsprefs) }}"
+                                    alt="{{ _T("Object photo", "objectslend") }}"/>
+                            </td>
+    {% endif %}
+                            <td>
+                                <strong>{{ object.displayName(filters)|raw }}</strong>
+                                {% if lendsprefs.VIEW_DESCRIPTION %}
+                                    <br/>{{ object.displayDescription(filters)|raw }}
+                                {% endif %}
+                            </td>
+                            {% if lendsprefs.VIEW_SERIAL %}
+                                <td>
+                                    {{ object.displaySerial(filters)|raw }}
+                                </td>
+                            {% endif %}
+                            {% if lendsprefs.VIEW_PRICE %}
+                                <td class="right nowrap">
+                                    {{ object.getPrice() }}&euro;
+                                </td>
+                            {% endif %}
+                            {% if lendsprefs.VIEW_LEND_PRICE %}
+                                <td class="right">
+                                    {{ object.getRentPrice() }}&euro;<br/>
+                                {% if object.isPricePerDay() %}
+                                    {{ _T("(per day)", "objectslend") }}
+                                {% else %}
+                                    {{ _T("(at once)", "objectslend") }}
+                                {% endif %}
+                                </td>
+                            {% endif %}
+                            {% if lendsprefs.VIEW_DIMENSION %}
+                                <td>
+                                    {{ object.displayDimension(filters)|raw }}
+                                </td>
+                            {% endif %}
+                            {% if lendsprefs.VIEW_WEIGHT %}
+                                <td>
+                                    {{ object.weight }}
+                                </td>
+                            {% endif %}
+                            <td>
+                                {% if object.getStatusText() %}
+                                    {{ object.getStatusText() }}{% if object.inStock() %} ({{ _T("In stock", "objectslend") }}){% endif %}
+                                {% else %}-{% endif %}
+                            </td>
+                            <td class="center nowrap">
+                                {{ object.getDateBegin() }}
+                            </td>
+                            <td>
+                                {% if object.getIdAdh() %}
+                                    <a href="{{ path_for("member", {"id": object.getIdAdh()}) }}">{{ memberName({'id': object.getIdAdh()}) }}</a>
+                                {% else %}-{% endif %}
+                            </td>
+                            {% if lendsprefs.VIEW_DATE_FORECAST %}
+                            <td class="center nowrap">
+                                {{ object.getDateForecast() }}
+                            </td>
+                            {% endif %}
+                            <td class="center {% if object.isActive() %}use{% else %}delete{% endif %}">
+                                <i
+                                    class="fas fa-thumbs-{% if object.isActive() %}up{% else %}down{% endif %}"
+                                    title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
+                                </i>
+                                <span class="sr-only">{{ _T("Active", "objectslend") }}</span>
+                            </td>
+                            <td class="center nowrap">
+                                {% if login.isAdmin() or login.isStaff() %}
+                                    {% set actions = [
+                                        {
+                                            'label': _T("Edit the object", "objectslend"),
+                                            'route': {
+                                                'name': 'objectslend_object_edit',
+                                                'args': {'id': object.getId()}
+                                            },
+                                            'icon': 'edit'
+                                        },
+                                        {
+                                            'label': _T("Duplicate object", "objectslend"),
+                                            'route': {
+                                                'name': 'objectslend_object_clone',
+                                                'args': {'id': object.getId()}
+                                            },
+                                            'icon': 'clone'
+                                        },
+                                        {
+                                            'label': _T("Show object lends", "objectslend"),
+                                            'route': {
+                                                'name': 'objectslend_show_object_lend',
+                                                'args': {'id': object.getId()}
+                                            },
+                                            'icon': 'file alt'
+                                        },
+                                        {
+                                            'label': _T("Object card in PDF", "objectslend"),
+                                            'route': {
+                                                'name': 'objectslend_object_print',
+                                                'args': {'id': object.getId()}
+                                            },
+                                            'icon': 'file pdf'
+                                        },
+                                        {
+                                            'label': _T("Remove %object from database", "objectslend")|replace({ '%object': object.getName() }),
+                                            'route': {
+                                                'name': 'objectslend_remove_object',
+                                                'args': {'id': object.getId()}
+                                            },
+                                            'icon': 'times red'
+                                        }
+                                    ] %}
+                                {% endif %}
+
+                                {% if not object.getRentId() or object.inStock() %}
+                                    {% if lendsprefs.ENABLE_MEMBER_RENT_OBJECT or login.isAdmin() or login.isStaff() %}
+                                        {% set actions = [
+                                            {
+                                                'label': _T("Take away", "objectslend"),
+                                                'route': {
+                                                    'name': 'objectslend_object_take',
+                                                    'args': {
+                                                        'action': 'take',
+                                                        'id': object.getId()
+                                                    }
+                                                },
+                                                'icon': 'cart'
+                                            }
+                                        ]|merge(actions) %}
+                                    {% endif %}
+                                {% elseif login.isAdmin() or login.isStaff() or login.id == object.getIdAdh() %}
+                                    {% set actions = [
+                                        {
+                                            'label': _T("Give back", "objectslend"),
+                                            'route': {
+                                            'name': 'objectslend_object_take',
+                                            'args': {
+                                                'action': 'return',
+                                                'id': object.getId()
+                                            }
+                                        },
+                                            'icon': 'cart red'
+                                        }
+                                    ]|merge(actions) %}
+                                {% endif %}
+
+                                {% for action in actions %}
+                                    {{ macros.drawListAction(action.label, action.route, action.icon) }}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        {# FIXME: calculate colspan #}
+                        <tr>
+                            <td colspan="14" class="emptylist">{{ _T("No object has been found", "objectslend") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+{% if nb_objects != 0 %}
+            <div class="ui bottom attached segment screen-only">
+                <div class="ui horizontal list">
+                    <span class="ui primary ribbon label">{{ _T('For the selection:') }}</span>
+                    {% set batch_actions = [
+                        {
+                            'name': 'pdf',
+                            'label': _T("Print objects list", "objectslend"),
+                            'icon': 'file pdf'
+                        }
+                    ] %}
+
+                    {% if login.isAdmin() or login.isStaff() %}
+                        {%  set batch_actions = batch_actions|merge([
+                            {
+                                'name': 'delete',
+                                'label': _T("Delete"),
+                                'icon': 'times red'
+                            }
+                        ]) %}
+                    {% endif %}
+
+                    {% for batch_action in batch_actions %}
+                        {{ macros.drawBatchAction(batch_action.name, batch_action.label, batch_action.icon) }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="ui basic center aligned fitted segment">
+                <div class="ui inverted pagination menu">
+                    <div class="header item">
+                        {{ _T('Pages:') }}
+                    </div>
+                    {{ pagination|raw }}
+                </div>
+            </div>
+{% endif %}
+
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+{% if nb_objects != 0 %}
+        var _is_checked = true;
+        var _bind_check = function(){
+            $('#checkall').click(function(){
+                $('table.listing :checkbox[name="object_ids[]"]').each(function(){
+                    this.checked = _is_checked;
+                });
+                _is_checked = !_is_checked;
+                return false;
+            });
+            $('#checkinvert').click(function(){
+                $('table.listing :checkbox[name="object_ids[]"]').each(function(){
+                    this.checked = !$(this).is(':checked');
+                });
+                return false;
+            });
+        };
+        var _checkselection = function() {
+            var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
+            if (_checkeds == 0) {
+                var _el = $('<div id="pleaseselect" title="{{ _T("No object selected", "objectslend")|e("js") }}">{{ _T("Please make sure to select at least one object from the list to perform this action.", "objectslend")|e("js") }}</div>');
+                _el.appendTo('body').dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    close: function(event, ui){
+                        _el.remove();
+                    }
+                });
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        {#* Use of Javascript to draw specific elements that are not relevant is JS is inactive *#}
+        $(function(){
+            {include file="js_removal.tpl"}
+            {include file="js_removal.tpl" selector="#delete" deleteurl="'{{ path_for("objectslend_batch-objectslist") }}'" extra_check="if (!_checkselection()) {ldelim}return false;{rdelim}" extra_data="delete: true, object_ids: $('#objects_list input[type=\"checkbox\"]:checked').map(function(){ return $(this).val(); }).get()" method="POST"}
+            $('#table_footer').parent().before('<tr><td id="checkboxes" colspan="4"><span class="fleft"><a href="#" id="checkall">{{ _T("(Un)Check all") }}</a> | <a href="#" id="checkinvert">{{ _T("Invert selection") }}</a></span></td></tr>');
+            _bind_check();
+            $('#nbshow').change(function() {
+                this.form.submit();
+            });
+
+            $('.selection_menu input[type="submit"], .selection_menu button').click(function(){
+                if ( this.id == 'delete' ) {
+                    //mass removal is handled from 2 steps removal
+                    return;
+                }
+
+                return _checkselection();
+            });
+
+            $('.object_hist').on('click', function(e) {
+                e.preventDefault();
+                var _this = $(this);
+
+                $.ajax({
+                    url: _this.attr('href'),
+                    type: 'GET',
+                    datatype: 'html',
+                    {include file="../../../../templates/default/js_loader.tpl"},
+                    success: function(res){
+                        var _el = $('<div id="object_hist_window" title="{{ _T("History of object", "objectslend")|e("js") }}"></div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '60%',
+                            height: 450,
+                            close: function(event, ui){
+                                _el.remove();
+                            }
+                        }).append(res);
+                    },
+                    error: function(){
+                        alert("{{ _T("An error occurred loading history display :(", "objectslend")|e("js") }}")
+                    }
+                });
+            });
+        });
+
+    {% if login.isAdmin() or login.isStaff() %}
+            $('#objects_take_away').click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+
+                $.ajax({
+                    url: 'take_more_objects_away.php?mode=ajax',
+                    type: 'GET',
+                    data: {
+                        object_ids: get_checked_objets_ids()
+                    },
+                    datatype: 'html',
+                    {include file="../../../../templates/default/js_loader.tpl"},
+                    success: function(res){
+                        var _el = $('<div id="lend_window" title="{{ _T("Take objects", "objectslend")|e("js") }}"></div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '60%',
+                            height: 450,
+                            close: function(event, ui){
+                                _el.remove();
+                            }
+                        }).append(res);
+
+                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
+                            create: function(event, ui) {
+                                if ( $(event.target).hasClass('disabled') ) {
+                                    $(event.target).button('disable');
+                                }
+                            }
+                        });
+
+                        $('#btncancel').on('click', function(e) {
+                            e.preventDefault();
+                            $('#lend_window').dialog('close');
+                        });
+
+                        _init_takeobject_js();
+
+                    },
+                    error: function(){
+                        alert("{{ _T("An error occured loading 'Take away' display :(", "objectslend")|e("js") }}")
+                    }
+                });
+            });
+
+            $('#objects_give_back').click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+
+                $.ajax({
+                    url: 'give_more_objects_back.php?mode=ajax',
+                    type: 'GET',
+                    data: {
+                        object_ids: get_checked_objets_ids()
+                    },
+                    datatype: 'html',
+                    {include file="../../../../templates/default/js_loader.tpl"},
+                    success: function(res){
+                        var _el = $('<div id="lend_window" title="{{ _T("Give back objects", "objectslend")|e("js") }}"></div>');
+                        _el.appendTo('body').dialog({
+                            modal: true,
+                            hide: 'fold',
+                            width: '60%',
+                            height: 450,
+                            close: function(event, ui){
+                                _el.remove();
+                            }
+                        }).append(res);
+
+                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
+                            create: function(event, ui) {
+                                if ( $(event.target).hasClass('disabled') ) {
+                                    $(event.target).button('disable');
+                                }
+                            }
+                        });
+
+                        $('#btncancel').on('click', function(e) {
+                            e.preventDefault();
+                            $('#lend_window').dialog('close');
+                        });
+
+                        _init_giveobject_js();
+
+                    },
+                    error: function(){
+                        alert("{{ _T("An error occured loading 'Give back' display :(", "objectslend")|e("js") }}")
+                    }
+                });
+            });
+
+            function statusObjects(isAway) {
+                if (!$(':checkbox:checked').length) {
+                    return false;
+                }
+                var objectsIds = '';
+                $(':checkbox:checked').each(function () {
+                    objectsIds += $(this).val() + ',';
+                });
+                window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?object_ids=' + objectsIds;
+                return false;
+            }
+    {% endif %}
+{% endif %}
+</script>
+{% endblock %}

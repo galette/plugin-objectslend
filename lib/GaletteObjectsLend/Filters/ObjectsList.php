@@ -107,6 +107,17 @@ class ObjectsList extends Pagination
         $this->selected = array();
     }
 
+    public function __call($name, $arguments)
+    {
+        if (in_array($name, $this->pagination_fields)) {
+            return parent::__get($name);
+        } else {
+            if (in_array($name, $this->objectslist_fields)) {
+                return $this->$name;
+            }
+        }
+    }
+
     /**
      * Global getter method
      *
@@ -116,7 +127,6 @@ class ObjectsList extends Pagination
      */
     public function __get($name)
     {
-
         Analog::log(
             '[ObectsList] Getting property `' . $name . '`',
             Analog::DEBUG
@@ -253,11 +263,11 @@ class ObjectsList extends Pagination
      * Set commons filters for templates
      *
      * @param LendsPreferences $prefs Preferences instance
-     * @param Smarty           $view  Smarty template reference
+     * @param mixed            $view  Template reference
      *
      * @return void
      */
-    public function setViewCommonsFilters($prefs, \Smarty $view)
+    public function setViewCommonsFilters($prefs, $view)
     {
         $prefs = $prefs->getPreferences();
 
@@ -272,9 +282,6 @@ class ObjectsList extends Pagination
             $options[Objects::FILTER_DIM] = _T("Dimensions", "objectslend");
         }
 
-        $view->assign(
-            'field_filter_options',
-            $options
-        );
+        $view->getEnvironment()->addGlobal('field_filter_options', $options);
     }
 }
