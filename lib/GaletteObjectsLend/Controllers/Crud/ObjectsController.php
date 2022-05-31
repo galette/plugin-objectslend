@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-12
@@ -62,7 +62,7 @@ use Slim\Http\Response;
  * @name      ObjectsController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-12
@@ -149,8 +149,8 @@ class ObjectsController extends AbstractPluginController
         $this->session->objectslend_filter_objects = $filters;
 
         //assign pagination variables to the template and add pagination links
-        $filters->setViewCommonsFilters($lendsprefs, $this->view->getSmarty());
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewCommonsFilters($lendsprefs, $this->view);
+        $filters->setSmartyPagination($this->router, $this->view, false);
 
         $cat_filters = new CategoriesList();
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
@@ -161,7 +161,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']objects_list.tpl',
+            $this->getTemplate('objects_list'),
             array(
                 'page_title' => _T("Objects list", "objectslend"),
                 'require_dialog' => true,
@@ -385,7 +385,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']objects_edit.tpl',
+            $this->getTemplate('objects_edit'),
             $params
         );
         return $response;

@@ -57,6 +57,8 @@ use GaletteObjectsLend\Entity\CategoryPicture;
  * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property bool $is_active
  */
 class LendCategory
 {
@@ -269,7 +271,7 @@ class LendCategory
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
      * @return false|object the called property
      */
@@ -278,6 +280,7 @@ class LendCategory
         switch ($name) {
             case 'objects_price_sum':
                 return number_format($this->$name, 2, ',', '');
+            case 'is_active':
             default:
                 return $this->$name;
         }
@@ -294,5 +297,30 @@ class LendCategory
     public function __set($name, $value)
     {
         $this->$name = $value;
+    }
+
+    public function getId(): int
+    {
+        return (int)$this->category_id;
+    }
+
+    public function isActive(): bool
+    {
+        return (bool)$this->is_active;
+    }
+
+    public function getPicture(): \GaletteObjectsLend\Entity\CategoryPicture
+    {
+        return $this->picture;
+    }
+
+    public function getSum(): float
+    {
+        return $this->objects_price_sum;
+    }
+
+    public function getObjectsNb(): int
+    {
+        return $this->objects_nb;
     }
 }

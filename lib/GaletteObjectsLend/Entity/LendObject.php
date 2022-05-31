@@ -40,7 +40,6 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use Laminas\Db\Sql\Predicate;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
@@ -244,7 +243,7 @@ class LendObject
         } else {
             $this->cat_active = false;
         }
-        if (property_exists($r, 'cat_name') && trim($r->cat_name) != '') {
+        if (property_exists($r, 'cat_name') && $r->cat_name) {
             $this->cat_name = $r->cat_name;
         }
         $this->category_id = $r->category_id;
@@ -465,30 +464,9 @@ class LendObject
     public function __get($name)
     {
         switch ($name) {
-            case 'date_begin_ihm':
-                if ($this->date_begin == '' || $this->date_begin == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_begin);
-                return $dtb->format('j M Y');
-            case 'date_begin_short':
-                if ($this->date_begin == '' || $this->date_begin == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_begin);
-                return $dtb->format('d/m/Y');
-            case 'date_forecast_ihm':
-                if ($this->date_forecast == '' || $this->date_forecast == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_forecast);
-                return $dtb->format('j M Y');
-            case 'date_forecast_short':
-                if ($this->date_forecast == '' || $this->date_forecast == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_forecast);
-                return $dtb->format('d/m/Y');
+            case 'date_begin':
+            case 'date_forecast':
+                return $this->getDateField($name);
             case 'price':
             case 'rent_price':
                 return number_format($this->$name, 2, ',', ' ');
@@ -602,7 +580,7 @@ class LendObject
             return $this->$field;
         }
 
-        $untokenized = trim($filters->filter_str, '%');
+        $untokenized = trim($filters->filter_str ?? '', '%');
         mb_internal_encoding('UTF-8');
         return preg_replace(
             '/(' . $untokenized . ')/iu',
@@ -699,5 +677,90 @@ class LendObject
         //unset image
         $this->picture = new ObjectPicture($this->plugins);
         return $this->store();
+    }
+
+    public function getId(): int
+    {
+        return (int)$this->object_id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getPicture(): ObjectPicture
+    {
+        return $this->picture;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function getRentPrice(): float
+    {
+        return $this->rent_price;
+    }
+
+    public function isPricePerDay(): bool
+    {
+        return $this->price_per_day;
+    }
+
+    public function getWeight(): float
+    {
+        return $this->weight;
+    }
+
+    public function getStatusText()
+    {
+        return $this->status_text;
+    }
+
+    public function inStock(): bool
+    {
+        return $this->in_stock;
+    }
+
+    public function getDateBegin(): string
+    {
+        return $this->getDateField('date_begin');
+    }
+
+    public function getDateFOrecast(): string
+    {
+        return $this->getDateField('date_forecast');
+    }
+
+    public function getIdAdh()
+    {
+        return $this->id_adh;
+    }
+
+    public function getRentId()
+    {
+        return $this->rent_id;
+    }
+
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    public function getSerialNumber()
+    {
+        return $this->serial_number;
+    }
+
+    protected function getDateField($name): string
+    {
+        $date = $this->$name;
+        if ($date == '' || $date == null) {
+            return '';
+        }
+        $datetime = new \DateTime($date);
+        return $datetime->format(_T('Y-m-d'));
     }
 }

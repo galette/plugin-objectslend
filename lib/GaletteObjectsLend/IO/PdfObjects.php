@@ -236,9 +236,9 @@ class PdfObjects extends Pdf
             $this->Cell($w_dimension, 0, $this->cut($object->dimension, $w_dimension), 'B', 0, 'L', $fill);
             $this->Cell($w_weight, 0, $this->cut($object->weight, $w_weight), 'B', 0, 'R', $fill);
             $this->Cell($w_status, 0, $this->cut($object->status_text, $w_status), 'B', 0, 'L', $fill);
-            $this->Cell($w_date, 0, $this->cut($object->date_begin_short, $w_date), 'B', 0, 'L', $fill);
+            $this->Cell($w_date, 0, $this->cut($object->date_begin, $w_date), 'B', 0, 'L', $fill);
             $this->Cell($w_adherent, 0, $this->cut($object->nom_adh . ' ' . $object->prenom_adh, $w_adherent), 'B', 0, 'L', $fill);
-            $this->Cell($w_date, 0, $this->cut($object->date_forecast_short, $w_date), 'B', 1, 'L', $fill);
+            $this->Cell($w_date, 0, $this->cut($object->date_forecast, $w_date), 'B', 1, 'L', $fill);
 
             if ($this->login->isAdmin() || $this->login->isStaff()) {
                 $sum_price += (float)str_replace(array(',', ' '), array('.', ''), $object->price);
