@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 22:05+0100\n"
-"PO-Revision-Date: 2022-05-29 23:13+0000\n"
+"PO-Revision-Date: 2022-06-02 13:14+0000\n"
 "Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
@@ -129,7 +129,7 @@ msgstr "Будь ласка, додайте хоча б один стан \"в �
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr ""
+msgstr "Будь ласка, додайте хоча б один статус \"об'єкт позичено\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
@@ -246,7 +246,7 @@ msgstr "Доступно"
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:79
 msgid "object_card"
-msgstr "object_card"
+msgstr "картка_об'єкта"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:91
 msgid "Object card"
