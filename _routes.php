@@ -177,7 +177,7 @@ $this->get(
 
 $this->post(
     '/object/add',
-    [ObjectsController::class, 'add']
+    [ObjectsController::class, 'doAdd']
 )->setName('objectslend_object_action_add')->add($authenticate);
 
 $this->post(
