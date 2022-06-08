@@ -150,7 +150,7 @@ class ObjectsController extends AbstractPluginController
 
         //assign pagination variables to the template and add pagination links
         $filters->setViewCommonsFilters($lendsprefs, $this->view);
-        $filters->setSmartyPagination($this->router, $this->view, false);
+        $filters->setViewPagination($this->router, $this->view, false);
 
         $cat_filters = new CategoriesList();
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories

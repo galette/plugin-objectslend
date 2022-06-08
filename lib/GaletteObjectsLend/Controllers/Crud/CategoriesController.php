@@ -132,7 +132,7 @@ class CategoriesController extends AbstractPluginController
         $this->session->objectslend_filter_categories = $filters;
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->router, $this->view->getSmarty(), false);
 
         $lendsprefs = new Preferences($this->zdb);
         // display page
