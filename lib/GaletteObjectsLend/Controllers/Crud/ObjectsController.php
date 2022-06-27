@@ -260,7 +260,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']list_lent_object.tpl',
+            $this->getTemplate('list_lend_object'),
             $params
         );
         return $response;
@@ -676,7 +676,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']take_object.tpl',
+            $this->getTemplate('take_object'),
             $params
         );
         return $response;

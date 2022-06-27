@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-12
@@ -52,7 +52,7 @@ use Slim\Http\Response;
  * @name      CategoriesController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -151,7 +151,7 @@ class StatusController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']status_list.tpl',
+            $this->getTemplate('status_list'),
             array(
                 'page_title'            => _T("Status list", "objectslend"),
                 'require_dialog'        => true,
@@ -259,7 +259,7 @@ class StatusController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']status_edit.tpl',
+            $this->getTemplate('status_edit'),
             $params
         );
         return $response;
