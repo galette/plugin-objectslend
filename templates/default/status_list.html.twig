@@ -33,27 +33,73 @@
 {% endblock %}
 
 {% block search %}
-    <form id="filtre" method="POST" action="{path_for name="objectslend_filter_statuses"}" class="ui form">
-        <div id="listfilter">
-            <label for="filter_str">{{ _T("Search:") }}&nbsp;</label>
-            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{{ _T("Enter a value") }}"/>&nbsp;
-            {{ _T("Active:", "objectslend") }}
-            <input type="radio" name="active_filter" id="filter_dc_active" value="{GaletteObjectsLend\Repository\Status::ALL}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::ALL')} checked="checked"{/if}>
-            <label for="filter_dc_active" >{{ _T("Don't care") }}</label>
-            <input type="radio" name="active_filter" id="filter_yes_active" value="{GaletteObjectsLend\Repository\Status::ACTIVE}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::ACTIVE')} checked="checked"{/if}>
-            <label for="filter_yes_active" >{{ _T("Yes") }}</label>
-            <input type="radio" name="active_filter" id="filter_no_active" value="{GaletteObjectsLend\Repository\Status::INACTIVE}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::INACTIVE')} checked="checked"{/if}>
-            <label for="filter_no_active" >{{ _T("No") }}</label>
-            {{ _T("In stock:", "objectslend") }}
-            <input type="radio" name="stock_filter" id="filter_dc_stock" value="{GaletteObjectsLend\Repository\Status::DC_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::DC_STOCK')} checked="checked"{/if}>
-            <label for="filter_dc_stock" >{{ _T("Don't care") }}</label>
-            <input type="radio" name="stock_filter" id="filter_yes_stock" value="{GaletteObjectsLend\Repository\Status::IN_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::IN_STOCK')} checked="checked"{/if}>
-            <label for="filter_yes_stock" >{{ _T("Yes") }}</label>
-            <input type="radio" name="stock_filter" id="filter_no_stock" value="{GaletteObjectsLend\Repository\Status::OUT_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::OUT_STOCK')} checked="checked"{/if}>
-            <label for="filter_no_stock" >{{ _T("No") }}</label>
-            <input type="submit" class="inline" value="{{ _T("Filter") }}"/>
-            <input name="clear_filter" type="submit" value="{{ _T("Clear filter") }}">
+    <form action="{{ path_for("objectslend_filter_statuses") }}" method="post" id="filtre" class="ui form">
+        <div class="ui segment">
+            <div class="ui three fields">
+                <div class="field">
+                    <label for="event_filter">{{_T("Search:") }}</label>
+                    <input type="text" name="filter_str" id="filter_str" value="{{ filters.filter_str }}" type="search" placeholder="{{ _T("Enter a value") }}"/>
+                </div>
+                <div class="field">
+                    <div class="inline fields">
+                        <label for="email_filter">{{ _T("Active:", "objectslend") }}</label>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Status::ALL')}}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::ALL') %} checked="checked"{% endif %}>
+                                <label for="filter_dc_active" >{{ _T("Don't care") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_yes_active" value="{{ constant('GaletteObjectsLend\\Repository\\Status::ACTIVE') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::ACTIVE') %} checked="checked"{% endif %}>
+                                <label for="filter_yes_active" >{{ _T("Yes") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_no_active" value="{{ constant('GaletteObjectsLend\\Repository\\Status::INACTIVE') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::INACTIVE') %} checked="checked"{% endif %}>
+                                <label for="filter_no_active" >{{ _T("No") }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="inline fields">
+                        <label for="email_filter">{{ _T("In stock:", "objectslend") }}</label>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="stock_filter" id="filter_dc_stock" value="{{ constant('GaletteObjectsLend\\Repository\\Status::DC_STOCK')}}"{% if filters.stock_filter == constant('GaletteObjectsLend\\Repository\\Status::DC_STOCK') %} checked="checked"{% endif %}>
+                                <label for="filter_dc_stock" >{{ _T("Don't care") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="stock_filter" id="filter_yes_stock" value="{{ constant('GaletteObjectsLend\\Repository\\Status::IN_STOCK') }}"{% if filters.stock_filter == constant('GaletteObjectsLend\\Repository\\Status::IN_STOCK') %} checked="checked"{% endif %}>
+                                <label for="filter_yes_stock" >{{ _T("Yes") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="stock_filter" id="filter_no_stock" value="{{ constant('GaletteObjectsLend\\Repository\\Status::OUT_STOCK') }}"{% if filters.stock_filter == constant('GaletteObjectsLend\\Repository\\Status::OUT_STOCK') %} checked="checked"{% endif %}>
+                                <label for="filter_no_stock" >{{ _T("No") }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui right aligned basic fitted segment field flexend">
+                <button type="submit"  class="tooltip action ui labeled icon primary button" title="{{ _T('Apply filters') }}" name="filter">
+                    <i class="search icon"></i>
+                    {{ _T('Filter') }}
+                </button>
+                <button type="submit" name="clear_filter" class="ui labeled icon button" title="{{ _T('Reset all filters to defaults') }}">
+                    <i class="trash alt red icon" aria-hidden="true"></i>
+                    {{ _T('Clear filter') }}
+                </button>
+            </div>
         </div>
+        {% include "components/forms/csrf.html.twig" %}
     </form>
 {% endblock %}
 
