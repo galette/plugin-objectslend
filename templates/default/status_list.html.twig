@@ -1,0 +1,123 @@
+{% extends 'elements/list.html.twig' %}
+
+{% set nb = nb_status %}
+
+{% set form = {
+    'order': {
+        'name': "objectslend_statuses"
+    }
+} %}
+
+{% import "macros.twig" as macros %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count status", "%count statuses", nb)|replace({"%count": nb}),
+        'route': {
+            'name': 'objectslend_filter_statuses'
+        }
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#', order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_ID')},
+        {'label': _T("Status", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_NAME')},
+        {'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_ACTIVE')},
+        {'label': _T("Stock", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_STOCK')},
+        {'label': _T("Days for rent", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_RENTDAYS')}
+    ] %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block search %}
+    <form id="filtre" method="POST" action="{path_for name="objectslend_filter_statuses"}" class="ui form">
+        <div id="listfilter">
+            <label for="filter_str">{{ _T("Search:") }}&nbsp;</label>
+            <input type="text" name="filter_str" id="filter_str" value="{$filters->filter_str}" type="search" placeholder="{{ _T("Enter a value") }}"/>&nbsp;
+            {{ _T("Active:", "objectslend") }}
+            <input type="radio" name="active_filter" id="filter_dc_active" value="{GaletteObjectsLend\Repository\Status::ALL}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::ALL')} checked="checked"{/if}>
+            <label for="filter_dc_active" >{{ _T("Don't care") }}</label>
+            <input type="radio" name="active_filter" id="filter_yes_active" value="{GaletteObjectsLend\Repository\Status::ACTIVE}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::ACTIVE')} checked="checked"{/if}>
+            <label for="filter_yes_active" >{{ _T("Yes") }}</label>
+            <input type="radio" name="active_filter" id="filter_no_active" value="{GaletteObjectsLend\Repository\Status::INACTIVE}"{if $filters->active_filter eq constant('GaletteObjectsLend\Repository\Status::INACTIVE')} checked="checked"{/if}>
+            <label for="filter_no_active" >{{ _T("No") }}</label>
+            {{ _T("In stock:", "objectslend") }}
+            <input type="radio" name="stock_filter" id="filter_dc_stock" value="{GaletteObjectsLend\Repository\Status::DC_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::DC_STOCK')} checked="checked"{/if}>
+            <label for="filter_dc_stock" >{{ _T("Don't care") }}</label>
+            <input type="radio" name="stock_filter" id="filter_yes_stock" value="{GaletteObjectsLend\Repository\Status::IN_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::IN_STOCK')} checked="checked"{/if}>
+            <label for="filter_yes_stock" >{{ _T("Yes") }}</label>
+            <input type="radio" name="stock_filter" id="filter_no_stock" value="{GaletteObjectsLend\Repository\Status::OUT_STOCK}"{if $filters->stock_filter eq constant('GaletteObjectsLend\Repository\Status::OUT_STOCK')} checked="checked"{/if}>
+            <label for="filter_no_stock" >{{ _T("No") }}</label>
+            <input type="submit" class="inline" value="{{ _T("Filter") }}"/>
+            <input name="clear_filter" type="submit" value="{{ _T("Clear filter") }}">
+        </div>
+    </form>
+{% endblock %}
+
+{% block body %}
+    {% for status in statuses %}
+        <tr class="{if $status@index is odd}even{else}odd{/if}">
+            <td>
+                {{ status.status_id }}
+            </td>
+            <td>
+                {{ status.status_text }}
+            </td>
+            <td class="center {if $status->is_active}use{else}delete{/if}">
+                {% if status.is_active %}
+                    <i class="thumbs up icon"></i>
+                    <span class="sr-only">{{ _T("Active", "objectslend") }}</span>
+                {% else %}
+                    <i class="thumbs down icon"></i>
+                    <span class="sr-only">{{ _T("Inactive", "objectslend") }}</span>
+                {% endif %}
+            </td>
+            <td class="center {if $status->in_stock}use{else}delete{/if}">
+                {% if status.in_stock %}
+                    <i class="thumbs up icon"></i>
+                    <span class="sr-only">{{ _T("In stock", "objectslend") }}</span>
+                {% else %}
+                    <i class="thumbs down icon"></i>
+                    <span class="sr-only">{{ _T("Not in stock", "objectslend") }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if status.rent_day_number %}
+                    {{ _T("%days days", "objectslend")|replace({'%days': status.rent_day_number}) }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td class="center nowrap">
+                {% set actions = [
+                    {
+                        'label': _T("Edit %status", "objectslend")|replace({'%status': status.status_text}),
+                        'route': {
+                            'name': 'objectslend_status_edit',
+                            'args': {'id': status.status_id}
+                        },
+                        'icon': 'edit'
+                    },
+                    {
+                        'label': _T("Remove %status from database", "objectslend")|replace({ '%status': status.status_text }),
+                        'route': {
+                        'name': 'objectslend_remove_status',
+                            'args': {'id': status.status_id}
+                        },
+                        'icon': 'trash red',
+                        'extra_class': 'delete'
+                    }
+                ] %}
+
+                {% for action in actions %}
+                    {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class ?? '') }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{{ _T("No status has been found", "objectslend") }}</td></tr>
+    {% endfor %}
+{% endblock %}
