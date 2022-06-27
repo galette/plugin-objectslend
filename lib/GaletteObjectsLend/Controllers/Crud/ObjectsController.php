@@ -278,14 +278,14 @@ class ObjectsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        if (isset($post['object_ids'])) {
+        if (isset($post['entries_sel'])) {
             if (isset($this->session->objectslend_filter_objects)) {
                 $filters = $this->session->objectslend_filter_objects;
             } else {
                 $filters = new ObjectsList();
             }
 
-            $filters->selected = $post['object_ids'];
+            $filters->selected = $post['entries_sel'];
             $this->session->objectslend_filter_objects = $filters;
 
             if (isset($post['delete'])) {

@@ -68,7 +68,7 @@ class PluginGaletteObjectslend extends GalettePlugin
 
         $menus['galetteplugin_objectslends'] = [
             'title' => _T("Objects lend", "objectslend"),
-            'icon' => '',
+            'icon' => 'briefcase',
             'items' => [
                 [
                     'label' => _T("Objects list", "objectslend"),
@@ -148,16 +148,7 @@ class PluginGaletteObjectslend extends GalettePlugin
      */
     public static function getPublicMenusItemsList(): array
     {
-        return [
-            /*[
-                'label' => _T("Maps", "maps"),
-                'title' => _T("Maps", "maps"),
-                'route' => [
-                    'name' => 'maps_map'
-                ],
-                'icon' => 'map'
-            ]*/
-        ];
+        return [];
     }
 
     /**
@@ -167,24 +158,7 @@ class PluginGaletteObjectslend extends GalettePlugin
      */
     public static function getDashboardsContents(): array
     {
-        /** @var Login $login */
-        global $login;
-
-        if ($login->isSuperAdmin()) {
-            return [];
-        }
-
-        return [
-            /*[
-                'label' => _T("My localization", "maps"),
-                'title' => _T("My localization", "maps"),
-                'route' => [
-                    'name' => 'maps_localize_member',
-                    'args' => ["id" => $login->id]
-                ],
-                'icon' => 'map'
-            ]*/
-        ];
+        return [];
     }
 
     /**
@@ -194,21 +168,7 @@ class PluginGaletteObjectslend extends GalettePlugin
      */
     public static function getListActionsContents(Adherent $member): array
     {
-        return [
-            /*[
-                'label' => _T("Geolocalize", "maps"),
-                'title' => str_replace(
-                    '%membername',
-                    $member->sname,
-                    _T("Geolocalize %membername","maps")
-                ),
-                'route' => [
-                    'name' => 'maps_localize_member',
-                    'args' => ['id' => $member->id]
-                ],
-                'icon' => 'map grey'
-            ],*/
-        ];
+        return [];
     }
 
     /**
