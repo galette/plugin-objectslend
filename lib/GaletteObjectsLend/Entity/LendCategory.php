@@ -9,7 +9,7 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -54,7 +54,7 @@ use GaletteObjectsLend\Entity\CategoryPicture;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  *
@@ -322,5 +322,17 @@ class LendCategory
     public function getObjectsNb(): int
     {
         return $this->objects_nb;
+    }
+
+    /**
+     * Generic isset function
+     *
+     * @param $name Property name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return property_exists($this, $name);
     }
 }
