@@ -1,0 +1,320 @@
+{% extends 'page.html.twig' %}
+
+{% block content %}
+<form action="{% if takeorgive == 'take' %}{{ path_for("objectslend_object_dotake", {"id": object.object_id}) }}{% else %}{{ path_for("objectslend_object_doreturn", {"id": object.object_id}) }}{% endif %}" method="post" id="form_take_object" class="ui form">
+    <div class="ui styled fluid accordion field">
+        <div class="active title">
+            <i class="icon dropdown"></i>
+            {{ _T("Object", "objectslend") }}
+        </div>
+        <div class="active content">
+            <div class="inline field">
+                <label>{{ _T("Name:", "objectslend") }}</label>
+                {{ object.name }}
+                <img src="{% if object.object_id %}{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
+                class="picture fright"
+                width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
+                height="{{ object.picture.getOptimalThumbHeight(olendsprefs)}}"
+                alt="{{ _T("Object photo", "objectslend") }}"/>
+            </div>
+
+    {% if lendsprefs.VIEW_DESCRIPTION %}
+            <div class="inline field">
+                <label>{{ _T("Description:", "objectslend") }}</label>
+                {{ object.description }}
+            </div>
+    {% endif %}
+
+    {% if lendsprefs.VIEW_SERIAL %}
+            <div class="inline field">
+                <label>{{ _T("Serial number:", "objectslend") }}</label>
+                {{ object.serial_number }}
+            </div>
+    {% endif %}
+
+    {% if lendsprefs.VIEW_PRICE %}
+            <div class="inline field">
+                <label>{{ _T("Price:", "objectslend") }}</label>
+                {{ object.price }} {{ object.currency }}
+            </div>
+    {% endif %}
+
+    {% if lendsprefs.VIEW_DIMENSION %}
+            <div class="inline field">
+                <label>{{ _T("Dimensions:", "objectslend") }}</label>
+                {% if object.dimension != '' %}
+                    {{ object.dimension }} {{ _T("Cm", "objectslend") }}
+                {% else %}
+                -
+                {% endif %}
+            </div>
+    {% endif %}
+
+    {% if lendsprefs.VIEW_WEIGHT %}
+            <div class="inline field">
+                <label>{{ _T("Weight:", "objectslend") }}</label>
+                {% if object.weight != '' %}
+                    {{ object.weight }} {{ _T("Kg", "objectslend") }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+    {% endif %}
+
+            <div class="inline field">
+                <label>{{ _T("Borrow price:", "objectslend") }}</label>
+                {% if takeorgive == 'take' and (login.isAdmin() or login.isStaff()) %}
+                    <input type="text" name="rent_price" id="rent_price" value="{{ object.rent_price }}" size="10"> {{ object.currency }}
+                {% else %}
+                    <input type="hidden" name="rent_price" id="rent_price" value="{{ object.rent_price }}">
+                    <span id="rent_price_label">{{ object.rent_price }}</span> {{ object.currency }}
+                {% endif %}
+
+                {% if object.price_per_day %}
+                    {{ _T("(per day)", "objectslend") }}
+                {% else %}
+                    {{ _T("(at once)", "objectslend") }}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    {% if takeorgive == 'take' %}
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Borrow information", "objectslend") }}
+            </div>
+            <div class="active content">
+                {% if login.isAdmin() or login.isStaff() %}
+                <div class="inline field">
+                    <label for="id_adh">{{ _T("Member:", "objectslend") }}</label>
+                    <select name="id_adh" id="id_adh" class="nochosen">
+                        <option value="">{{ _T("Search for name or ID and pick member") }}</option>
+                        {% for k, v in members.list %}
+                            <option value="{{ k }}"{% if login.id == k %} selected="selected"{% endif %}>{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+
+                <div class="inline field">
+                    {% set state_list_values = {(-1): _T("--- Select a status ---", "objectslend")} %}
+                    {% for sta in statuses %}
+                        {% set text = sta.status_text %}
+                        {% if sta.rent_day_number != '' %}
+                            {% set text = text ~ ' (' ~ _T("%days days", "objectslend")|replace({'%days': sta.rent_day_number}) ~ ')' %}
+                        {% endif %}
+                        {% set state_list_values = state_list_values + {(sta.status_id): text} %}
+                    {% endfor %}
+
+                    {% include "components/forms/select.html.twig" with {
+                        id: 'status',
+                        value: '',
+                        values: state_list_values,
+                        label: _T("Status:", "objectslend")
+                    } %}
+
+                    <span class="bline">{{ _T("Status:", "objectslend") }}</span>
+                    <select name="status" id="status">
+                        <option value="null">{{ _T("--- Select a status ---", "objectslend") }}</option>
+                        {foreach from=$statuses item=sta}
+                        <option value="{$sta->status_id}" data-days="{$sta->rent_day_number}">
+                            {$sta->status_text}
+                            {if $sta->rent_day_number ne ''}
+                            ({_T string="%days days" domain="objectslend" pattern="/%days/" replace=$sta->rent_day_number})
+                            {/if}
+                        </option>
+                        {/foreach}
+                    </select>
+                </div>
+
+                <div class="inline field">
+                    {% include "components/forms/date.html.twig" with {
+                        id: 'expected_return',
+                        value: date_forecast,
+                        label: _T("Expected return:", "objectslend")
+                    } %}
+                </div>
+
+                {% if lendsprefs.AUTO_GENERATE_CONTRIBUTION %}
+                <div class="inline field">
+                    {% include "components/forms/payment_types.html.twig" with {
+                        show_inline: true,
+                        current: contribution.payment_type,
+                        varname: "payment_type"
+                    } %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else  %}
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Return information", "objectslend") }}
+            </div>
+            <div class="active content">
+                <div class="inline field">
+                    {% set state_list_values = {(-1): _T("--- Select a status ---", "objectslend")} %}
+                    {% for sta in statuses %}
+                        {% set state_list_values = state_list_values + {(sta.status_id): sta.status_text} %}
+                    {% endfor %}
+
+                    {% include "components/forms/select.html.twig" with {
+                        id: 'status',
+                        value: '',
+                        values: state_list_values,
+                        label: _T("Status:", "objectslend")
+                    } %}
+                </div>
+
+                <div class="inline field">
+                    <label>{{ _T("Time:", "objectslend") }}</label>
+                    {{ _T("From %begindate to %enddate", "objectslend")|replace({"%begindate": last_rent.date_begin, "%enddate": "now"|date(_T("Y-m-d"))}) }}
+                </div>
+                <div>
+                    {% include "components/forms/textarea.html.twig" with {
+                        id: 'comments',
+                        value: '',
+                        label: _T("Comments:", "objectslend")
+                    } %}
+                    <span class="exemple"><span id="remaining">200</span> {{ _T("remaining characters", "objectslend") }}</span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if takeorgive == 'take' %}
+    <div class="disclaimer center">
+        <input type="checkbox" name="agreement" id="agreement" value="1" required="required"/>
+        <label for="agreement">{{ _T("I have read and I agree with terms and conditions", "objectslend") }}</label>
+        <span class="show_agreement" title="{{ _T("Show terms and conditions", "objectslend") }}">
+
+        <img src="{base_url}/{$template_subdir}images/icon-down.png" alt="{{ _T("Show terms and conditions", "objectslend") }}"/></span>
+        <div id="terms_conditions" class="left">{{ _T("The items offered for rent are in good condition and verification rental contradictory to their status is at the time of withdrawal. No claims will be accepted after the release of the object. Writing by the store a list of reservation does not exempt the customer checking his retrait. The payment of rent entitles the purchaser to make normal use of the loaned object. If the object is rendered in a degraded state, the seller reserves the right to collect all or part of the security deposit. In case of deterioration of the rented beyond the standard object, a financial contribution will be required for additional cleaning caused. In case of damage, loss or theft of the rented property, the deposit will not be refunded automatically to 'the company as damages pursuant to Article 1152 of the Civil Code and without that it need for any other judicial or extra-judicial formality. In some other cases not listed above and at the discretion of the seller, the deposit check may also be collected in whole or party.", "objectslend") }}</div>
+    </div>
+    {% endif %}
+
+    <div class="ui basic center aligned fitted segment">
+        <button type="submit" name="valid" class="action ui labeled icon primary button">
+            <i class="save icon"></i> {% if takeorgive == 'take' %}{{ _T("Borrow object", "objectslend") }}{% else %}{{ _T("Return object", "objectslend") }}{% endif %}
+        </button>
+        <input type="hidden" name="mode" value="{% if ajax %}ajax{% endif %}"/>
+        {% include "components/forms/csrf.html.twig" %}
+    </div>
+</form>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    {% include "elements/js/choose_adh.js.twig" %}
+
+{% if takeorgive == 'take' %}
+    var _init_takeobject_js = function() {
+        $('#btnsave').button('disable');
+
+    {% if olendsprefs.showFullsize() %}
+        _init_fullimage();
+    {% endif %}
+
+        $('#id_adh, #status, #payment_type').on('change',function() {
+            validStatus()
+        });
+
+        $('#btnsave').on('click', function(e) {
+            if (!$('#agreement').is(':checked')) {
+                e.preventDefault();
+                alert('{{ _T("You must agree with terms and conditions in order to take.", "objectslend")|e('js') }}');
+            }
+        });
+
+        $('#terms_conditions').hide();
+        $('.show_agreement').on('click', function() {
+            $('#terms_conditions').toggle();
+        });
+    }
+
+    {% if not ajax %}
+    $(function () {
+        _init_takeobject_js();
+    });
+    {% endif %}
+
+    function completeZero(n) {
+        return n < 10 ? '0' + n : n;
+    }
+
+    function validStatus() {
+        var _disabled = false;
+        if ($('#status').val() === 'null') {
+            _disabled = true;
+        }
+        if ($('#id_adh').val() === 'null') {
+            _disabled = true;
+        }
+        if ($('#payment_type').val() === 'null') {
+            _disabled = true;
+        }
+
+        var _lyes = $('#btnsave');
+        if (_disabled) {
+            _lyes.button('disable');
+        } else {
+            _lyes.button('enable');
+        }
+
+        var days = $('#status option:selected').data('days');
+        if (typeof days == "undefined" || days == 'null') {
+            return;
+        }
+
+        if (days.length === 0) {
+            var text = "{{ object.rent_price }}";
+            $('#rent_price').val(text);
+            $('#rent_price_label').html(text);
+            return;
+        }
+
+        if ('1' === '{{ object.price_per_day }}') {
+            var price_per_day = {{ object.price_per_day }} * parseInt(days);
+            var text = price_per_day.toFixed(2).replace(".", ",");
+            $('#rent_price').val(text);
+            $('#rent_price_label').html(text);
+        }
+    }
+{% else %}
+    var _init_giveobject_js = function() {
+        $('#btnsave').button('disable');
+
+        $('#comments').keyup(function() {
+            if ($('#comments').val().length > 200) {
+                $('#comments').val($('#comments').val().substr(0, 200));
+            }
+            $('#remaining').text(200 - $('#comments').val().length);
+        });
+
+        $('#status').on('change',function() {
+            validStatus()
+        });
+    }
+
+    {if not $ajax}
+    $(function () {
+        _init_giveobject_js();
+    });
+    {/if}
+
+    function validStatus() {
+        var _lyes = $('#btnsave');
+        if ($('#status').val() === 'null') {
+            _lyes.button('disable');
+        } else {
+            _lyes.button('enable');
+        }
+    }
+
+{% endif %}
+</script>
+{% endblock %}

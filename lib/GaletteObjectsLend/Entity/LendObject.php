@@ -763,4 +763,16 @@ class LendObject
         $datetime = new \DateTime($date);
         return $datetime->format(_T('Y-m-d'));
     }
+
+    /**
+     * Generic isset function
+     *
+     * @param $name Property name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return property_exists($this, $name);
+    }
 }

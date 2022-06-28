@@ -260,7 +260,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            $this->getTemplate('list_lend_object'),
+            $this->getTemplate('list_lent_object'),
             $params
         );
         return $response;
@@ -579,7 +579,11 @@ class ObjectsController extends AbstractPluginController
         $lendsprefs = new Preferences($this->zdb);
 
         $params = [
-            'page_title'    => _T("Borrow an object", "objectslend"),
+            'page_title'    => ($action == 'take' ?
+                _T("Borrow an object", "objectslend") :
+                _T("Return a borrowed object", "objectslend")
+
+            ),
             'time'          => time(),
             'statuses'      => ($action == 'take' ?
                 LendStatus::getActiveTakeAwayStatuses($this->zdb) :
