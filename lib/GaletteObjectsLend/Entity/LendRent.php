@@ -414,4 +414,16 @@ class LendRent
                 break;
         }
     }
+
+    /**
+     * Generic isset function
+     *
+     * @param $name Property name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return property_exists($this, $name);
+    }
 }

@@ -1,0 +1,43 @@
+{% extends 'elements/list.html.twig' %}
+
+{% set nb = rents|length %}
+{% set no_action = true %}
+{% set is_paginated = false %}
+
+{% block infoline %}
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': _T("Id", "objectslend")},
+        {'label': _T("Status", "objectslend")},
+        {'label': _T("Begin date", "objectslend")},
+        {'label': _T("End date", "objectslend")},
+        {'label': _T("Return", "objectslend")},
+        {'label': _T("Name", "objectslend")},
+        {'label': _T("Comments", "objectslend")},
+    ] %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% set dformat = _T("Y-m-d") %}
+    {% for rent in rents %}
+        <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
+            <td>{{ rent.rent_id }}</td>
+            <td>{{ rent.status_text }}{% if rent.in_stock %} ({{ _T("In stock", "objectslend") }}){% endif %}</td>
+            <td>{{ rent.date_begin }}</td>
+            <td>{{ rent.date_forecast }}</td>
+            <td>{{ rent.date_end }}</td>
+            <td>
+                {{ rent.nom_adh }} {{ rent.prenom_adh }}
+            </td>
+            <td>{{ rent.comments }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7" class="center">{{ _T("No lend found", "objectslend") }}</td>
+        </tr>
+    {% endfor %}
+{% endblock %}
