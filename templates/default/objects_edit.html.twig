@@ -141,9 +141,8 @@
                 <i class="print icon"></i> {{ _T("Print object", "objectslend") }}
             </a>
     {% endif %}
-
+            <input type="hidden" name="object_id" value="{{ object.getId()}}">
         </div>
-        <input type="hidden" name="object_id" value="{{ object.getId()}}">
         {% include "components/forms/csrf.html.twig" %}
     </form>
 
