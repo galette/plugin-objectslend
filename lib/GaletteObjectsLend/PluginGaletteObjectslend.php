@@ -164,6 +164,8 @@ class PluginGaletteObjectslend extends GalettePlugin
     /**
      * Get actions contents
      *
+     * @param Adherent $member Member instance
+     *
      * @return array|array[]
      */
     public static function getListActionsContents(Adherent $member): array
@@ -173,6 +175,8 @@ class PluginGaletteObjectslend extends GalettePlugin
 
     /**
      * Get detailed actions contents
+     *
+     * @param Adherent $member Member instance
      *
      * @return array|array[]
      */

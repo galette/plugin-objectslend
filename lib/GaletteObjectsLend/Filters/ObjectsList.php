@@ -107,15 +107,20 @@ class ObjectsList extends Pagination
         $this->selected = array();
     }
 
-    public function __call($name, $arguments)
+    /**
+     * Default isset
+     *
+     * @param string $name Property name
+     *
+     * @return object|void
+     */
+    public function __isset($name)
     {
-        if (in_array($name, $this->pagination_fields)) {
-            return parent::__get($name);
-        } else {
-            if (in_array($name, $this->objectslist_fields)) {
-                return $this->$name;
-            }
+        if (in_array($name, $this->objectslist_fields)) {
+            return true;
         }
+
+        return parent::__isset($name);
     }
 
     /**

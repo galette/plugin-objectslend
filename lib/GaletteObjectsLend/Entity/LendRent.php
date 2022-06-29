@@ -58,7 +58,6 @@ use Galette\Repository\Members;
  */
 class LendRent
 {
-
     public const TABLE = 'rents';
     public const PK = 'rent_id';
 
