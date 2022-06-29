@@ -679,81 +679,166 @@ class LendObject
         return $this->store();
     }
 
+    /**
+     * Get ID
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return (int)$this->object_id;
     }
 
+    /**
+     * Get name
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Get picture
+     *
+     * @return ObjectPicture
+     */
     public function getPicture(): ObjectPicture
     {
         return $this->picture;
     }
 
+    /**
+     * Get price
+     *
+     * @return float
+     */
     public function getPrice(): float
     {
         return $this->price;
     }
 
+    /**
+     * Get rent price
+     *
+     * @return float
+     */
     public function getRentPrice(): float
     {
         return $this->rent_price;
     }
 
+    /**
+     * Is a price per day
+     *
+     * @return bool
+     */
     public function isPricePerDay(): bool
     {
         return $this->price_per_day;
     }
 
+    /**
+     * Get weight
+     *
+     * @return float
+     */
     public function getWeight(): float
     {
         return $this->weight;
     }
 
+    /**
+     * Get textual status
+     *
+     * @return mixed
+     */
     public function getStatusText()
     {
         return $this->status_text;
     }
 
+    /**
+     * Is in stock
+     *
+     * @return bool
+     */
     public function inStock(): bool
     {
         return $this->in_stock;
     }
 
+    /**
+     * Get localized begin date
+     *
+     * @return string
+     * @throws \Exception
+     */
     public function getDateBegin(): string
     {
         return $this->getDateField('date_begin');
     }
 
-    public function getDateFOrecast(): string
+    /**
+     * Get localized forecast date
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getDateForecast(): string
     {
         return $this->getDateField('date_forecast');
     }
 
+    /**
+     * Get member ID
+     *
+     * @return mixed
+     */
     public function getIdAdh()
     {
         return $this->id_adh;
     }
 
+    /**
+     * Get rent ID
+     *
+     * @return mixed
+     */
     public function getRentId()
     {
         return $this->rent_id;
     }
 
+    /**
+     * Get category ID
+     *
+     * @return mixed
+     */
     public function getCategoryId()
     {
         return $this->category_id;
     }
 
+    /**
+     * Get serial number
+     *
+     * @return string
+     */
     public function getSerialNumber()
     {
         return $this->serial_number;
     }
 
+    /**
+     * Get localized date field
+     *
+     * @param string $name Field name
+     *
+     * @return string
+     * @throws \Exception
+     */
     protected function getDateField($name): string
     {
         $date = $this->$name;

@@ -57,7 +57,6 @@ use Galette\Core\Db;
  */
 class LendStatus
 {
-
     public const TABLE = 'status';
     public const PK = 'status_id';
 

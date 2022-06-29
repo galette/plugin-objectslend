@@ -299,26 +299,51 @@ class LendCategory
         $this->$name = $value;
     }
 
+    /**
+     * Get object ID
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return (int)$this->category_id;
     }
 
+    /**
+     * Is object active
+     *
+     * @return bool
+     */
     public function isActive(): bool
     {
         return (bool)$this->is_active;
     }
 
+    /**
+     * Get picture
+     *
+     * @return \GaletteObjectsLend\Entity\CategoryPicture
+     */
     public function getPicture(): \GaletteObjectsLend\Entity\CategoryPicture
     {
         return $this->picture;
     }
 
+    /**
+     * Get sum
+     *
+     * @return float
+     */
     public function getSum(): float
     {
         return $this->objects_price_sum;
     }
 
+    /**
+     * Get objects count
+     *
+     * @return int
+     */
     public function getObjectsNb(): int
     {
         return $this->objects_nb;

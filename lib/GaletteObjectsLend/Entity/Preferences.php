@@ -57,7 +57,6 @@ use Laminas\Db\Sql\Predicate;
  */
 class Preferences
 {
-
     public const TABLE = 'parameters';
     public const PK = 'code';
 
