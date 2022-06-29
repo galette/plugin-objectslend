@@ -94,25 +94,55 @@
 {% endblock %}
 
 {% block search %}
-    <form id="filtre" method="POST" action="{{ path_for("objectslend_filter_objects") }}">
-        <div id="listfilter">
-            <label for="filter_str">{{ _T("Search:") }}&nbsp;</label>
-            <input type="text" name="filter_str" id="filter_str" value="{{ filters.filter_str }}" type="search" placeholder="{{ _T("Enter a value") }}"/>&nbsp;
-            <label for="field_filter"> {{ _T("in:") }}&nbsp;</label>
-            <select name="field_filter" id="field_filter" onchange="form.submit()">
-                {html_options options=$field_filter_options selected=$filters->field_filter}
-            </select>
-            {% if login.isAdmin() or login.isStaff() %}
-                {{ _T("Active:", "objectslend") }}
-                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ALL_OBJECTS') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Objects::ALL_OBJECTS') %} checked="checked"{% endif %}>
-                <label for="filter_dc_active">{{ _T("Don't care") }}</label>
-                <input type="radio" name="active_filter" id="filter_yes_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ACTIVE_OBJECTS') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Objects::ACTIVE_OBJECTS') %} checked="checked"{% endif %}>
-                <label for="filter_yes_active">{{ _T("Yes") }}</label>
-                <input type="radio" name="active_filter" id="filter_no_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::INACTIVE_OBJECTS') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Objects::INACTIVE_OBJECTS') %} checked="checked"{% endif %}>
-                <label for="filter_no_active">{{ _T("No") }}</label>
-            {% endif %}
-            <input type="submit" class="inline" value="{{ _T("Filter") }}"/>
-            <input name="clear_filter" type="submit" value="{{ _T("Clear filter") }}">
+    <form id="filtre" method="POST" action="{{ path_for("objectslend_filter_objects") }}" class="ui form">
+        <div class="ui segment">
+            <div class="three fields">
+                <div class="field">
+                    <label for="filter_str">{{ _T('Search:') }}</label>
+                    <input type="text" name="filter_str" id="filter_str" value="{{ filters.filter_str }}" type="search" placeholder="{{ _T('Enter a value') }}"/>
+                </div>
+                <div class="field">
+                    <label for="field_filter">{{ _T('in:') }}</label>
+                    <select name="field_filter" id="field_filter" class="ui search dropdown nochosen">
+                        {% for key, value in field_filter_options %}
+                            <option value="{{ key }}"{% if key == filters.field_filter %} selected="selected"{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <div class="inline fields">
+                        <label for="email_filter">{{ _T("Active:", "objectslend") }}</label>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ALL_OBJECTS') }}"{% if filters.email_filter == constant('Galette\\Repository\\Members::FILTER_DC_EMAIL') %} checked="checked"{% endif %}>
+                                <label for="filter_dc_active">{{ _T("Don't care") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_yes_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ACTIVE_OBJECTS') }}"{% if filters.email_filter == constant('Galette\\Repository\\Members::FILTER_W_EMAIL') %} checked="checked"{% endif %}>
+                                <label for="filter_yes_active">{{ _T('Yes') }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_no_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::INACTIVE_OBJECTS') }}"{% if filters.email_filter == constant('Galette\\Repository\\Members::FILTER_WO_EMAIL') %} checked="checked"{% endif %}>
+                                <label for="filter_no_active">{{ _T('No') }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui right aligned basic fitted segment field flexend">
+                    <button type="submit"  class="ui labeled icon primary button" title="{{ _T("Apply filters") }}" name="filter">
+                        <i class="search icon"></i>
+                        {{ _T("Filter") }}
+                    </button>
+                    <button type="submit" name="clear_filter" class="ui labeled icon button" title="{{ _T("Reset all filters to defaults") }}">
+                        <i class="trash alt red icon" aria-hidden="true"></i>
+                        {{ _T("Clear filter") }}
+                    </button>
+                </div>
+            </div>
         </div>
         {% include "components/forms/csrf.html.twig" %}
     </form>
@@ -122,27 +152,45 @@
             <header class="ui-state-default ui-state-active">
                 {{ _T("Categories", "objectslend") }}
             </header>
-            <div>
-                <a href="{{ path_for("objectslend_objects", {"option": "category", "value": 0} )}}"{% if filters.category_filter == null %} class="active"{% endif %}>
-                    <img src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": 0}) }}"
-                         alt=""/>
-                    <br/>
-                    {{ _T("All") }}
-                </a>
+            <div class="ui doubling six column cards">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img
+                                src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": 0}) }}"
+                                alt=""
+                        />
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            <a href="{{ path_for("objectslend_objects", {"option": "category", "value": 0}) }}"{% if filters.category_filter == null %} class="active"{% endif %}>
+                                {{ _T("All") }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 {% for categ in categories %}
                     {% if categ.isActive() or categ.getId() == -1 %}
-                        <a href="{{ path_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}"{% if filters.category_filter == categ.getId() %} class="active"{% endif %}>
-                            <img src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
-                                 width="{{ categ.getPicture().getOptimalThumbWidth(olendsprefs) }}"
-                                 height="{{ categ.getPicture().getOptimalThumbHeight(olendsprefs) }}"
-                                 alt=""/>
-                            <br/>
-                            {{ categ.getName() }}
-                            {% if lendsprefs.VIEW_LIST_PRICE_SUM and lendsprefs.VIEW_PRICE and (login.isAdmin() or login.isStaff()) %}
-                                &middot;
-                                {{ categ.getSum() }} &euro;
-                            {% endif %}
-                        </a>
+                        <div class="ui fluid card">
+                            <div class="image">
+                                    <img
+                                        src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
+                                        width="{{ categ.getPicture().getOptimalThumbWidth(olendsprefs) }}"
+                                        height="{{ categ.getPicture().getOptimalThumbHeight(olendsprefs) }}"
+                                        alt=""
+                                    />
+                            </div>
+                            <div class="content">
+                                <div class="header">
+                                    <a href="{{ path_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}"{% if filters.category_filter == categ.getId() %} class="active"{% endif %}>
+                                        {{ categ.getName() }}
+                                    </a>
+                                </div>
+                                {% if lendsprefs.VIEW_LIST_PRICE_SUM and lendsprefs.VIEW_PRICE and (login.isAdmin() or login.isStaff()) %}
+                                    <div class="meta">{{ categ.getSum() }} &euro;</div>
+                                {% endif %}
+                            </div>
+                        </div>
                     {% endif %}
                 {% endfor %}
 
