@@ -16,6 +16,16 @@
     {{ parent() }}
 {% endblock %}
 
+{% block infoline_actions %}
+    <a
+            class="button"
+            href="{{ path_for("objectslend_category_add") }}"
+    >
+        <i class="ui plus circle icon" aria-hidden="true"></i>
+        {{ _T("Add a category", "objectslend") }}
+    </a>
+{% endblock %}
+
 {% block header %}
     {% set columns = [
         {'label': '#'},

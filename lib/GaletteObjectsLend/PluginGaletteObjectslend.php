@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Members GPS coordinates
+ * Plugin Galette Objects Lend
  *
  * PHP version 5
  *
@@ -25,7 +25,7 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  Plugins
- * @package   GaletteMaps
+ * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2022 The Galette Team
@@ -41,11 +41,11 @@ use Galette\Entity\Adherent;
 use Galette\Core\GalettePlugin;
 
 /**
- * Members GPS coordinates
+ * Plugin Galette Objects Lend
  *
  * @category  Plugins
- * @name      Coordinates
- * @package   GaletteMaps
+ * @name      PluginObjectsLend
+ * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
@@ -75,8 +75,7 @@ class PluginGaletteObjectslend extends GalettePlugin
                     'title' => _T("Objects list", "objectslend"),
                     'route' => [
                         'name' => 'objectslend_objects'
-                    ],
-                    'icon' => ''
+                    ]
                 ],
             ]
         ];
@@ -86,54 +85,26 @@ class PluginGaletteObjectslend extends GalettePlugin
                 $menus['galetteplugin_objectslends']['items'],
                 [
                     [
-                        'label' => _T("Add an object", "objectslend"),
-                        'title' => _T("Add an object", "objectslend"),
-                        'route' => [
-                            'name' => 'objectslend_object_add'
-                        ],
-                        'icon' => ''
-                    ],
-                    [
                         'label' => _T("Borrow status", "objectslend"),
                         'title' => _T("Borrow status", "objectslend"),
                         'route' => [
-                            'name' => 'objectslend_statuses'
-                        ],
-                        'icon' => ''
-                    ],
-                    [
-                        'label' => _T("Add a status", "objectslend"),
-                        'title' => _T("Add a status", "objectslend"),
-                        'route' => [
-                            'name' => 'objectslend_status_add'
-                        ],
-                        'icon' => ''
+                            'name' => 'objectslend_statuses',
+                        ]
                     ],
                     [
                         'label' => _T("Object categories", "objectslend"),
                         'title' => _T("Object categories", "objectslend"),
                         'route' => [
-                            'name' => 'objectslend_categories'
-                        ],
-                        'icon' => ''
-                    ],
-                    [
-                        'label' => _T("Add a category", "objectslend"),
-                        'title' => _T("Add a category", "objectslend"),
-                        'route' => [
-                            'name' => 'objectslend_category_add'
-                        ],
-                        'icon' => ''
+                            'name' => 'objectslend_categories',
+                        ]
                     ],
                     [
                         'label' => _T("Preferences", "objectslend"),
                         'title' => _T("Preferences", "objectslend"),
                         'route' => [
                             'name' => 'objectslend_preferences'
-                        ],
-                        'icon' => ''
-                    ],
-
+                        ]
+                    ]
                 ]
             );
         }

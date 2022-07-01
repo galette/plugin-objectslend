@@ -23,6 +23,18 @@
     {{ parent() }}
 {% endblock %}
 
+{% block infoline_actions %}
+    {% if login.isAdmin() or login.isStaff() %}
+    <a
+            class="button"
+            href="{{ path_for("objectslend_object_add") }}"
+    >
+        <i class="ui plus circle icon" aria-hidden="true"></i>
+        {{ _T("Add an object", "objectslend") }}
+    </a>
+    {% endif %}
+{% endblock %}
+
 {% block header %}
     {% set columns = [] %}
 
