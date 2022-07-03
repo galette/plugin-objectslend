@@ -74,7 +74,8 @@ class PluginGaletteObjectslend extends GalettePlugin
                     'label' => _T("Objects list", "objectslend"),
                     'title' => _T("Objects list", "objectslend"),
                     'route' => [
-                        'name' => 'objectslend_objects'
+                        'name' => 'objectslend_objects',
+                        'aliases' => ['objectslend_object_add', 'objectslend_object_edit']
                     ]
                 ],
             ]
@@ -89,6 +90,7 @@ class PluginGaletteObjectslend extends GalettePlugin
                         'title' => _T("Borrow status", "objectslend"),
                         'route' => [
                             'name' => 'objectslend_statuses',
+                            'aliases' => ['objectslend_status_add', 'objectslend_status_edit']
                         ]
                     ],
                     [
@@ -96,6 +98,7 @@ class PluginGaletteObjectslend extends GalettePlugin
                         'title' => _T("Object categories", "objectslend"),
                         'route' => [
                             'name' => 'objectslend_categories',
+                            'aliases' => ['objectslend_category_add', 'objectslend_category_edit']
                         ]
                     ],
                     [
