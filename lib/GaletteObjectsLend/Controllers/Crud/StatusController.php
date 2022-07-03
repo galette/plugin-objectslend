@@ -132,7 +132,7 @@ class StatusController extends AbstractPluginController
         if (count(LendStatus::getActiveStockStatuses($this->zdb)) == 0) {
             $this->flash->addMessage(
                 'error_detected',
-                _T("Please add add at last one status \"in stock\"!", "objectslend")
+                _T("Please add at last one status \"in stock\"!", "objectslend")
             );
         }
         if (count(LendStatus::getActiveTakeAwayStatuses($this->zdb)) == 0) {
