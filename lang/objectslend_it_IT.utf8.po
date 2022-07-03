@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2021-11-21 22:05+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-03 22:19+0200\n"
 "PO-Revision-Date: 2021-12-20 22:53+0000\n"
 "Last-Translator: Giacomo Alessandroni <g.alessandroni@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
@@ -31,7 +31,7 @@ msgid "New category"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:478
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:481
 msgid "Delete failed"
 msgstr "Rimozione fallita"
 
@@ -49,6 +49,8 @@ msgid "Remove category %1$s"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:74
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:75
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
@@ -68,61 +70,65 @@ msgstr ""
 msgid "New object"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:432
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:435
 msgid "Object has been successfully stored!"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:486
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:489
 msgid "Something went wrong saving object :("
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:512
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:515
 msgid "Object has been saved"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:543
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:546
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:549
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:552
 msgid "An error occured cloning object :("
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:579
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:583
 msgid "Borrow an object"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:621
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:584
+msgid "Return a borrowed object"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 msgid "You do not have rights to take objects!"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:657
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
 msgid "%object is currently not available"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:785
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:793
 #, php-format
 msgid "You have just borrowed %object :)"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:843
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:851
 #, php-format
 msgid "%object has been returned :)"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:929
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:937
 #, php-format
 msgid "Remove object %1$s"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:938
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:946
 #, php-format
 msgid "You are about to remove %count objects."
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:135
-msgid "Please add add at last one status \"in stock\"!"
+msgid "Please add at last one status \"in stock\"!"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
@@ -163,6 +169,25 @@ msgstr ""
 msgid "Preferences have been successfully stored!"
 msgstr ""
 
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:70
+msgid "Objects lend"
+msgstr "Prestiti oggetti"
+
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:89
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:90
+msgid "Borrow status"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:97
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:98
+msgid "Object categories"
+msgstr ""
+
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:105
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:106
+msgid "Preferences"
+msgstr "Preferenze"
+
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
 #, php-format
 msgid "Printed on %date"
@@ -170,7 +195,11 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:157
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:281
+#: ../tempcache/category_edit.html.twig:69
+#: ../tempcache/objects_list.html.twig:140
+#: ../tempcache/list_lent_object.html.twig:66
+#: ../tempcache/categories_list.html.twig:98
 msgid "Name"
 msgstr "Nome"
 
@@ -180,36 +209,46 @@ msgid "Description"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
+#: ../tempcache/objects_list.html.twig:148
 msgid "Serial"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:168
+#: ../tempcache/objects_list.html.twig:159
 msgid "Price"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
+#: ../tempcache/objects_list.html.twig:170
 msgid "Borrow price"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:272
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:287
+#: ../tempcache/objects_list.html.twig:181
 msgid "Dimensions"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
+#: ../tempcache/objects_list.html.twig:192
 msgid "Weight"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
+#: ../tempcache/objects_list.html.twig:200
+#: ../tempcache/list_lent_object.html.twig:66
+#: ../tempcache/status_list.html.twig:98 ../tempcache/status_edit.html.twig:62
+#: ../tempcache/objects_edit.html.twig:349
 msgid "Status"
 msgstr "Stato"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
+#: ../tempcache/objects_list.html.twig:200
 msgid "Since"
 msgstr ""
 
@@ -221,6 +260,8 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
+#: ../tempcache/objects_list.html.twig:208
+#: ../tempcache/list_lent_object.html.twig:66
 msgid "Return"
 msgstr ""
 
@@ -257,11 +298,12 @@ msgid "Labels"
 msgstr "Etichetta"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
+#: ../tempcache/category_edit.html.twig:62
 msgid "Category"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:165
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:267
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:282
 msgid "Serial number"
 msgstr ""
 
@@ -270,14 +312,22 @@ msgid "Price per rental day"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
+#: ../tempcache/objects_edit.html.twig:140
+#: ../tempcache/take_object.html.twig:171
 msgid "Cm"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
+#: ../tempcache/objects_edit.html.twig:146
+#: ../tempcache/take_object.html.twig:201
 msgid "Kg"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
+#: ../tempcache/objects_list.html.twig:219
+#: ../tempcache/objects_list.html.twig:728
+#: ../tempcache/status_list.html.twig:98 ../tempcache/status_list.html.twig:307
+#: ../tempcache/categories_list.html.twig:98
 msgid "Active"
 msgstr "Attivo"
 
@@ -298,116 +348,299 @@ msgid "End"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
+#: ../tempcache/objects_list.html.twig:655
+#: ../tempcache/list_lent_object.html.twig:119
+#: ../tempcache/status_list.html.twig:329
+#: ../tempcache/objects_edit.html.twig:331
 msgid "In stock"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:218
+#: ../tempcache/list_lent_object.html.twig:66
+#: ../tempcache/objects_edit.html.twig:354
 msgid "Comments"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:161
+#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:160
 msgid "Status has not been added :("
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/Preferences.php:271
+#: ../lib/GaletteObjectsLend/Entity/Preferences.php:270
 msgid "Unable to store preferences :("
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:186
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:185
 msgid "Rent has not been added"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:350
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:349
 msgid "Y-m-d H:i"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:260
+#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:262
+#: ../tempcache/categories_list.html.twig:334
 msgid "No category"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Entity/LendObject.php:348
+#: ../lib/GaletteObjectsLend/Entity/LendObject.php:347
 msgid "Object has not been added :("
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:266
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:281
 msgid "Name/description"
 msgstr ""
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:268
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:283
+#: ../tempcache/list_lent_object.html.twig:66
 msgid "Id"
 msgstr ""
 
-#: ../templates/default/categories_list.tpl:7
-#: ../templates/default/objects_edit.tpl:57
-#: ../templates/default/status_edit.tpl:25
-#: ../templates/default/objects_list.tpl:14
-#: ../templates/default/status_list.tpl:7
+#: ../tempcache/category_edit.html.twig:75
+msgid "Is active"
+msgstr ""
+
+#: ../tempcache/category_edit.html.twig:82
+msgid "Picture:"
+msgstr "Foto:"
+
+#: ../tempcache/category_edit.html.twig:104
+msgid "Category photo"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:55
+msgid "Print objects list"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:100
+msgid "Add an object"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:200
+msgid "By"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:287
+#: ../tempcache/status_list.html.twig:134
+#: ../tempcache/categories_list.html.twig:132
+#: ../tempcache/status_edit.html.twig:80
+#: ../tempcache/objects_edit.html.twig:151
 msgid "Active:"
 msgstr ""
 
-#: ../templates/default/categories_list.tpl:18
-msgid "categories"
+#: ../tempcache/objects_list.html.twig:377
+msgid "Categories"
 msgstr ""
 
-#: ../templates/default/categories_list.tpl:18
-msgid "category"
+#: ../tempcache/objects_list.html.twig:547
+#: ../tempcache/take_object.html.twig:95
+msgid "Object photo"
 msgstr ""
 
-#: ../templates/default/categories_list.tpl:86
-#: ../templates/default/categories_list.tpl:89
+#: ../tempcache/objects_list.html.twig:607
+#: ../tempcache/take_object.html.twig:250
+msgid "(per day)"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:613
+#: ../tempcache/take_object.html.twig:256
+msgid "(at once)"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:720
+msgid "Object is active"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:722
+msgid "Object is inactive"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:737
+msgid "Edit the object"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:738
+msgid "Duplicate object"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:739
+msgid "Show object lends"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:740
+msgid "Object card in PDF"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:741
+#, php-format
+msgid "Remove %object from database"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:757
+msgid "Take away"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:768
+msgid "Give back"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:811
+msgid "No object has been found"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:850
+msgid "History of object"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:865
+msgid "An error occurred loading history display :("
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:894
+msgid "Take objects"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:925
+msgid "An error occurred loading 'Take away' display :("
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:949
+msgid "Give back objects"
+msgstr ""
+
+#: ../tempcache/objects_list.html.twig:980
+msgid "An error occurred loading 'Give back' display :("
+msgstr ""
+
+#: ../tempcache/list_lent_object.html.twig:66
+msgid "Begin date"
+msgstr ""
+
+#: ../tempcache/list_lent_object.html.twig:66
+msgid "End date"
+msgstr ""
+
+#: ../tempcache/list_lent_object.html.twig:164
+msgid "No lend found"
+msgstr ""
+
+#: ../tempcache/headers.html.twig:57
+msgid "Click to view fullsize image"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:86
+msgid "Add a status"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:98
+msgid "Stock"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:98 ../tempcache/status_edit.html.twig:87
+msgid "Days for rent"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:190 ../tempcache/status_edit.html.twig:74
+msgid "In stock:"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:315
+msgid "Inactive"
+msgstr "Inattivo"
+
+#: ../tempcache/status_list.html.twig:337
+msgid "Not in stock"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:349
+#: ../tempcache/take_object.html.twig:337
+#, php-format
+msgid "%days days"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:362
+#, php-format
+msgid "Edit %status"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:364
+#, php-format
+msgid "Remove %status from database"
+msgstr ""
+
+#: ../tempcache/status_list.html.twig:392
+msgid "No status has been found"
+msgstr ""
+
+#: ../tempcache/categories_list.html.twig:62
+#, php-format
+msgid "%count category"
+msgid_plural "%count categories"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../tempcache/categories_list.html.twig:86
+msgid "Add a category"
+msgstr ""
+
+#: ../tempcache/categories_list.html.twig:288
 #, php-format
 msgid "Edit \"%category\""
 msgstr ""
 
-#: ../templates/default/categories_list.tpl:95
-#: ../templates/default/categories_list.tpl:98
+#: ../tempcache/categories_list.html.twig:298
 #, php-format
 msgid "Remove \"%category\""
 msgstr ""
 
-#: ../templates/default/preferences.tpl:6
+#: ../tempcache/preferences.html.twig:57
 msgid "Plugin preferences"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:8
-#: ../templates/default/preferences.tpl:9
+#: ../tempcache/preferences.html.twig:61
+msgid "Images related"
+msgstr ""
+
+#: ../tempcache/preferences.html.twig:65
+msgid "Display preferences"
+msgstr ""
+
+#: ../tempcache/preferences.html.twig:74
+msgid "Members can borrow:"
+msgstr ""
+
+#: ../tempcache/preferences.html.twig:74
 msgid ""
 "Allow a member (not staff neither admin) to borrow an object. If set to "
 "'No', only admin and staff members can access the 'Take object' page"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:8
-msgid "Members can borrow:"
+#: ../tempcache/preferences.html.twig:76
+msgid "Generate contribution:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:15
-#: ../templates/default/preferences.tpl:16
+#: ../tempcache/preferences.html.twig:76
 msgid ""
 "Automatically generate a contribution for the member of the amount of the "
 "rental price of the object"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:15
-msgid "Generate contribution:"
-msgstr ""
-
-#: ../templates/default/preferences.tpl:22
-msgid "Contribution type:"
-msgstr ""
-
-#: ../templates/default/preferences.tpl:24
+#: ../tempcache/preferences.html.twig:105
 msgid "Choose a contribution type"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:32
-msgid "Comment text to add on generated contribution"
+#: ../tempcache/preferences.html.twig:127
+msgid "Contribution type:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:32
+#: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:33
+#: ../tempcache/preferences.html.twig:134
+msgid "Comment text to add on generated contribution"
+msgstr ""
+
+#: ../tempcache/preferences.html.twig:134
 msgid ""
 "Comment text to add on generated contribution. Automatically replaced values "
 "(put into curly brackets): <br/>- NAME: Name<br/>- DESCRIPTION: "
@@ -415,244 +648,232 @@ msgid ""
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:39
-msgid "Images related"
-msgstr ""
-
-#: ../templates/default/preferences.tpl:41
+#: ../tempcache/preferences.html.twig:148
 msgid "Max thumb height (in px)"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:45
+#: ../tempcache/preferences.html.twig:154
 msgid "Max thumb width (in px)"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:49
+#: ../tempcache/preferences.html.twig:159
 msgid "Images in lists:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:50
+#: ../tempcache/preferences.html.twig:159
 msgid "Display images in objects and categories lists"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:55
-msgid "Show fullsize image or just thumbs"
-msgstr ""
-
-#: ../templates/default/preferences.tpl:55
+#: ../tempcache/preferences.html.twig:161
 msgid "Enable fullsize:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:56
+#: ../tempcache/preferences.html.twig:161
+msgid "Show fullsize image or just thumbs"
+msgstr ""
+
+#: ../tempcache/preferences.html.twig:161
 msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
 
-#: ../templates/default/preferences.tpl:62
-msgid "Display preferences"
-msgstr ""
-
-#: ../templates/default/preferences.tpl:64
+#: ../tempcache/preferences.html.twig:196
 msgid "View category:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:69
+#: ../tempcache/preferences.html.twig:198
 msgid "View forecast return date:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:74
+#: ../tempcache/preferences.html.twig:200
 msgid "View description"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:79
+#: ../tempcache/preferences.html.twig:202
 msgid "View dimensions:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:84
+#: ../tempcache/preferences.html.twig:204
 msgid "View borrow price:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:89
-#: ../templates/default/preferences.tpl:90
-msgid "View the objects buy price sum on the list under the category"
-msgstr ""
-
-#: ../templates/default/preferences.tpl:89
+#: ../tempcache/preferences.html.twig:206
 msgid "View price sum:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:95
+#: ../tempcache/preferences.html.twig:206
+msgid "View the objects buy price sum on the list under the category"
+msgstr ""
+
+#: ../tempcache/preferences.html.twig:208
 msgid "View buy price:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:100
+#: ../tempcache/preferences.html.twig:210
 msgid "View serial number:"
 msgstr ""
 
-#: ../templates/default/preferences.tpl:105
+#: ../tempcache/preferences.html.twig:212
 msgid "View weight"
 msgstr ""
 
-#: ../templates/default/admin_picture.tpl:7
-msgid "Backup categories pictures"
-msgstr ""
-
-#: ../templates/default/admin_picture.tpl:11
-msgid "Backup objects pictures"
-msgstr ""
-
-#: ../templates/default/admin_picture.tpl:15
-msgid "Restore objects pictures from database"
-msgstr ""
-
-#: ../templates/default/admin_picture.tpl:19
-msgid "Restore categories pictures from database"
-msgstr ""
-
-#: ../templates/default/headers.tpl:14
-msgid "Click to view fullsize image"
-msgstr ""
-
-#: ../templates/default/menu.tpl:3
-msgid "Objects lend"
-msgstr "Prestiti oggetti"
-
-#: ../templates/default/menu.tpl:19
-msgid "Add an object"
-msgstr ""
-
-#: ../templates/default/menu.tpl:22
-msgid "Borrow status"
-msgstr ""
-
-#: ../templates/default/menu.tpl:25
-msgid "Add a status"
-msgstr ""
-
-#: ../templates/default/menu.tpl:28
-msgid "Object categories"
-msgstr ""
-
-#: ../templates/default/menu.tpl:31
-msgid "Add a category"
-msgstr ""
-
-#: ../templates/default/menu.tpl:34
-msgid "Preferences"
-msgstr "Preferenze"
-
-#: ../templates/default/take_object.tpl:12
-#: ../templates/default/objects_edit.tpl:7
-msgid "Object"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:20
-#: ../templates/default/objects_edit.tpl:80
-#: ../templates/default/objects_list.tpl:235
-#: ../templates/default/take_more_objects_away.tpl:53
-msgid "Object photo"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:21
-#: ../templates/default/objects_edit.tpl:9
-msgid "Name:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:28
-#: ../templates/default/objects_edit.tpl:13
-msgid "Description:"
-msgstr "Descrizione:"
-
-#: ../templates/default/take_object.tpl:36
-#: ../templates/default/objects_edit.tpl:31
-msgid "Serial number:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:44
-#: ../templates/default/objects_edit.tpl:35
-msgid "Price:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:51
-#: ../templates/default/objects_edit.tpl:39
-msgid "Borrow price:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:60
-#: ../templates/default/objects_list.tpl:258
-msgid "(per day)"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:62
-#: ../templates/default/objects_list.tpl:260
-msgid "(at once)"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:69
-#: ../templates/default/objects_edit.tpl:49
-msgid "Dimensions:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:81
-#: ../templates/default/objects_edit.tpl:53
-msgid "Weight:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:94
-#: ../templates/default/take_more_objects_away.tpl:95
-msgid "Member:"
-msgstr ""
-
-#: ../templates/default/take_object.tpl:108
-#: ../templates/default/take_object.tpl:138
-#: ../templates/default/status_edit.tpl:10
-#: ../templates/default/take_more_objects_away.tpl:106
-#: ../templates/default/take_more_objects_away.tpl:135
+#: ../tempcache/status_edit.html.twig:69 ../tempcache/take_object.html.twig:355
+#: ../tempcache/take_object.html.twig:360
+#: ../tempcache/take_object.html.twig:437
 msgid "Status:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:110
-#: ../templates/default/take_object.tpl:140
-#: ../templates/default/take_more_objects_away.tpl:108
-#: ../templates/default/take_more_objects_away.tpl:137
+#: ../tempcache/status_edit.html.twig:74
+msgid "Is object in stock or borrowed"
+msgstr ""
+
+#: ../tempcache/status_edit.html.twig:75
+msgid ""
+"Check if the object is available to be borrowed;<br/>uncheck if object is "
+"already borrowed and should be given back"
+msgstr ""
+
+#: ../tempcache/status_edit.html.twig:87
+msgid "Number of days to rent per default"
+msgstr ""
+
+#: ../tempcache/status_edit.html.twig:87
+msgid "used to compute return date"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:62 ../tempcache/take_object.html.twig:63
+msgid "Object"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:69 ../tempcache/take_object.html.twig:70
+msgid "Name:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:75
+#: ../tempcache/take_object.html.twig:106
+msgid "Description:"
+msgstr "Descrizione:"
+
+#: ../tempcache/objects_edit.html.twig:83
+msgid "--- Select a category ---"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:104
+msgid "Category:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:114
+#: ../tempcache/take_object.html.twig:124
+msgid "Serial number:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:120
+#: ../tempcache/take_object.html.twig:142
+msgid "Price:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:127
+#: ../tempcache/take_object.html.twig:218
+msgid "Borrow price:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:133
+msgid "Price per rental day:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:133
+msgid "The price applies on each rental day if checked, only once otherwise"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:140
+#: ../tempcache/take_object.html.twig:162
+msgid "Dimensions:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:146
+#: ../tempcache/take_object.html.twig:192
+msgid "Weight:"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:161
+#: ../tempcache/objects_edit.html.twig:317
+#: ../tempcache/take_object.html.twig:323
+#: ../tempcache/take_object.html.twig:365
+#: ../tempcache/take_object.html.twig:417
 msgid "--- Select a status ---"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:115
-#: ../templates/default/status_list.tpl:139
-#, php-format
-msgid "%days days"
+#: ../tempcache/objects_edit.html.twig:181
+msgid "Where is the object?"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:124
+#: ../tempcache/objects_edit.html.twig:194
+#: ../tempcache/objects_edit.html.twig:219
+msgid "Object's photo"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:253
+msgid "Duplicate"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:262
+msgid "Print object"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:287
+msgid "History"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:311
+#: ../tempcache/objects_edit.html.twig:398
+msgid "Change status"
+msgstr ""
+
+#: ../tempcache/objects_edit.html.twig:360
+#: ../tempcache/take_object.html.twig:286
+msgid "Member:"
+msgstr ""
+
+#: ../tempcache/take_object.html.twig:275
+msgid "Borrow information"
+msgstr ""
+
+#: ../tempcache/take_object.html.twig:382
 msgid "Expected return:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:149
+#: ../tempcache/take_object.html.twig:410
+msgid "Return information"
+msgstr ""
+
+#: ../tempcache/take_object.html.twig:444
 msgid "Time:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:155
-#: ../templates/default/take_more_objects_away.tpl:146
+#: ../tempcache/take_object.html.twig:448
+#, php-format
+msgid "From %begindate to %enddate"
+msgstr ""
+
+#: ../tempcache/take_object.html.twig:454
 msgid "Comments:"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:158
-#: ../templates/default/take_more_objects_away.tpl:149
+#: ../tempcache/take_object.html.twig:457
 msgid "remaining characters"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:167
+#: ../tempcache/take_object.html.twig:474
 msgid "I have read and I agree with terms and conditions"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:168
-#: ../templates/default/take_object.tpl:170
+#: ../tempcache/take_object.html.twig:478
+#: ../tempcache/take_object.html.twig:483
 msgid "Show terms and conditions"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:171
+#: ../tempcache/take_object.html.twig:487
 msgid ""
 "The items offered for rent are in good condition and verification rental "
 "contradictory to their status is at the time of withdrawal. No claims will "
@@ -670,285 +891,14 @@ msgid ""
 "deposit check may also be collected in whole or party."
 msgstr ""
 
-#: ../templates/default/take_object.tpl:176
-#: ../templates/default/objects_list.tpl:312
-#: ../templates/default/take_more_objects_away.tpl:156
-msgid "Take away"
+#: ../tempcache/take_object.html.twig:499
+msgid "Borrow object"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:176
-msgid "Return back"
+#: ../tempcache/take_object.html.twig:501
+msgid "Return object"
 msgstr ""
 
-#: ../templates/default/take_object.tpl:213
+#: ../tempcache/take_object.html.twig:556
 msgid "You must agree with terms and conditions in order to take."
-msgstr ""
-
-#: ../templates/default/list_lent_object.tpl:15
-msgid "Begin date"
-msgstr ""
-
-#: ../templates/default/list_lent_object.tpl:16
-msgid "End date"
-msgstr ""
-
-#: ../templates/default/list_lent_object.tpl:37
-msgid "No lend found"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:18
-msgid "Category:"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:20
-msgid "--- Select a category ---"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:43
-msgid "The price applies on each rental day if checked, only once otherwise"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:44
-msgid "Price per rental day:"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:62
-msgid "Where is the object?"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:65
-msgid "in stock"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:72
-msgid "Object's photo"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:83
-#: ../templates/default/category_edit.tpl:33
-msgid "Delete image"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:94
-msgid "Duplicate"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:97
-msgid "Print object"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:102
-#: ../templates/default/status_edit.tpl:47
-#: ../templates/default/category_edit.tpl:47
-msgid "Back to list"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:110
-msgid "History"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:115
-#: ../templates/default/objects_edit.tpl:141
-msgid "Change status"
-msgstr ""
-
-#: ../templates/default/objects_edit.tpl:132
-msgid "No member"
-msgstr ""
-
-#: ../templates/default/status_edit.tpl:16
-msgid "Is object in stock or borrowed"
-msgstr ""
-
-#: ../templates/default/status_edit.tpl:17
-#: ../templates/default/status_list.tpl:14
-msgid "In stock:"
-msgstr ""
-
-#: ../templates/default/status_edit.tpl:19
-msgid ""
-"Check if the object is available to be borrowed;<br/>uncheck if object is "
-"already borrowed and should be given back"
-msgstr ""
-
-#: ../templates/default/status_edit.tpl:31
-#: ../templates/default/status_edit.tpl:34
-msgid "Number of days to rent per default"
-msgstr ""
-
-#: ../templates/default/status_edit.tpl:32
-#: ../templates/default/status_list.tpl:89
-msgid "Days for rent"
-msgstr ""
-
-#: ../templates/default/status_edit.tpl:34
-msgid "used to compute return date"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:26
-msgid "objects"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:26
-msgid "object"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:45
-msgid "Categories"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:186
-msgid "By"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:299
-msgid "Object is active"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:299
-msgid "Object is inactive"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:309
-msgid "Take object away"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:319
-msgid "Give object back"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:322
-#: ../templates/default/take_more_objects_away.tpl:156
-msgid "Give back"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:330
-#: ../templates/default/objects_list.tpl:333
-msgid "Edit the object"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:338
-#: ../templates/default/objects_list.tpl:341
-msgid "Duplicate object"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:347
-msgid "Show object lends"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:352
-#: ../templates/default/objects_list.tpl:355
-msgid "Object card in PDF"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:360
-#: ../templates/default/objects_list.tpl:363
-#, php-format
-msgid "Remove %object from database"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:371
-msgid "No object has been found"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:384
-msgid "Print objects list"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:441
-msgid "No object selected"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:441
-msgid ""
-"Please make sure to select at least one object from the list to perform this "
-"action."
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:488
-msgid "History of object"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:500
-msgid "An error occured loading history display :("
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:520
-msgid "Take objects"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:548
-msgid "An error occured loading 'Take away' display :("
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:566
-msgid "Give back objects"
-msgstr ""
-
-#: ../templates/default/objects_list.tpl:594
-msgid "An error occured loading 'Give back' display :("
-msgstr ""
-
-#: ../templates/default/status_list.tpl:25
-msgid "status"
-msgstr ""
-
-#: ../templates/default/status_list.tpl:77
-msgid "Stock"
-msgstr ""
-
-#: ../templates/default/status_list.tpl:125
-msgid "Inactive"
-msgstr "Inattivo"
-
-#: ../templates/default/status_list.tpl:134
-msgid "Not in stock"
-msgstr ""
-
-#: ../templates/default/status_list.tpl:148
-#: ../templates/default/status_list.tpl:151
-#, php-format
-msgid "Edit %status"
-msgstr ""
-
-#: ../templates/default/status_list.tpl:156
-#: ../templates/default/status_list.tpl:159
-#, php-format
-msgid "Remove %status from database"
-msgstr ""
-
-#: ../templates/default/status_list.tpl:164
-msgid "No status has been found"
-msgstr ""
-
-#: ../templates/default/category_edit.tpl:16
-msgid "Is active"
-msgstr ""
-
-#: ../templates/default/category_edit.tpl:26
-msgid "Picture:"
-msgstr "Foto:"
-
-#: ../templates/default/category_edit.tpl:31
-msgid "Category photo"
-msgstr ""
-
-#: ../templates/default/take_more_objects_away.tpl:4
-msgid "Objects"
-msgstr ""
-
-#: ../templates/default/take_more_objects_away.tpl:10
-msgid "Picture"
-msgstr ""
-
-#: ../templates/default/take_more_objects_away.tpl:97
-msgid "--- Select a member ---"
-msgstr ""
-
-#: ../templates/default/take_more_objects_away.tpl:118
-msgid "Payment type:"
-msgstr ""
-
-#: ../templates/default/take_more_objects_away.tpl:120
-msgid "--- Select a payment type ---"
 msgstr ""
