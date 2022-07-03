@@ -1,10 +1,10 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:19+0200\n"
-"PO-Revision-Date: 2021-11-21 21:09+0000\n"
+"PO-Revision-Date: 2022-07-03 20:26+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -93,10 +93,8 @@ msgid "Borrow an object"
 msgstr "Emprunter un objet"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:584
-#, fuzzy
-#| msgid "You have just borrowed %object :)"
 msgid "Return a borrowed object"
-msgstr "Vous venez d'emprunter %object :)"
+msgstr "Retourner un objet emprunté"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 msgid "You do not have rights to take objects!"
@@ -128,8 +126,6 @@ msgid "You are about to remove %count objects."
 msgstr "Vous allez supprimer %count objets."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:135
-#, fuzzy
-#| msgid "Please add add at last one status \"in stock\"!"
 msgid "Please add at last one status \"in stock\"!"
 msgstr "Veuillez ajouter au moins un statut « en stock » !"
 
@@ -492,8 +488,6 @@ msgid "History of object"
 msgstr "Historique de l'objet"
 
 #: ../tempcache/objects_list.html.twig:865
-#, fuzzy
-#| msgid "An error occured loading history display :("
 msgid "An error occurred loading history display :("
 msgstr "Une erreur est survenue à l'affichage de l'historique :("
 
@@ -502,22 +496,16 @@ msgid "Take objects"
 msgstr "Emprunter les objets"
 
 #: ../tempcache/objects_list.html.twig:925
-#, fuzzy
-#| msgid "An error occured loading 'Take away' display :("
 msgid "An error occurred loading 'Take away' display :("
-msgstr ""
-"Une erreur est survenue à l'affichage de la fonctionnalité d'emprunt :("
+msgstr "Une erreur est survenue à l'affichage de la fonctionnalité d'emprunt :("
 
 #: ../tempcache/objects_list.html.twig:949
 msgid "Give back objects"
 msgstr "Retourner des objets"
 
 #: ../tempcache/objects_list.html.twig:980
-#, fuzzy
-#| msgid "An error occured loading 'Give back' display :("
 msgid "An error occurred loading 'Give back' display :("
-msgstr ""
-"Une erreur est survenue à l'affichage de la fonctionnalité de retour :("
+msgstr "Une erreur est survenue à l'affichage de la fonctionnalité de retour :("
 
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Begin date"
@@ -580,12 +568,11 @@ msgid "No status has been found"
 msgstr "Aucun statut trouvé"
 
 #: ../tempcache/categories_list.html.twig:62
-#, fuzzy, php-format
-#| msgid "No category"
+#, php-format
 msgid "%count category"
 msgid_plural "%count categories"
-msgstr[0] "Aucune catégorie"
-msgstr[1] "Aucune catégorie"
+msgstr[0] "%count catégorie"
+msgstr[1] "%count catégories"
 
 #: ../tempcache/categories_list.html.twig:86
 msgid "Add a category"
@@ -863,10 +850,8 @@ msgid "Member:"
 msgstr "Adhérent&nbsp;:"
 
 #: ../tempcache/take_object.html.twig:275
-#, fuzzy
-#| msgid "Borrow price"
 msgid "Borrow information"
-msgstr "Prix loccation"
+msgstr "Informations de location"
 
 #: ../tempcache/take_object.html.twig:382
 msgid "Expected return:"
@@ -874,17 +859,16 @@ msgstr "Retour escompté&nbsp;:"
 
 #: ../tempcache/take_object.html.twig:410
 msgid "Return information"
-msgstr ""
+msgstr "Informations de retour"
 
 #: ../tempcache/take_object.html.twig:444
 msgid "Time:"
 msgstr "Durée&nbsp;:"
 
 #: ../tempcache/take_object.html.twig:448
-#, fuzzy, php-format
-#| msgid "Printed on %date"
+#, php-format
 msgid "From %begindate to %enddate"
-msgstr "Imprimé le %date"
+msgstr "De %begindate à %enddate"
 
 #: ../tempcache/take_object.html.twig:454
 msgid "Comments:"
@@ -939,16 +923,12 @@ msgstr ""
 "partie."
 
 #: ../tempcache/take_object.html.twig:499
-#, fuzzy
-#| msgid "Borrow an object"
 msgid "Borrow object"
 msgstr "Emprunter un objet"
 
 #: ../tempcache/take_object.html.twig:501
-#, fuzzy
-#| msgid "Return back"
 msgid "Return object"
-msgstr "Retour arrière"
+msgstr "Retour d'objet"
 
 #: ../tempcache/take_object.html.twig:556
 msgid "You must agree with terms and conditions in order to take."
