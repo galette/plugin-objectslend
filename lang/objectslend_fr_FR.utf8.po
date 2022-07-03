@@ -220,7 +220,7 @@ msgstr "Prix"
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
 #: ../tempcache/objects_list.html.twig:170
 msgid "Borrow price"
-msgstr "Prix loccation"
+msgstr "Prix location"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
