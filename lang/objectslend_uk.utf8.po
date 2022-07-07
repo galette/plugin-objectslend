@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:19+0200\n"
-"PO-Revision-Date: 2022-07-03 20:27+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2022-07-08 12:21+0000\n"
+"Last-Translator: Artem <artem@molotov.work>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
@@ -97,10 +97,8 @@ msgid "Borrow an object"
 msgstr "Позичити об'єкт"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:584
-#, fuzzy
-#| msgid "You have just borrowed %object :)"
 msgid "Return a borrowed object"
-msgstr "Ви щойно позичили %object :)"
+msgstr "Повернути позичений об'єкт"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 msgid "You do not have rights to take objects!"
@@ -575,13 +573,12 @@ msgid "No status has been found"
 msgstr "Стан не знайдено"
 
 #: ../tempcache/categories_list.html.twig:62
-#, fuzzy, php-format
-#| msgid "No category"
+#, php-format
 msgid "%count category"
 msgid_plural "%count categories"
-msgstr[0] "Немає категорії"
-msgstr[1] "Немає категорії"
-msgstr[2] "Немає категорії"
+msgstr[0] "%count категорія"
+msgstr[1] "%count категорії"
+msgstr[2] "%count категорій"
 
 #: ../tempcache/categories_list.html.twig:86
 msgid "Add a category"
@@ -855,10 +852,8 @@ msgid "Member:"
 msgstr "Член:"
 
 #: ../tempcache/take_object.html.twig:275
-#, fuzzy
-#| msgid "Borrow price"
 msgid "Borrow information"
-msgstr "Ціна позики"
+msgstr "Відомості про позику"
 
 #: ../tempcache/take_object.html.twig:382
 msgid "Expected return:"
@@ -866,17 +861,16 @@ msgstr "Очікуване повернення:"
 
 #: ../tempcache/take_object.html.twig:410
 msgid "Return information"
-msgstr ""
+msgstr "Відомості про повернення"
 
 #: ../tempcache/take_object.html.twig:444
 msgid "Time:"
 msgstr "Час:"
 
 #: ../tempcache/take_object.html.twig:448
-#, fuzzy, php-format
-#| msgid "Printed on %date"
+#, php-format
 msgid "From %begindate to %enddate"
-msgstr "Надруковано %date"
+msgstr "З %begindate до %enddate"
 
 #: ../tempcache/take_object.html.twig:454
 msgid "Comments:"
@@ -922,10 +916,10 @@ msgstr ""
 "стану орендованого об'єкта понад стандартного, потрібен фінансовий внесок за "
 "додаткове очищення тощо.\n"
 "Згідно зі статтею 590 Цивільного кодексу України:\n"
-"\"1. Заставодержатель набуває право звернення стягнення на предмет застави в "
+"\"1. Заставоутримувач набуває право звернення стягнення на предмет застави в "
 "разі, коли зобов'язання не буде виконано у встановлений строк (термін), якщо "
 "інше не встановлено договором або законом.\n"
-"2. Заставодержатель набуває право звернення стягнення на предмет застави в "
+"2. Заставоутримувач набуває право звернення стягнення на предмет застави в "
 "разі, коли зобов'язання не буде виконано у встановлений строк (термін), якщо "
 "інше не встановлено договором або законом.\"."
 
@@ -934,10 +928,8 @@ msgid "Borrow object"
 msgstr "Позичити об'єкт"
 
 #: ../tempcache/take_object.html.twig:501
-#, fuzzy
-#| msgid "Return back"
 msgid "Return object"
-msgstr "Повернути назад"
+msgstr "Повернути об'єкт"
 
 #: ../tempcache/take_object.html.twig:556
 msgid "You must agree with terms and conditions in order to take."
