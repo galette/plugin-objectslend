@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:19+0200\n"
-"PO-Revision-Date: 2022-07-03 20:27+0000\n"
+"PO-Revision-Date: 2022-07-14 06:40+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
@@ -75,7 +75,7 @@ msgstr "Crear objeto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:435
 msgid "Object has been successfully stored!"
-msgstr "El objeto ha sido almacenado correctamente."
+msgstr "¡ El objeto ha sido almacenado correctamente !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:489
 msgid "Something went wrong saving object :("
@@ -105,7 +105,7 @@ msgstr "Ha alquilado %object :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 msgid "You do not have rights to take objects!"
-msgstr "No tiene derechos para tomar objetos."
+msgstr "¡ No tiene derechos para tomar objetos !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
@@ -134,11 +134,11 @@ msgstr "Va a quitar %count objetos."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:135
 msgid "Please add at last one status \"in stock\"!"
-msgstr "Agregue al final un estado «en almacenaje»."
+msgstr "¡ Agregue al final un estado «en almacenaje» !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:141
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr "Añada un estado «objeto alquilado»."
+msgstr "¡ Añada un estado «objeto alquilado» !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
@@ -172,7 +172,7 @@ msgstr "Preferencias de ObjectLend"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:120
 msgid "Preferences have been successfully stored!"
-msgstr "Las preferencias han sigo almacenadas correctamente."
+msgstr "¡ Las preferencias han sigo almacenadas correctamente !"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:70
 msgid "Objects lend"
