@@ -5,13 +5,14 @@
 # Alonso Arteaga <alon.arte.r@gmail.com>, 2021.
 # noelia <zizizhuji1@gmail.com>, 2021.
 # Cow <javier.fserrador@gmail.com>, 2022.
+# gallegonovato <fran-carro@hotmail.es>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:19+0200\n"
-"PO-Revision-Date: 2022-07-14 06:40+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2022-10-17 00:53+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -19,11 +20,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
 msgid "Categories list"
-msgstr "Índice de categorías"
+msgstr "Lista de las categorías"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:224
 msgid "Edit category"
@@ -98,10 +99,8 @@ msgid "Borrow an object"
 msgstr "Alquilar un objeto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:584
-#, fuzzy
-#| msgid "You have just borrowed %object :)"
 msgid "Return a borrowed object"
-msgstr "Ha alquilado %object :)"
+msgstr "Devolver un objeto prestado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 msgid "You do not have rights to take objects!"
@@ -290,7 +289,7 @@ msgstr "Disponible"
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:79
 msgid "object_card"
-msgstr ""
+msgstr "objeto_tarjeta"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:91
 msgid "Object card"
@@ -575,12 +574,11 @@ msgid "No status has been found"
 msgstr "No ha sido encontrado ningún estado"
 
 #: ../tempcache/categories_list.html.twig:62
-#, fuzzy, php-format
-#| msgid "No category"
+#, php-format
 msgid "%count category"
 msgid_plural "%count categories"
-msgstr[0] "Ninguna categoría"
-msgstr[1] "Ninguna categoría"
+msgstr[0] "Categoría %count"
+msgstr[1] "Categorías de %count"
 
 #: ../tempcache/categories_list.html.twig:86
 msgid "Add a category"
@@ -858,10 +856,8 @@ msgid "Member:"
 msgstr "Miembro:"
 
 #: ../tempcache/take_object.html.twig:275
-#, fuzzy
-#| msgid "Borrow price"
 msgid "Borrow information"
-msgstr "Precio de alquiler"
+msgstr "Pedir prestada la información"
 
 #: ../tempcache/take_object.html.twig:382
 msgid "Expected return:"
@@ -869,17 +865,16 @@ msgstr "Devolución esperada:"
 
 #: ../tempcache/take_object.html.twig:410
 msgid "Return information"
-msgstr ""
+msgstr "Información de retorno"
 
 #: ../tempcache/take_object.html.twig:444
 msgid "Time:"
 msgstr "Hora:"
 
 #: ../tempcache/take_object.html.twig:448
-#, fuzzy, php-format
-#| msgid "Printed on %date"
+#, php-format
 msgid "From %begindate to %enddate"
-msgstr "Escrito el %d"
+msgstr "De %begindate a %enddate"
 
 #: ../tempcache/take_object.html.twig:454
 msgid "Comments:"
@@ -915,22 +910,34 @@ msgid ""
 "other cases not listed above and at the discretion of the seller, the "
 "deposit check may also be collected in whole or party."
 msgstr ""
+"Los artículos ofrecidos para alquiler están en buenas condiciones y la "
+"verificación de alquiler contradictorio a su estado es en el momento de la "
+"retirada. No se aceptarán reclamos después de la liberación del objeto. "
+"Escribir por la tienda una lista de reservas no exime al cliente de "
+"comprobar su desistimiento. El pago del alquiler da derecho al comprador a "
+"hacer un uso normal del objeto prestado. Si el objeto se entrega en estado "
+"degradado, el vendedor se reserva el derecho de cobrar la totalidad o parte "
+"del depósito de garantía. En caso de deterioro de la propiedad alquilada más "
+"allá del objeto estándar, se requerirá una contribución financiera para la "
+"limpieza adicional causada. En caso de daños, pérdida o robo del inmueble "
+"alquilado, el depósito no se reembolsará automáticamente a la sociedad en "
+"concepto de daños y perjuicios, de conformidad con el artículo 1152 del "
+"Código Civil y sin necesidad de ningún otro trámite judicial o "
+"extrajudicial. En algunos otros casos no enumerados anteriormente y a "
+"discreción del vendedor, el cheque de depósito también puede cobrarse en su "
+"totalidad o en parte."
 
 #: ../tempcache/take_object.html.twig:499
 msgid "Borrow object"
 msgstr "Alquilar un objeto"
 
 #: ../tempcache/take_object.html.twig:501
-#, fuzzy
-#| msgid "Return back"
 msgid "Return object"
-msgstr "Devolver"
+msgstr "Devuelve el objeto"
 
 #: ../tempcache/take_object.html.twig:556
-#, fuzzy
 msgid "You must agree with terms and conditions in order to take."
-msgstr ""
-"Debe estar de acuerdo con los términos y condiciones con el fin de aceptar"
+msgstr "Debe estar de acuerdo con los términos y condiciones para poder entrar."
 
 #~ msgid "categories"
 #~ msgstr "categorías"
