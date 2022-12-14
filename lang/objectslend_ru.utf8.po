@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:19+0200\n"
-"PO-Revision-Date: 2022-12-09 16:47+0000\n"
+"PO-Revision-Date: 2022-12-15 11:47+0000\n"
 "Last-Translator: Evgeniy Khramov <thejenjagamertjg@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ru/>\n"
@@ -294,7 +294,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:93
 msgid "Labels"
-msgstr ""
+msgstr "Метки"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 #: ../tempcache/category_edit.html.twig:62
