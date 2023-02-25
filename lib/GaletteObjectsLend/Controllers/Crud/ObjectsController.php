@@ -430,10 +430,9 @@ class ObjectsController extends AbstractPluginController
             //FIXME: better format handler
             $object->weight = (int)str_replace(' ', '', str_replace(',', '.', $post['weight']));
         }
-        $object->is_active = $post['is_active'] == 'true';
+        $object->is_active = ($post['is_active'] ?? false == 'true');
 
         if ($object->store()) {
-            $success_detected[] = _T("Object has been successfully stored!", "objectslend");
             if (isset($post['1st_status'])) {
                 $rent = new LendRent();
                 $rent->object_id = $object->object_id;
