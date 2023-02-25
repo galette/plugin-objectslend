@@ -107,7 +107,7 @@ class LendRent
     /**
      * Default constructor
      *
-     * @param mixed|null $args
+     * @param mixed|null $args Either an int with rent id, null, or a resultset row
      */
     public function __construct($args = null)
     {
