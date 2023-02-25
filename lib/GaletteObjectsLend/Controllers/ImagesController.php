@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org */
 
@@ -36,11 +36,8 @@ namespace GaletteObjectsLend\Controllers;
 
 use Galette\Controllers\ImagesController as GImagesController;
 use GaletteObjectsLend\Entity\Preferences;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Galette\Core\Picture;
-use Galette\Entity\Adherent;
-use Analog\Analog;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Galette objects lend images controller
@@ -49,7 +46,7 @@ use Analog\Analog;
  * @name      ImageController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */

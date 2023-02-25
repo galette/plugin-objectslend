@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021-2022 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2022 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-12
@@ -36,14 +36,14 @@
 
 namespace GaletteObjectsLend\Controllers\Crud;
 
-use Analog\Analog;
+use DI\Attribute\Inject;
 use GaletteObjectsLend\Filters\StatusList;
 use GaletteObjectsLend\Repository\Status;
 use GaletteObjectsLend\Entity\LendStatus;
 use GaletteObjectsLend\Entity\Preferences;
 use Galette\Controllers\Crud\AbstractPluginController;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Status controller
@@ -52,7 +52,7 @@ use Slim\Http\Response;
  * @name      CategoriesController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2022 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -61,9 +61,9 @@ use Slim\Http\Response;
 class StatusController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Objects Lend")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Objects Lend")]
     protected $module_info;
 
     // CRUD - Create
@@ -215,7 +215,7 @@ class StatusController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->routeparser->pathFor('objectslend_statuses'));
+            ->withHeader('Location', $this->routeparser->urlFor('objectslend_statuses'));
     }
 
     // /CRUD - Read
@@ -304,7 +304,7 @@ class StatusController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->routeparser->pathFor(
+                    $this->routeparser->urlFor(
                         'objectslend_status_' . $action,
                         $args
                     )
@@ -320,7 +320,7 @@ class StatusController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->routeparser->pathFor('objectslend_statuses')
+                    $this->routeparser->urlFor('objectslend_statuses')
                 );
         }
     }
@@ -337,7 +337,7 @@ class StatusController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->routeparser->pathFor('objectslend_statuses');
+        return $this->routeparser->urlFor('objectslend_statuses');
     }
 
     /**
@@ -349,7 +349,7 @@ class StatusController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->routeparser->pathFor(
+        return $this->routeparser->urlFor(
             'objectslend_doremove_status',
             $args
         );

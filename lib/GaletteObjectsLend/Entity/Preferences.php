@@ -9,7 +9,7 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @Copyright 2017-2020 The Galette Team
+ * @Copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,6 +40,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
+use Galette\Core\Db;
 use Laminas\Db\Sql\Predicate;
 
 /**
@@ -51,16 +52,33 @@ use Laminas\Db\Sql\Predicate;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property bool $ENABLE_MEMBER_RENT_OBJECT
+ * @property bool $AUTO_GENERATE_CONTRIBUTION
+ * @property int $GENERATED_CONTRIBUTION_TYPE_ID
+ * @property string $GENERATED_CONTRIB_INFO_TEXT
+ * @property bool $VIEW_CATEGORY
+ * @property bool $VIEW_SERIAL
+ * @property bool $VIEW_THUMBNAIL
+ * @property bool $VIEW_DESCRIPTION
+ * @property bool $VIEW_PRICE
+ * @property bool $VIEW_DIMENSION
+ * @property bool $VIEW_WEIGHT
+ * @property bool $VIEW_LEND_PRICE
+ * @property bool $VIEW_DATE_FORECAST
+ * @property bool $VIEW_LIST_PRICE_SUM
+ * @property int $THUMB_MAX_WIDTH
+ * @property int $THUMB_MAX_HEIGHT
  */
 class Preferences
 {
     public const TABLE = 'parameters';
     public const PK = 'code';
 
-    private $zdb;
+    private Db $zdb;
     private $prefs;
 
     /**
@@ -167,7 +185,7 @@ class Preferences
      *
      * @return void
      */
-    public function __construct($zdb, $load = true)
+    public function __construct(Db $zdb, $load = true)
     {
         $this->zdb = $zdb;
         if ($load) {

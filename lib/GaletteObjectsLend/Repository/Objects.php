@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017-2018 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2017-02-10
@@ -36,12 +36,13 @@
 
 namespace GaletteObjectsLend\Repository;
 
+use ArrayObject;
 use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Galette\Entity\Adherent;
-use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Entity\Preferences;
 use GaletteObjectsLend\Entity\LendObject;
@@ -49,6 +50,7 @@ use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\LendStatus;
 use Galette\Core\Plugins;
+use Laminas\Db\Sql\Select;
 
 /**
  * Objects list
@@ -58,7 +60,7 @@ use Galette\Core\Plugins;
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2018 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -86,11 +88,13 @@ class Objects
     public const ORDERBY_FDATE = 7;
     public const ORDERBY_MEMBER = 8;
 
+    private Db $zdb;
+
     private $filters = false;
     private $count = null;
     private $errors = array();
-    private $prefs;
-    private $plugins;
+    private Preferences $prefs;
+    private Plugins $plugins;
 
     /**
      * Default constructor
@@ -125,7 +129,7 @@ class Objects
      * @param boolean $limit      true if we want records pagination
      * @param boolean $all_rents  true to load rents along with objects
      *
-     * @return LendObject[]|ResultSet
+     * @return array|ArrayObject
      */
     public function getObjectsList(
         $as_objects = false,
@@ -172,7 +176,7 @@ class Objects
      *
      * @param array $ids Objects identifiers to delete
      *
-     * @return boolean
+     * @return bool
      */
     public function removeObjects(array $ids)
     {
@@ -222,7 +226,7 @@ class Objects
      *
      * @param array $ids List of objects id to disable
      *
-     * @return boolean
+     * @return ResultSet
      */
     public function disableObjects(array $ids)
     {
@@ -232,7 +236,7 @@ class Objects
             self::PK,
             $ids
         );
-        $result = $this->zdb->execute($update);
+        $results = $this->zdb->execute($update);
         return $results;
     }
 
@@ -245,7 +249,7 @@ class Objects
      *                            an array. If null, all fields will be
      *                            returned
      *
-     * @return LendObject[]|ResultSet
+     * @return array|ArrayObject
      */
     public function getList($as_objects = false, $fields = null)
     {
@@ -323,7 +327,7 @@ class Objects
                 'Cannot build SELECT clause for objects | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -378,7 +382,7 @@ class Objects
                 'Cannot count objects | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -388,7 +392,7 @@ class Objects
      * @param array $fields Fields list to ensure ORDER clause
      *                      references selected fields. Optionnal.
      *
-     * @return string[] SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -450,7 +454,7 @@ class Objects
      *
      * @param Select $select Original select
      *
-     * @return string SQL WHERE clause
+     * @return void
      */
     public function buildWhereClause($select)
     {
@@ -526,11 +530,12 @@ class Objects
                 __METHOD__ . ' | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
         }
     }
 
     /**
-     * Is field allowed to order? it shoulsd be present in
+     * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
      * @param string $field_name Field name to order by

@@ -4,12 +4,12 @@
 
 /**
  * Public Class LendRent
- * Store all informations about rent status and time of an object
+ * Store all information about rent status and time of an object
  *
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2020 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @Copyright 2017-2020 The Galette Team
+ * @Copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,6 +40,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Entity\Adherent;
 use Galette\Repository\Members;
 
@@ -52,9 +53,24 @@ use Galette\Repository\Members;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property integer $rent_id
+ * @property integer $object_id
+ * @property string $date_begin
+ * @property string $date_forecast
+ * @property string $date_end
+ * @property integer $status_id
+ * @property integer $adherent_id
+ * @property string $comments
+ * @property integer $in_stock
+ * @property string $status_text
+ * @property string $nom_adh
+ * @property string $prenom_adh
+ * @property string $pseudo_adh
+ * @property string $email_adh
  */
 class LendRent
 {
@@ -89,9 +105,9 @@ class LendRent
     private $email_adh = '';
 
     /**
-     * Construit un nouvel historique d'emprunt à partir de la BDD (à partir de son ID) ou vierge
+     * Default constructor
      *
-     * @param int|object $args Peut être null, un ID ou une ligne de la BDD
+     * @param mixed|null $args
      */
     public function __construct($args = null)
     {
@@ -123,7 +139,7 @@ class LendRent
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -140,9 +156,9 @@ class LendRent
     }
 
     /**
-     * Enregistre l'élément en cours que ce soit en insert ou update
+     * Store current element
      *
-     * @return bool False si l'enregistrement a échoué, true si aucune erreur
+     * @return bool
      */
     public function store()
     {
@@ -211,7 +227,7 @@ class LendRent
      * @param boolean $only_last Only retrieve last rent (for list display)
      * @param string  $order     Order clause, defaults to 'date_begin DESC'
      *
-     * @return LendRent[] Tableau d'objects emprunts
+     * @return array
      */
     public static function getRentsForObjectId($object_id, $only_last = false, $order = 'date_begin desc')
     {
@@ -259,7 +275,7 @@ class LendRent
                     $e->getTraceAsString(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -302,15 +318,15 @@ class LendRent
     }
 
     /**
-     * Renvoi une liste de tous les adhérents actifs triés par nom
+     * Get active members sorted by name
      *
-     * @return \Galette\Entity\Adherent[] Tableau des adhérents actifs triés par nom
+     * @return array
      */
     public static function getAllActivesAdherents()
     {
         try {
             $filters = new \Galette\Filters\MembersList();
-            $filters->account_status_filter = Members::ACTIVE_ACCOUNT;
+            $filters->filter_account = Members::ACTIVE_ACCOUNT;
             $members = new Members($filters);
             $adherents = $members->getMembersList(
                 true,
@@ -328,16 +344,16 @@ class LendRent
                     $e->getTraceAsString(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
@@ -349,7 +365,6 @@ class LendRent
                     return $dt->format(_T('Y-m-d H:i', 'objectslend'));
                 }
                 return '';
-            case 'date_begin_short':
             case 'date_forecast':
                 if ($this->$name != '') {
                     $dt = new \DateTime($this->$name);
@@ -380,7 +395,6 @@ class LendRent
                 }
                 break;
             case 'date_forecast':
-            case 'date_begin_short':
             case 'date_begin':
             case 'date_end':
                 $fmt = "Y-m-d";
@@ -397,9 +411,9 @@ class LendRent
                         if ($d === false) {
                             throw new \Exception('Incorrect format');
                         }
-                        $this->$prop = $d->format($fmt);
+                        $this->$name = $d->format($fmt);
                     }
-                    $this->$prop = $d->format($tfmt);
+                    $this->$name = $d->format($tfmt);
                 } catch (\Exception $e) {
                     $this->$name = null;
                     Analog::log(

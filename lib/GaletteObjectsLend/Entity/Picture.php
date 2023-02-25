@@ -8,7 +8,7 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2018 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -31,7 +31,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,6 +40,8 @@ namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Core\Plugins;
+use Slim\Psr7\Response;
+use Slim\Psr7\Stream;
 
 /**
  * Picture handling
@@ -50,7 +52,7 @@ use Galette\Core\Plugins;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -67,15 +69,15 @@ class Picture extends \Galette\Core\Picture
     protected $thumb_optimal_height;
     protected $thumb_optimal_width;
 
-    protected $plugins;
+    protected Plugins $plugins;
 
     /**
      * Default constructor.
      *
-     * @param Plugins $plugins  Plugins
-     * @param int     $objectid Object id
+     * @param Plugins    $plugins  Plugins
+     * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, $objectid = '')
+    public function __construct(Plugins $plugins, $objectid = null)
     {
         $this->plugins = $plugins;
 
@@ -126,9 +128,9 @@ class Picture extends \Galette\Core\Picture
      * @param Response    $response Reponse
      * @param Preferences $prefs    Preferences instance
      *
-     * @return void
+     * @return Response
      */
-    public function displayThumb(\Slim\Http\Response $response, Preferences $prefs)
+    public function displayThumb(Response $response, Preferences $prefs)
     {
         $this->setThumbSizes($prefs);
         $response = $response->withHeader('Content-Type', $this->mime)
@@ -141,7 +143,7 @@ class Picture extends \Galette\Core\Picture
         fwrite($stream, file_get_contents($this->getThumbPath()));
         rewind($stream);
 
-        return $response->withBody(new \Slim\Http\Stream($stream));
+        return $response->withBody(new Stream($stream));
     }
 
     /**
@@ -153,7 +155,7 @@ class Picture extends \Galette\Core\Picture
      * @param string $dest   the destination image.
      *                       If null, we'll use the source image. Defaults to null
      *
-     * @return void
+     * @return void|false
      */
     private function createThumb($source, $ext, $dest = null)
     {
@@ -418,7 +420,7 @@ class Picture extends \Galette\Core\Picture
         if (!$this->thumb_optimal_height) {
             $this->setThumbSizes($prefs);
         }
-        return round($this->thumb_optimal_height);
+        return (int)round($this->thumb_optimal_height);
     }
 
     /**
@@ -433,7 +435,7 @@ class Picture extends \Galette\Core\Picture
         if (!$this->thumb_optimal_width) {
             $this->setThumbSizes($prefs);
         }
-        return round($this->thumb_optimal_width);
+        return (int)round($this->thumb_optimal_width);
     }
 
     /**

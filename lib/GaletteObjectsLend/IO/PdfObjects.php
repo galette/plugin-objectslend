@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -36,6 +36,7 @@
 namespace GaletteObjectsLend\IO;
 
 use Galette\Core\Db;
+use Galette\Core\Plugins;
 use Galette\IO\Pdf;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
@@ -51,7 +52,7 @@ use GaletteObjectsLend\Entity\Preferences as LendPreferences;
  * @name      PDFObjects
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -59,10 +60,11 @@ class PdfObjects extends Pdf
 {
     public const LIST_FONT = self::FONT_SIZE - 2;
 
-    private $zdb;
+    private Db $zdb;
     private $lendsprefs;
     private $filters;
-    private $login;
+    private Login $login;
+    private Plugins $plugins;
 
     /**
      * Main constructor, set creator and author
@@ -72,19 +74,22 @@ class PdfObjects extends Pdf
      * @param LendPreferences $lendsprefs Plugin preferences
      * @param ObjectsList     $filters    Current filters
      * @param Login           $login      Login instance
+     * @param Plugins         $plugins    Plugins instance
      */
     public function __construct(
         Db $zdb,
         Preferences $prefs,
         LendPreferences $lendsprefs,
         ObjectsList $filters,
-        Login $login
+        Login $login,
+        Plugins $plugins
     ) {
         parent::__construct($prefs);
         $this->zdb = $zdb;
         $this->lendsprefs = $lendsprefs;
         $this->filters = $filters;
         $this->login = $login;
+        $this->plugins = $plugins;
         $this->init();
     }
 
@@ -142,7 +147,7 @@ class PdfObjects extends Pdf
     /**
      * Draw objects list
      *
-     * @param LendObject[] $objects List of objects
+     * @param array $objects List of objects
      *
      * @return void
      */
@@ -152,10 +157,6 @@ class PdfObjects extends Pdf
         $this->AddPage();
 
         $this->Ln(10); //for Header
-
-        if ($this->filters->category_filter > 0) {
-            $category = new LendCategory((int)$filters->category_filter);
-        }
 
         // Header
         $this->SetFillColor(255, 255, 255);
@@ -262,7 +263,5 @@ class PdfObjects extends Pdf
         $this->Cell(0, 0, _T("Borrowed", "objectslend"), 0, 1);
         $this->Cell($w_price, 0, '', true);
         $this->Cell(0, 0, _T("Available", "objectslend"), 0, 1);
-
-        $current_category = $object->category_id;
     }
 }

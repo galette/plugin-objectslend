@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2018-01-07
@@ -36,6 +36,7 @@
 
 namespace GaletteObjectsLend\Repository;
 
+use ArrayObject;
 use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
@@ -48,6 +49,7 @@ use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\LendStatus;
 use Galette\Core\Login;
+use Laminas\Db\Sql\Select;
 
 /**
  * Status list
@@ -57,7 +59,7 @@ use Galette\Core\Login;
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -81,6 +83,9 @@ class Status
     public const ORDERBY_ACTIVE = 2;
     public const ORDERBY_STOCK = 3;
     public const ORDERBY_RENTDAYS = 4;
+
+    private Db $zdb;
+    private Login $login;
 
     private $filters = false;
     private $count = null;
@@ -117,7 +122,7 @@ class Status
      * @param boolean $count  true if we want to count members
      * @param boolean $limit  true if we want records pagination
      *
-     * @return LendStatus[]|ResultSet
+     * @return array|ArrayObject
      */
     public function getStatusList(
         $as_stt = false,
@@ -150,6 +155,7 @@ class Status
                 'Cannot list categories | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
         }
     }
 
@@ -162,7 +168,7 @@ class Status
      *                        an array. If null, all fields will be
      *                        returned
      *
-     * @return LendStatus[]|ResultSet
+     * @return LendStatus[]|ArrayObject
      */
     public function getList($as_stt = false, $fields = null)
     {
@@ -209,7 +215,7 @@ class Status
                 'Cannot build SELECT clause for objectslend status | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -242,6 +248,7 @@ class Status
 
             $results = $this->zdb->execute($countSelect);
 
+            //@phpstan-ignore-next-line
             $this->count = $results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
@@ -251,7 +258,7 @@ class Status
                 'Cannot count objectslend status | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -259,9 +266,9 @@ class Status
      * Builds the order clause
      *
      * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     *                      references selected fields. Optional.
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -302,7 +309,7 @@ class Status
      *
      * @param Select $select Original select
      *
-     * @return string SQL WHERE clause
+     * @return void
      */
     private function buildWhereClause($select)
     {

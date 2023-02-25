@@ -4,12 +4,12 @@
 
 /**
  * Public Class LendObject
- * Store informations about an object to lend
+ * Store information about an object to lend
  *
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2018 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,6 +40,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
@@ -55,9 +56,29 @@ use GaletteObjectsLend\Repository\Objects;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property int $object_id
+ * @property Picture $picture
+ * @property string $name
+ * @property string $description
+ * @property string $serial_number
+ * @property float $price
+ * @property float $rent_price
+ * @property float $value_rent_price
+ * @property bool $price_per_day
+ * @property string $dimension
+ * @property float $weight
+ * @property bool $is_active
+ * @property string $cat_name
+ * @property string $status_text
+ * @property string $date_begin
+ * @property Adherent $member
+ * @property string $date_forecast
+ * @property array $rents
+ * @property int $category_id
  */
 class LendObject
 {
@@ -132,7 +153,7 @@ class LendObject
      * Default constructor
      *
      * @param Db         $zdb     Database instance
-     * @param Plugins    $plugins Pluginsugins instance
+     * @param Plugins    $plugins Plugins instance
      * @param int|object $args    Maybe null, an RS object or an id from database
      * @param array      $deps    Dependencies configuration, see LendOb::$deps
      */
@@ -222,7 +243,7 @@ class LendObject
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -419,7 +440,7 @@ class LendObject
      */
     public static function getMoreObjectsByIds($ids)
     {
-        global $zdb;
+        global $zdb, $plugins;
 
         $myids = array();
         foreach ($ids as $id) {
@@ -436,7 +457,7 @@ class LendObject
 
             $rows = $zdb->execute($select);
             foreach ($rows as $r) {
-                $o = new self($r);
+                $o = new self($zdb, $plugins, $r);
 
                 self::getStatusForObject($o);
 
@@ -450,16 +471,16 @@ class LendObject
                     $e->getTraceAsString(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
@@ -519,7 +540,7 @@ class LendObject
     /**
      * Get current rent
      *
-     * @return LendRent
+     * @return LendRent|void
      */
     public function getCurrentRent()
     {
@@ -655,7 +676,7 @@ class LendObject
             $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
-            $zdb->connection->rollBack();
+            $this->zdb->connection->rollBack();
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
                     $e->getTraceAsString(),

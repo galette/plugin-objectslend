@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2017-02-10
@@ -36,6 +36,7 @@
 
 namespace GaletteObjectsLend\Repository;
 
+use ArrayObject;
 use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
@@ -49,6 +50,7 @@ use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendObject;
 use Galette\Core\Login;
 use Galette\Core\Plugins;
+use Laminas\Db\Sql\Select;
 
 /**
  * Categories list
@@ -58,7 +60,7 @@ use Galette\Core\Plugins;
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -78,7 +80,10 @@ class Categories
     private $filters = false;
     private $count = null;
     private $errors = array();
-    private $plugins;
+
+    private Db $zdb;
+    private Plugins $plugins;
+    private Login $login;
 
     /**
      * Default constructor
@@ -103,7 +108,7 @@ class Categories
 
 
     /**
-     * Get members list
+     * Get categories list
      *
      * @param boolean $as_cat return the results as an array of
      *                        Categories object.
@@ -113,7 +118,7 @@ class Categories
      * @param boolean $count  true if we want to count members
      * @param boolean $limit  true if we want records pagination
      *
-     * @return LendObject[]|ResultSet
+     * @return array|ArrayObject
      */
     public function getCategoriesList(
         $as_cat = false,
@@ -146,6 +151,7 @@ class Categories
                 'Cannot list categories | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
         }
     }
 
@@ -158,7 +164,7 @@ class Categories
      *                        an array. If null, all fields will be
      *                        returned
      *
-     * @return LendCategory[]|ResultSet
+     * @return array|ArrayObject
      */
     public function getList($as_cat = false, $fields = null)
     {
@@ -220,12 +226,12 @@ class Categories
                 'Cannot build SELECT clause for categories | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
-     * Count members from the query
+     * Count categories from the query
      *
      * @param Select $select Original select
      *
@@ -264,6 +270,7 @@ class Categories
 
             $results = $this->zdb->execute($countSelect);
 
+            //@phpstan-ignore-next-line
             $this->count = $results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
@@ -273,7 +280,7 @@ class Categories
                 'Cannot count categories | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -281,9 +288,9 @@ class Categories
      * Builds the order clause
      *
      * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     *                      references selected fields. Optional.
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clauses
      */
     private function buildOrderClause($fields = null)
     {
@@ -351,17 +358,18 @@ class Categories
                 __METHOD__ . ' | ' . $e->getMessage(),
                 Analog::WARNING
             );
+            throw $e;
         }
     }
 
     /**
-     * Is field allowed to order? it shoulsd be present in
+     * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
      * @param string $field_name Field name to order by
      * @param array  $fields     SELECTE'ed fields
      *
-     * @return boolean
+     * @return bool
      */
     private function canOrderBy($field_name, $fields)
     {

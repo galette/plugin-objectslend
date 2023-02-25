@@ -4,12 +4,12 @@
 
 /**
  * Public Class LendStatus
- * Store informations about a lend status
+ * Store information about a lend status
  *
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2021 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @Copyright 2017-2021 The Galette Team
+ * @Copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,6 +40,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Core\Db;
 
 /**
@@ -51,9 +52,15 @@ use Galette\Core\Db;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property integer $status_id
+ * @property string $status_text
+ * @property boolean $in_stock
+ * @property boolean $is_active
+ * @property integer $rent_day_number
  */
 class LendStatus
 {
@@ -108,7 +115,7 @@ class LendStatus
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -122,9 +129,9 @@ class LendStatus
     }
 
     /**
-     * Enregistre l'élément en cours que ce soit en insert ou update
+     * Store current element
      *
-     * @return bool False si l'enregistrement a échoué, true si aucune erreur
+     * @return bool
      */
     public function store()
     {
@@ -177,11 +184,11 @@ class LendStatus
     }
 
     /**
-     * Renvoi tous les statuts actifs triés par nom
+     * Get all active statuses sorted by name
      *
      * @param Db $zdb Database instance
      *
-     * @return LendStatus[] La liste des statuts actifs triés
+     * @return array
      */
     public static function getActiveStatuses(Db $zdb)
     {
@@ -202,16 +209,16 @@ class LendStatus
                     $e->getTraceAsString(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
-     * Renvoi tous les statuts actifs considéré comme empruntés triés par nom
+     * Get all borrowed active statuses sorted by
      *
      * @param Db $zdb Database instance
      *
-     * @return LendStatus[] La liste des statuts actifs triés
+     * @return array
      */
     public static function getActiveTakeAwayStatuses(Db $zdb)
     {
@@ -232,7 +239,7 @@ class LendStatus
                     $e->getTraceAsString(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
