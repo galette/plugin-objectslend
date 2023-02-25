@@ -27,7 +27,7 @@
     {% if login.isAdmin() or login.isStaff() %}
     <a
             class="button"
-            href="{{ path_for("objectslend_object_add") }}"
+            href="{{ url_for("objectslend_object_add") }}"
     >
         <i class="ui plus circle icon" aria-hidden="true"></i>
         {{ _T("Add an object", "objectslend") }}
@@ -106,7 +106,7 @@
 {% endblock %}
 
 {% block search %}
-    <form id="filtre" method="POST" action="{{ path_for("objectslend_filter_objects") }}" class="ui form">
+    <form id="filtre" method="POST" action="{{ url_for("objectslend_filter_objects") }}" class="ui form">
         <div class="ui segment">
             <div class="three fields">
                 <div class="field">
@@ -168,13 +168,13 @@
                 <div class="ui fluid card">
                     <div class="image">
                         <img
-                                src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": 0}) }}"
+                                src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": 0}) }}"
                                 alt=""
                         />
                     </div>
                     <div class="content">
                         <div class="header">
-                            <a href="{{ path_for("objectslend_objects", {"option": "category", "value": 0}) }}"{% if filters.category_filter == null %} class="active"{% endif %}>
+                            <a href="{{ url_for("objectslend_objects", {"option": "category", "value": 0}) }}"{% if filters.category_filter == null %} class="active"{% endif %}>
                                 {{ _T("All") }}
                             </a>
                         </div>
@@ -186,7 +186,7 @@
                         <div class="ui fluid card">
                             <div class="image">
                                     <img
-                                        src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
+                                        src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
                                         width="{{ categ.getPicture().getOptimalThumbWidth(olendsprefs) }}"
                                         height="{{ categ.getPicture().getOptimalThumbHeight(olendsprefs) }}"
                                         alt=""
@@ -194,7 +194,7 @@
                             </div>
                             <div class="content">
                                 <div class="header">
-                                    <a href="{{ path_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}"{% if filters.category_filter == categ.getId() %} class="active"{% endif %}>
+                                    <a href="{{ url_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}"{% if filters.category_filter == categ.getId() %} class="active"{% endif %}>
                                         {{ categ.getName() }}
                                     </a>
                                 </div>
@@ -242,7 +242,7 @@
             {% endif %}
             {% if olendsprefs.imagesInLists() %}
                 <td class="center">
-                    <img src="{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.getId()}) }}"
+                    <img src="{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.getId()}) }}"
                          class="picture"
                          width="{{ object.getPicture().getOptimalThumbWidth(olendsprefs) }}"
                          height="{{ object.getPicture().getOptimalThumbHeight(olendsprefs) }}"
@@ -295,7 +295,7 @@
             </td>
             <td>
                 {% if object.getIdAdh() %}
-                    <a href="{{ path_for("member", {"id": object.getIdAdh()}) }}">{{ memberName({'id': object.getIdAdh()}) }}</a>
+                    <a href="{{ url_for("member", {"id": object.getIdAdh()}) }}">{{ memberName({'id': object.getIdAdh()}) }}</a>
                 {% else %}-{% endif %}
             </td>
             {% if lendsprefs.VIEW_DATE_FORECAST %}
@@ -308,7 +308,7 @@
                         class="fas fa-thumbs-{% if object.isActive() %}up{% else %}down{% endif %}"
                         title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
                 </i>
-                <span class="sr-only">{{ _T("Active", "objectslend") }}</span>
+                <span class="displaynone">{{ _T("Active", "objectslend") }}</span>
             </td>
             <td class="center nowrap">
                 {% if login.isAdmin() or login.isStaff() %}

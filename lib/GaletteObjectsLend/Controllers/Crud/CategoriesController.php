@@ -132,7 +132,7 @@ class CategoriesController extends AbstractPluginController
         $this->session->objectslend_filter_categories = $filters;
 
         //assign pagination variables to the template and add pagination links
-        $filters->setViewPagination($this->router, $this->view, false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $lendsprefs = new Preferences($this->zdb);
         // display page
@@ -195,7 +195,7 @@ class CategoriesController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('objectslend_categories'));
+            ->withHeader('Location', $this->routeparser->pathFor('objectslend_categories'));
     }
 
     // /CRUD - Read
@@ -312,7 +312,7 @@ class CategoriesController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_category', $args)
+                    $this->routeparser->pathFor('objectslend_category', $args)
                 );
         } else {
             //redirect to categories list
@@ -325,7 +325,7 @@ class CategoriesController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_categories', $args)
+                    $this->routeparser->pathFor('objectslend_categories', $args)
                 );
         }
     }
@@ -342,7 +342,7 @@ class CategoriesController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('objectslend_categories');
+        return $this->routeparser->pathFor('objectslend_categories');
     }
 
     /**
@@ -354,7 +354,7 @@ class CategoriesController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->pathFor(
             'objectslend_doremove_category',
             $args
         );

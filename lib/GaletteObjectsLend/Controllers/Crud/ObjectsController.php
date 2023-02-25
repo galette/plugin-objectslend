@@ -150,7 +150,7 @@ class ObjectsController extends AbstractPluginController
 
         //assign pagination variables to the template and add pagination links
         $filters->setViewCommonsFilters($lendsprefs, $this->view);
-        $filters->setViewPagination($this->router, $this->view, false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $cat_filters = new CategoriesList();
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
@@ -221,7 +221,7 @@ class ObjectsController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('objectslend_objects'));
+            ->withHeader('Location', $this->routeparser->pathFor('objectslend_objects'));
     }
 
     /**
@@ -254,7 +254,7 @@ class ObjectsController extends AbstractPluginController
             'object' => $object,
             'rents' => $object->rents,
             'time' => time(),
-            'ajax' => $request->isXhr()
+            'ajax' => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest'
         ];
 
         // display page
@@ -291,13 +291,13 @@ class ObjectsController extends AbstractPluginController
             if (isset($post['delete'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('objectslend_remove_objects'));
+                    ->withHeader('Location', $this->routeparser->pathFor('objectslend_remove_objects'));
             }
 
             if (isset($post['print_list'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('objectslend_objects_print'));
+                    ->withHeader('Location', $this->routeparser->pathFor('objectslend_objects_print'));
             }
 
             $this->flash->addMessage(
@@ -313,7 +313,7 @@ class ObjectsController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('objectslend_objects'));
+            ->withHeader('Location', $this->routeparser->pathFor('objectslend_objects'));
     }
 
     // /CRUD - Read
@@ -503,7 +503,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor(
+                    $this->routeparser->pathFor(
                         'objectslend_object_' . $action,
                         $args
                     )
@@ -519,7 +519,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_objects')
+                    $this->routeparser->pathFor('objectslend_objects')
                 );
         }
     }
@@ -557,7 +557,7 @@ class ObjectsController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor(
+                $this->routeparser->pathFor(
                     'objectslend_object_edit',
                     ['id' => $object->object_id]
                 )
@@ -590,7 +590,7 @@ class ObjectsController extends AbstractPluginController
                 LendStatus::getActiveStockStatuses($this->zdb)),
             'lendsprefs'    => $lendsprefs->getpreferences(),
             'olendsprefs'   => $lendsprefs,
-            'ajax'          => $request->isXhr(),
+            'ajax'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest',
             'takeorgive'    => $action,
             'adh_selected'  => ($this->login->isSuperadmin() ? null : $this->login->id),
             'contribution'  => new Contribution($this->zdb, $this->login)
@@ -632,7 +632,7 @@ class ObjectsController extends AbstractPluginController
                     ->withStatus(301)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('objectslend_objects')
+                        $this->routeparser->pathFor('objectslend_objects')
                     );
             }
 
@@ -670,7 +670,7 @@ class ObjectsController extends AbstractPluginController
                     ->withStatus(301)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('objectslend_objects')
+                        $this->routeparser->pathFor('objectslend_objects')
                     );
             }
 
@@ -794,7 +794,7 @@ class ObjectsController extends AbstractPluginController
             )
         );
 
-        if ($request->isXhr() || $post['mode'] == 'ajax') {
+        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' || $post['mode'] == 'ajax') {
             return $response->withJson(
                 [
                     'success'   => $success
@@ -806,7 +806,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_objects')
+                    $this->routeparser->pathFor('objectslend_objects')
                 );
         }
     }
@@ -852,7 +852,7 @@ class ObjectsController extends AbstractPluginController
             )
         );
 
-        if ($request->isXhr() || $post['mode'] == 'ajax') {
+        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' || $post['mode'] == 'ajax') {
             return $response->withJson(
                 [
                     'success'   => $success
@@ -864,7 +864,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_objects')
+                    $this->routeparser->pathFor('objectslend_objects')
                 );
         }
     }
@@ -881,7 +881,7 @@ class ObjectsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('objectslend_objects');
+        return $this->routeparser->pathFor('objectslend_objects');
     }
 
     /**
@@ -893,7 +893,7 @@ class ObjectsController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->pathFor(
             'objectslend_doremove_object',
             $args
         );

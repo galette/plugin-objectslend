@@ -24,7 +24,7 @@
 {% endmacro %}
 
 {% block content %}
-<form action="{{ path_for("store_objectlend_preferences") }}" method="post" class="ui form">
+<form action="{{ url_for("store_objectlend_preferences") }}" method="post" class="ui form">
     <div class="ui stackable pointing inverted menu tabbed">
         <a class="item active" data-tab="plugin_preferences">{{ _T("Plugin preferences", "objectslend") }}</a>
         <a class="item" data-tab="plugin_images">{{ _T("Images related", "objectslend") }}</a>

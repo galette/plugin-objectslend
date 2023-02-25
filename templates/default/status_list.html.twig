@@ -23,7 +23,7 @@
 {% block infoline_actions %}
     <a
             class="button"
-            href="{{ path_for("objectslend_status_add") }}"
+            href="{{ url_for("objectslend_status_add") }}"
     >
         <i class="ui plus circle icon" aria-hidden="true"></i>
         {{ _T("Add a status", "objectslend") }}
@@ -43,7 +43,7 @@
 {% endblock %}
 
 {% block search %}
-    <form action="{{ path_for("objectslend_filter_statuses") }}" method="post" id="filtre" class="ui form">
+    <form action="{{ url_for("objectslend_filter_statuses") }}" method="post" id="filtre" class="ui form">
         <div class="ui segment">
             <div class="ui three fields">
                 <div class="field">
@@ -125,19 +125,19 @@
             <td class="center {if $status->is_active}use{else}delete{/if}">
                 {% if status.is_active %}
                     <i class="thumbs up icon"></i>
-                    <span class="sr-only">{{ _T("Active", "objectslend") }}</span>
+                    <span class="displaynone">{{ _T("Active", "objectslend") }}</span>
                 {% else %}
                     <i class="thumbs down icon"></i>
-                    <span class="sr-only">{{ _T("Inactive", "objectslend") }}</span>
+                    <span class="displaynone">{{ _T("Inactive", "objectslend") }}</span>
                 {% endif %}
             </td>
             <td class="center {if $status->in_stock}use{else}delete{/if}">
                 {% if status.in_stock %}
                     <i class="thumbs up icon"></i>
-                    <span class="sr-only">{{ _T("In stock", "objectslend") }}</span>
+                    <span class="displaynone">{{ _T("In stock", "objectslend") }}</span>
                 {% else %}
                     <i class="thumbs down icon"></i>
-                    <span class="sr-only">{{ _T("Not in stock", "objectslend") }}</span>
+                    <span class="displaynone">{{ _T("Not in stock", "objectslend") }}</span>
                 {% endif %}
             </td>
             <td>

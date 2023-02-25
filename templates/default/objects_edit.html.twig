@@ -1,7 +1,7 @@
 {% extends 'page.html.twig' %}
 
 {% block content %}
-    <form action="{% if object.getId() %}{{ path_for("objectslend_object_action_edit", {"id": object.getId()}) }}{% else %}{{ path_for("objectslend_object_action_add") }}{% endif %}" method="post" enctype="multipart/form-data" class="ui form">
+    <form action="{% if object.getId() %}{{ url_for("objectslend_object_action_edit", {"id": object.getId()}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" enctype="multipart/form-data" class="ui form">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -110,7 +110,7 @@
             <div class="active content">
                 <div class="inline field">
                     <img
-                            src="{% if object.object_id %}{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
+                            src="{% if object.object_id %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
                             class="picture"
                             width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
                             height="{{ object.picture.getOptimalThumbHeight(olendsprefs) }}"
@@ -134,10 +134,10 @@
                 <i class="save icon"></i> {{ _T("Save") }}
             </button>
     {%if object.object_id != '' %}
-            <a href="{{ path_for("objectslend_object_clone", {"id": object.object_id}) }}" class="ui labeled icon button">
+            <a href="{{ url_for("objectslend_object_clone", {"id": object.object_id}) }}" class="ui labeled icon button">
                 <i class="clone icon"></i> {{ _T("Duplicate", "objectslend") }}
             </a>
-            <a href="{{ path_for("objectslend_object_print", {"id": object.object_id}) }}" class="ui labeled icon button">
+            <a href="{{ url_for("objectslend_object_print", {"id": object.object_id}) }}" class="ui labeled icon button">
                 <i class="print icon"></i> {{ _T("Print object", "objectslend") }}
             </a>
     {% endif %}
@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        <form action="{% if object.object_id %}{{ path_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ path_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
+        <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
             <div class="ui styled fluid accordion field">
                 <div class="active title">
                     <i class="icon dropdown"></i>

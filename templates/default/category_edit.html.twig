@@ -1,7 +1,7 @@
 {% extends "page.html.twig" %}
 
 {% block content %}
-<form action="{% if category.category_id %}{{ path_for("objectslend_category_action_edit", {"id": category.category_id}) }}{% else %}{{ path_for("objectslend_category_action_add") }}{% endif %}" method="post" enctype="multipart/form-data" class="ui form">
+<form action="{% if category.category_id %}{{ url_for("objectslend_category_action_edit", {"id": category.category_id}) }}{% else %}{{ url_for("objectslend_category_action_add") }}{% endif %}" method="post" enctype="multipart/form-data" class="ui form">
     <div class="ui styled fluid accordion field">
         <div class="active title">
             <i class="icon dropdown"></i>
@@ -25,7 +25,7 @@
             <div class="inline field">
                 <label>{{ _T("Picture:", "objectslend") }}</label>
                 <img
-                    src="{% if category.category_id %}{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": category.category_id}) }}{% else %}{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail"}) }}{% endif %}"
+                    src="{% if category.category_id %}{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": category.category_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail"}) }}{% endif %}"
                     class="picture"
                     width="{{ category.picture.getOptimalThumbWidth(olendsprefs) }}"
                     height="{{ category.picture.getOptimalThumbHeight(olendsprefs) }}"

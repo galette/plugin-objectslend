@@ -19,7 +19,7 @@
 {% block infoline_actions %}
     <a
             class="button"
-            href="{{ path_for("objectslend_category_add") }}"
+            href="{{ url_for("objectslend_category_add") }}"
     >
         <i class="ui plus circle icon" aria-hidden="true"></i>
         {{ _T("Add a category", "objectslend") }}
@@ -36,7 +36,7 @@
 {% endblock %}
 
 {% block search %}
-    <form action="{{ path_for("objectslend_filter_categories") }}" method="post" id="filtre" class="ui form">
+    <form action="{{ url_for("objectslend_filter_categories") }}" method="post" id="filtre" class="ui form">
         <div class="ui segment">
             <div class="ui two fields">
                 <div class="field">
@@ -91,7 +91,7 @@
                 </td>
                 <td>
         {% if olendsprefs.imagesInLists() %}
-                    <img src="{{ path_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.category_id}) }}"
+                    <img src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.category_id}) }}"
                         class="picture"
                         width="{{ categ.picture.getOptimalThumbWidth(olendsprefs) }}"
                         height="{{ categ.picture.getOptimalThumbHeight(olendsprefs) }}"
@@ -101,7 +101,7 @@
                 </td>
                 <td class="center {% if categ.is_active %}use{% else %}delete{% endif %}">
                     <i class="thumbs {% if categ.is_active%}up{% else %}down{% endif %} icon"></i>
-                    <span class="sr-only">{{ _T("Active") }}</span>
+                    <span class="displaynone">{{ _T("Active") }}</span>
                 </td>
         {% if login.isAdmin() or login.isStaff() %}
                 <td class="center nowrap">

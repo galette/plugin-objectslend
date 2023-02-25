@@ -1,7 +1,7 @@
 {% extends 'page.html.twig' %}
 
 {% block content %}
-    <form action="{% if status.status_id %}{{ path_for("objectslend_status_action_edit", {"id": status.status_id}) }}{% else %}{{ path_for("objectslend_status_action_add") }}{% endif %}" method="post" class="ui form">
+    <form action="{% if status.status_id %}{{ url_for("objectslend_status_action_edit", {"id": status.status_id}) }}{% else %}{{ url_for("objectslend_status_action_add") }}{% endif %}" method="post" class="ui form">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>

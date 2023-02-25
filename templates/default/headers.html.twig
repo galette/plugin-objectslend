@@ -1,6 +1,6 @@
 {% if olendsprefs is defined and olendsprefs.showFullsize() %}
-<link rel="stylesheet" type="text/css" href="{{ path_for("plugin_res", {"plugin": module_id, "path": "featherlight-1.7.0/featherlight.min.css"}) }}" media="screen"/>
-<script type="text/javascript" src="{{ path_for("plugin_res", {"plugin": module_id, "path": "featherlight-1.7.0/featherlight.min.js"}) }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for("plugin_res", {"plugin": module_id, "path": "featherlight-1.7.0/featherlight.min.css"}) }}" media="screen"/>
+<script type="text/javascript" src="{{ url_for("plugin_res", {"plugin": module_id, "path": "featherlight-1.7.0/featherlight.min.js"}) }}"></script>
 <script type="text/javascript">
     var _init_fullimage = function() {
         $('.picture').featherlight({
@@ -18,4 +18,4 @@
     });
 </script>
 {% endif %}
-<script type="text/javascript" src="{{ path_for("plugin_res", {"plugin": module_id, "path": "lend.js"}) }}"></script>
+<script type="text/javascript" src="{{ url_for("plugin_res", {"plugin": module_id, "path": "lend.js"}) }}"></script>

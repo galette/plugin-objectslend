@@ -133,7 +133,7 @@ class MainController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('objectslend_preferences')
+                $this->routeparser->pathFor('objectslend_preferences')
             );
     }
 }

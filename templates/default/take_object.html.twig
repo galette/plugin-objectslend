@@ -1,7 +1,7 @@
 {% extends 'page.html.twig' %}
 
 {% block content %}
-<form action="{% if takeorgive == 'take' %}{{ path_for("objectslend_object_dotake", {"id": object.object_id}) }}{% else %}{{ path_for("objectslend_object_doreturn", {"id": object.object_id}) }}{% endif %}" method="post" id="form_take_object" class="ui form">
+<form action="{% if takeorgive == 'take' %}{{ url_for("objectslend_object_dotake", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_doreturn", {"id": object.object_id}) }}{% endif %}" method="post" id="form_take_object" class="ui form">
     <div class="ui styled fluid accordion field">
         <div class="active title">
             <i class="icon dropdown"></i>
@@ -11,7 +11,7 @@
             <div class="inline field">
                 <label>{{ _T("Name:", "objectslend") }}</label>
                 {{ object.name }}
-                <img src="{% if object.object_id %}{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ path_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
+                <img src="{% if object.object_id %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
                 class="picture fright"
                 width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
                 height="{{ object.picture.getOptimalThumbHeight(olendsprefs)}}"
