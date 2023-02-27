@@ -124,19 +124,19 @@
             </td>
             <td class="center {if $status->is_active}use{else}delete{/if}">
                 {% if status.is_active %}
-                    <i class="thumbs up icon"></i>
+                    <i class="thumbs up green icon"></i>
                     <span class="displaynone">{{ _T("Active", "objectslend") }}</span>
                 {% else %}
-                    <i class="thumbs down icon"></i>
+                    <i class="thumbs down red icon"></i>
                     <span class="displaynone">{{ _T("Inactive", "objectslend") }}</span>
                 {% endif %}
             </td>
             <td class="center {if $status->in_stock}use{else}delete{/if}">
                 {% if status.in_stock %}
-                    <i class="thumbs up icon"></i>
+                    <i class="thumbs up green icon"></i>
                     <span class="displaynone">{{ _T("In stock", "objectslend") }}</span>
                 {% else %}
-                    <i class="thumbs down icon"></i>
+                    <i class="thumbs down red icon"></i>
                     <span class="displaynone">{{ _T("Not in stock", "objectslend") }}</span>
                 {% endif %}
             </td>
