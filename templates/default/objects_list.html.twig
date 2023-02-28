@@ -106,7 +106,7 @@
 {% endblock %}
 
 {% block search %}
-    <form id="filtre" method="POST" action="{{ url_for("objectslend_filter_objects") }}" class="ui form">
+    <form id="filtre" method="POST" action="{{ url_for("objectslend_filter_objects") }}" class="ui form filters">
         <div class="ui secondary yellow segment">
             <div class="three fields">
                 <div class="field">
@@ -122,8 +122,8 @@
                     </select>
                 </div>
                 <div class="field">
+                    <label for="email_filter">{{ _T("Active:", "objectslend") }}</label>
                     <div class="inline fields">
-                        <label for="email_filter">{{ _T("Active:", "objectslend") }}</label>
                         <div class="field inline">
                             <div class="ui radio checkbox">
                                 <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Objects::ALL_OBJECTS') }}"{% if filters.active_filter == constant('Galette\\Repository\\Members::FILTER_DC_EMAIL') %} checked="checked"{% endif %}>
