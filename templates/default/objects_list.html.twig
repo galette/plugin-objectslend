@@ -305,7 +305,7 @@
             {% endif %}
             <td class="center {% if object.isActive() %}use{% else %}delete{% endif %}">
                 <i
-                        class="fas fa-thumbs-{% if object.isActive() %}up{% else %}down{% endif %}"
+                        class="thumbs {% if object.isActive() %}up green{% else %}down red{% endif %} icon"
                         title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
                 </i>
                 <span class="displaynone">{{ _T("Active", "objectslend") }}</span>
