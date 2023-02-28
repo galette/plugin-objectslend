@@ -311,6 +311,7 @@
                 <span class="displaynone">{{ _T("Active", "objectslend") }}</span>
             </td>
             <td class="center nowrap">
+                {% set actions = [] %}
                 {% if login.isAdmin() or login.isStaff() %}
                     {% set actions = [
                         {
