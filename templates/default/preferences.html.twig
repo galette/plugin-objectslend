@@ -3,10 +3,11 @@
 {%  macro yesno_checkbox(label, name, tip, yes, no) %}
     <div class="field">
         <div class="inline fields">
-            <label title="{{ tip|e() }}">{{ label }}</label>
+            <label title="{{ tip|e() }}">{{ label }}
     {% if tip is not null %}
-            <i class="circular inverted primary small icon info tooltip" data-html="{{ tip|e() }}"></i>
+                <i class="circular inverted primary small icon info tooltip" data-html="{{ tip|e() }}"></i>
     {% endif %}
+            </label>
             <div class="field inline">
                 <div class="ui radio checkbox">
                     <input type="radio" name="{{ name }}" id="{{ yes.name }}" value="1" {% if yes.checked %}checked="checked"{% endif %}/>
@@ -30,7 +31,7 @@
         <a class="item" data-tab="plugin_images">{{ _T("Images related", "objectslend") }}</a>
         <a class="item" data-tab="plugin_display">{{ _T("Display preferences", "objectslend") }}</a>
     </div>
-    
+
     <div class="ui active tab segment" data-tab="plugin_preferences">
         <div class="ui stackable grid">
             <div class="column">
@@ -94,7 +95,7 @@
                     value: lendsprefs.GENERATED_CONTRIB_INFO_TEXT,
                     label: _T("Contribution text:", "objectslend"),
                     title: _T("Comment text to add on generated contribution", "objectslend"),
-                    tip: _T("Comment text to add on generated contribution. Automatically replaced values (put into curly brackets): <br/>- NAME: Name<br/>- DESCRIPTION: Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions", "objectslend"),
+                    tip_html: _T("Comment text to add on generated contribution. Automatically replaced values (put into curly brackets): <br/>- NAME: Name<br/>- DESCRIPTION: Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions", "objectslend"),
                     required: lendsprefs.AUTO_GENERATE_CONTRIBUTION == '1',
                     component_class: 'field'
                 } %}

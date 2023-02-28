@@ -46,14 +46,14 @@
                     id: 'price',
                     value: object.price,
                     label: _T("Price:", "objectslend"),
-                    example: object.getCurrency()
+                    rightlabel: object.getCurrency()
                 } %}
 
                 {% include "components/forms/text.html.twig" with {
                     id: 'rent_price',
                     value: object.rent_price,
                     label: _T("Borrow price:", "objectslend"),
-                    example: object.getCurrency()
+                    rightlabel: object.getCurrency()
                 } %}
 
                 {% include "components/forms/checkbox.html.twig" with {
@@ -68,14 +68,14 @@
                     id: 'dimension',
                     value: object.dimension,
                     label: _T("Dimensions:", "objectslend"),
-                    example: _T("Cm", "objectslend")
+                    rightlabel: _T("Cm", "objectslend")
                 } %}
 
                 {% include "components/forms/text.html.twig" with {
                     id: 'weight',
                     value: object.weight,
                     label: _T("Weight:", "objectslend"),
-                    example: _T("Kg", "objectslend")
+                    rightlabel: _T("Kg", "objectslend")
                 } %}
 
                 {% include "components/forms/checkbox.html.twig" with {
@@ -147,17 +147,17 @@
     </form>
 
     {% if object.object_id %}
-        <div class="ui styled fluid accordion field">
-            <div class="active title">
-                <i class="icon dropdown"></i>
-                {{ _T("History", "objectslend") }}
-            </div>
-            <div class="active content">
-                {% include "@PluginGaletteObjectslend/list_lent_object.html.twig" with {rents: object.rents, mode: 'ajax'} %}
-            </div>
-        </div>
-
         <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
+            <div class="ui styled fluid accordion field">
+                <div class="active title">
+                    <i class="icon dropdown"></i>
+                    {{ _T("History", "objectslend") }}
+                </div>
+                <div class="active content">
+                    {% include "@PluginGaletteObjectslend/list_lent_object.html.twig" with {rents: object.rents, mode: 'ajax'} %}
+                </div>
+            </div>
+
             <div class="ui styled fluid accordion field">
                 <div class="active title">
                     <i class="icon dropdown"></i>

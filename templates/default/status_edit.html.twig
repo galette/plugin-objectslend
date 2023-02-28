@@ -10,6 +10,7 @@
             <div class="active content">
                 {% include "components/forms/text.html.twig" with {
                     id: 'text',
+                    component_class: 'inline field',
                     value: status.status_text,
                     label: _T("Status:", "objectslend"),
                     required: true
@@ -33,6 +34,7 @@
 
                 {% include "components/forms/number.html.twig" with {
                     id: 'rent_day_number',
+                    component_class: 'inline field',
                     value: status.rent_day_number,
                     label: _T("Days for rent", "objectslend"),
                     title: _T("Number of days to rent per default", "objectslend"),
