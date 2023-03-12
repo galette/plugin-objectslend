@@ -5,13 +5,13 @@
 # Alonso Arteaga <alon.arte.r@gmail.com>, 2021.
 # noelia <zizizhuji1@gmail.com>, 2021.
 # Cow <javier.fserrador@gmail.com>, 2022.
-# gallegonovato <fran-carro@hotmail.es>, 2022.
+# gallegonovato <fran-carro@hotmail.es>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-03-12 09:59+0100\n"
-"PO-Revision-Date: 2022-10-17 00:53+0000\n"
+"PO-Revision-Date: 2023-03-13 13:41+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15-dev\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -99,10 +99,8 @@ msgid "Return a borrowed object"
 msgstr "Devolver un objeto prestado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
-#, fuzzy
-#| msgid "You do not have rights to take objects!"
 msgid "You do not have rights to borrow objects!"
-msgstr "¡ No tiene derechos para tomar objetos !"
+msgstr "¡No tienes derecho a tomar objetos prestados!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
@@ -934,11 +932,8 @@ msgid "Return object"
 msgstr "Devuelve el objeto"
 
 #: ../tempcache/take_object.html.twig:556
-#, fuzzy
-#| msgid "You must agree with terms and conditions in order to take."
 msgid "You must agree with terms and conditions in order to borrow."
-msgstr ""
-"Debe estar de acuerdo con los términos y condiciones para poder entrar."
+msgstr "Debe aceptar los términos y condiciones para obtener un préstamo."
 
 #~ msgid "Object has been successfully stored!"
 #~ msgstr "¡ El objeto ha sido almacenado correctamente !"
