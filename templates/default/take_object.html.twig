@@ -226,7 +226,7 @@
         $('#btnsave').on('click', function(e) {
             if (!$('#agreement').is(':checked')) {
                 e.preventDefault();
-                alert('{{ _T("You must agree with terms and conditions in order to take.", "objectslend")|e('js') }}');
+                alert('{{ _T("You must agree with terms and conditions in order to borrow.", "objectslend")|e('js') }}');
             }
         });
 

@@ -617,7 +617,7 @@ class ObjectsController extends AbstractPluginController
                 && !($this->login->isAdmin() || $this->login->isStaff())
             ) {
                 Analog::log(
-                    'Trying to take an object without appropriate rights! (Object ' .
+                    'Trying to borrow an object without appropriate rights! (Object ' .
                     $id . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
@@ -625,7 +625,7 @@ class ObjectsController extends AbstractPluginController
                 //redirect to objects list
                 $this->flash->addMessage(
                     'error_detected',
-                    _T("You do not have rights to take objects!", "objectslend")
+                    _T("You do not have rights to borrow objects!", "objectslend")
                 );
 
                 return $response
