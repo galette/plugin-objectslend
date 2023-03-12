@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2022-07-03 22:19+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-12 09:59+0100\n"
 "PO-Revision-Date: 2022-10-17 00:53+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
@@ -22,61 +22,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.15-dev\n"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:143
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
 msgstr "Lista de las categorías"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:224
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:225
 msgid "Edit category"
 msgstr "Editar categoría"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:226
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:227
 msgid "New category"
 msgstr "Crear categoría"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:290
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:291
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:481
 msgid "Delete failed"
 msgstr "Eliminación errónea"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:298
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:299
 msgid "An error occured while storing the category."
 msgstr "Ocurrió un error al almacenar la categoría."
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:321
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:322
 msgid "Category has been saved"
 msgstr "La categoría ha sido guardada"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:374
+#: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:375
 #, php-format
 msgid "Remove category %1$s"
 msgstr "Eliminar categoría %1$s"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:166
-#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:74
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:167
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:75
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:99
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:101
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:119
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:76
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:104
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:106
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:124
 msgid "Objects list"
 msgstr "Índice de objetos"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:253
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:254
 #, php-format
 msgid "Rents list for %object"
 msgstr "Listado de rentas para %objeto"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:346
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:347
 msgid "Edit object"
 msgstr "Editar objeto"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:348
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:349
 msgid "New object"
 msgstr "Crear objeto"
-
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:435
-msgid "Object has been successfully stored!"
-msgstr "¡ El objeto ha sido almacenado correctamente !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:489
 msgid "Something went wrong saving object :("
@@ -103,7 +99,9 @@ msgid "Return a borrowed object"
 msgstr "Devolver un objeto prestado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
-msgid "You do not have rights to take objects!"
+#, fuzzy
+#| msgid "You do not have rights to take objects!"
+msgid "You do not have rights to borrow objects!"
 msgstr "¡ No tiene derechos para tomar objetos !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
@@ -116,17 +114,17 @@ msgstr "%objet no está disponible actualmente"
 msgid "You have just borrowed %object :)"
 msgstr "Ha alquilado %object :)"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:851
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:852
 #, php-format
 msgid "%object has been returned :)"
 msgstr "%object ha sido devuelto"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:937
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:939
 #, php-format
 msgid "Remove object %1$s"
 msgstr "Quita objeto %1$s"
 
-#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:946
+#: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:948
 #, php-format
 msgid "You are about to remove %count objects."
 msgstr "Va a quitar %count objetos."
@@ -165,41 +163,41 @@ msgstr "El estado ha sido guardado"
 msgid "Remove status %1$s"
 msgstr "Eliminar estado %1$s"
 
-#: ../lib/GaletteObjectsLend/Controllers/MainController.php:88
+#: ../lib/GaletteObjectsLend/Controllers/MainController.php:84
 msgid "ObjectsLend preferences"
 msgstr "Preferencias de ObjectLend"
 
-#: ../lib/GaletteObjectsLend/Controllers/MainController.php:120
+#: ../lib/GaletteObjectsLend/Controllers/MainController.php:116
 msgid "Preferences have been successfully stored!"
 msgstr "¡ Las preferencias han sigo almacenadas correctamente !"
 
-#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:70
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Objects lend"
 msgstr "Lente de objetos"
 
-#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:89
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:90
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:91
 msgid "Borrow status"
 msgstr "Estado alquilado"
 
-#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:97
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:98
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:99
 msgid "Object categories"
 msgstr "Categorías de objeto"
 
-#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:105
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:106
+#: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:107
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:128
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:133
 #, php-format
 msgid "Printed on %date"
 msgstr "Escrito el %d"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:175
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:157
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:281
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:289
 #: ../tempcache/category_edit.html.twig:69
 #: ../tempcache/objects_list.html.twig:140
 #: ../tempcache/list_lent_object.html.twig:66
@@ -207,192 +205,192 @@ msgstr "Escrito el %d"
 msgid "Name"
 msgstr "Nombre"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:159
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:158
 msgid "Description"
 msgstr "Descripción"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:177
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
 #: ../tempcache/objects_list.html.twig:148
 msgid "Serial"
 msgstr "Serie"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:168
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
 #: ../tempcache/objects_list.html.twig:159
 msgid "Price"
 msgstr "Precio"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:179
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
 #: ../tempcache/objects_list.html.twig:170
 msgid "Borrow price"
 msgstr "Precio de alquiler"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:180
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:287
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:295
 #: ../tempcache/objects_list.html.twig:181
 msgid "Dimensions"
 msgstr "Dimensiones"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
 #: ../tempcache/objects_list.html.twig:192
 msgid "Weight"
 msgstr "Ponderación"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/list_lent_object.html.twig:66
 #: ../tempcache/status_list.html.twig:98 ../tempcache/status_edit.html.twig:62
-#: ../tempcache/objects_edit.html.twig:349
+#: ../tempcache/objects_edit.html.twig:348
 msgid "Status"
 msgstr "Estado"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
 #: ../tempcache/objects_list.html.twig:200
 msgid "Since"
 msgstr "Desde"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:191
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "Member"
 msgstr "Miembro"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:186
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 #: ../tempcache/objects_list.html.twig:208
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Return"
 msgstr "Devolución"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:213
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:214
 #, php-format
 msgid "Category: %category"
 msgstr "Categoría: %c"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:255
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:256
 msgid "Total:"
 msgstr "Total:"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:262
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:263
 msgid "Borrowed"
 msgstr "Alquilado"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:264
+#: ../lib/GaletteObjectsLend/IO/PdfObjects.php:265
 msgid "Available"
 msgstr "Disponible"
 
 #. TRANS: this is a filename
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:79
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:78
 msgid "object_card"
 msgstr "objeto_tarjeta"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:91
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:90
 msgid "Object card"
 msgstr "Tarjeta objeto"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:93
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:92
 msgid "Labels"
 msgstr "Etiquetas"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:161
 #: ../tempcache/category_edit.html.twig:62
 msgid "Category"
 msgstr "Categoría"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:165
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:282
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:164
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:290
 msgid "Serial number"
 msgstr "Nº de serie"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:177
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:176
 msgid "Price per rental day"
 msgstr "Precio por día beneficiario"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:183
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
 #: ../tempcache/objects_edit.html.twig:140
 #: ../tempcache/take_object.html.twig:171
 msgid "Cm"
 msgstr "Cm"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:186
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
 #: ../tempcache/objects_edit.html.twig:146
 #: ../tempcache/take_object.html.twig:201
 msgid "Kg"
 msgstr "Kg"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:187
 #: ../tempcache/objects_list.html.twig:219
 #: ../tempcache/objects_list.html.twig:728
-#: ../tempcache/status_list.html.twig:98 ../tempcache/status_list.html.twig:307
+#: ../tempcache/status_list.html.twig:98 ../tempcache/status_list.html.twig:306
 #: ../tempcache/categories_list.html.twig:98
 msgid "Active"
 msgstr "Activa"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:189
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:188
 msgid "Location"
 msgstr "Lugar"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:211
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:210
 msgid "History of object loans"
 msgstr "Histórico de objeto alquilado"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:212
 msgid "Begin"
 msgstr "Comienzo"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:213
 msgid "End"
 msgstr "Final"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:215
 #: ../tempcache/objects_list.html.twig:655
 #: ../tempcache/list_lent_object.html.twig:119
-#: ../tempcache/status_list.html.twig:329
-#: ../tempcache/objects_edit.html.twig:331
+#: ../tempcache/status_list.html.twig:328
+#: ../tempcache/objects_edit.html.twig:330
 msgid "In stock"
 msgstr "Almacenado"
 
-#: ../lib/GaletteObjectsLend/IO/PdfObject.php:218
+#: ../lib/GaletteObjectsLend/IO/PdfObject.php:217
 #: ../tempcache/list_lent_object.html.twig:66
-#: ../tempcache/objects_edit.html.twig:354
+#: ../tempcache/objects_edit.html.twig:353
 msgid "Comments"
 msgstr "Comentarios"
 
-#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:160
+#: ../lib/GaletteObjectsLend/Entity/LendStatus.php:167
 msgid "Status has not been added :("
 msgstr "Estado que no ha sido añadido :("
 
-#: ../lib/GaletteObjectsLend/Entity/Preferences.php:270
+#: ../lib/GaletteObjectsLend/Entity/Preferences.php:288
 msgid "Unable to store preferences :("
 msgstr "Imposible almacenar preferencias :("
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:185
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:201
 msgid "Rent has not been added"
 msgstr "La renta no ha sido añadida"
 
-#: ../lib/GaletteObjectsLend/Entity/LendRent.php:349
+#: ../lib/GaletteObjectsLend/Entity/LendRent.php:365
 msgid "Y-m-d H:i"
 msgstr "A-m-d H:i"
 
-#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:262
-#: ../tempcache/categories_list.html.twig:334
+#: ../lib/GaletteObjectsLend/Entity/LendCategory.php:266
+#: ../tempcache/categories_list.html.twig:333
 msgid "No category"
 msgstr "Ninguna categoría"
 
-#: ../lib/GaletteObjectsLend/Entity/LendObject.php:347
+#: ../lib/GaletteObjectsLend/Entity/LendObject.php:368
 msgid "Object has not been added :("
 msgstr "El objeto no ha sido agregado :("
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:281
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:289
 msgid "Name/description"
 msgstr "Nombre/descripción"
 
-#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:283
+#: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:291
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Id"
 msgstr "Id"
@@ -421,9 +419,9 @@ msgstr "Añade un objeto"
 msgid "By"
 msgstr "Por"
 
-#: ../tempcache/objects_list.html.twig:287
-#: ../tempcache/status_list.html.twig:134
-#: ../tempcache/categories_list.html.twig:132
+#: ../tempcache/objects_list.html.twig:286
+#: ../tempcache/status_list.html.twig:133
+#: ../tempcache/categories_list.html.twig:131
 #: ../tempcache/status_edit.html.twig:80
 #: ../tempcache/objects_edit.html.twig:151
 msgid "Active:"
@@ -456,60 +454,60 @@ msgstr "Objeto está activo"
 msgid "Object is inactive"
 msgstr "Objeto no está activo"
 
-#: ../tempcache/objects_list.html.twig:737
+#: ../tempcache/objects_list.html.twig:740
 msgid "Edit the object"
 msgstr "Edita el objeto"
 
-#: ../tempcache/objects_list.html.twig:738
+#: ../tempcache/objects_list.html.twig:741
 msgid "Duplicate object"
 msgstr "Duplicar objeto"
 
-#: ../tempcache/objects_list.html.twig:739
+#: ../tempcache/objects_list.html.twig:742
 msgid "Show object lends"
 msgstr "Mostrar objeto prestado"
 
-#: ../tempcache/objects_list.html.twig:740
+#: ../tempcache/objects_list.html.twig:743
 msgid "Object card in PDF"
 msgstr "Tarjeta de objeto en *.pdf"
 
-#: ../tempcache/objects_list.html.twig:741
+#: ../tempcache/objects_list.html.twig:744
 #, php-format
 msgid "Remove %object from database"
 msgstr "Quitar %object desde BdD"
 
-#: ../tempcache/objects_list.html.twig:757
+#: ../tempcache/objects_list.html.twig:760
 msgid "Take away"
 msgstr "Lárgate"
 
-#: ../tempcache/objects_list.html.twig:768
+#: ../tempcache/objects_list.html.twig:771
 msgid "Give back"
 msgstr "Devolver"
 
-#: ../tempcache/objects_list.html.twig:811
+#: ../tempcache/objects_list.html.twig:814
 msgid "No object has been found"
 msgstr "No se ha encontrado ningún objeto"
 
-#: ../tempcache/objects_list.html.twig:850
+#: ../tempcache/objects_list.html.twig:853
 msgid "History of object"
 msgstr "Historial de objeto"
 
-#: ../tempcache/objects_list.html.twig:865
+#: ../tempcache/objects_list.html.twig:868
 msgid "An error occurred loading history display :("
 msgstr "Ha ocurrido un error al cargar la pantalla histórica :("
 
-#: ../tempcache/objects_list.html.twig:894
+#: ../tempcache/objects_list.html.twig:897
 msgid "Take objects"
 msgstr "Coger objetos"
 
-#: ../tempcache/objects_list.html.twig:925
+#: ../tempcache/objects_list.html.twig:928
 msgid "An error occurred loading 'Take away' display :("
 msgstr "Ha ocurrido un error al cargar la pantalla «Apartar» :("
 
-#: ../tempcache/objects_list.html.twig:949
+#: ../tempcache/objects_list.html.twig:952
 msgid "Give back objects"
 msgstr "Devolver objetos"
 
-#: ../tempcache/objects_list.html.twig:980
+#: ../tempcache/objects_list.html.twig:983
 msgid "An error occurred loading 'Give back' display :("
 msgstr "Ha ocurrido un error al cargar la pantalla «Devolver» :("
 
@@ -541,35 +539,35 @@ msgstr "Mercancía"
 msgid "Days for rent"
 msgstr "Días para alquilar"
 
-#: ../tempcache/status_list.html.twig:190 ../tempcache/status_edit.html.twig:74
+#: ../tempcache/status_list.html.twig:189 ../tempcache/status_edit.html.twig:74
 msgid "In stock:"
 msgstr "Almacenado:"
 
-#: ../tempcache/status_list.html.twig:315
+#: ../tempcache/status_list.html.twig:314
 msgid "Inactive"
 msgstr "Inactiva"
 
-#: ../tempcache/status_list.html.twig:337
+#: ../tempcache/status_list.html.twig:336
 msgid "Not in stock"
 msgstr "No dentro del almacenaje"
 
-#: ../tempcache/status_list.html.twig:349
+#: ../tempcache/status_list.html.twig:348
 #: ../tempcache/take_object.html.twig:337
 #, php-format
 msgid "%days days"
 msgstr "%d días"
 
-#: ../tempcache/status_list.html.twig:362
+#: ../tempcache/status_list.html.twig:361
 #, php-format
 msgid "Edit %status"
 msgstr "Editar %s"
 
-#: ../tempcache/status_list.html.twig:364
+#: ../tempcache/status_list.html.twig:363
 #, php-format
 msgid "Remove %status from database"
 msgstr "Quitar estado %s desde BdD"
 
-#: ../tempcache/status_list.html.twig:392
+#: ../tempcache/status_list.html.twig:391
 msgid "No status has been found"
 msgstr "No ha sido encontrado ningún estado"
 
@@ -584,12 +582,12 @@ msgstr[1] "Categorías de %count"
 msgid "Add a category"
 msgstr "Añadir una categoría"
 
-#: ../tempcache/categories_list.html.twig:288
+#: ../tempcache/categories_list.html.twig:287
 #, php-format
 msgid "Edit \"%category\""
 msgstr "Editar «%categoría»"
 
-#: ../tempcache/categories_list.html.twig:298
+#: ../tempcache/categories_list.html.twig:297
 #, php-format
 msgid "Remove \"%category\""
 msgstr "Eliminar «%categoría»"
@@ -817,7 +815,7 @@ msgid "Weight:"
 msgstr "Ponderación:"
 
 #: ../tempcache/objects_edit.html.twig:161
-#: ../tempcache/objects_edit.html.twig:317
+#: ../tempcache/objects_edit.html.twig:316
 #: ../tempcache/take_object.html.twig:323
 #: ../tempcache/take_object.html.twig:365
 #: ../tempcache/take_object.html.twig:417
@@ -841,16 +839,16 @@ msgstr "Duplicar"
 msgid "Print object"
 msgstr "Imprimir objeto"
 
-#: ../tempcache/objects_edit.html.twig:287
+#: ../tempcache/objects_edit.html.twig:294
 msgid "History"
 msgstr "Historial"
 
-#: ../tempcache/objects_edit.html.twig:311
-#: ../tempcache/objects_edit.html.twig:398
+#: ../tempcache/objects_edit.html.twig:310
+#: ../tempcache/objects_edit.html.twig:397
 msgid "Change status"
 msgstr "Cambiar estado"
 
-#: ../tempcache/objects_edit.html.twig:360
+#: ../tempcache/objects_edit.html.twig:359
 #: ../tempcache/take_object.html.twig:286
 msgid "Member:"
 msgstr "Miembro:"
@@ -936,8 +934,14 @@ msgid "Return object"
 msgstr "Devuelve el objeto"
 
 #: ../tempcache/take_object.html.twig:556
-msgid "You must agree with terms and conditions in order to take."
-msgstr "Debe estar de acuerdo con los términos y condiciones para poder entrar."
+#, fuzzy
+#| msgid "You must agree with terms and conditions in order to take."
+msgid "You must agree with terms and conditions in order to borrow."
+msgstr ""
+"Debe estar de acuerdo con los términos y condiciones para poder entrar."
+
+#~ msgid "Object has been successfully stored!"
+#~ msgstr "¡ El objeto ha sido almacenado correctamente !"
 
 #~ msgid "categories"
 #~ msgstr "categorías"
