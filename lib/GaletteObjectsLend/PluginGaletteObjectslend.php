@@ -76,7 +76,12 @@ class PluginGaletteObjectslend extends GalettePlugin
                     'title' => _T("Objects list", "objectslend"),
                     'route' => [
                         'name' => 'objectslend_objects',
-                        'aliases' => ['objectslend_object_add', 'objectslend_object_edit']
+                        'aliases' => [
+                            'objectslend_object_add',
+                            'objectslend_object_edit',
+                            'objectslend_show_object_lend',
+                            'objectslend_object_take'
+                        ]
                     ]
                 ],
             ]

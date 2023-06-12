@@ -1,7 +1,7 @@
 {% extends 'page.html.twig' %}
 
 {% block content %}
-<form action="{% if takeorgive == 'take' %}{{ url_for("objectslend_object_dotake", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_doreturn", {"id": object.object_id}) }}{% endif %}" method="post" id="form_take_object" class="ui form">
+<form action="{% if takeorgive == 'take' %}{{ url_for("objectslend_object_dotake", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_doreturn", {"id": object.object_id}) }}{% endif %}" method="post" id="form_take_object" class="ui form info">
     <div class="ui styled fluid accordion field">
         <div class="active title">
             <i class="icon dropdown"></i>
@@ -90,12 +90,18 @@
                 {% if login.isAdmin() or login.isStaff() %}
                 <div class="inline field">
                     <label for="id_adh">{{ _T("Member:", "objectslend") }}</label>
-                    <select name="id_adh" id="id_adh" class="nochosen">
-                        <option value="">{{ _T("Search for name or ID and pick member") }}</option>
-                        {% for k, v in members.list %}
-                            <option value="{{ k }}"{% if login.id == k %} selected="selected"{% endif %}>{{ v }}</option>
-                        {% endfor %}
-                    </select>
+                    <div id="id_adh" class="jsonly search-dropdown ui input nochosen paginated">
+                        <input id="id_adh_input" type="text" name="id_adh" value="{% if not login.isSuperAdmin() %}{{ login.id }}{% endif %}" placeholder="{{ _T("Member ID") }}">
+                        <i class="jsonly displaynone dropdown icon"></i>
+                        <span class="ui mini compact icon disabled button prev-results"><i class="jsonly displaynone chevron circle left icon disabled button tooltip" title="{{ _T("Load previous members...") }}"></i></span>
+                        <span class="ui mini compact icon disabled button next-results"><i class="jsonly displaynone chevron circle right icon disabled button tooltip" title="{{ _T("Load following members...") }}"></i></span>
+                        <div class="jsonly displaynone default text">{% if adh_selected == 0 %}{{ _T("Search for name or ID and pick member") }}{% endif %}</div>
+                        <div class="jsonly displaynone menu">
+                            {% for k, v in members.list %}
+                                <div class="item" data-value="{{ k }}">{{ v }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
                 {% endif %}
 
@@ -115,19 +121,6 @@
                         values: state_list_values,
                         label: _T("Status:", "objectslend")
                     } %}
-
-                    <span class="bline">{{ _T("Status:", "objectslend") }}</span>
-                    <select name="status" id="status">
-                        <option value="null">{{ _T("--- Select a status ---", "objectslend") }}</option>
-                        {foreach from=$statuses item=sta}
-                        <option value="{$sta->status_id}" data-days="{$sta->rent_day_number}">
-                            {$sta->status_text}
-                            {if $sta->rent_day_number ne ''}
-                            ({_T string="%days days" domain="objectslend" pattern="/%days/" replace=$sta->rent_day_number})
-                            {/if}
-                        </option>
-                        {/foreach}
-                    </select>
                 </div>
 
                 <div class="inline field">
@@ -188,12 +181,19 @@
 
     {% if takeorgive == 'take' %}
     <div class="disclaimer center">
-        <input type="checkbox" name="agreement" id="agreement" value="1" required="required"/>
-        <label for="agreement">{{ _T("I have read and I agree with terms and conditions", "objectslend") }}</label>
-        <span class="show_agreement" title="{{ _T("Show terms and conditions", "objectslend") }}">
-
-        <img src="{base_url}/{$template_subdir}images/icon-down.png" alt="{{ _T("Show terms and conditions", "objectslend") }}"/></span>
-        <div id="terms_conditions" class="left">{{ _T("The items offered for rent are in good condition and verification rental contradictory to their status is at the time of withdrawal. No claims will be accepted after the release of the object. Writing by the store a list of reservation does not exempt the customer checking his retrait. The payment of rent entitles the purchaser to make normal use of the loaned object. If the object is rendered in a degraded state, the seller reserves the right to collect all or part of the security deposit. In case of deterioration of the rented beyond the standard object, a financial contribution will be required for additional cleaning caused. In case of damage, loss or theft of the rented property, the deposit will not be refunded automatically to 'the company as damages pursuant to Article 1152 of the Civil Code and without that it need for any other judicial or extra-judicial formality. In some other cases not listed above and at the discretion of the seller, the deposit check may also be collected in whole or party.", "objectslend") }}</div>
+        <div class="ui checkbox">
+            <input type="checkbox" name="agreement" id="agreement" value="1" required="required"/>
+            <label for="agreement">{{ _T("I have read and I agree with terms and conditions", "objectslend") }}</label>
+        </div>
+        <div id="attach-checkbox" class="ui toggle checkbox">
+            <input type="checkbox" name="show_terms" id="show_terms" value="1"/>
+            <label for="show_terms">{{ _T("Show terms and conditions", "objectslend") }}</label>
+        </div>
+        <div id="show_terms_elt" class="">
+            <div class="ui info message">
+                {{ _T("The items offered for rent are in good condition and verification rental contradictory to their status is at the time of withdrawal. No claims will be accepted after the release of the object. Writing by the store a list of reservation does not exempt the customer checking his retrait. The payment of rent entitles the purchaser to make normal use of the loaned object. If the object is rendered in a degraded state, the seller reserves the right to collect all or part of the security deposit. In case of deterioration of the rented beyond the standard object, a financial contribution will be required for additional cleaning caused. In case of damage, loss or theft of the rented property, the deposit will not be refunded automatically to 'the company as damages pursuant to Article 1152 of the Civil Code and without that it need for any other judicial or extra-judicial formality. In some other cases not listed above and at the discretion of the seller, the deposit check may also be collected in whole or party.", "objectslend") }}
+            </div>
+        </div>
     </div>
     {% endif %}
 
@@ -211,9 +211,9 @@
 <script type="text/javascript">
     {% include "elements/js/choose_adh.js.twig" %}
 
-{% if takeorgive == 'take' %}
+    {% if takeorgive == 'take' %}
     var _init_takeobject_js = function() {
-        $('#btnsave').button('disable');
+        $('button[name="valid"]').addClass('disabled');
 
     {% if olendsprefs.showFullsize() %}
         _init_fullimage();
@@ -223,7 +223,7 @@
             validStatus()
         });
 
-        $('#btnsave').on('click', function(e) {
+        $('button[name="valid"]').on('click', function(e) {
             if (!$('#agreement').is(':checked')) {
                 e.preventDefault();
                 alert('{{ _T("You must agree with terms and conditions in order to borrow.", "objectslend")|e('js') }}');
@@ -233,6 +233,16 @@
         $('#terms_conditions').hide();
         $('.show_agreement').on('click', function() {
             $('#terms_conditions').toggle();
+        });
+
+        $('#show_terms_elt').addClass('displaynone');
+        $('#attach-checkbox').checkbox({
+            onChecked: function() {
+                $('#show_terms_elt').removeClass('displaynone');
+            },
+            onUnchecked: function() {
+                $('#show_terms_elt').addClass('displaynone');
+            }
         });
     }
 
@@ -258,11 +268,11 @@
             _disabled = true;
         }
 
-        var _lyes = $('#btnsave');
+        var _lyes = $('button[name="valid"]');
         if (_disabled) {
-            _lyes.button('disable');
+            _lyes.addClass('disabled');
         } else {
-            _lyes.button('enable');
+            _lyes.removeClass('disabled');
         }
 
         var days = $('#status option:selected').data('days');
@@ -286,7 +296,7 @@
     }
 {% else %}
     var _init_giveobject_js = function() {
-        $('#btnsave').button('disable');
+        $('button[name="valid"]').addClass('disabled');
 
         $('#comments').keyup(function() {
             if ($('#comments').val().length > 200) {
@@ -307,11 +317,11 @@
     {/if}
 
     function validStatus() {
-        var _lyes = $('#btnsave');
+        var _lyes = $('button[name="valid"]');
         if ($('#status').val() === 'null') {
-            _lyes.button('disable');
+            _lyes.addClass('disabled');
         } else {
-            _lyes.button('enable');
+            _lyes.removeClass('disabled');
         }
     }
 
