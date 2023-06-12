@@ -60,8 +60,8 @@ use GaletteObjectsLend\Repository\Objects;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  *
- * @property int $object_id
- * @property Picture $picture
+ * @property ?int $object_id
+ * @property ObjectPicture $picture
  * @property string $name
  * @property string $description
  * @property string $serial_number

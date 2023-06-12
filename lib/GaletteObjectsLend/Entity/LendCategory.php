@@ -44,7 +44,6 @@ use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Laminas\Db\Sql\Predicate;
-use GaletteObjectsLend\Entity\CategoryPicture;
 
 /**
  * Categories manageemnt
@@ -62,7 +61,7 @@ use GaletteObjectsLend\Entity\CategoryPicture;
  * @property bool $is_active
  * @property string $name
  * @property int $category_id
- * @property Picture $picture
+ * @property CategoryPicture $picture
  */
 class LendCategory
 {
@@ -326,9 +325,9 @@ class LendCategory
     /**
      * Get picture
      *
-     * @return \GaletteObjectsLend\Entity\CategoryPicture
+     * @return CategoryPicture
      */
-    public function getPicture(): \GaletteObjectsLend\Entity\CategoryPicture
+    public function getPicture(): CategoryPicture
     {
         return $this->picture;
     }

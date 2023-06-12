@@ -59,13 +59,13 @@ use Galette\Repository\Members;
  *
  * @property integer $rent_id
  * @property integer $object_id
- * @property string $date_begin
- * @property string $date_forecast
- * @property string $date_end
+ * @property ?string $date_begin
+ * @property ?string $date_forecast
+ * @property ?string $date_end
  * @property integer $status_id
- * @property integer $adherent_id
+ * @property ?integer $adherent_id
  * @property string $comments
- * @property integer $in_stock
+ * @property bool $in_stock
  * @property string $status_text
  * @property string $nom_adh
  * @property string $prenom_adh

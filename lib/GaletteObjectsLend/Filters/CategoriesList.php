@@ -54,10 +54,10 @@ use Laminas\Db\Sql\Select;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  *
- * @property string $filter_str
- * @property int $active_filter
- * @property bool $not_empty
- * @property string $objects_filters
+ * @property ?string $filter_str
+ * @property ?int $active_filter
+ * @property ?bool $not_empty
+ * @property ?ObjectsList $objects_filters
  * @property string $query
  */
 
@@ -144,7 +144,7 @@ class CategoriesList extends Pagination
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
