@@ -1,4 +1,4 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2022.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2022, 2023.
 # Berto Te <Bertote@3fpj.com>, 2021.
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 # Toni Martínez <yagstyle@gmail.com>, 2021.
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-03-12 09:59+0100\n"
-"PO-Revision-Date: 2023-03-13 13:41+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2023-07-08 08:09+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -64,7 +64,7 @@ msgstr "Índice de objetos"
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:254
 #, php-format
 msgid "Rents list for %object"
-msgstr "Listado de rentas para %objeto"
+msgstr "Listado de rentas para %object"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:347
 msgid "Edit object"
@@ -191,7 +191,7 @@ msgstr "Preferencias"
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:133
 #, php-format
 msgid "Printed on %date"
-msgstr "Escrito el %d"
+msgstr "Escrito el %date"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:176
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
@@ -268,7 +268,7 @@ msgstr "Devolución"
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:214
 #, php-format
 msgid "Category: %category"
-msgstr "Categoría: %c"
+msgstr "Categoría: %category"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:256
 msgid "Total:"
@@ -553,17 +553,17 @@ msgstr "No dentro del almacenaje"
 #: ../tempcache/take_object.html.twig:337
 #, php-format
 msgid "%days days"
-msgstr "%d días"
+msgstr "%days días"
 
 #: ../tempcache/status_list.html.twig:361
 #, php-format
 msgid "Edit %status"
-msgstr "Editar %s"
+msgstr "Editar %status"
 
 #: ../tempcache/status_list.html.twig:363
 #, php-format
 msgid "Remove %status from database"
-msgstr "Quitar estado %s desde BdD"
+msgstr "Quitar estado %status desde BdD"
 
 #: ../tempcache/status_list.html.twig:391
 msgid "No status has been found"
@@ -588,7 +588,7 @@ msgstr "Editar «%categoría»"
 #: ../tempcache/categories_list.html.twig:297
 #, php-format
 msgid "Remove \"%category\""
-msgstr "Eliminar «%categoría»"
+msgstr "Eliminar «%category»"
 
 #: ../tempcache/preferences.html.twig:57
 msgid "Plugin preferences"
