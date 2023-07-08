@@ -2,22 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-03-12 09:59+0100\n"
-"PO-Revision-Date: 2022-12-15 11:47+0000\n"
-"Last-Translator: Evgeniy Khramov <thejenjagamertjg@gmail.com>\n"
+"PO-Revision-Date: 2023-07-08 08:09+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -61,7 +62,7 @@ msgstr "Список объектов"
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:254
 #, php-format
 msgid "Rents list for %object"
-msgstr "Список арендной платы для объекта %o"
+msgstr "Список арендной платы для объекта %object"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:347
 msgid "Edit object"
@@ -104,7 +105,7 @@ msgstr "У вас нет прав на изъятие предметов!"
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
 msgid "%object is currently not available"
-msgstr "%oобъект в настоящее время недоступен"
+msgstr "%object в настоящее время недоступен"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:793
 #, php-format
@@ -114,7 +115,7 @@ msgstr "Вы только что заимствовали %object :)"
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:852
 #, php-format
 msgid "%object has been returned :)"
-msgstr "%oобъект был возвращен :)"
+msgstr "%object был возвращен :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:939
 #, php-format
