@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-03-12 09:59+0100\n"
-"PO-Revision-Date: 2023-07-08 06:03+0000\n"
+"PO-Revision-Date: 2023-07-08 06:17+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
@@ -161,7 +161,7 @@ msgstr "Préférences ObjectsLend"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:116
 msgid "Preferences have been successfully stored!"
-msgstr "Les préférences ont été sauvegardées avec succès&nbsp;!"
+msgstr "Les préférences ont été sauvegardées avec succès !"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Objects lend"
@@ -417,7 +417,7 @@ msgstr "Par"
 #: ../tempcache/status_edit.html.twig:80
 #: ../tempcache/objects_edit.html.twig:151
 msgid "Active:"
-msgstr "Actif&nbsp;:"
+msgstr "Actif :"
 
 #: ../tempcache/objects_list.html.twig:377
 msgid "Categories"
@@ -600,7 +600,7 @@ msgstr "Préférences d'affichage"
 
 #: ../tempcache/preferences.html.twig:74
 msgid "Members can borrow:"
-msgstr "Les adhérents peuvent emprunter&nbsp;:"
+msgstr "Les adhérents peuvent emprunter :"
 
 #: ../tempcache/preferences.html.twig:74
 msgid ""
@@ -613,7 +613,7 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:76
 msgid "Generate contribution:"
-msgstr "Générer une contribution&nbsp;:"
+msgstr "Générer une contribution :"
 
 #: ../tempcache/preferences.html.twig:76
 msgid ""
@@ -633,7 +633,7 @@ msgstr "Type de contribution :"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
-msgstr "Texte contributions&nbsp;:"
+msgstr "Texte contributions :"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Comment text to add on generated contribution"
@@ -647,10 +647,10 @@ msgid ""
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
 "Texte de commentaire à ajouter sur les contributions générées. Valeur "
-"remplacées automatiquement (mettre entre accolades)&nbsp;: <br>- NAME : "
-"Nom<br>- DESCRIPTION : Description<br>- SERIAL_NUMBER : Numéro de série<br>- "
-"PRICE : Prix<br>- RENT_PRICE : Prix d'emprunt<br>- WEIGHT : Poids<br>- "
-"DIMENSION : Dimensions"
+"remplacées automatiquement (mettre entre accolades) : <br>- NAME : Nom<br>- "
+"DESCRIPTION : Description<br>- SERIAL_NUMBER : Numéro de série<br>- PRICE : "
+"Prix<br>- RENT_PRICE : Prix d'emprunt<br>- WEIGHT : Poids<br>- DIMENSION : "
+"Dimensions"
 
 #: ../tempcache/preferences.html.twig:148
 msgid "Max thumb height (in px)"
@@ -662,7 +662,7 @@ msgstr "Taille max. minitaure (en px)"
 
 #: ../tempcache/preferences.html.twig:159
 msgid "Images in lists:"
-msgstr "Images dans les listes&nbsp;:"
+msgstr "Images dans les listes :"
 
 #: ../tempcache/preferences.html.twig:159
 msgid "Display images in objects and categories lists"
@@ -670,7 +670,7 @@ msgstr "Afficher les images dans les listes des objets et des catégories"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Enable fullsize:"
-msgstr "Activer la pleine taille&nbsp;:"
+msgstr "Activer la pleine taille :"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Show fullsize image or just thumbs"
@@ -687,11 +687,11 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:196
 msgid "View category:"
-msgstr "Voir la catégorie&nbsp;:"
+msgstr "Voir la catégorie :"
 
 #: ../tempcache/preferences.html.twig:198
 msgid "View forecast return date:"
-msgstr "Voir la date de retour prévue&nbsp;:"
+msgstr "Voir la date de retour prévue :"
 
 #: ../tempcache/preferences.html.twig:200
 msgid "View description"
@@ -699,15 +699,15 @@ msgstr "Voir la description"
 
 #: ../tempcache/preferences.html.twig:202
 msgid "View dimensions:"
-msgstr "Voir les dimensions&nbsp;:"
+msgstr "Voir les dimensions :"
 
 #: ../tempcache/preferences.html.twig:204
 msgid "View borrow price:"
-msgstr "Voir le prix loc.&nbsp;:"
+msgstr "Voir le prix loc. :"
 
 #: ../tempcache/preferences.html.twig:206
 msgid "View price sum:"
-msgstr "Voir la somme des prix&nbsp;:"
+msgstr "Voir la somme des prix :"
 
 #: ../tempcache/preferences.html.twig:206
 msgid "View the objects buy price sum on the list under the category"
@@ -716,11 +716,11 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:208
 msgid "View buy price:"
-msgstr "Voir le prix d'achat&nbsp;:"
+msgstr "Voir le prix d'achat :"
 
 #: ../tempcache/preferences.html.twig:210
 msgid "View serial number:"
-msgstr "Voir le numéro de série&nbsp;:"
+msgstr "Voir le numéro de série :"
 
 #: ../tempcache/preferences.html.twig:212
 msgid "View weight"
@@ -776,12 +776,12 @@ msgstr "Catégorie :"
 #: ../tempcache/objects_edit.html.twig:114
 #: ../tempcache/take_object.html.twig:124
 msgid "Serial number:"
-msgstr "Numéro de série&nbsp;:"
+msgstr "Numéro de série :"
 
 #: ../tempcache/objects_edit.html.twig:120
 #: ../tempcache/take_object.html.twig:142
 msgid "Price:"
-msgstr "Prix&nbsp;:"
+msgstr "Prix :"
 
 #: ../tempcache/objects_edit.html.twig:127
 #: ../tempcache/take_object.html.twig:218
@@ -790,7 +790,7 @@ msgstr "Prix location :"
 
 #: ../tempcache/objects_edit.html.twig:133
 msgid "Price per rental day:"
-msgstr "Prix par jour de location&nbsp;:"
+msgstr "Prix par jour de location :"
 
 #: ../tempcache/objects_edit.html.twig:133
 msgid "The price applies on each rental day if checked, only once otherwise"
@@ -818,7 +818,7 @@ msgstr "--- Choisissez un status ---"
 
 #: ../tempcache/objects_edit.html.twig:181
 msgid "Where is the object?"
-msgstr "Où se trouve l'objet&nbsp;?"
+msgstr "Où se trouve l'objet ?"
 
 #: ../tempcache/objects_edit.html.twig:194
 #: ../tempcache/objects_edit.html.twig:219
@@ -845,7 +845,7 @@ msgstr "Modifier le status"
 #: ../tempcache/objects_edit.html.twig:359
 #: ../tempcache/take_object.html.twig:286
 msgid "Member:"
-msgstr "Adhérent&nbsp;:"
+msgstr "Adhérent :"
 
 #: ../tempcache/take_object.html.twig:275
 msgid "Borrow information"
@@ -853,7 +853,7 @@ msgstr "Informations de location"
 
 #: ../tempcache/take_object.html.twig:382
 msgid "Expected return:"
-msgstr "Retour escompté&nbsp;:"
+msgstr "Retour escompté :"
 
 #: ../tempcache/take_object.html.twig:410
 msgid "Return information"
@@ -861,7 +861,7 @@ msgstr "Informations de retour"
 
 #: ../tempcache/take_object.html.twig:444
 msgid "Time:"
-msgstr "Durée&nbsp;:"
+msgstr "Durée :"
 
 #: ../tempcache/take_object.html.twig:448
 #, php-format
