@@ -58,8 +58,6 @@ use Slim\Psr7\Stream;
  */
 class Picture extends \Galette\Core\Picture
 {
-    protected $tbl_prefix = LEND_PREFIX;
-
     protected $max_width = 800;
     protected $max_height = 800;
 
@@ -79,6 +77,7 @@ class Picture extends \Galette\Core\Picture
      */
     public function __construct(Plugins $plugins, $objectid = null)
     {
+        $this->tbl_prefix = LEND_PREFIX;
         $this->plugins = $plugins;
 
         if (!file_exists($this->store_path)) {
@@ -125,7 +124,7 @@ class Picture extends \Galette\Core\Picture
     /**
      * Display a thumbnail image, create it if necessary
      *
-     * @param Response    $response Reponse
+     * @param Response    $response Response
      * @param Preferences $prefs    Preferences instance
      *
      * @return Response
@@ -211,9 +210,9 @@ class Picture extends \Galette\Core\Picture
 
             // calculate image size according to ratio
             if ($cur_width > $cur_height) {
-                $h = $w / $ratio;
+                $h = (int)($w / $ratio);
             } else {
-                $w = $h * $ratio;
+                $w = (int)($h * $ratio);
             }
 
             $thumb = imagecreatetruecolor($w, $h);
@@ -404,8 +403,8 @@ class Picture extends \Galette\Core\Picture
         }
 
         list($width, $height) = getimagesize($thumb);
-        $this->thumb_optimal_height = $height;
-        $this->thumb_optimal_width = $width;
+        $this->thumb_optimal_height = (int)$height;
+        $this->thumb_optimal_width = (int)$width;
     }
 
     /**
@@ -420,7 +419,7 @@ class Picture extends \Galette\Core\Picture
         if (!$this->thumb_optimal_height) {
             $this->setThumbSizes($prefs);
         }
-        return (int)round($this->thumb_optimal_height);
+        return (int)round($this->thumb_optimal_height, 1);
     }
 
     /**
@@ -435,7 +434,7 @@ class Picture extends \Galette\Core\Picture
         if (!$this->thumb_optimal_width) {
             $this->setThumbSizes($prefs);
         }
-        return (int)round($this->thumb_optimal_width);
+        return (int)round($this->thumb_optimal_width, 1);
     }
 
     /**
