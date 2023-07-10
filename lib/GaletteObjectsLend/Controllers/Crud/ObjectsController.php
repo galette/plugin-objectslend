@@ -430,7 +430,7 @@ class ObjectsController extends AbstractPluginController
             //FIXME: better format handler
             $object->weight = (int)str_replace(' ', '', str_replace(',', '.', $post['weight']));
         }
-        $object->is_active = ($post['is_active'] ?? false == 'true');
+        $object->is_active = ($post['is_active'] ?? false) == true;
 
         if ($object->store()) {
             if (isset($post['1st_status'])) {

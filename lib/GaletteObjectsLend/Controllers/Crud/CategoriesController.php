@@ -262,7 +262,7 @@ class CategoriesController extends AbstractPluginController
         $error_detected = [];
 
         $category->name = $post['name'];
-        $category->is_active = $post['is_active'] == 'true';
+        $category->is_active = $post['is_active'] == true;
         if ($category->store()) {
             // picture upload
             if (isset($_FILES['picture'])) {
