@@ -70,7 +70,7 @@
                     <span id="rent_price_label">{{ object.rent_price }}</span> {{ object.currency }}
                 {% endif %}
 
-                {% if object.price_per_day %}
+                {% if object.isPricePerDay() %}
                     {{ _T("(per day)", "objectslend") }}
                 {% else %}
                     {{ _T("(at once)", "objectslend") }}
@@ -275,6 +275,7 @@
             _lyes.removeClass('disabled');
         }
 
+        {#
         var days = $('#status option:selected').data('days');
         if (typeof days == "undefined" || days == 'null') {
             return;
@@ -287,12 +288,12 @@
             return;
         }
 
-        if ('1' === '{{ object.price_per_day }}') {
-            var price_per_day = {{ object.price_per_day }} * parseInt(days);
+        {%  if object.isPricePerDay() %}
+            var price_per_day = {{ object.rent_price }} * parseInt(days);
             var text = price_per_day.toFixed(2).replace(".", ",");
             $('#rent_price').val(text);
             $('#rent_price_label').html(text);
-        }
+        {% endif %#}
     }
 {% else %}
     var _init_giveobject_js = function() {

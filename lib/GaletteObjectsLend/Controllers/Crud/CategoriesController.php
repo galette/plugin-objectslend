@@ -296,7 +296,7 @@ class CategoriesController extends AbstractPluginController
                 }
             }
         } else {
-            $error_detected[] = _T("An error occured while storing the category.", "objectslend");
+            $error_detected[] = _T("An error occurred while storing the category.", "objectslend");
         }
 
         $args = ($id === null ? [] : ['id' => $id]);
@@ -313,7 +313,7 @@ class CategoriesController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->routeparser->urlFor('objectslend_category', $args)
+                    $this->routeparser->urlFor('objectslend_category_' . $action, $args)
                 );
         } else {
             //redirect to categories list

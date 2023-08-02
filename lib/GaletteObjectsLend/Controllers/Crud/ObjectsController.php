@@ -763,14 +763,22 @@ class ObjectsController extends AbstractPluginController
                 $values = array(
                     'montant_cotis'         => $rentprice,
                     ContributionsTypes::PK  => $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIBUTION_TYPE_ID},
-                    'date_enreg'            => date(_T("Y-m-d")),
-                    'date_debut_cotis'      => date(_T("Y-m-d")),
+                    'date_enreg'            => date("Y-m-d"),
+                    'date_debut_cotis'      => date("Y-m-d"),
                     'type_paiement_cotis'   => $post['payment_type'],
                     'info_cotis'            => $info,
                     Adherent::PK            => $rent->adherent_id
                 );
                 $contrib->check($values, array(), array());
-                $created = $contrib->store();
+                try {
+                    $created = $contrib->store();
+                } catch (\OverflowException $e) {
+                    $created = false;
+                    Analog::log(
+                        $e->getMessage(),
+                        Analog::ERROR
+                    );
+                }
                 if ($created) {
                     $this->flash->addMessage(
                         'success_detected',

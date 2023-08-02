@@ -302,7 +302,7 @@ class LendRent
             foreach ($rows as $r) {
                 $rent = new LendRent($r);
                 $rent->date_end = date('Y-m-d H:i:s');
-                $rent->comments = $comments; //FIXME: will replace any existing comments :/
+                //$rent->comments = $comments; //FIXME: will replace any existing comments :/
                 $rent->store();
             }
 
@@ -413,7 +413,7 @@ class LendRent
                         }
                         $this->$name = $d->format($fmt);
                     }
-                    $this->$name = $d->format($tfmt);
+                    $this->$name = $d->format($fmt);
                 } catch (\Exception $e) {
                     $this->$name = null;
                     Analog::log(

@@ -147,17 +147,18 @@
     </form>
 
     {% if object.object_id %}
-        <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
-            <div class="ui styled fluid accordion field">
-                <div class="active title">
-                    <i class="icon dropdown"></i>
-                    {{ _T("History", "objectslend") }}
-                </div>
-                <div class="active content">
-                    {% include "@PluginGaletteObjectslend/list_lent_object.html.twig" with {rents: object.rents, mode: 'ajax'} %}
-                </div>
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("History", "objectslend") }}
             </div>
+            <div class="active content">
+                {% include "@PluginGaletteObjectslend/list_lent_object.html.twig" with {rents: object.rents, mode: 'ajax'} %}
+            </div>
+        </div>
 
+        {# FIXME: should not be here, create a specific page. #}
+        <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
             <div class="ui styled fluid accordion field">
                 <div class="active title">
                     <i class="icon dropdown"></i>

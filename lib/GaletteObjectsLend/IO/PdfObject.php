@@ -158,7 +158,7 @@ class PdfObject extends Pdf
             $this->addCell(_T("Description", "objectslend"), $object->description, $wpic);
         }
         if ($this->lprefs->{LPreferences::PARAM_VIEW_CATEGORY}) {
-            $this->addCell(_T("Category", "objectslend"), $object->cat_name, $wpic);
+            $this->addCell(_T("Category", "objectslend"), $object->cat_name ?? '', $wpic);
         }
         if ($this->lprefs->{LPreferences::PARAM_VIEW_SERIAL}) {
             $this->addCell(_T("Serial number", "objectslend"), $object->serial_number, $wpic);
