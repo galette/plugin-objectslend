@@ -114,7 +114,7 @@ class Picture extends \Galette\Core\Picture
     {
         $this->file_path = realpath(
             $this->plugins->getTemplatesPathFromName('Galette Objects Lend') .
-            '/../../webroot/images/default.png'
+            '/../../webroot/images/1f5bc.png'
         );
         $this->format = 'png';
         $this->mime = 'image/png';
