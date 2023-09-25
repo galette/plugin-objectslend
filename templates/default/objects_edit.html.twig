@@ -108,23 +108,27 @@
                 {{ _T("Object's photo", "objectslend") }}
             </div>
             <div class="active content">
-                <div class="inline field">
-                    <img
-                            src="{% if object.object_id %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
-                            class="picture"
-                            width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
-                            height="{{ object.picture.getOptimalThumbHeight(olendsprefs) }}"
-                            alt="{{ _T("Object's photo", "objectslend") }}"/>
-                    <br/>
-                    {% if object.picture.hasPicture() %}
-                        {% include "components/forms/checkbox.html.twig" with {
-                            id: 'del_picture',
-                            value: 1,
-                            label: _T("Delete image"),
-                            required: false
-                        } %}
-                    {% endif %}
-                    <input class="labelalign" type="file" name="picture"/>
+                <img
+                        src="{% if object.object_id %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
+                        class="picture"
+                        width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
+                        height="{{ object.picture.getOptimalThumbHeight(olendsprefs) }}"
+                        alt="{{ _T("Object's photo", "objectslend") }}"/>
+                <br/>
+                {% if object.picture.hasPicture() %}
+                    {% include "components/forms/checkbox.html.twig" with {
+                        id: 'del_picture',
+                        value: 1,
+                        label: _T("Delete image"),
+                        required: false
+                    } %}
+                {% endif %}
+                <div class="ui file action input">
+                    <input id="picture_file" type="file" name="picture"/>
+                    <label for="picture_file" class="ui button">
+                        <i class="blue upload icon"></i>
+                        {% if object.picture.hasPicture() %}{{ _T("Choose another file") }}{% else %}{{ _T("Choose a file") }}{% endif %}
+                    </label>
                 </div>
             </div>
         </div>
