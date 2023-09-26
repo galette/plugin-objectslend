@@ -104,7 +104,7 @@ class Picture extends \Galette\Core\Picture
     }
 
     /**
-     * Gets the default picture to show, anyways
+     * Gets the default picture to show, anyway
      *
      * @see Logo::getDefaultPicture()
      *
@@ -352,8 +352,8 @@ class Picture extends \Galette\Core\Picture
             $filename .= '_th.' . $ext;
         } else {
             $this->getDefaultPicture();
-            $filename = $this->file_path;
             $infos = pathinfo($this->file_path);
+            $filename = $this->store_path . '/' . $infos['filename'] . '_th' . '.' . $infos['extension'];
         }
         return $filename;
     }
