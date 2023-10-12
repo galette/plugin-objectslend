@@ -22,7 +22,7 @@
                 } %}
 
                 {% if lendsprefs.VIEW_CATEGORY %}
-                    {% set category_list_values = {(-1): _T("--- Select a category ---", "objectslend")} %}
+                    {% set category_list_values = {(0): _T("--- Select a category ---", "objectslend")} %}
                     {% for categ in categories %}
                         {% set category_list_values = category_list_values + {(categ.getId()): categ.getName()} %}
                     {% endfor %}
@@ -87,7 +87,7 @@
 
 
                 {% if not object.object_id %}
-                    {% set state_list_values = {(-1): _T("--- Select a status ---", "objectslend")} %}
+                    {% set state_list_values = {(0): _T("--- Select a status ---", "objectslend")} %}
                     {% for sta in statuses %}
                         {% set state_list_values = state_list_values + {(sta.status_id): sta.status_text} %}
                     {% endfor %}
