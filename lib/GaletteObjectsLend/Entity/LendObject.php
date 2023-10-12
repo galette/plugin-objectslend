@@ -364,6 +364,10 @@ class LendObject
                     } else {
                         $this->object_id = $this->zdb->driver->getLastGeneratedValue();
                     }
+
+                    if ($this->deps['picture'] === true) {
+                        $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+                    }
                 } else {
                     throw new \Exception(_T("Object has not been added :(", "objectslend"));
                 }
