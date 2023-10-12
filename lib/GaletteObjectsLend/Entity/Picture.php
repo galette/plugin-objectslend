@@ -273,8 +273,8 @@ class Picture extends \Galette\Core\Picture
     /**
      * Stores an image on the disk and in the database
      *
-     * @param object $file the uploaded file
-     * @param bool   $ajax not used
+     * @param object $file           the uploaded file
+     * @param bool   $ajax          not used
      * @param array  $cropping not used
      *
      * @return true|false result of the storage process
