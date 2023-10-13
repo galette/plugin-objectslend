@@ -273,12 +273,13 @@ class Picture extends \Galette\Core\Picture
     /**
      * Stores an image on the disk and in the database
      *
-     * @param object $file the uploaded file
-     * @param bool   $ajax not used
+     * @param object $file     the uploaded file
+     * @param bool   $ajax     not used
+     * @param array  $cropping not used
      *
      * @return true|false result of the storage process
      */
-    public function store($file, $ajax = false)
+    public function store($file, $ajax = false, $cropping = null)
     {
         $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
         $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
