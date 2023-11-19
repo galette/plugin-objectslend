@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-03-12 09:59+0100\n"
-"PO-Revision-Date: 2023-07-08 08:09+0000\n"
+"PO-Revision-Date: 2023-11-19 06:42+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -398,7 +398,7 @@ msgstr ""
 
 #: ../tempcache/category_edit.html.twig:82
 msgid "Picture:"
-msgstr ""
+msgstr "Imatge:"
 
 #: ../tempcache/category_edit.html.twig:104
 msgid "Category photo"
