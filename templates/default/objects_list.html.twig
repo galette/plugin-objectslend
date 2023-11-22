@@ -315,7 +315,7 @@
                 {% if login.isAdmin() or login.isStaff() %}
                     {% set actions = [
                         {
-                            'label': _T("Edit the object", "objectslend"),
+                            'label': _T("Edit object", "objectslend"),
                             'route': {
                                 'name': 'objectslend_object_edit',
                                 'args': {'id': object.getId()}
