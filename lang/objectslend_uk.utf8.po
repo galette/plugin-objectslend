@@ -1,4 +1,4 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2022.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2022, 2023.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
 # Ostap <ostapbataj79@gmail.com>, 2022.
@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-11-22 11:41+0100\n"
-"PO-Revision-Date: 2022-07-08 12:21+0000\n"
-"Last-Translator: Artem <artem@molotov.work>\n"
+"PO-Revision-Date: 2023-11-22 10:44+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -38,8 +38,6 @@ msgid "Delete failed"
 msgstr "Не вдалося видалити"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:299
-#, fuzzy
-#| msgid "An error occured while storing the category."
 msgid "An error occurred while storing the category."
 msgstr "Під час зберігання категорії сталася помилка."
 
