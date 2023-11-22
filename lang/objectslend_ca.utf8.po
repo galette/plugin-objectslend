@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-11-22 11:41+0100\n"
-"PO-Revision-Date: 2023-11-19 06:42+0000\n"
+"PO-Revision-Date: 2023-11-22 10:44+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
@@ -35,8 +35,6 @@ msgid "Delete failed"
 msgstr "Ha fallat la supressió"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:299
-#, fuzzy
-#| msgid "An error occured while storing the category."
 msgid "An error occurred while storing the category."
 msgstr "Hi ha ocorregut un error mentre s'emmagatzemava la categoria."
 
