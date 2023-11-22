@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-11-22 11:41+0100\n"
-"PO-Revision-Date: 2023-10-04 07:11+0000\n"
+"PO-Revision-Date: 2023-11-22 10:44+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -40,8 +40,6 @@ msgid "Delete failed"
 msgstr "Eliminación errónea"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:299
-#, fuzzy
-#| msgid "An error occured while storing the category."
 msgid "An error occurred while storing the category."
 msgstr "Ocurrió un error al almacenar la categoría."
 
