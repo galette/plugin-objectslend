@@ -1,4 +1,5 @@
 {% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
 
 {% set nb = nb_objects %}
 
@@ -10,8 +11,6 @@
         'name': 'objectslend_batch-objectslist'
     }
 } %}
-
-{% import "macros.twig" as macros %}
 
 {% block infoline %}
     {% set infoline = {
@@ -209,28 +208,7 @@
             </div>
         </section>
     {% endif %}
-
 {% endblock %}
-
-{% if nb_objects != 0 %}
-    {% set batch_actions = [
-        {
-            'name': 'pdf',
-            'label': _T("Print objects list", "objectslend"),
-            'icon': 'file pdf'
-        }
-    ] %}
-
-    {% if login.isAdmin() or login.isStaff() %}
-        {%  set batch_actions = batch_actions|merge([
-            {
-                'name': 'delete',
-                'label': _T("Delete"),
-                'icon': 'times red'
-            }
-        ]) %}
-    {% endif %}
-{% endif %}
 
 {% block body %}
     {% for object in objects %}
@@ -308,7 +286,7 @@
                         class="thumbs {% if object.isActive() %}up green{% else %}down red{% endif %} icon"
                         title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
                 </i>
-                <span class="visually-hidden">{{ _T("Active", "objectslend") }}</span>
+                <span class="visually-hidden">{% if object.isActive() %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
             </td>
             <td class="center nowrap">
                 {% set actions = [] %}
@@ -332,11 +310,12 @@
                         },
                         {
                             'label': _T("Show object lends", "objectslend"),
+                            'extra_class': 'object_hist',
                             'route': {
                                 'name': 'objectslend_show_object_lend',
                                 'args': {'id': object.getId()}
                             },
-                            'icon': 'file alt grey'
+                            'icon': 'history grey'
                         },
                         {
                             'label': _T("Object card in PDF", "objectslend"),
@@ -370,7 +349,7 @@
                                     'id': object.getId()
                                 }
                             },
-                                'icon': 'cart plus grey'
+                                'icon': 'shopping basket grey'
                             }
                         ]|merge(actions) %}
                     {% endif %}
@@ -385,7 +364,7 @@
                                 'id': object.getId()
                             }
                         },
-                            'icon': 'cart arrow down orange'
+                            'icon': 'share orange'
                         }
                     ]|merge(actions) %}
                 {% endif %}
@@ -403,10 +382,47 @@
     {% endfor %}
 {% endblock %}
 
+{% if nb_objects > 0 %}
+    {% if login.isAdmin() or login.isStaff() %}
+        {% set batch = {
+            'route': {
+                'name': 'objectslend_batch-objectslist'
+            },
+            'modal': {
+                'title': _T("No object selected", "objectslend"),
+                'content': _T("Please make sure to select at least one object from the list to perform this action.", "objectslend")
+            }
+        } %}
+
+        {%  set batch_actions = [
+            {
+                'name': 'takeaway',
+                'label': _T("Take away", "objectslend"),
+                'icon': 'shopping basket'
+            },
+            {
+                'name': 'giveback',
+                'label': _T("Give back", "objectslend"),
+                'icon': 'share'
+            },
+            {
+                'name': 'print_list__directdownload',
+                'label': _T("Print objects list", "objectslend"),
+                'icon': 'file pdf'
+            },
+            {
+                'name': 'delete',
+                'label': _T("Delete"),
+                'icon': 'red trash'
+            }
+        ] %}
+    {% endif %}
+{% endif %}
+
 {% block javascripts %}
     {{ parent() }}
 <script type="text/javascript">
-    {% if nb_objects != 0 %}
+    {% if nb_objects > 0 %}
         $(function(){
             $('.object_hist').on('click', function(e) {
                 e.preventDefault();
@@ -416,18 +432,19 @@
                     url: _this.attr('href'),
                     type: 'GET',
                     datatype: 'html',
-                    {% include "elements/js/loader.js.twig" %},
+                    {% include "elements/js/loader.js.twig" with {
+                        loader: "action",
+                    }%},
                     success: function(res){
-                        var _el = $('<div id="object_hist_window" title="{{ _T("History of object", "objectslend")|e("js") }}"></div>');
-                        _el.appendTo('body').dialog({
-                            modal: true,
-                            hide: 'fold',
-                            width: '60%',
-                            height: 450,
-                            close: function(event, ui){
-                                _el.remove();
-                            }
-                        }).append(res);
+                        var _content = $($.parseHTML(res)).find('div.main-content').children();
+                        {% include "elements/js/modal.js.twig" with {
+                            modal_title_twig: _T("History of object", "objectslend")|e("js"),
+                            modal_content: "_content",
+                            modal_class: "fullscreen",
+                            modal_content_class: "scrolling",
+                            modal_deny_only: true,
+                            modal_cancel_text: _T("Close")|e("js")
+                        } %}
                     },
                     error: function(){
                         alert("{{ _T("An error occurred loading history display :(", "objectslend")|e("js") }}")
@@ -437,11 +454,13 @@
         });
 
     {% if login.isAdmin() or login.isStaff() %}
-            $('#objects_take_away').click(function (e) {
+            $('.batch-takeaway').click(function (e) {
                 e.preventDefault();
                 var _this = $(this);
 
-                $.ajax({
+                _statusObjects();
+
+                /*$.ajax({
                     url: 'take_more_objects_away.php?mode=ajax',
                     type: 'GET',
                     data: {
@@ -480,14 +499,16 @@
                     error: function(){
                         alert("{{ _T("An error occurred loading 'Take away' display :(", "objectslend")|e("js") }}")
                     }
-                });
+                });*/
             });
 
-            $('#objects_give_back').click(function (e) {
+            $('.batch-takeaway').click(function (e) {
                 e.preventDefault();
                 var _this = $(this);
 
-                $.ajax({
+                _statusObjects();
+
+                /*$.ajax({
                     url: 'give_more_objects_back.php?mode=ajax',
                     type: 'GET',
                     data: {
@@ -526,18 +547,18 @@
                     error: function(){
                         alert("{{ _T("An error occurred loading 'Give back' display :(", "objectslend")|e("js") }}")
                     }
-                });
+                });*/
             });
 
-            function statusObjects(isAway) {
-                if (!$(':checkbox:checked').length) {
+            function _statusObjects(isAway) {
+                if (!$('.listing :checkbox:checked').length) {
                     return false;
                 }
                 var objectsIds = '';
-                $(':checkbox:checked').each(function () {
+                $('.listing :checkbox:checked').each(function () {
                     objectsIds += $(this).val() + ',';
                 });
-                window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?object_ids=' + objectsIds;
+                //window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?object_ids=' + objectsIds;
                 return false;
             }
     {% endif %}
