@@ -100,7 +100,7 @@
                 </td>
                 <td class="center {% if categ.is_active %}use{% else %}delete{% endif %}">
                     <i class="thumbs {% if categ.is_active%}up green{% else %}down red{% endif %} icon"></i>
-                    <span class="displaynone">{{ _T("Active") }}</span>
+                    <span class="visually-hidden">{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
                 </td>
         {% if login.isAdmin() or login.isStaff() %}
                 <td class="center nowrap">

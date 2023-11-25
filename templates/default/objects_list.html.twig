@@ -308,7 +308,7 @@
                         class="thumbs {% if object.isActive() %}up green{% else %}down red{% endif %} icon"
                         title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
                 </i>
-                <span class="displaynone">{{ _T("Active", "objectslend") }}</span>
+                <span class="visually-hidden">{{ _T("Active", "objectslend") }}</span>
             </td>
             <td class="center nowrap">
                 {% set actions = [] %}
