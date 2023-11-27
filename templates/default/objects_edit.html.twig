@@ -150,7 +150,7 @@
         {% include "components/forms/csrf.html.twig" %}
     </form>
 
-    {% if object.object_id %}
+    {% if object.getId() %}
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -162,57 +162,69 @@
         </div>
 
         {# FIXME: should not be here, create a specific page. #}
-        <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
-            <div class="ui styled fluid accordion field">
-                <div class="active title">
-                    <i class="icon dropdown"></i>
-                    {{ _T("Change status", "objectslend") }}
-                </div>
-                <div class="active content">
-                    {% set state_list_values = {(-1): _T("--- Select a status ---", "objectslend")} %}
-                    {% for sta in statuses %}
-                        {% set text = sta.status_text %}
-                        {% if sta.in_stock %}
-                            {% set text = text ~ ' (' ~ _T("In stock", "objectslend") ~ ')' %}
-                        {% endif %}
-                        {% set state_list_values = state_list_values + {(sta.status_id): text} %}
-                    {% endfor %}
-
-                    {% include "components/forms/select.html.twig" with {
-                        id: '1st_status',
-                        value: '',
-                        values: state_list_values,
-                        label: _T("Status", "objectslend")
-                    } %}
-
-                    {% include "components/forms/text.html.twig" with {
-                        id: 'new_comment',
-                        value: '',
-                        label: _T("Comments", "objectslend"),
-                        size: 100,
-                        maxlength: 200
-                    } %}
-
-                    <div class="inline field">
-                        <label for="new_adh">{{ _T("Member:", "objectslend") }}</label>
-                        <select name="new_adh" id="id_adh" class="nochosen">
-                            <option value="">{{ _T("Search for name or ID and pick member") }}</option>
-                            {% for k, v in members.list %}
-                                <option value="{{ k }}"{% if login.id == k %} selected="selected"{% endif %}>{{ v }}</option>
-                            {% endfor %}
-                        </select>
+        <div class="ui basic horizontally fitted segment">
+            <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
+                <div class="ui styled fluid accordion field">
+                    <div class="active title">
+                        <i class="icon dropdown"></i>
+                        {{ _T("Change status", "objectslend") }}
                     </div>
+                    <div class="active content">
+                        {% set state_list_values = {(-1): _T("--- Select a status ---", "objectslend")} %}
+                        {% for sta in statuses %}
+                            {% set text = sta.status_text %}
+                            {% if sta.in_stock %}
+                                {% set text = text ~ ' (' ~ _T("In stock", "objectslend") ~ ')' %}
+                            {% endif %}
+                            {% set state_list_values = state_list_values + {(sta.status_id): text} %}
+                        {% endfor %}
 
+                        {% include "components/forms/select.html.twig" with {
+                            id: '1st_status',
+                            value: '',
+                            values: state_list_values,
+                            label: _T("Status", "objectslend")
+                        } %}
+
+                        {% include "components/forms/text.html.twig" with {
+                            id: 'new_comment',
+                            value: '',
+                            label: _T("Comments", "objectslend"),
+                            size: 100,
+                            maxlength: 200
+                        } %}
+
+                        <div class="inline field">
+                            <label for="new_adh">{{ _T("Member:", "objectslend") }}</label>
+                            <select name="new_adh" id="id_adh" class="nochosen">
+                                <option value="">{{ _T("Search for name or ID and pick member") }}</option>
+                                {% for k, v in members.list %}
+                                    <option value="{{ k }}"{% if login.id == k %} selected="selected"{% endif %}>{{ v }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
 
-            <div class="ui basic center aligned segment">
-                <button type="submit" class="ui labeled icon primary button action">
-                    <i class="save icon"></i> {{ _T("Change status", "objectslend") }}
-                </button>
-            </div>
-            <input type="hidden" name="object_id" value="{{ object.object_id }}">
-            {% include "components/forms/csrf.html.twig" %}
-        </form>
+                <div class="ui basic center aligned segment">
+                    <button type="submit" class="ui labeled icon primary button action">
+                        <i class="save icon"></i> {{ _T("Change status", "objectslend") }}
+                    </button>
+                </div>
+                <input type="hidden" name="object_id" value="{{ object.object_id }}">
+                <input type="hidden" name="name" value="{{ object.name }}">
+                <input type="hidden" name="description" value="{{ object.description }}">
+                <input type="hidden" name="category_id" value="{{ object.getCategoryId() }}">
+                <input type="hidden" name="serial" value="{{ object.getSerialNumber() }}">
+                <input type="hidden" name="price" value="{{ object.price }}">
+                <input type="hidden" name="rent_price" value="{{ object.rent_price }}">
+                <input type="hidden" name="price_per_day" value="{{ object.price_per_day }}">
+                <input type="hidden" name="dimension" value="{{ object.dimension }}">
+                <input type="hidden" name="weight" value="{{ object.weight }}">
+                <input type="hidden" name="is_active" value="{{ object.is_active }}">
+                {% include "components/forms/csrf.html.twig" %}
+            </form>
+        </div>
     {% endif %}
 {% endblock %}
