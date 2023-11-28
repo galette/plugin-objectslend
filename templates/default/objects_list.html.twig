@@ -5,7 +5,7 @@
 
 {% set form = {
     'order': {
-        'name': "history"
+        'name': "objectslend_objects"
     },
     'route': {
         'name': 'objectslend_batch-objectslist'
@@ -159,54 +159,41 @@
     </form>
 
     {% if lendsprefs.VIEW_CATEGORY and categories|length > 0 %}
-        <section id="categories">
-            <header class="ui-state-default ui-state-active">
+        <div class="galetteform ui styled fluid accordion field">
+            <div class="ui title">
+                <i class="jsonly displaynone dropdown icon" aria-hidden="true"></i>
                 {{ _T("Categories", "objectslend") }}
-            </header>
-            <div class="ui doubling six column cards">
-                <div class="ui fluid card">
-                    <div class="image">
+            </div>
+            <div class="content">
+                <div class="ui huge labels">
+                    <a class="ui{% if filters.category_filter == null %} primary{% endif %} image label" href="{{ url_for("objectslend_objects", {"option": "category", "value": 0}) }}">
                         <img
                                 src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": 0}) }}"
                                 alt=""
                         />
-                    </div>
-                    <div class="content">
-                        <div class="header">
-                            <a href="{{ url_for("objectslend_objects", {"option": "category", "value": 0}) }}"{% if filters.category_filter == null %} class="active"{% endif %}>
-                                {{ _T("All") }}
+                        {{ _T("All") }}
+                    </a>
+
+                    {% for categ in categories %}
+                        {% if categ.isActive() or categ.getId() == -1 %}
+                            <a class="ui{% if filters.category_filter == categ.getId() %} primary{% endif %} image label" href="{{ url_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}">
+                                <img
+                                    src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
+                                    width="{{ categ.getPicture().getOptimalThumbWidth(olendsprefs) }}"
+                                    height="{{ categ.getPicture().getOptimalThumbHeight(olendsprefs) }}"
+                                    alt=""
+                                />
+                                {{ categ.getName() }}
+                            {% if lendsprefs.VIEW_LIST_PRICE_SUM and lendsprefs.VIEW_PRICE and (login.isAdmin() or login.isStaff()) %}
+                                <div class="detail">{{ categ.getSum() }} &euro;</div>
+                            {% endif %}
                             </a>
-                        </div>
-                    </div>
+                        {% endif %}
+                    {% endfor %}
+
                 </div>
-
-                {% for categ in categories %}
-                    {% if categ.isActive() or categ.getId() == -1 %}
-                        <div class="ui fluid card">
-                            <div class="image">
-                                    <img
-                                        src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.getId()}) }}"
-                                        width="{{ categ.getPicture().getOptimalThumbWidth(olendsprefs) }}"
-                                        height="{{ categ.getPicture().getOptimalThumbHeight(olendsprefs) }}"
-                                        alt=""
-                                    />
-                            </div>
-                            <div class="content">
-                                <div class="header">
-                                    <a href="{{ url_for("objectslend_objects", {"option": "category", "value": categ.getId()}) }}"{% if filters.category_filter == categ.getId() %} class="active"{% endif %}>
-                                        {{ categ.getName() }}
-                                    </a>
-                                </div>
-                                {% if lendsprefs.VIEW_LIST_PRICE_SUM and lendsprefs.VIEW_PRICE and (login.isAdmin() or login.isStaff()) %}
-                                    <div class="meta">{{ categ.getSum() }} &euro;</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-
             </div>
-        </section>
+        </div>
     {% endif %}
 {% endblock %}
 
@@ -396,16 +383,6 @@
 
         {%  set batch_actions = [
             {
-                'name': 'takeaway',
-                'label': _T("Take away", "objectslend"),
-                'icon': 'shopping basket'
-            },
-            {
-                'name': 'giveback',
-                'label': _T("Give back", "objectslend"),
-                'icon': 'share'
-            },
-            {
                 'name': 'print_list__directdownload',
                 'label': _T("Print objects list", "objectslend"),
                 'icon': 'file pdf'
@@ -422,145 +399,135 @@
 {% block javascripts %}
     {{ parent() }}
 <script type="text/javascript">
-    {% if nb_objects > 0 %}
-        $(function(){
-            $('.object_hist').on('click', function(e) {
-                e.preventDefault();
-                var _this = $(this);
+{% if nb_objects > 0 %}
+    $(function(){
+        $('.object_hist').on('click', function(e) {
+            e.preventDefault();
+            var _this = $(this);
 
-                $.ajax({
-                    url: _this.attr('href'),
-                    type: 'GET',
-                    datatype: 'html',
-                    {% include "elements/js/loader.js.twig" with {
-                        loader: "action",
-                    }%},
-                    success: function(res){
-                        var _content = $($.parseHTML(res)).find('div.main-content').children();
-                        {% include "elements/js/modal.js.twig" with {
-                            modal_title_twig: _T("History of object", "objectslend")|e("js"),
-                            modal_content: "_content",
-                            modal_class: "fullscreen",
-                            modal_content_class: "scrolling",
-                            modal_deny_only: true,
-                            modal_cancel_text: _T("Close")|e("js")
-                        } %}
-                    },
-                    error: function(){
-                        alert("{{ _T("An error occurred loading history display :(", "objectslend")|e("js") }}")
-                    }
-                });
+            $.ajax({
+                url: _this.attr('href'),
+                type: 'GET',
+                datatype: 'html',
+                {% include "elements/js/loader.js.twig" with {
+                    loader: "action",
+                }%},
+                success: function(res){
+                    var _content = $($.parseHTML(res)).find('div.main-content').children();
+                    {% include "elements/js/modal.js.twig" with {
+                        modal_title_twig: _T("History of object", "objectslend")|e("js"),
+                        modal_content: "_content",
+                        modal_class: "fullscreen",
+                        modal_content_class: "scrolling",
+                        modal_deny_only: true,
+                        modal_cancel_text: _T("Close")|e("js")
+                    } %}
+                },
+                error: function(){
+                    alert("{{ _T("An error occurred loading history display :(", "objectslend")|e("js") }}")
+                }
+            });
+        });
+    });
+
+    /*{% if login.isAdmin() or login.isStaff() %}
+        $('.batch-takeaway').click(function (e) {
+            e.preventDefault();
+            var _this = $(this);
+
+            _statusObjects();
+
+            $.ajax({
+                url: '{{ url_for("objectslend_object_take", {"action": "take", "id": ""}) }}',
+                type: 'GET',
+                data: {
+                    object_ids: get_checked_objets_ids()
+                },
+                datatype: 'html',
+                {% include "elements/js/loader.js.twig" with {
+                    loader: "action",
+                }%},
+                success: function(res){
+                    var _content = $($.parseHTML(res)).find('div.main-content').children();
+                    {% include "elements/js/modal.js.twig" with {
+                        modal_title_twig: _T("Take objects", "objectslend")|e("js"),
+                        modal_content: "_content",
+                        modal_class: "fullscreen",
+                        modal_content_class: "scrolling",
+                        modal_deny_only: true,
+                        modal_cancel_text: _T("Close")|e("js")
+                    } %}
+
+                    $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
+                      create: function(event, ui) {
+                          if ( $(event.target).hasClass('disabled') ) {
+                              $(event.target).button('disable');
+                          }
+                      }
+                    });
+
+                    _init_takeobject_js();
+
+                },
+                error: function(){
+                    alert("{{ _T("An error occurred loading 'Take away' display :(", "objectslend")|e("js") }}")
+                }
             });
         });
 
-    {% if login.isAdmin() or login.isStaff() %}
-            $('.batch-takeaway').click(function (e) {
-                e.preventDefault();
-                var _this = $(this);
+        $('.batch-giveback').click(function (e) {
+            e.preventDefault();
+            var _this = $(this);
 
-                _statusObjects();
+            _statusObjects();
 
-                /*$.ajax({
-                    url: 'take_more_objects_away.php?mode=ajax',
-                    type: 'GET',
-                    data: {
-                        object_ids: get_checked_objets_ids()
-                    },
-                    datatype: 'html',
-                    {% include "elements/js/loader.js.twig" %},
-                    success: function(res){
-                        var _el = $('<div id="lend_window" title="{{ _T("Take objects", "objectslend")|e("js") }}"></div>');
-                        _el.appendTo('body').dialog({
-                            modal: true,
-                            hide: 'fold',
-                            width: '60%',
-                            height: 450,
-                            close: function(event, ui){
-                                _el.remove();
+            $.ajax({
+                url: '{{ url_for("objectslend_object_take", {"action": "return", "id": ""}) }}',
+                type: 'GET',
+                data: {
+                    object_ids: get_checked_objets_ids()
+                },
+                datatype: 'html',
+                {% include "elements/js/loader.js.twig" %},
+                success: function(res){
+                    var _content = $($.parseHTML(res)).find('div.main-content').children();
+                    {% include "elements/js/modal.js.twig" with {
+                        modal_title_twig: _T("Give back objects", "objectslend")|e("js"),
+                        modal_content: "_content",
+                        modal_class: "fullscreen",
+                        modal_content_class: "scrolling",
+                        modal_deny_only: true,
+                        modal_cancel_text: _T("Close")|e("js")
+                    } %}
+
+                    $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
+                        create: function(event, ui) {
+                            if ( $(event.target).hasClass('disabled') ) {
+                                $(event.target).button('disable');
                             }
-                        }).append(res);
+                        }
+                    });
 
-                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
-                            create: function(event, ui) {
-                                if ( $(event.target).hasClass('disabled') ) {
-                                    $(event.target).button('disable');
-                                }
-                            }
-                        });
+                    _init_giveobject_js();
 
-                        $('#btncancel').on('click', function(e) {
-                            e.preventDefault();
-                            $('#lend_window').dialog('close');
-                        });
-
-                        _init_takeobject_js();
-
-                    },
-                    error: function(){
-                        alert("{{ _T("An error occurred loading 'Take away' display :(", "objectslend")|e("js") }}")
-                    }
-                });*/
-            });
-
-            $('.batch-takeaway').click(function (e) {
-                e.preventDefault();
-                var _this = $(this);
-
-                _statusObjects();
-
-                /*$.ajax({
-                    url: 'give_more_objects_back.php?mode=ajax',
-                    type: 'GET',
-                    data: {
-                        object_ids: get_checked_objets_ids()
-                    },
-                    datatype: 'html',
-                    {% include "elements/js/loader.js.twig" %},
-                    success: function(res){
-                        var _el = $('<div id="lend_window" title="{{ _T("Give back objects", "objectslend")|e("js") }}"></div>');
-                        _el.appendTo('body').dialog({
-                            modal: true,
-                            hide: 'fold',
-                            width: '60%',
-                            height: 450,
-                            close: function(event, ui){
-                                _el.remove();
-                            }
-                        }).append(res);
-
-                        $('#lend_window input:submit, #lend_window .button, #lend_window input:reset' ).button({
-                            create: function(event, ui) {
-                                if ( $(event.target).hasClass('disabled') ) {
-                                    $(event.target).button('disable');
-                                }
-                            }
-                        });
-
-                        $('#btncancel').on('click', function(e) {
-                            e.preventDefault();
-                            $('#lend_window').dialog('close');
-                        });
-
-                        _init_giveobject_js();
-
-                    },
-                    error: function(){
-                        alert("{{ _T("An error occurred loading 'Give back' display :(", "objectslend")|e("js") }}")
-                    }
-                });*/
-            });
-
-            function _statusObjects(isAway) {
-                if (!$('.listing :checkbox:checked').length) {
-                    return false;
+                },
+                error: function(){
+                    alert("{{ _T("An error occurred loading 'Give back' display :(", "objectslend")|e("js") }}")
                 }
-                var objectsIds = '';
-                $('.listing :checkbox:checked').each(function () {
-                    objectsIds += $(this).val() + ',';
-                });
-                //window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?object_ids=' + objectsIds;
+            });
+        });
+
+        function _statusObjects(isAway) {
+            if (!$('.listing :checkbox:checked').length) {
                 return false;
             }
+            var objectsIds = '';
+            $('.listing :checkbox:checked').each(function () {
+                objectsIds += $(this).val() + ',';
+            });
+            window.location = (isAway ? 'take_more_objects_away' : 'give_more_objects_back') + '.php?object_ids=' + objectsIds;
+            return false;
+        }*/
     {% endif %}
 {% endif %}
 </script>
