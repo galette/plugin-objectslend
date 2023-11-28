@@ -188,20 +188,20 @@ class Objects
                 self::PK,
                 $ids
             );
-            $result = $this->zdb->execute($delete);
+            $this->zdb->execute($delete);
 
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE);
             $delete->where->in(
                 self::PK,
                 $ids
             );
-            $result = $this->zdb->execute($delete);
+            $this->zdb->execute($delete);
             $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
 
-            if ($e->getCode() == 23000) {
+            if ($this->zdb->isForeignKeyException($e)) {
                 Analog::log(
                     'Object mays still have existing dependencies in the ' .
                     'database.' .

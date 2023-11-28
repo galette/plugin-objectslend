@@ -293,16 +293,18 @@ class LendRent
 
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array(
-                'object_id' => $object_id,
-                'date_end' => null
-                    ));
+                ->where(
+                    array(
+                        'object_id' => $object_id,
+                        'date_end' => null
+                    )
+                );
             $rows = $zdb->execute($select);
 
             foreach ($rows as $r) {
                 $rent = new LendRent($r);
                 $rent->date_end = date('Y-m-d H:i:s');
-                //$rent->comments = $comments; //FIXME: will replace any existing comments :/
+                $rent->comments = $comments; //FIXME: will replace any existing comments :/
                 $rent->store();
             }
 

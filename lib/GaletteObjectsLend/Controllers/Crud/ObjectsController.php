@@ -435,25 +435,11 @@ class ObjectsController extends AbstractPluginController
         if ($object->store()) {
             if (isset($post['1st_status'])) {
                 $rent = new LendRent();
-                $rent->object_id = $object->object_id;
+                $rent->object_id = $object->getId();
                 $rent->status_id = $post['1st_status'];
                 $rent->store();
             }
 
-            $object_id = $object->object_id;
-
-            // Change status
-            if (isset($post['status'])) {
-                LendRent::closeAllRentsForObject(intval($object_id), $post['new_comment']);
-
-                $rent = new LendRent();
-                $rent->object_id = $object_id;
-                $rent->status_id = $post['new_status'];
-                if (filter_input(INPUT_POST, 'new_adh') != 'null') {
-                    $rent->adherent_id = $post['new_adh'];
-                }
-                $rent->store();
-            }
             // picture upload
             if (isset($_FILES['picture'])) {
                 if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
@@ -522,6 +508,46 @@ class ObjectsController extends AbstractPluginController
                     $this->routeparser->urlFor('objectslend_objects')
                 );
         }
+    }
+
+    /**
+     * Update status action
+     *
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
+     * @param null|int $id       Object id for edit
+     * @param string   $action   Either add or edit
+     *
+     * @return Response
+     */
+    public function doUpdateStatus(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    {
+        $post = $request->getParsedBody();
+
+        $object = new LendObject($this->zdb, $this->plugins, $id);
+
+        LendRent::closeAllRentsForObject($object->getId(), $post['new_comment']);
+
+        $rent = new LendRent();
+        $rent->object_id = $object->getId();
+        $rent->status_id = $post['new_status'];
+        if (filter_input(INPUT_POST, 'new_adh') != 'null') {
+            $rent->adherent_id = $post['new_adh'];
+        }
+        $rent->store();
+
+        //redirect to objects form
+        $this->flash->addMessage(
+            'success_detected',
+            _T("Status has been updated", "objectslend")
+        );
+
+        return $response
+            ->withStatus(301)
+            ->withHeader(
+                'Location',
+                $this->routeparser->urlFor('objectslend_object_edit', ['id' => $object->getId()])
+            );
     }
 
     /**

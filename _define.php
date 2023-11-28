@@ -65,6 +65,7 @@ $this->register(
         'objectslend_doremove_status'   => 'admin',
         'objectslend_object_add'        => 'staff',
         'objectslend_object_edit'       => 'staff',
+        'objectslend_object_updatestatus' => 'staff',
         'objectslend_object_action_add' => 'staff',
         'objectslend_object_action_edit' => 'staff',
         'objectslend_object_clone'      => 'staff',

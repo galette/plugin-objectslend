@@ -170,6 +170,12 @@ $app->get(
     [ObjectsController::class, 'edit']
 )->setName('objectslend_object_edit')->add($authenticate);
 
+$app->post(
+    '/object/{id:\d+}/updatestatus',
+    [ObjectsController::class, 'doUpdateStatus']
+)->setName('objectslend_object_updatestatus')->add($authenticate);
+
+
 $app->get(
     '/object/clone/{id:\d+}',
     [ObjectsController::class, 'doClone']

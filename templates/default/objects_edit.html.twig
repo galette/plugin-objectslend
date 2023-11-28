@@ -163,7 +163,7 @@
 
         {# FIXME: should not be here, create a specific page. #}
         <div class="ui basic horizontally fitted segment">
-            <form action="{% if object.object_id %}{{ url_for("objectslend_object_action_edit", {"id": object.object_id}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" class="ui form">
+            <form action="{{ url_for("objectslend_object_updatestatus", {"id": object.getId()}) }}" method="post" class="ui form">
                 <div class="ui styled fluid accordion field">
                     <div class="active title">
                         <i class="icon dropdown"></i>
@@ -180,7 +180,7 @@
                         {% endfor %}
 
                         {% include "components/forms/select.html.twig" with {
-                            id: '1st_status',
+                            id: 'new_status',
                             value: '',
                             values: state_list_values,
                             label: _T("Status", "objectslend")
@@ -213,16 +213,6 @@
                     </button>
                 </div>
                 <input type="hidden" name="object_id" value="{{ object.object_id }}">
-                <input type="hidden" name="name" value="{{ object.name }}">
-                <input type="hidden" name="description" value="{{ object.description }}">
-                <input type="hidden" name="category_id" value="{{ object.getCategoryId() }}">
-                <input type="hidden" name="serial" value="{{ object.getSerialNumber() }}">
-                <input type="hidden" name="price" value="{{ object.price }}">
-                <input type="hidden" name="rent_price" value="{{ object.rent_price }}">
-                <input type="hidden" name="price_per_day" value="{{ object.price_per_day }}">
-                <input type="hidden" name="dimension" value="{{ object.dimension }}">
-                <input type="hidden" name="weight" value="{{ object.weight }}">
-                <input type="hidden" name="is_active" value="{{ object.is_active }}">
                 {% include "components/forms/csrf.html.twig" %}
             </form>
         </div>
