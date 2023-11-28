@@ -183,6 +183,14 @@ class Objects
         try {
             $this->zdb->connection->beginTransaction();
 
+            $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
+            $update->set(['rent_id' => null]);
+            $update->where->in(
+                self::PK,
+                $ids
+            );
+            $this->zdb->execute($update);
+
             $delete = $this->zdb->delete(LEND_PREFIX . LendRent::TABLE);
             $delete->where->in(
                 self::PK,
