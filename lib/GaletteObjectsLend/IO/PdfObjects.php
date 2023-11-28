@@ -85,6 +85,8 @@ class PdfObjects extends Pdf
         Plugins $plugins
     ) {
         parent::__construct($prefs);
+        //TRANS: this is a filename
+        $this->filename = _T('objects_cards', 'objectslend') . '.pdf';
         $this->zdb = $zdb;
         $this->lendsprefs = $lendsprefs;
         $this->filters = $filters;

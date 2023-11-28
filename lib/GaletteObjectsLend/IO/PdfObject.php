@@ -249,7 +249,7 @@ class PdfObject extends Pdf
         $this->Cell($padding, 0, $this->cut($title, $padding));
 
         $this->SetFont(Pdf::FONT, '', 9);
-        $wrapped = explode("\n", wordwrap($value, 150 - $padding - $width, "\n"));
+        $wrapped = explode("\n", wordwrap($value ?? '', 150 - $padding - $width, "\n"));
         $i = 0;
         foreach ($wrapped as $w) {
             if ($i++ > 0) {
