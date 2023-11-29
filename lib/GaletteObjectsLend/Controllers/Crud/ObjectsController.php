@@ -1008,7 +1008,11 @@ class ObjectsController extends AbstractPluginController
             $ids = $post['id'];
         }
 
-        return $objects->removeObjects($ids);
+        $result = $objects->removeObjects($ids);
+        if ($result) {
+            unset($this->session->objectslend_filter_objects);
+        }
+        return $result;
     }
 
     // /CRUD - Delete
