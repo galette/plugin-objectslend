@@ -101,7 +101,7 @@
                         <i class="search icon"></i>
                         {{ _T('Filter') }}
                     </button>
-                    <button type="submit" name="clear_filter" class="ui labeled icon button" title="{{ _T('Reset all filters to defaults') }}">
+                    <button type="submit" name="clear_filter" class="ui labeled icon button tooltip" title="{{ _T('Reset all filters to defaults') }}">
                         <i class="trash alt red icon" aria-hidden="true"></i>
                         {{ _T('Clear filter') }}
                     </button>
@@ -114,39 +114,39 @@
 
 {% block body %}
     {% for status in statuses %}
-        <tr class="{if $status@index is odd}even{else}odd{/if}">
-            <td>
+        <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
+            <td data-scope="id">
                 {{ status.status_id }}
             </td>
-            <td>
+            <td data-col-label="{{ _T("Status", "objectslend") }}">
                 {{ status.status_text }}
             </td>
-            <td class="center {if $status->is_active}use{else}delete{/if}">
+            <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
                 {% if status.is_active %}
-                    <i class="thumbs up green icon"></i>
+                    <i class="thumbs up green icon tooltip" data-html="{{ _T("Active", "objectslend") }}"></i>
                     <span class="visually-hidden">{{ _T("Active", "objectslend") }}</span>
                 {% else %}
-                    <i class="thumbs down red icon"></i>
+                    <i class="thumbs down red icon tooltip" data-html="{{ _T("Inactive", "objectslend") }}"></i>
                     <span class="visually-hidden">{{ _T("Inactive", "objectslend") }}</span>
                 {% endif %}
             </td>
-            <td class="center {if $status->in_stock}use{else}delete{/if}">
+            <td class="center" data-col-label="{{ _T("Stock", "objectslend") }}">
                 {% if status.in_stock %}
-                    <i class="thumbs up green icon"></i>
+                    <i class="thumbs up green icon tooltip" data-html="{{ _T("In stock", "objectslend") }}"></i>
                     <span class="visually-hidden">{{ _T("In stock", "objectslend") }}</span>
                 {% else %}
-                    <i class="thumbs down red icon"></i>
+                    <i class="thumbs down red icon tooltip" data-html="{{ _T("Not in stock", "objectslend") }}"></i>
                     <span class="visually-hidden">{{ _T("Not in stock", "objectslend") }}</span>
                 {% endif %}
             </td>
-            <td>
+            <td data-col-label="{{ _T("Days for rent", "objectslend") }}">
                 {% if status.rent_day_number %}
                     {{ _T("%days days", "objectslend")|replace({'%days': status.rent_day_number}) }}
                 {% else %}
                     -
                 {% endif %}
             </td>
-            <td class="center nowrap">
+            <td class="center actions_row nowrap">
                 {% set actions = [
                     {
                         'label': _T("Edit %status", "objectslend")|replace({'%status': status.status_text}),
