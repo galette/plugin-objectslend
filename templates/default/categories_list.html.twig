@@ -71,7 +71,7 @@
                         <i class="search icon"></i>
                         {{ _T('Filter') }}
                     </button>
-                    <button type="submit" name="clear_filter" class="ui labeled icon button" title="{{ _T('Reset all filters to defaults') }}">
+                    <button type="submit" name="clear_filter" class="ui labeled icon button tooltip" title="{{ _T('Reset all filters to defaults') }}">
                         <i class="trash alt red icon" aria-hidden="true"></i>
                         {{ _T('Clear filter') }}
                     </button>
@@ -85,10 +85,10 @@
 {% block body %}
     {% for categ in categories %}
             <tr class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
-                <td>
+                <td  data-col-label="#">
                     {{ categ.category_id }}
                 </td>
-                <td>
+                <td data-col-label="{{ _T("Name", "objectslend") }}">
         {% if olendsprefs.imagesInLists() %}
                     <img src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.category_id}) }}"
                         class="ui middle aligned image"
@@ -98,12 +98,12 @@
         {% endif %}
                     {{ categ.name }}
                 </td>
-                <td class="center {% if categ.is_active %}use{% else %}delete{% endif %}">
-                    <i class="thumbs {% if categ.is_active%}up green{% else %}down red{% endif %} icon"></i>
+                <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
+                    <i class="thumbs {% if categ.is_active%}up green{% else %}down red{% endif %} icon tooltip" data-html="{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}"></i>
                     <span class="visually-hidden">{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
                 </td>
         {% if login.isAdmin() or login.isStaff() %}
-                <td class="center nowrap">
+                <td class="center actions_row nowrap">
                     {% set actions = [
                         {
                             'label': _T("Edit \"%category\"", "objectslend")|replace({"%category": categ.name}),

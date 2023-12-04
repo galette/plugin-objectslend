@@ -148,7 +148,7 @@
                         <i class="search icon"></i>
                         {{ _T("Filter") }}
                     </button>
-                    <button type="submit" name="clear_filter" class="ui labeled icon button" title="{{ _T("Reset all filters to defaults") }}">
+                    <button type="submit" name="clear_filter" class="ui labeled icon button tooltip" title="{{ _T("Reset all filters to defaults") }}">
                         <i class="trash alt red icon" aria-hidden="true"></i>
                         {{ _T("Clear filter") }}
                     </button>
@@ -201,12 +201,12 @@
     {% for object in objects %}
         <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
             {% if login.isAdmin() or login.isStaff() %}
-                <td class="center">
+                <td class="center" data-scope="row">
                     <input type="checkbox" name="entries_sel[]" value="{{ object.getId() }}">
                 </td>
             {% endif %}
             {% if olendsprefs.imagesInLists() %}
-                <td class="center">
+                <td class="center" data-col-label="{{ _T("Picture") }}">
                     <img src="{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.getId()}) }}"
                          class="picture"
                          width="{{ object.getPicture().getOptimalThumbWidth(olendsprefs) }}"
@@ -214,24 +214,24 @@
                          alt="{{ _T("Object photo", "objectslend") }}"/>
                 </td>
             {% endif %}
-            <td>
+            <td data-col-label="{{ _T("Name", "objectslend") }}">
                 <strong>{{ object.displayName(filters)|raw }}</strong>
                 {% if lendsprefs.VIEW_DESCRIPTION %}
                     <br/>{{ object.displayDescription(filters)|raw }}
                 {% endif %}
             </td>
             {% if lendsprefs.VIEW_SERIAL %}
-                <td>
+                <td data-col-label="{{ _T("Serial", "objectslend") }}">
                     {{ object.displaySerial(filters)|raw }}
                 </td>
             {% endif %}
             {% if lendsprefs.VIEW_PRICE %}
-                <td class="right nowrap">
+                <td class="right nowrap" data-col-label="{{ _T("Price", "objectslend") }}">
                     {{ object.getPrice() }}&euro;
                 </td>
             {% endif %}
             {% if lendsprefs.VIEW_LEND_PRICE %}
-                <td class="right">
+                <td class="right" data-col-label="{{ _T("Borrow price", "objectslend") }}">
                     {{ object.getRentPrice() }}&euro;<br/>
                     {% if object.isPricePerDay() %}
                         {{ _T("(per day)", "objectslend") }}
@@ -241,41 +241,41 @@
                 </td>
             {% endif %}
             {% if lendsprefs.VIEW_DIMENSION %}
-                <td>
+                <td data-col-label="{{ _T("Dimensions", "objectslend") }}">
                     {{ object.displayDimension(filters)|raw }}
                 </td>
             {% endif %}
             {% if lendsprefs.VIEW_WEIGHT %}
-                <td>
+                <td data-col-label="{{ _T("Weight", "objectslend") }}">
                     {{ object.weight }}
                 </td>
             {% endif %}
-            <td>
+            <td data-col-label="{{ _T("Status", "objectslend") }}">
                 {% if object.getStatusText() %}
                     {{ object.getStatusText() }}{% if object.inStock() %} ({{ _T("In stock", "objectslend") }}){% endif %}
                 {% else %}-{% endif %}
             </td>
-            <td class="center nowrap">
+            <td class="center nowrap" data-col-label="{{ _T("Since", "objectslend") }}">
                 {{ object.getDateBegin() }}
             </td>
-            <td>
+            <td data-col-label="{{ _T("By", "objectslend") }}">
                 {% if object.getIdAdh() %}
                     <a href="{{ url_for("member", {"id": object.getIdAdh()}) }}">{{ memberName({'id': object.getIdAdh()}) }}</a>
                 {% else %}-{% endif %}
             </td>
             {% if lendsprefs.VIEW_DATE_FORECAST %}
-                <td class="center nowrap">
+                <td class="center nowrap" data-col-label="{{ _T("Return", "objectslend") }}">
                     {{ object.getDateForecast() }}
                 </td>
             {% endif %}
-            <td class="center {% if object.isActive() %}use{% else %}delete{% endif %}">
+            <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
                 <i
-                        class="thumbs {% if object.isActive() %}up green{% else %}down red{% endif %} icon"
+                        class="thumbs {% if object.isActive() %}up green{% else %}down red{% endif %} icon tooltip"
                         title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
                 </i>
                 <span class="visually-hidden">{% if object.isActive() %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
             </td>
-            <td class="center nowrap">
+            <td class="center actions_row nowrap">
                 {% set actions = [] %}
                 {% if login.isAdmin() or login.isStaff() %}
                     {% set actions = [
