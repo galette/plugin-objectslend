@@ -739,7 +739,7 @@ class ObjectsController extends AbstractPluginController
         $rent->status_id = $post['status'];
         $rent->date_forecast = $post['expected_return'];
 
-        if ($post[Adherent::PK] && ($this->login->isAdmin() || $this->login->isStaff())) {
+        if ($post[Adherent::PK] ?? null && ($this->login->isAdmin() || $this->login->isStaff())) {
             $rent->adherent_id = $post[Adherent::PK];
         } else {
             $rent->adherent_id = $this->login->id;
