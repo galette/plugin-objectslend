@@ -625,7 +625,8 @@ class ObjectsController extends AbstractPluginController
 
         $deps = [
             'rents'     => true,
-            'last_rent' => true
+            'last_rent' => true,
+            'member'    => true
         ];
         $object = new LendObject(
             $this->zdb,
@@ -679,7 +680,7 @@ class ObjectsController extends AbstractPluginController
                 $params['members']['list'] = $members;
             }
             $params['require_calendar'] = true;
-            $param['rent_price'] = str_replace(array( ',', ' '), array( '.', ''), $object->rent_price); //FIXME :/
+            $params['rent_price'] = str_replace(array( ',', ' '), array( '.', ''), $object->rent_price); //FIXME :/
 
             if ($last_rent !== null && !$last_rent->in_stock) {
                 //redirect to objects list
@@ -703,6 +704,30 @@ class ObjectsController extends AbstractPluginController
             $date_forecast = new \DateTime();
             $date_forecast->add(new \DateInterval('P1D'));
             $params['date_forecast'] = $date_forecast->format(__('Y-m-d'));
+        } else {
+            if (
+                !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+                || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
+            ) {
+                Analog::log(
+                    'Trying to return an object without appropriate rights! (Object ' .
+                    $id . ', user ' . $this->login->login . ')',
+                    Analog::WARNING
+                );
+
+                //redirect to objects list
+                $this->flash->addMessage(
+                    'error_detected',
+                    _T("You do not have rights to return objects!", "objectslend")
+                );
+
+                return $response
+                    ->withStatus(301)
+                    ->withHeader(
+                        'Location',
+                        $this->routeparser->urlFor('objectslend_objects')
+                    );
+            }
         }
 
         // display page
@@ -729,6 +754,30 @@ class ObjectsController extends AbstractPluginController
         $post = $request->getParsedBody();
 
         $object_id = $id;
+
+        if (
+            !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+            && !($this->login->isAdmin() || $this->login->isStaff())
+        ) {
+            Analog::log(
+                'Trying to borrow an object without appropriate rights! (Object ' .
+                $id . ', user ' . $this->login->login . ')',
+                Analog::WARNING
+            );
+
+            //redirect to objects list
+            $this->flash->addMessage(
+                'error_detected',
+                _T("You do not have rights to borrow objects!", "objectslend")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader(
+                    'Location',
+                    $this->routeparser->urlFor('objectslend_objects')
+                );
+        }
 
         // close olds object rents
         LendRent::closeAllRentsForObject($object_id, '');
@@ -862,6 +911,44 @@ class ObjectsController extends AbstractPluginController
 
         $object_id = $id;
 
+        $deps = [
+            'rents'     => true,
+            'last_rent' => true,
+            'member'    => true
+        ];
+
+        //retrieve object information
+        $object = new LendObject(
+            $this->zdb,
+            $this->plugins,
+            $object_id,
+            $deps
+        );
+
+        if (
+            !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+            || !($this->login->isAdmin() || $this->login->isStaff() && $this->login->id != $object->getIdAdh())
+        ) {
+            Analog::log(
+                'Trying to return an object without appropriate rights! (Object ' .
+                $id . ', user ' . $this->login->login . ')',
+                Analog::WARNING
+            );
+
+            //redirect to objects list
+            $this->flash->addMessage(
+                'error_detected',
+                _T("You do not have rights to return objects!", "objectslend")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader(
+                    'Location',
+                    $this->routeparser->urlFor('objectslend_objects')
+                );
+        }
+
         // close olds object rents
         LendRent::closeAllRentsForObject($object_id, '');
 
@@ -870,13 +957,6 @@ class ObjectsController extends AbstractPluginController
         $rent->object_id = $object_id;
         $rent->status_id = $post['status'];
         $rent->store();
-
-        //retrieve object information
-        $object = new LendObject(
-            $this->zdb,
-            $this->plugins,
-            $object_id
-        );
 
         $this->flash->addMessage(
             'success_detected',

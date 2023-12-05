@@ -80,6 +80,6 @@ $this->register(
         'objectslend_show_object_lend'  => 'staff',
         'objectslend_object_take'       => 'member',
         'objectslend_object_dotake'     => 'member',
-        'objectslend_object_doreturn'   => 'staff'
+        'objectslend_object_doreturn'   => 'member'
     ]
 );
