@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-12-06 08:20+0100\n"
-"PO-Revision-Date: 2023-11-22 10:44+0000\n"
+"PO-Revision-Date: 2023-12-06 07:26+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/fr/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -77,10 +77,8 @@ msgid "Object has been saved"
 msgstr "L'objet a été enregistré"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:542
-#, fuzzy
-#| msgid "Status has been saved"
 msgid "Status has been updated"
-msgstr "Le status a été enregistré"
+msgstr "Le status a été mis à jour"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:572
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
@@ -110,10 +108,8 @@ msgstr "%object est actuellement indisponible"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:721
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:941
-#, fuzzy
-#| msgid "You do not have rights to borrow objects!"
 msgid "You do not have rights to return objects!"
-msgstr "Vous n'avez pas le droit d'emprunter des objets !"
+msgstr "Vous n'avez pas le droit de retourner des objets !"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:876
 #, php-format
@@ -195,10 +191,8 @@ msgstr "Préférences"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
-#, fuzzy
-#| msgid "object_card"
 msgid "objects_cards"
-msgstr "fiche_objet"
+msgstr "fiches_objets"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:135
 #, php-format
