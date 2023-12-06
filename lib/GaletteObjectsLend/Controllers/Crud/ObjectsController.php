@@ -927,7 +927,7 @@ class ObjectsController extends AbstractPluginController
 
         if (
             !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
-            || !($this->login->isAdmin() || $this->login->isStaff() && $this->login->id != $object->getIdAdh())
+            || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
         ) {
             Analog::log(
                 'Trying to return an object without appropriate rights! (Object ' .
