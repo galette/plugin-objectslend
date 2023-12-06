@@ -9,10 +9,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-12-06 08:20+0100\n"
-"PO-Revision-Date: 2023-11-22 10:44+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2023-12-07 12:05+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
@@ -83,10 +83,8 @@ msgid "Object has been saved"
 msgstr "El objeto ha sido guardado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:542
-#, fuzzy
-#| msgid "Status has been saved"
 msgid "Status has been updated"
-msgstr "El estado ha sido guardado"
+msgstr "Estado actualizado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:572
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
@@ -116,10 +114,8 @@ msgstr "%objet no está disponible actualmente"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:721
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:941
-#, fuzzy
-#| msgid "You do not have rights to borrow objects!"
 msgid "You do not have rights to return objects!"
-msgstr "¡No tienes derecho a tomar objetos prestados!"
+msgstr "¡No tiene derecho a devolver objetos!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:876
 #, php-format
@@ -201,10 +197,8 @@ msgstr "Preferencias"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
-#, fuzzy
-#| msgid "object_card"
 msgid "objects_cards"
-msgstr "objeto_tarjeta"
+msgstr "objects_cards"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:135
 #, php-format
@@ -450,12 +444,12 @@ msgid ""
 "Please make sure to select at least one object from the list to perform this "
 "action."
 msgstr ""
-"Asegúrese seleccionar al menos un objetos desde el índice para realizar esta "
-"operación."
+"Por favor, asegúrese de seleccionar al menos un objeto de la lista para "
+"realizar esta acción."
 
 #: ../tempcache/objects_list.html.twig:59
 msgid "Print objects list"
-msgstr "Índice de objetos escritos"
+msgstr "Imprimir la lista de objetos"
 
 #: ../tempcache/objects_list.html.twig:100
 msgid "Add an object"
