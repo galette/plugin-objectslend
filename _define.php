@@ -8,9 +8,9 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2022 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * ObjectsLend is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,9 +31,9 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2022 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @link      https://galette.eu
  */
 
 $this->register(
@@ -43,7 +43,7 @@ $this->register(
     '2.0.0',                            //Version
     '1.0.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2022-05-29',                       //Date
+    '2023-12-07',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
