@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -24,11 +24,11 @@
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  *
- * @category  Entity
+ * @category  Controllers
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org */
 
@@ -41,26 +41,23 @@ use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Repository\Objects;
 use GaletteObjectsLend\IO\PdfObject;
 use GaletteObjectsLend\IO\PdfObjects;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Analog\Analog;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Galette objects lend PDF controller
  *
  * @category  Controllers
- * @name      ImageController
+ * @name      PdfController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
 
 class PdfController extends GPdfController
 {
-    private $lendsprefs;
-
     /**
      * Object lends print object
      *
@@ -123,7 +120,8 @@ class PdfController extends GPdfController
             $this->preferences,
             $lendsprefs,
             $filters,
-            $this->login
+            $this->login,
+            $this->plugins
         );
 
         $pdf->drawList($list);

@@ -4,12 +4,12 @@
 
 /**
  * Public Class LendObject
- * Store informations about an object to lend
+ * Store information about an object to lend
  *
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2018 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,7 +40,7 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use Laminas\Db\Sql\Predicate;
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
@@ -56,9 +56,29 @@ use GaletteObjectsLend\Repository\Objects;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property ?int $object_id
+ * @property ObjectPicture $picture
+ * @property string $name
+ * @property string $description
+ * @property string $serial_number
+ * @property float $price
+ * @property float $rent_price
+ * @property float $value_rent_price
+ * @property bool $price_per_day
+ * @property string $dimension
+ * @property float $weight
+ * @property bool $is_active
+ * @property string $cat_name
+ * @property string $status_text
+ * @property string $date_begin
+ * @property Adherent $member
+ * @property string $date_forecast
+ * @property array $rents
+ * @property int $category_id
  */
 class LendObject
 {
@@ -133,7 +153,7 @@ class LendObject
      * Default constructor
      *
      * @param Db         $zdb     Database instance
-     * @param Plugins    $plugins Pluginsugins instance
+     * @param Plugins    $plugins Plugins instance
      * @param int|object $args    Maybe null, an RS object or an id from database
      * @param array      $deps    Dependencies configuration, see LendOb::$deps
      */
@@ -223,7 +243,7 @@ class LendObject
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -244,7 +264,7 @@ class LendObject
         } else {
             $this->cat_active = false;
         }
-        if (property_exists($r, 'cat_name') && trim($r->cat_name) != '') {
+        if (property_exists($r, 'cat_name') && $r->cat_name) {
             $this->cat_name = $r->cat_name;
         }
         $this->category_id = $r->category_id;
@@ -344,6 +364,10 @@ class LendObject
                     } else {
                         $this->object_id = $this->zdb->driver->getLastGeneratedValue();
                     }
+
+                    if ($this->deps['picture'] === true) {
+                        $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+                    }
                 } else {
                     throw new \Exception(_T("Object has not been added :(", "objectslend"));
                 }
@@ -420,7 +444,7 @@ class LendObject
      */
     public static function getMoreObjectsByIds($ids)
     {
-        global $zdb;
+        global $zdb, $plugins;
 
         $myids = array();
         foreach ($ids as $id) {
@@ -437,7 +461,7 @@ class LendObject
 
             $rows = $zdb->execute($select);
             foreach ($rows as $r) {
-                $o = new self($r);
+                $o = new self($zdb, $plugins, $r);
 
                 self::getStatusForObject($o);
 
@@ -451,44 +475,23 @@ class LendObject
                     $e->getTraceAsString(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
         switch ($name) {
-            case 'date_begin_ihm':
-                if ($this->date_begin == '' || $this->date_begin == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_begin);
-                return $dtb->format('j M Y');
-            case 'date_begin_short':
-                if ($this->date_begin == '' || $this->date_begin == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_begin);
-                return $dtb->format('d/m/Y');
-            case 'date_forecast_ihm':
-                if ($this->date_forecast == '' || $this->date_forecast == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_forecast);
-                return $dtb->format('j M Y');
-            case 'date_forecast_short':
-                if ($this->date_forecast == '' || $this->date_forecast == null) {
-                    return '';
-                }
-                $dtb = new \DateTime($this->date_forecast);
-                return $dtb->format('d/m/Y');
+            case 'date_begin':
+            case 'date_forecast':
+                return $this->getDateField($name);
             case 'price':
             case 'rent_price':
                 return number_format($this->$name, 2, ',', ' ');
@@ -541,7 +544,7 @@ class LendObject
     /**
      * Get current rent
      *
-     * @return LendRent
+     * @return LendRent|void
      */
     public function getCurrentRent()
     {
@@ -602,7 +605,7 @@ class LendObject
             return $this->$field;
         }
 
-        $untokenized = trim($filters->filter_str, '%');
+        $untokenized = trim($filters->filter_str ?? '', '%');
         mb_internal_encoding('UTF-8');
         return preg_replace(
             '/(' . $untokenized . ')/iu',
@@ -677,7 +680,7 @@ class LendObject
             $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
-            $zdb->connection->rollBack();
+            $this->zdb->connection->rollBack();
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
                     $e->getTraceAsString(),
@@ -699,5 +702,187 @@ class LendObject
         //unset image
         $this->picture = new ObjectPicture($this->plugins);
         return $this->store();
+    }
+
+    /**
+     * Get ID
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return (int)$this->object_id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return ObjectPicture
+     */
+    public function getPicture(): ObjectPicture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    /**
+     * Get rent price
+     *
+     * @return float
+     */
+    public function getRentPrice(): float
+    {
+        return $this->rent_price;
+    }
+
+    /**
+     * Is a price per day
+     *
+     * @return bool
+     */
+    public function isPricePerDay(): bool
+    {
+        return $this->price_per_day;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return float
+     */
+    public function getWeight(): float
+    {
+        return $this->weight;
+    }
+
+    /**
+     * Get textual status
+     *
+     * @return mixed
+     */
+    public function getStatusText()
+    {
+        return $this->status_text;
+    }
+
+    /**
+     * Is in stock
+     *
+     * @return bool
+     */
+    public function inStock(): bool
+    {
+        return $this->in_stock;
+    }
+
+    /**
+     * Get localized begin date
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getDateBegin(): string
+    {
+        return $this->getDateField('date_begin');
+    }
+
+    /**
+     * Get localized forecast date
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getDateForecast(): string
+    {
+        return $this->getDateField('date_forecast');
+    }
+
+    /**
+     * Get member ID
+     *
+     * @return mixed
+     */
+    public function getIdAdh()
+    {
+        return $this->id_adh;
+    }
+
+    /**
+     * Get rent ID
+     *
+     * @return mixed
+     */
+    public function getRentId()
+    {
+        return $this->rent_id;
+    }
+
+    /**
+     * Get category ID
+     *
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Get serial number
+     *
+     * @return string
+     */
+    public function getSerialNumber()
+    {
+        return $this->serial_number;
+    }
+
+    /**
+     * Get localized date field
+     *
+     * @param string $name Field name
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function getDateField($name): string
+    {
+        $date = $this->$name;
+        if ($date == '' || $date == null) {
+            return '';
+        }
+        $datetime = new \DateTime($date);
+        return $datetime->format(_T('Y-m-d'));
+    }
+
+    /**
+     * Generic isset function
+     *
+     * @param $name Property name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return property_exists($this, $name);
     }
 }

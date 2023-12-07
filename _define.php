@@ -8,9 +8,9 @@
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2021 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * ObjectsLend is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,24 +31,22 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @link      https://galette.eu
  */
 
 $this->register(
     'Galette Objects Lend',             //Name
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
-    '1.2.0',                            //Version
-    '0.9.6',                            //Galette version compatibility
+    '2.0.0',                            //Version
+    '1.0.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2021-11-29',                       //Date
+    '2023-12-07',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
-        'objectslend_adminimages'       => 'staff',
-        'objectslend_adminimages_action' => 'staff',
         'objectslend_category_add'      => 'staff',
         'objectslend_category_edit'     => 'staff',
         'objectslend_category_action_add' => 'staff',
@@ -67,6 +65,7 @@ $this->register(
         'objectslend_doremove_status'   => 'admin',
         'objectslend_object_add'        => 'staff',
         'objectslend_object_edit'       => 'staff',
+        'objectslend_object_updatestatus' => 'staff',
         'objectslend_object_action_add' => 'staff',
         'objectslend_object_action_edit' => 'staff',
         'objectslend_object_clone'      => 'staff',
@@ -81,6 +80,6 @@ $this->register(
         'objectslend_show_object_lend'  => 'staff',
         'objectslend_object_take'       => 'member',
         'objectslend_object_dotake'     => 'member',
-        'objectslend_object_doreturn'   => 'staff'
+        'objectslend_object_doreturn'   => 'member'
     ]
 );

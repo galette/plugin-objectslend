@@ -1,0 +1,144 @@
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = nb_categories %}
+
+{% set form = {
+    'order': {
+        'name': 'objectslend_categories'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count category", "%count categories", nb, "events")|replace({"%count": nb}),
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    <a
+            class="ui tiny labeled icon button"
+            href="{{ url_for("objectslend_category_add") }}"
+    >
+        <i class="plus circle green icon" aria-hidden="true"></i>
+        {{ _T("Add a category", "objectslend") }}
+    </a>
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#'},
+        {'label': _T("Name", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_NAME')},
+        {'label': _T("Active", "objectslend")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block search %}
+    <form action="{{ url_for("objectslend_filter_categories") }}" method="post" id="filtre" class="ui form filters">
+        <div class="ui secondary yellow segment">
+            <div class="ui three fields">
+                <div class="field">
+                    <label for="filter_str">{{_T("Search:") }}</label>
+                    <input type="text" name="filter_str" id="filter_str" value="{{ filters.filter_str }}" type="search" placeholder="{{ _T("Enter a value") }}"/>
+                </div>
+                <div class="field">
+                    <label for="email_filter">{{ _T("Active:", "objectslend") }}</label>
+                    <div class="inline fields">
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Categories::ALL_CATEGORIES')}}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::ALL') %} checked="checked"{% endif %}>
+                                <label for="filter_dc_active" >{{ _T("Don't care") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_yes_active" value="{{ constant('GaletteObjectsLend\\Repository\\\Categories::ACTIVE_CATEGORIES') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::ACTIVE') %} checked="checked"{% endif %}>
+                                <label for="filter_yes_active" >{{ _T("Yes") }}</label>
+                            </div>
+                        </div>
+                        <div class="field inline">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="active_filter" id="filter_no_active" value="{{ constant('GaletteObjectsLend\\Repository\\Categories::INACTIVE_CATEGORIES') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::INACTIVE') %} checked="checked"{% endif %}>
+                                <label for="filter_no_active" >{{ _T("No") }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui right aligned basic fitted segment field flexend">
+                    <button type="submit"  class="tooltip action ui labeled icon primary button" title="{{ _T('Apply filters') }}" name="filter">
+                        <i class="search icon"></i>
+                        {{ _T('Filter') }}
+                    </button>
+                    <button type="submit" name="clear_filter" class="ui labeled icon button tooltip" title="{{ _T('Reset all filters to defaults') }}">
+                        <i class="trash alt red icon" aria-hidden="true"></i>
+                        {{ _T('Clear filter') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% include "components/forms/csrf.html.twig" %}
+    </form>
+{% endblock %}
+
+{% block body %}
+    {% for categ in categories %}
+            <tr class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
+                <td  data-col-label="#">
+                    {{ categ.category_id }}
+                </td>
+                <td data-col-label="{{ _T("Name", "objectslend") }}">
+        {% if olendsprefs.imagesInLists() %}
+                    <img src="{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": categ.category_id}) }}"
+                        class="ui middle aligned image"
+                        width="{{ categ.picture.getOptimalThumbWidth(olendsprefs) }}"
+                        height="{{ categ.picture.getOptimalThumbHeight(olendsprefs) }}"
+                        alt=""/>
+        {% endif %}
+                    {{ categ.name }}
+                </td>
+                <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
+                    <i class="thumbs {% if categ.is_active%}up green{% else %}down red{% endif %} icon tooltip" data-html="{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}"></i>
+                    <span class="visually-hidden">{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
+                </td>
+        {% if login.isAdmin() or login.isStaff() %}
+                <td class="center actions_row nowrap">
+                    {% set actions = [
+                        {
+                            'label': _T("Edit \"%category\"", "objectslend")|replace({"%category": categ.name}),
+                            'route': {
+                                'name': 'objectslend_category_edit',
+                                'args': {'id': categ.category_id}
+                            },
+                            'icon': 'edit'
+                        }
+                    ] %}
+
+                    {% if login.isAdmin() %}
+                        {% set actions = actions|merge([
+                            {
+                                'label': _T("Remove \"%category\"", "events")|replace({"%category": categ.name}),
+                                'route': {
+                                    'name': 'objectslend_remove_category',
+                                    'args': {'id': categ.category_id}
+                                },
+                                'icon': 'trash red',
+                                'extra_class': 'delete'
+                            }
+                        ]) %}
+                    {% endif %}
+
+                    {% for action in actions %}
+                        {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
+                    {% endfor %}
+                </td>
+        {% endif %}
+            </tr>
+    {% else %}
+            <tr>
+                <td colspan="4">{{ _T("No category", "objectslend") }}</td>
+            </tr>
+    {% endfor %}
+</table>
+{% endblock %}

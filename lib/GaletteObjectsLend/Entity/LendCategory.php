@@ -4,12 +4,12 @@
 
 /**
  * Public Class LendCategory
- * Store informations about a lend category
+ * Store information about a lend category
  *
  * PHP version 5
  *
  * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,7 +32,7 @@
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
  */
@@ -40,10 +40,10 @@
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Laminas\Db\Sql\Predicate;
-use GaletteObjectsLend\Entity\CategoryPicture;
 
 /**
  * Categories manageemnt
@@ -54,9 +54,14 @@ use GaletteObjectsLend\Entity\CategoryPicture;
  * @author    Mélissa Djebel <melissa.djebel@gmx.net>
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      https://galette.eu
+ *
+ * @property bool $is_active
+ * @property string $name
+ * @property int $category_id
+ * @property CategoryPicture $picture
  */
 class LendCategory
 {
@@ -136,7 +141,7 @@ class LendCategory
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -251,7 +256,7 @@ class LendCategory
     /**
      * Get category name
      *
-     * @param boolea $count Whether to display count along with name (defaults to true)
+     * @param bool $count Whether to display count along with name (defaults to true)
      *
      * @return string
      */
@@ -269,15 +274,16 @@ class LendCategory
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
         switch ($name) {
             case 'objects_price_sum':
                 return number_format($this->$name, 2, ',', '');
+            case 'is_active':
             default:
                 return $this->$name;
         }
@@ -294,5 +300,67 @@ class LendCategory
     public function __set($name, $value)
     {
         $this->$name = $value;
+    }
+
+    /**
+     * Get object ID
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return (int)$this->category_id;
+    }
+
+    /**
+     * Is object active
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return (bool)$this->is_active;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return CategoryPicture
+     */
+    public function getPicture(): CategoryPicture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Get sum
+     *
+     * @return float
+     */
+    public function getSum(): float
+    {
+        return $this->objects_price_sum;
+    }
+
+    /**
+     * Get objects count
+     *
+     * @return int
+     */
+    public function getObjectsNb(): int
+    {
+        return $this->objects_nb;
+    }
+
+    /**
+     * Generic isset function
+     *
+     * @param $name Property name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return property_exists($this, $name);
     }
 }

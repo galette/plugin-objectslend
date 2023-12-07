@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -40,6 +40,7 @@ namespace GaletteObjectsLend\Filters;
 use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Categories;
+use Laminas\Db\Sql\Select;
 
 /**
  * Categories list filters and paginator
@@ -49,9 +50,15 @@ use GaletteObjectsLend\Repository\Categories;
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
+ *
+ * @property ?string $filter_str
+ * @property ?int $active_filter
+ * @property ?bool $not_empty
+ * @property ?ObjectsList $objects_filters
+ * @property string $query
  */
 
 class CategoriesList extends Pagination
@@ -107,9 +114,9 @@ class CategoriesList extends Pagination
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
@@ -126,7 +133,7 @@ class CategoriesList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[CategoriesList] Unable to get proprety `' . $name . '`',
+                    '[CategoriesList] Unable to get property `' . $name . '`',
                     Analog::WARNING
                 );
             }
@@ -137,7 +144,7 @@ class CategoriesList extends Pagination
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
@@ -168,8 +175,8 @@ class CategoriesList extends Pagination
                         default:
                             Analog::log(
                                 '[CategoriesList] Value for active filter should be either ' .
-                                Categories::ACTIVE . ' or ' .
-                                Categories::INACTIVE . ' (' . $value . ' given)',
+                                Categories::ALL_CATEGORIES . ', ' . Categories::ACTIVE_CATEGORIES . ' or ' .
+                                Categories::INACTIVE_CATEGORIES . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
@@ -190,11 +197,11 @@ class CategoriesList extends Pagination
      *
      * @param Select $select Original select
      *
-     * @return <type>
+     * @return void
      */
     public function setLimit($select)
     {
-        return $this->setLimits($select);
+        $this->setLimits($select);
     }
 
     /**

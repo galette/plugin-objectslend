@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -37,13 +37,14 @@
 namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
+use DI\Attribute\Inject;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Repository\Categories;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\Preferences;
 use Galette\Controllers\Crud\AbstractPluginController;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Categories controller
@@ -52,7 +53,7 @@ use Slim\Http\Response;
  * @name      CategoriesController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-09
@@ -61,9 +62,9 @@ use Slim\Http\Response;
 class CategoriesController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Objects Lend")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Objects Lend")]
     protected $module_info;
 
     // CRUD - Create
@@ -132,13 +133,13 @@ class CategoriesController extends AbstractPluginController
         $this->session->objectslend_filter_categories = $filters;
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $lendsprefs = new Preferences($this->zdb);
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']categories_list.tpl',
+            $this->getTemplate('categories_list'),
             array(
                 'page_title'            => _T("Categories list", "objectslend"),
                 'require_dialog'        => true,
@@ -195,7 +196,7 @@ class CategoriesController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('objectslend_categories'));
+            ->withHeader('Location', $this->routeparser->urlFor('objectslend_categories'));
     }
 
     // /CRUD - Read
@@ -238,7 +239,7 @@ class CategoriesController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']category_edit.tpl',
+            $this->getTemplate('category_edit'),
             $params
         );
         return $response;
@@ -261,7 +262,7 @@ class CategoriesController extends AbstractPluginController
         $error_detected = [];
 
         $category->name = $post['name'];
-        $category->is_active = $post['is_active'] == 'true';
+        $category->is_active = $post['is_active'] == true;
         if ($category->store()) {
             // picture upload
             if (isset($_FILES['picture'])) {
@@ -295,7 +296,7 @@ class CategoriesController extends AbstractPluginController
                 }
             }
         } else {
-            $error_detected[] = _T("An error occured while storing the category.", "objectslend");
+            $error_detected[] = _T("An error occurred while storing the category.", "objectslend");
         }
 
         $args = ($id === null ? [] : ['id' => $id]);
@@ -312,7 +313,7 @@ class CategoriesController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_category', $args)
+                    $this->routeparser->urlFor('objectslend_category_' . $action, $args)
                 );
         } else {
             //redirect to categories list
@@ -325,7 +326,7 @@ class CategoriesController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_categories', $args)
+                    $this->routeparser->urlFor('objectslend_categories', $args)
                 );
         }
     }
@@ -342,7 +343,7 @@ class CategoriesController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('objectslend_categories');
+        return $this->routeparser->urlFor('objectslend_categories');
     }
 
     /**
@@ -354,7 +355,7 @@ class CategoriesController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'objectslend_doremove_category',
             $args
         );

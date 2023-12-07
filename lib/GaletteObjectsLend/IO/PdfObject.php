@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2018 The Galette Team
+ * Copyright © 2018-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -53,14 +53,13 @@ use Galette\Entity\Adherent;
  * @name      PdfObject
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018 The Galette Team
+ * @copyright 2018-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
 class PdfObject extends Pdf
 {
     private $zdb;
-    private $prefs;
     private $lprefs;
 
     /**
@@ -104,7 +103,7 @@ class PdfObject extends Pdf
     /**
      * Draw listed object cards
      *
-     * @param LendObject[] $objects Object list
+     * @param array $objects Object list
      *
      * @return void
      */
@@ -159,7 +158,7 @@ class PdfObject extends Pdf
             $this->addCell(_T("Description", "objectslend"), $object->description, $wpic);
         }
         if ($this->lprefs->{LPreferences::PARAM_VIEW_CATEGORY}) {
-            $this->addCell(_T("Category", "objectslend"), $object->cat_name, $wpic);
+            $this->addCell(_T("Category", "objectslend"), $object->cat_name ?? '', $wpic);
         }
         if ($this->lprefs->{LPreferences::PARAM_VIEW_SERIAL}) {
             $this->addCell(_T("Serial number", "objectslend"), $object->serial_number, $wpic);
@@ -186,11 +185,11 @@ class PdfObject extends Pdf
             $this->addCell(_T("Weight", "objectslend"), $object->weight . ' ' . _T('Kg', 'objectslend'), $wpic);
         }
         $this->addCell(_T("Active", "objectslend"), $object->is_active ? 'X' : '', $wpic);
-        $this->addCell(_T("Location", "objectslend"), $object->status_text, $wpic);
-        $this->addCell(_T("Since", "objectslend"), $object->date_begin_ihm, $wpic);
+        $this->addCell(_T("Location", "objectslend"), $object->status_text ?? '', $wpic);
+        $this->addCell(_T("Since", "objectslend"), $object->date_begin, $wpic);
         $this->addCell(_T("Member", "objectslend"), $object->member->sname, $wpic);
         if ($this->lprefs->{LPreferences::PARAM_VIEW_DATE_FORECAST}) {
-            $this->addCell(_T("Return", "objectslend"), $object->date_forecast_ihm, $wpic);
+            $this->addCell(_T("Return", "objectslend"), $object->date_forecast, $wpic);
         }
 
         if ($this->GetY() < $hpic) {
@@ -240,7 +239,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    private function addCell($title, $value, $width)
+    private function addCell(string $title, string $value, int $width)
     {
         if ($width > 0) {
             $this->Cell($width, 0, '');

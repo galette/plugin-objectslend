@@ -1,0 +1,220 @@
+{% extends 'page.html.twig' %}
+
+{% block content %}
+    <form action="{% if object.getId() %}{{ url_for("objectslend_object_action_edit", {"id": object.getId()}) }}{% else %}{{ url_for("objectslend_object_action_add") }}{% endif %}" method="post" enctype="multipart/form-data" class="ui form">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Object", "objectslend") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: 'name',
+                    value: object.name,
+                    label: _T("Name:", "objectslend"),
+                    required: true
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'description',
+                    value: object.description,
+                    label: _T("Description:", "objectslend")
+                } %}
+
+                {% if lendsprefs.VIEW_CATEGORY %}
+                    {% set category_list_values = {(0): _T("--- Select a category ---", "objectslend")} %}
+                    {% for categ in categories %}
+                        {% set category_list_values = category_list_values + {(categ.getId()): categ.getName()} %}
+                    {% endfor %}
+
+                    {% include "components/forms/select.html.twig" with {
+                        id: 'category_id',
+                        value: object.getCategoryId(),
+                        values: category_list_values,
+                        label: _T("Category:", "objectslend")
+                    } %}
+
+                {% endif %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'serial',
+                    value: object.getSerialNumber(),
+                    label: _T("Serial number:", "objectslend")
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'price',
+                    value: object.price,
+                    label: _T("Price:", "objectslend"),
+                    rightlabel: object.getCurrency()
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'rent_price',
+                    value: object.rent_price,
+                    label: _T("Borrow price:", "objectslend"),
+                    rightlabel: object.getCurrency()
+                } %}
+
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'price_per_day',
+                    value: 1,
+                    label: _T("Price per rental day:", "objectslend"),
+                    tip: _T("The price applies on each rental day if checked, only once otherwise", "objectslend"),
+                    checked: object.price_per_day
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'dimension',
+                    value: object.dimension,
+                    label: _T("Dimensions:", "objectslend"),
+                    rightlabel: _T("Cm", "objectslend")
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'weight',
+                    value: object.weight,
+                    label: _T("Weight:", "objectslend"),
+                    rightlabel: _T("Kg", "objectslend")
+                } %}
+
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'is_active',
+                    value: 1,
+                    label: _T("Active:", "objectslend"),
+                    checked: object.is_active
+                } %}
+
+
+                {% if not object.object_id %}
+                    {% set state_list_values = {(0): _T("--- Select a status ---", "objectslend")} %}
+                    {% for sta in statuses %}
+                        {% set state_list_values = state_list_values + {(sta.status_id): sta.status_text} %}
+                    {% endfor %}
+
+                    {% include "components/forms/select.html.twig" with {
+                        id: '1st_status',
+                        value: '',
+                        values: state_list_values,
+                        label: _T("Where is the object?", "objectslend")
+                    } %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Object's photo", "objectslend") }}
+            </div>
+            <div class="active content">
+                <img
+                        src="{% if object.object_id %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
+                        class="picture"
+                        width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
+                        height="{{ object.picture.getOptimalThumbHeight(olendsprefs) }}"
+                        alt="{{ _T("Object's photo", "objectslend") }}"/>
+                <br/>
+                {% if object.picture.hasPicture() %}
+                    {% include "components/forms/checkbox.html.twig" with {
+                        id: 'del_picture',
+                        value: 1,
+                        label: _T("Delete image"),
+                        required: false
+                    } %}
+                {% endif %}
+                <div class="ui file action input">
+                    <input id="picture_file" type="file" name="picture"/>
+                    <label for="picture_file" class="ui button">
+                        <i class="blue upload icon"></i>
+                        {% if object.picture.hasPicture() %}{{ _T("Choose another file") }}{% else %}{{ _T("Choose a file") }}{% endif %}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui basic center aligned segment">
+            <button type="submit" class="ui labeled icon primary button action">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+    {%if object.object_id != '' %}
+            <a href="{{ url_for("objectslend_object_clone", {"id": object.object_id}) }}" class="ui labeled icon button">
+                <i class="clone icon"></i> {{ _T("Duplicate", "objectslend") }}
+            </a>
+            <a href="{{ url_for("objectslend_object_print", {"id": object.object_id}) }}" class="ui labeled icon button">
+                <i class="print icon"></i> {{ _T("Print object", "objectslend") }}
+            </a>
+    {% endif %}
+            <input type="hidden" name="object_id" value="{{ object.getId()}}">
+        </div>
+        {% include "components/forms/csrf.html.twig" %}
+    </form>
+
+    {% if object.getId() %}
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("History", "objectslend") }}
+            </div>
+            <div class="active content">
+                {% include "@PluginGaletteObjectslend/list_lent_object.html.twig" with {rents: object.rents, mode: 'ajax'} %}
+            </div>
+        </div>
+
+        {# FIXME: should not be here, create a specific page. #}
+        <div class="ui basic horizontally fitted segment">
+            <form action="{{ url_for("objectslend_object_updatestatus", {"id": object.getId()}) }}" method="post" class="ui form">
+                <div class="ui styled fluid accordion field">
+                    <div class="active title">
+                        <i class="icon dropdown"></i>
+                        {{ _T("Change status", "objectslend") }}
+                    </div>
+                    <div class="active content">
+                        {% set state_list_values = {(-1): _T("--- Select a status ---", "objectslend")} %}
+                        {% for sta in statuses %}
+                            {% set text = sta.status_text %}
+                            {% if sta.in_stock %}
+                                {% set text = text ~ ' (' ~ _T("In stock", "objectslend") ~ ')' %}
+                            {% endif %}
+                            {% set state_list_values = state_list_values + {(sta.status_id): text} %}
+                        {% endfor %}
+
+                        {% include "components/forms/select.html.twig" with {
+                            id: 'new_status',
+                            value: '',
+                            values: state_list_values,
+                            label: _T("Status", "objectslend")
+                        } %}
+
+                        {% include "components/forms/text.html.twig" with {
+                            id: 'new_comment',
+                            value: '',
+                            label: _T("Comments", "objectslend"),
+                            size: 100,
+                            maxlength: 200
+                        } %}
+
+                        <div class="inline field">
+                            <label for="new_adh">{{ _T("Member:", "objectslend") }}</label>
+                            <select name="new_adh" id="id_adh" class="nochosen">
+                                <option value="">{{ _T("Search for name or ID and pick member") }}</option>
+                                {% for k, v in members.list %}
+                                    <option value="{{ k }}"{% if login.id == k %} selected="selected"{% endif %}>{{ v }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ui basic center aligned segment">
+                    <button type="submit" class="ui labeled icon primary button action">
+                        <i class="save icon"></i> {{ _T("Change status", "objectslend") }}
+                    </button>
+                </div>
+                <input type="hidden" name="object_id" value="{{ object.object_id }}">
+                {% include "components/forms/csrf.html.twig" %}
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-12
@@ -37,6 +37,7 @@
 namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
+use DI\Attribute\Inject;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Filters\StatusList;
@@ -52,8 +53,8 @@ use Galette\Entity\Adherent;
 use Galette\Entity\Contribution;
 use Galette\Entity\ContributionsTypes;
 use Galette\Repository\Members;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Objects controller
@@ -62,7 +63,7 @@ use Slim\Http\Response;
  * @name      ObjectsController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2021-05-12
@@ -71,9 +72,9 @@ use Slim\Http\Response;
 class ObjectsController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Objects Lend")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Objects Lend")]
     protected $module_info;
 
     // CRUD - Create
@@ -149,8 +150,8 @@ class ObjectsController extends AbstractPluginController
         $this->session->objectslend_filter_objects = $filters;
 
         //assign pagination variables to the template and add pagination links
-        $filters->setViewCommonsFilters($lendsprefs, $this->view->getSmarty());
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewCommonsFilters($lendsprefs, $this->view);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $cat_filters = new CategoriesList();
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
@@ -161,7 +162,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']objects_list.tpl',
+            $this->getTemplate('objects_list'),
             array(
                 'page_title' => _T("Objects list", "objectslend"),
                 'require_dialog' => true,
@@ -221,7 +222,7 @@ class ObjectsController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('objectslend_objects'));
+            ->withHeader('Location', $this->routeparser->urlFor('objectslend_objects'));
     }
 
     /**
@@ -254,13 +255,13 @@ class ObjectsController extends AbstractPluginController
             'object' => $object,
             'rents' => $object->rents,
             'time' => time(),
-            'ajax' => $request->isXhr()
+            'ajax' => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest'
         ];
 
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']list_lent_object.tpl',
+            $this->getTemplate('list_lent_object'),
             $params
         );
         return $response;
@@ -278,26 +279,26 @@ class ObjectsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        if (isset($post['object_ids'])) {
+        if (isset($post['entries_sel'])) {
             if (isset($this->session->objectslend_filter_objects)) {
                 $filters = $this->session->objectslend_filter_objects;
             } else {
                 $filters = new ObjectsList();
             }
 
-            $filters->selected = $post['object_ids'];
+            $filters->selected = $post['entries_sel'];
             $this->session->objectslend_filter_objects = $filters;
 
             if (isset($post['delete'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('objectslend_remove_objects'));
+                    ->withHeader('Location', $this->routeparser->urlFor('objectslend_remove_objects'));
             }
 
             if (isset($post['print_list'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('objectslend_objects_print'));
+                    ->withHeader('Location', $this->routeparser->urlFor('objectslend_objects_print'));
             }
 
             $this->flash->addMessage(
@@ -313,7 +314,7 @@ class ObjectsController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('objectslend_objects'));
+            ->withHeader('Location', $this->routeparser->urlFor('objectslend_objects'));
     }
 
     // /CRUD - Read
@@ -367,7 +368,7 @@ class ObjectsController extends AbstractPluginController
 
         // members
         $m = new Members();
-        $members = $m->getSelectizedMembers(
+        $members = $m->getDropdownMembers(
             $this->zdb,
             $this->login,
             ($this->login->isSuperadmin() ? null : $this->login->id)
@@ -385,7 +386,7 @@ class ObjectsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']objects_edit.tpl',
+            $this->getTemplate('objects_edit'),
             $params
         );
         return $response;
@@ -415,43 +416,30 @@ class ObjectsController extends AbstractPluginController
         $object->serial_number = $post['serial'];
         if ($post['price'] != '') {
             //FIXME: better currency format handler
-            $object->price = str_replace(' ', '', str_replace(',', '.', $post['price']));
+            $object->price = (float)str_replace(' ', '', str_replace(',', '.', $post['price']));
         }
         if ($post['rent_price'] != '') {
             //FIXME: better currency format handler
-            $object->rent_price = str_replace(' ', '', str_replace(',', '.', $post['rent_price']));
+            $object->rent_price = (float)str_replace(' ', '', str_replace(',', '.', $post['rent_price']));
         }
-        $object->price_per_day = $post['price_per_day'] == 'true';
+        if (isset($post['price_per_day'])) {
+            $object->price_per_day = $post['price_per_day'] == 'true';
+        }
         $object->dimension = $post['dimension'];
         if ($post['weight'] != '') {
             //FIXME: better format handler
-            $object->weight = str_replace(' ', '', str_replace(',', '.', $post['weight']));
+            $object->weight = (int)str_replace(' ', '', str_replace(',', '.', $post['weight']));
         }
-        $object->is_active = $post['is_active'] == 'true';
+        $object->is_active = ($post['is_active'] ?? false) == true;
 
         if ($object->store()) {
-            $success_detected[] = _T("Object has been successfully stored!", "objectslend");
             if (isset($post['1st_status'])) {
                 $rent = new LendRent();
-                $rent->object_id = $object->object_id;
+                $rent->object_id = $object->getId();
                 $rent->status_id = $post['1st_status'];
                 $rent->store();
             }
 
-            $object_id = $object->object_id;
-
-            // Change status
-            if (isset($post['status'])) {
-                LendRent::closeAllRentsForObject(intval($object_id), $post['new_comment']);
-
-                $rent = new LendRent();
-                $rent->object_id = $object_id;
-                $rent->status_id = $post['new_status'];
-                if (filter_input(INPUT_POST, 'new_adh') != 'null') {
-                    $rent->adherent_id = $post['new_adh'];
-                }
-                $rent->store();
-            }
             // picture upload
             if (isset($_FILES['picture'])) {
                 if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
@@ -501,7 +489,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor(
+                    $this->routeparser->urlFor(
                         'objectslend_object_' . $action,
                         $args
                     )
@@ -517,9 +505,49 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_objects')
+                    $this->routeparser->urlFor('objectslend_objects')
                 );
         }
+    }
+
+    /**
+     * Update status action
+     *
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
+     * @param null|int $id       Object id for edit
+     * @param string   $action   Either add or edit
+     *
+     * @return Response
+     */
+    public function doUpdateStatus(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    {
+        $post = $request->getParsedBody();
+
+        $object = new LendObject($this->zdb, $this->plugins, $id);
+
+        LendRent::closeAllRentsForObject($object->getId(), $post['new_comment']);
+
+        $rent = new LendRent();
+        $rent->object_id = $object->getId();
+        $rent->status_id = $post['new_status'];
+        if (filter_input(INPUT_POST, 'new_adh') != 'null') {
+            $rent->adherent_id = $post['new_adh'];
+        }
+        $rent->store();
+
+        //redirect to objects form
+        $this->flash->addMessage(
+            'success_detected',
+            _T("Status has been updated", "objectslend")
+        );
+
+        return $response
+            ->withStatus(301)
+            ->withHeader(
+                'Location',
+                $this->routeparser->urlFor('objectslend_object_edit', ['id' => $object->getId()])
+            );
     }
 
     /**
@@ -527,7 +555,7 @@ class ObjectsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     * @param null|int $id       Object id for edit
+     * @param int      $id       Object id for edit
      *
      * @return Response
      */
@@ -555,7 +583,7 @@ class ObjectsController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor(
+                $this->routeparser->urlFor(
                     'objectslend_object_edit',
                     ['id' => $object->object_id]
                 )
@@ -577,14 +605,18 @@ class ObjectsController extends AbstractPluginController
         $lendsprefs = new Preferences($this->zdb);
 
         $params = [
-            'page_title'    => _T("Borrow an object", "objectslend"),
+            'page_title'    => ($action == 'take' ?
+                _T("Borrow an object", "objectslend") :
+                _T("Return a borrowed object", "objectslend")
+
+            ),
             'time'          => time(),
             'statuses'      => ($action == 'take' ?
                 LendStatus::getActiveTakeAwayStatuses($this->zdb) :
                 LendStatus::getActiveStockStatuses($this->zdb)),
             'lendsprefs'    => $lendsprefs->getpreferences(),
             'olendsprefs'   => $lendsprefs,
-            'ajax'          => $request->isXhr(),
+            'ajax'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest',
             'takeorgive'    => $action,
             'adh_selected'  => ($this->login->isSuperadmin() ? null : $this->login->id),
             'contribution'  => new Contribution($this->zdb, $this->login)
@@ -593,7 +625,8 @@ class ObjectsController extends AbstractPluginController
 
         $deps = [
             'rents'     => true,
-            'last_rent' => true
+            'last_rent' => true,
+            'member'    => true
         ];
         $object = new LendObject(
             $this->zdb,
@@ -611,7 +644,7 @@ class ObjectsController extends AbstractPluginController
                 && !($this->login->isAdmin() || $this->login->isStaff())
             ) {
                 Analog::log(
-                    'Trying to take an object without appropriate rights! (Object ' .
+                    'Trying to borrow an object without appropriate rights! (Object ' .
                     $id . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
@@ -619,20 +652,20 @@ class ObjectsController extends AbstractPluginController
                 //redirect to objects list
                 $this->flash->addMessage(
                     'error_detected',
-                    _T("You do not have rights to take objects!", "objectslend")
+                    _T("You do not have rights to borrow objects!", "objectslend")
                 );
 
                 return $response
                     ->withStatus(301)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('objectslend_objects')
+                        $this->routeparser->urlFor('objectslend_objects')
                     );
             }
 
             // members
             $m = new Members();
-            $members = $m->getSelectizedMembers(
+            $members = $m->getDropdownMembers(
                 $this->zdb,
                 $this->login,
                 ($this->login->isSuperadmin() ? null : $this->login->id)
@@ -647,7 +680,7 @@ class ObjectsController extends AbstractPluginController
                 $params['members']['list'] = $members;
             }
             $params['require_calendar'] = true;
-            $param['rent_price'] = str_replace(array( ',', ' '), array( '.', ''), $object->rent_price); //FIXME :/
+            $params['rent_price'] = str_replace(array( ',', ' '), array( '.', ''), $object->rent_price); //FIXME :/
 
             if ($last_rent !== null && !$last_rent->in_stock) {
                 //redirect to objects list
@@ -664,19 +697,43 @@ class ObjectsController extends AbstractPluginController
                     ->withStatus(301)
                     ->withHeader(
                         'Location',
-                        $this->router->pathFor('objectslend_objects')
+                        $this->routeparser->urlFor('objectslend_objects')
                     );
             }
 
             $date_forecast = new \DateTime();
             $date_forecast->add(new \DateInterval('P1D'));
             $params['date_forecast'] = $date_forecast->format(__('Y-m-d'));
+        } else {
+            if (
+                !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+                || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
+            ) {
+                Analog::log(
+                    'Trying to return an object without appropriate rights! (Object ' .
+                    $id . ', user ' . $this->login->login . ')',
+                    Analog::WARNING
+                );
+
+                //redirect to objects list
+                $this->flash->addMessage(
+                    'error_detected',
+                    _T("You do not have rights to return objects!", "objectslend")
+                );
+
+                return $response
+                    ->withStatus(301)
+                    ->withHeader(
+                        'Location',
+                        $this->routeparser->urlFor('objectslend_objects')
+                    );
+            }
         }
 
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']take_object.tpl',
+            $this->getTemplate('take_object'),
             $params
         );
         return $response;
@@ -698,6 +755,30 @@ class ObjectsController extends AbstractPluginController
 
         $object_id = $id;
 
+        if (
+            !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+            && !($this->login->isAdmin() || $this->login->isStaff())
+        ) {
+            Analog::log(
+                'Trying to borrow an object without appropriate rights! (Object ' .
+                $id . ', user ' . $this->login->login . ')',
+                Analog::WARNING
+            );
+
+            //redirect to objects list
+            $this->flash->addMessage(
+                'error_detected',
+                _T("You do not have rights to borrow objects!", "objectslend")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader(
+                    'Location',
+                    $this->routeparser->urlFor('objectslend_objects')
+                );
+        }
+
         // close olds object rents
         LendRent::closeAllRentsForObject($object_id, '');
 
@@ -707,7 +788,7 @@ class ObjectsController extends AbstractPluginController
         $rent->status_id = $post['status'];
         $rent->date_forecast = $post['expected_return'];
 
-        if ($post[Adherent::PK] && ($this->login->isAdmin() || $this->login->isStaff())) {
+        if ($post[Adherent::PK] ?? null && ($this->login->isAdmin() || $this->login->isStaff())) {
             $rent->adherent_id = $post[Adherent::PK];
         } else {
             $rent->adherent_id = $this->login->id;
@@ -757,14 +838,22 @@ class ObjectsController extends AbstractPluginController
                 $values = array(
                     'montant_cotis'         => $rentprice,
                     ContributionsTypes::PK  => $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIBUTION_TYPE_ID},
-                    'date_enreg'            => date(_T("Y-m-d")),
-                    'date_debut_cotis'      => date(_T("Y-m-d")),
+                    'date_enreg'            => date("Y-m-d"),
+                    'date_debut_cotis'      => date("Y-m-d"),
                     'type_paiement_cotis'   => $post['payment_type'],
                     'info_cotis'            => $info,
                     Adherent::PK            => $rent->adherent_id
                 );
                 $contrib->check($values, array(), array());
-                $created = $contrib->store();
+                try {
+                    $created = $contrib->store();
+                } catch (\OverflowException $e) {
+                    $created = false;
+                    Analog::log(
+                        $e->getMessage(),
+                        Analog::ERROR
+                    );
+                }
                 if ($created) {
                     $this->flash->addMessage(
                         'success_detected',
@@ -788,10 +877,11 @@ class ObjectsController extends AbstractPluginController
             )
         );
 
-        if ($request->isXhr() || $post['mode'] == 'ajax') {
-            return $response->withJson(
+        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' || $post['mode'] == 'ajax') {
+            return $this->withJson(
+                $response,
                 [
-                    'success'   => $success
+                    'success'   => 'true'
                 ]
             );
         } else {
@@ -800,7 +890,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_objects')
+                    $this->routeparser->urlFor('objectslend_objects')
                 );
         }
     }
@@ -821,6 +911,44 @@ class ObjectsController extends AbstractPluginController
 
         $object_id = $id;
 
+        $deps = [
+            'rents'     => true,
+            'last_rent' => true,
+            'member'    => true
+        ];
+
+        //retrieve object information
+        $object = new LendObject(
+            $this->zdb,
+            $this->plugins,
+            $object_id,
+            $deps
+        );
+
+        if (
+            !$lendsprefs->{Preferences::PARAM_ENABLE_MEMBER_RENT_OBJECT}
+            || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
+        ) {
+            Analog::log(
+                'Trying to return an object without appropriate rights! (Object ' .
+                $id . ', user ' . $this->login->login . ')',
+                Analog::WARNING
+            );
+
+            //redirect to objects list
+            $this->flash->addMessage(
+                'error_detected',
+                _T("You do not have rights to return objects!", "objectslend")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader(
+                    'Location',
+                    $this->routeparser->urlFor('objectslend_objects')
+                );
+        }
+
         // close olds object rents
         LendRent::closeAllRentsForObject($object_id, '');
 
@@ -829,13 +957,6 @@ class ObjectsController extends AbstractPluginController
         $rent->object_id = $object_id;
         $rent->status_id = $post['status'];
         $rent->store();
-
-        //retrieve object information
-        $object = new LendObject(
-            $this->zdb,
-            $this->plugins,
-            $object_id
-        );
 
         $this->flash->addMessage(
             'success_detected',
@@ -846,10 +967,11 @@ class ObjectsController extends AbstractPluginController
             )
         );
 
-        if ($request->isXhr() || $post['mode'] == 'ajax') {
-            return $response->withJson(
+        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' || $post['mode'] == 'ajax') {
+            return $this->withJson(
+                $response,
                 [
-                    'success'   => $success
+                    'success'   => 'true'
                 ]
             );
         } else {
@@ -858,7 +980,7 @@ class ObjectsController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader(
                     'Location',
-                    $this->router->pathFor('objectslend_objects')
+                    $this->routeparser->urlFor('objectslend_objects')
                 );
         }
     }
@@ -875,7 +997,7 @@ class ObjectsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('objectslend_objects');
+        return $this->routeparser->urlFor('objectslend_objects');
     }
 
     /**
@@ -887,7 +1009,7 @@ class ObjectsController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'objectslend_doremove_object',
             $args
         );
@@ -966,7 +1088,11 @@ class ObjectsController extends AbstractPluginController
             $ids = $post['id'];
         }
 
-        return $objects->removeObjects($ids);
+        $result = $objects->removeObjects($ids);
+        if ($result) {
+            unset($this->session->objectslend_filter_objects);
+        }
+        return $result;
     }
 
     // /CRUD - Delete

@@ -1,0 +1,54 @@
+{% extends 'page.html.twig' %}
+
+{% block content %}
+    <form action="{% if status.status_id %}{{ url_for("objectslend_status_action_edit", {"id": status.status_id}) }}{% else %}{{ url_for("objectslend_status_action_add") }}{% endif %}" method="post" class="ui form">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Status", "objectslend") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: 'text',
+                    component_class: 'inline field',
+                    value: status.status_text,
+                    label: _T("Status:", "objectslend"),
+                    required: true
+                } %}
+
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'in_stock',
+                    value: 1,
+                    label: _T("In stock:", "objectslend"),
+                    title: _T("Is object in stock or borrowed", "objectslend"),
+                    checked: status.in_stock,
+                    tip: _T("Check if the object is available to be borrowed;<br/>uncheck if object is already borrowed and should be given back", "objectslend")
+                } %}
+
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'is_active',
+                    value: 1,
+                    label: _T("Active:", "objectslend"),
+                    checked: status.is_active
+                } %}
+
+                {% include "components/forms/number.html.twig" with {
+                    id: 'rent_day_number',
+                    component_class: 'inline field',
+                    value: status.rent_day_number,
+                    label: _T("Days for rent", "objectslend"),
+                    title: _T("Number of days to rent per default", "objectslend"),
+                    tip: _T("Number of days to rent per default", "objectslend") ~ ' - ' ~ _T("used to compute return date", "objectslend")
+                } %}
+            </div>
+        </div>
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="valid" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="id" id="id" value="{{ status.status_id }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+    </form>
+{% endblock %}

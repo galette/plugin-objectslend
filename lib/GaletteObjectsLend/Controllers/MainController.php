@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2021 The Galette Team
+ * Copyright © 2021-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,20 +28,18 @@
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org */
 
 namespace GaletteObjectsLend\Controllers;
 
+use DI\Attribute\Inject;
 use Galette\Controllers\AbstractPluginController;
 use Galette\Entity\ContributionsTypes;
 use GaletteObjectsLend\Entity\Preferences;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Galette\Core\Picture;
-use Galette\Entity\Adherent;
-use Analog\Analog;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Galette objects lend main controller
@@ -50,7 +48,7 @@ use Analog\Analog;
  * @name      MainController
  * @package   GaletteObjectsLend
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021 The Galette Team
+ * @copyright 2021-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  */
@@ -58,12 +56,10 @@ use Analog\Analog;
 class MainController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Objects Lend")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Objects Lend")]
     protected $module_info;
-
-    private $lendsprefs;
 
     /**
      * Objects lends preferences
@@ -93,7 +89,7 @@ class MainController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']preferences.tpl',
+            $this->getTemplate('preferences'),
             $params
         );
         return $response;
@@ -133,7 +129,7 @@ class MainController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('objectslend_preferences')
+                $this->routeparser->urlFor('objectslend_preferences')
             );
     }
 }

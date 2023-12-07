@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -40,6 +40,7 @@ namespace GaletteObjectsLend\Filters;
 use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Objects;
+use Laminas\Db\Sql\Select;
 
 /**
  * Objects list filters and paginator
@@ -49,9 +50,16 @@ use GaletteObjectsLend\Repository\Objects;
  * @package   GaletteObjectsLend
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
+ *
+ * @property ?string $filter_str
+ * @property ?int $category_filter
+ * @property ?int $active_filter
+ * @property ?int $field_filter
+ * @property array $selected
+ * @property string $query
  */
 
 class ObjectsList extends Pagination
@@ -108,15 +116,30 @@ class ObjectsList extends Pagination
     }
 
     /**
+     * Default isset
+     *
+     * @param string $name Property name
+     *
+     * @return object|void
+     */
+    public function __isset($name)
+    {
+        if (in_array($name, $this->objectslist_fields)) {
+            return true;
+        }
+
+        return parent::__isset($name);
+    }
+
+    /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
-
         Analog::log(
             '[ObectsList] Getting property `' . $name . '`',
             Analog::DEBUG
@@ -129,7 +152,7 @@ class ObjectsList extends Pagination
                 return $this->$name;
             } else {
                 Analog::log(
-                    '[ObjectsList] Unable to get proprety `' . $name . '`',
+                    '[ObjectsList] Unable to get property `' . $name . '`',
                     Analog::WARNING
                 );
             }
@@ -140,7 +163,7 @@ class ObjectsList extends Pagination
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
@@ -193,8 +216,8 @@ class ObjectsList extends Pagination
                         default:
                             Analog::log(
                                 '[ObjectsList] Value for active filter should be either ' .
-                                Objects::ACTIVE . ' or ' .
-                                Objects::INACTIVE . ' (' . $value . ' given)',
+                                Objects::ACTIVE_OBJECTS . ', ' . Objects::ACTIVE_OBJECTS . ' or ' .
+                                Objects::INACTIVE_OBJECTS . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
@@ -229,11 +252,11 @@ class ObjectsList extends Pagination
      *
      * @param Select $select Original select
      *
-     * @return <type>
+     * @return void
      */
     public function setLimit($select)
     {
-        return $this->setLimits($select);
+        $this->setLimits($select);
     }
 
     /**
@@ -252,12 +275,12 @@ class ObjectsList extends Pagination
     /**
      * Set commons filters for templates
      *
-     * @param LendsPreferences $prefs Preferences instance
-     * @param Smarty           $view  Smarty template reference
+     * @param \GaletteObjectsLend\Entity\Preferences $prefs Preferences instance
+     * @param mixed                                  $view  Template reference
      *
      * @return void
      */
-    public function setViewCommonsFilters($prefs, \Smarty $view)
+    public function setViewCommonsFilters($prefs, $view)
     {
         $prefs = $prefs->getPreferences();
 
@@ -272,9 +295,6 @@ class ObjectsList extends Pagination
             $options[Objects::FILTER_DIM] = _T("Dimensions", "objectslend");
         }
 
-        $view->assign(
-            'field_filter_options',
-            $options
-        );
+        $view->getEnvironment()->addGlobal('field_filter_options', $options);
     }
 }

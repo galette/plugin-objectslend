@@ -1,0 +1,55 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+<form action="{% if category.category_id %}{{ url_for("objectslend_category_action_edit", {"id": category.category_id}) }}{% else %}{{ url_for("objectslend_category_action_add") }}{% endif %}" method="post" enctype="multipart/form-data" class="ui form">
+    <div class="ui styled fluid accordion field">
+        <div class="active title">
+            <i class="icon dropdown"></i>
+            {{ _T("Category", "objectslend") }}
+        </div>
+        <div class="active content">
+            {% include "components/forms/text.html.twig" with {
+                id: 'name',
+                value: category.name,
+                label: _T("Name", "objectslend"),
+                required: true
+            } %}
+
+            {% include "components/forms/checkbox.html.twig" with {
+                id: 'is_active',
+                value: 1,
+                label: _T("Is active", "objectslend"),
+                checked: category.is_active
+            } %}
+
+            <div class="inline field">
+                <label>{{ _T("Picture:", "objectslend") }}</label>
+                <img
+                    src="{% if category.category_id %}{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": category.category_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail"}) }}{% endif %}"
+                    class="picture"
+                    width="{{ category.picture.getOptimalThumbWidth(olendsprefs) }}"
+                    height="{{ category.picture.getOptimalThumbHeight(olendsprefs) }}"
+                    alt="{{ _T("Category photo", "objectslend") }}"/>
+                <br/>
+                {% if category.picture.hasPicture() %}
+                    {% include "components/forms/checkbox.html.twig" with {
+                        id: 'del_photo',
+                        value: 1,
+                        label: _T("Delete image"),
+                        required: false
+                    } %}
+                {% endif %}
+                <input class="labelalign" type="file" name="picture"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui basic center aligned fitted segment">
+        <button type="submit" name="valid" class="action ui labeled icon primary button">
+            <i class="save icon"></i> {{ _T("Save") }}
+        </button>
+        <input type="hidden" name="category_id" id="id" value="{{ category.getId() }}"/>
+        {% include "components/forms/csrf.html.twig" %}
+    </div>
+</form>
+{% endblock %}
