@@ -422,9 +422,7 @@ class ObjectsController extends AbstractPluginController
             //FIXME: better currency format handler
             $object->rent_price = (float)str_replace(' ', '', str_replace(',', '.', $post['rent_price']));
         }
-        if (isset($post['price_per_day'])) {
-            $object->price_per_day = $post['price_per_day'] == 'true';
-        }
+        $object->price_per_day = ($post['price_per_day'] ?? false) == true;
         $object->dimension = $post['dimension'];
         if ($post['weight'] != '') {
             //FIXME: better format handler
