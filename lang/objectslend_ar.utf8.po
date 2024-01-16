@@ -1,12 +1,12 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2020, 2021, 2022.
-# ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>, 2023.
+# ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-12-06 08:20+0100\n"
-"PO-Revision-Date: 2023-10-19 19:38+0000\n"
+"PO-Revision-Date: 2024-01-17 14:06+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:144
 msgid "Categories list"
-msgstr ""
+msgstr "قائمة الفئات"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:225
 msgid "Edit category"
-msgstr ""
+msgstr "تعديل الفئة"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:227
 msgid "New category"
-msgstr ""
+msgstr "فئة جديدة"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:291
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:467
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:322
 msgid "Category has been saved"
-msgstr ""
+msgstr "تم حفظ الفئة"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:375
 #, php-format
@@ -54,7 +54,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:108
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:126
 msgid "Objects list"
-msgstr ""
+msgstr "قائمة الأشياء"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:254
 #, php-format
@@ -64,11 +64,11 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:347
 #: ../tempcache/objects_list.html.twig:747
 msgid "Edit object"
-msgstr ""
+msgstr "تعديل الشيء"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:349
 msgid "New object"
-msgstr ""
+msgstr "شيء جديد"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:475
 msgid "Something went wrong saving object :("
@@ -92,11 +92,11 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:609
 msgid "Borrow an object"
-msgstr ""
+msgstr "استعارة شيء"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:610
 msgid "Return a borrowed object"
-msgstr ""
+msgstr "إعادة شيء مستَعار"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:655
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:771
@@ -143,7 +143,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:156
 msgid "Status list"
-msgstr ""
+msgstr "قائمة الحالات"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:247
 #, php-format
@@ -152,7 +152,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:250
 msgid "New status"
-msgstr ""
+msgstr "حالة جديدة"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:290
 msgid "An error occured while storing the status."
@@ -177,19 +177,19 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Objects lend"
-msgstr ""
+msgstr "استعارة أشياء"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:94
 msgid "Borrow status"
-msgstr ""
+msgstr "حالة الاستعارة"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:101
 msgid "Object categories"
-msgstr ""
+msgstr "فئات الأشياء"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:108
 msgid "Preferences"
-msgstr ""
+msgstr "الخيارات"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
@@ -199,7 +199,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:135
 #, php-format
 msgid "Printed on %date"
-msgstr ""
+msgstr "طُبِع في %date"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:178
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
@@ -222,20 +222,20 @@ msgstr "الوصف"
 #: ../tempcache/objects_list.html.twig:148
 #: ../tempcache/objects_list.html.twig:561
 msgid "Serial"
-msgstr ""
+msgstr "الرقم التسلسلي"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:181
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
 #: ../tempcache/objects_list.html.twig:159
 #: ../tempcache/objects_list.html.twig:575
 msgid "Price"
-msgstr ""
+msgstr "السعر"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:182
 #: ../tempcache/objects_list.html.twig:170
 #: ../tempcache/objects_list.html.twig:589
 msgid "Borrow price"
-msgstr ""
+msgstr "تكلفة الاستعارة"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:183
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:182
@@ -243,14 +243,14 @@ msgstr ""
 #: ../tempcache/objects_list.html.twig:181
 #: ../tempcache/objects_list.html.twig:619
 msgid "Dimensions"
-msgstr ""
+msgstr "الأحجام"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:184
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:185
 #: ../tempcache/objects_list.html.twig:192
 #: ../tempcache/objects_list.html.twig:633
 msgid "Weight"
-msgstr ""
+msgstr "الوزن"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:185
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:214
@@ -268,13 +268,13 @@ msgstr "الصفة"
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/objects_list.html.twig:666
 msgid "Since"
-msgstr ""
+msgstr "منذ"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:187
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:216
 msgid "Member"
-msgstr ""
+msgstr "عضو"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:188
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
@@ -291,7 +291,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:258
 msgid "Total:"
-msgstr ""
+msgstr "الإجمالي:"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:265
 msgid "Borrowed"
@@ -647,7 +647,7 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:74
 msgid "Members can borrow:"
-msgstr ""
+msgstr "بإمكان الأعضاء استعارة:"
 
 #: ../tempcache/preferences.html.twig:74
 msgid ""
@@ -667,11 +667,11 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:105
 msgid "Choose a contribution type"
-msgstr ""
+msgstr "اختيار نوع المساهمة"
 
 #: ../tempcache/preferences.html.twig:127
 msgid "Contribution type:"
-msgstr ""
+msgstr "نوع المساهمة:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
