@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Objects list filters and paginator
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +17,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Filters
- * @package   Galette
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     2017-02-10
  */
 
 namespace GaletteObjectsLend\Filters;
@@ -41,18 +25,12 @@ use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Objects;
 use Laminas\Db\Sql\Select;
+use Slim\Views\Twig;
 
 /**
  * Objects list filters and paginator
  *
- * @name      ObjectsList
- * @category  Filters
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property ?string $filter_str
  * @property ?int $category_filter
@@ -73,7 +51,8 @@ class ObjectsList extends Pagination
 
     protected $query;
 
-    protected $objectslist_fields = array(
+    /** @var array<string> */
+    protected array $objectslist_fields = array(
         'filter_str',
         'category_filter',
         'active_filter',
@@ -95,7 +74,7 @@ class ObjectsList extends Pagination
      *
      * @return string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): string
     {
         return 'name';
     }
@@ -105,7 +84,7 @@ class ObjectsList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->filter_str = null;
@@ -120,9 +99,9 @@ class ObjectsList extends Pagination
      *
      * @param string $name Property name
      *
-     * @return object|void
+     * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         if (in_array($name, $this->objectslist_fields)) {
             return true;
@@ -138,7 +117,7 @@ class ObjectsList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         Analog::log(
             '[ObectsList] Getting property `' . $name . '`',
@@ -167,7 +146,7 @@ class ObjectsList extends Pagination
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
 
         if (in_array($name, $this->pagination_fields)) {
@@ -254,33 +233,20 @@ class ObjectsList extends Pagination
      *
      * @return void
      */
-    public function setLimit($select)
+    public function setLimit(Select $select)
     {
         $this->setLimits($select);
-    }
-
-    /**
-     * Set counter
-     *
-     * @param int $c Count
-     *
-     * @return void
-     */
-    public function setCounter($c)
-    {
-        $this->counter = (int)$c;
-        $this->countPages();
     }
 
     /**
      * Set commons filters for templates
      *
      * @param \GaletteObjectsLend\Entity\Preferences $prefs Preferences instance
-     * @param mixed                                  $view  Template reference
+     * @param Twig                                   $view  Template reference
      *
      * @return void
      */
-    public function setViewCommonsFilters($prefs, $view)
+    public function setViewCommonsFilters($prefs, $view): void
     {
         $prefs = $prefs->getPreferences();
 

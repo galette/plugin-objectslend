@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Status list
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   Galette
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2018-01-07
  */
 
 namespace GaletteObjectsLend\Repository;
@@ -41,12 +26,7 @@ use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\Sql\Expression;
-use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\StatusList;
-use GaletteObjectsLend\Entity\Preferences;
-use GaletteObjectsLend\Entity\LendObject;
-use GaletteObjectsLend\Entity\LendCategory;
-use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\LendStatus;
 use Galette\Core\Login;
 use Laminas\Db\Sql\Select;
@@ -54,14 +34,7 @@ use Laminas\Db\Sql\Select;
 /**
  * Status list
  *
- * @name      Status
- * @category  Repository
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Status
 {
@@ -248,7 +221,6 @@ class Status
 
             $results = $this->zdb->execute($countSelect);
 
-            //@phpstan-ignore-next-line
             $this->count = $results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);

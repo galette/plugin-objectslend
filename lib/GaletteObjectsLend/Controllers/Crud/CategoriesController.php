@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Categories controller
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2021-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Controllers
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2021-05-09
  */
 
 namespace GaletteObjectsLend\Controllers\Crud;
@@ -49,23 +34,16 @@ use Slim\Psr7\Response;
 /**
  * Categories controller
  *
- * @category  Controllers
- * @name      CategoriesController
- * @package   GaletteObjectsLend
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2021-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2021-05-09
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
 class CategoriesController extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Objects Lend")]
-    protected $module_info;
+    protected array $module_info;
 
     // CRUD - Create
 
@@ -101,14 +79,14 @@ class CategoriesController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request             $request  PSR Request
+     * @param Response            $response PSR Response
+     * @param string|null         $option   One of 'page' or 'order'
+     * @param integer|string|null $value    Value of the option
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, $option = null, $value = null): Response
+    public function list(Request $request, Response $response, string $option = null, int|string $value = null): Response
     {
         if (isset($this->session->objectslend_filter_categories)) {
             $filters = $this->session->objectslend_filter_categories;
@@ -212,7 +190,7 @@ class CategoriesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->objectslend_category !== null) {
             $category = $this->session->objectslend_category;
@@ -255,7 +233,7 @@ class CategoriesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $category = new LendCategory($this->zdb, $this->plugins, $id);
@@ -337,7 +315,7 @@ class CategoriesController extends AbstractPluginController
     /**
      * Get redirection URI
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      *
      * @return string
      */
@@ -349,7 +327,7 @@ class CategoriesController extends AbstractPluginController
     /**
      * Get form URI
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      *
      * @return string
      */
@@ -364,7 +342,7 @@ class CategoriesController extends AbstractPluginController
     /**
      * Get confirmation removal page title
      *
-     * @param array $args Route arguments
+     * @param array<string,mixed> $args Route arguments
      *
      * @return string
      */
@@ -380,8 +358,8 @@ class CategoriesController extends AbstractPluginController
     /**
      * Remove object
      *
-     * @param array $args Route arguments
-     * @param array $post POST values
+     * @param array<string,mixed> $args Route arguments
+     * @param array<string,mixed> $post POST values
      *
      * @return boolean
      */
