@@ -105,7 +105,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return Response
      */
-    public function displayThumb(Response $response, Preferences $prefs)
+    public function displayThumb(Response $response, Preferences $prefs): Response
     {
         $this->setThumbSizes($prefs);
         $response = $response->withHeader('Content-Type', $this->mime)
@@ -130,9 +130,9 @@ class Picture extends \Galette\Core\Picture
      * @param string $dest   the destination image.
      *                       If null, we'll use the source image. Defaults to null
      *
-     * @return void|false
+     * @return bool
      */
-    private function createThumb($source, $ext, $dest = null)
+    private function createThumb($source, $ext, $dest = null): bool
     {
         $class = get_class($this);
 
@@ -215,12 +215,15 @@ class Picture extends \Galette\Core\Picture
                     imagegif($thumb, $dest);
                     break;
             }
+
+            return true;
         } else {
             Analog::log(
                 '[' . $class . '] GD is not present - ' .
                 'pictures could not be resized!',
                 Analog::ERROR
             );
+            return false;
         }
     }
 
@@ -255,7 +258,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return bool|int
      */
-    public function store($file, $ajax = false, $cropping = null): bool|int
+    public function store($file, bool $ajax = false, array $cropping = null): bool|int
     {
         $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
         $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
@@ -271,12 +274,12 @@ class Picture extends \Galette\Core\Picture
     /**
      * Restore objects images from database blob
      *
-     * @param array $success Success messages
-     * @param array $error   Error messages
+     * @param string[] $success Success messages
+     * @param string[] $error   Error messages
      *
      * @return void
      */
-    public function restorePictures(&$success, &$error)
+    public function restorePictures(array &$success, array &$error): void
     {
         global $zdb;
 
@@ -321,7 +324,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return string
      */
-    public function getThumbPath()
+    public function getThumbPath(): string
     {
         if ($this->has_picture) {
             $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
@@ -344,7 +347,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return void
      */
-    private function setThumbSizes(Preferences $prefs)
+    private function setThumbSizes(Preferences $prefs): void
     {
         $thumb = $this->getThumbPath();
         $this->thumb_max_width = $prefs->getThumbWidth();

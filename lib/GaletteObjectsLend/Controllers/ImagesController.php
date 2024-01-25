@@ -43,7 +43,7 @@ class ImagesController extends GImagesController
      * @param Response $response PSR Response
      * @param string   $type     Requested type (category or object)
      * @param string   $mode     Either thumbnail or photo
-     * @param int      $id       Object id
+     * @param ?int     $id       Object id
      *
      * @return Response
      */

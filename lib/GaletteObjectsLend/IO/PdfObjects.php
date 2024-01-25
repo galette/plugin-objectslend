@@ -27,6 +27,7 @@ use Galette\IO\Pdf;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
 use Analog\Analog;
+use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\Preferences as LendPreferences;
@@ -41,8 +42,8 @@ class PdfObjects extends Pdf
     public const LIST_FONT = self::FONT_SIZE - 2;
 
     private Db $zdb;
-    private $lendsprefs;
-    private $filters;
+    private LendPreferences $lendsprefs;
+    private ObjectsList $filters;
     private Login $login;
     private Plugins $plugins;
 
@@ -80,7 +81,7 @@ class PdfObjects extends Pdf
      *
      * @return void
      */
-    private function init()
+    private function init(): void
     {
         // Set document information
         $this->SetTitle(_T("Objects list", "objectslend"));
@@ -98,7 +99,7 @@ class PdfObjects extends Pdf
      *
      * @phpcs:disable
      */
-    public function Header()
+    public function Header(): void
     {
         // @phpcs:enable
         $this->SetFont(Pdf::FONT, 'B');
@@ -129,11 +130,11 @@ class PdfObjects extends Pdf
     /**
      * Draw objects list
      *
-     * @param array $objects List of objects
+     * @param LendObject[] $objects List of objects
      *
      * @return void
      */
-    public function drawList($objects)
+    public function drawList(array $objects): void
     {
         $this->Open();
         $this->AddPage();

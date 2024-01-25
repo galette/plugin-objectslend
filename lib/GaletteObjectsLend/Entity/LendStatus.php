@@ -42,28 +42,29 @@ class LendStatus
     public const TABLE = 'status';
     public const PK = 'status_id';
 
-    private $zdb;
+    private Db $zdb;
 
-    private $fields = array(
+    /** @var array<string,string> */
+    private array $fields = array(
         'status_id' => 'integer',
         'status_text' => 'varchar(100)',
         'in_stock' => 'boolean',
         'is_active' => 'boolean',
         'rent_day_number' => 'int'
     );
-    private $status_id;
-    private $status_text = '';
-    private $in_stock = false;
-    private $is_active = true;
-    private $rent_day_number = null;
+    private int $status_id;
+    private string $status_text = '';
+    private bool $in_stock = false;
+    private bool $is_active = true;
+    private ?int $rent_day_number = null;
 
     /**
      * Status constructor
      *
-     * @param Db    $zdb  Database instance
-     * @param mixed $args Can be null, an ID or a database row
+     * @param Db                                      $zdb  Database instance
+     * @param int|ArrayObject<string,int|string>|null $args Can be null, an ID or a database row
      */
-    public function __construct(Db $zdb, $args = null)
+    public function __construct(Db $zdb, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
 
@@ -90,16 +91,16 @@ class LendStatus
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string,int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
         $this->status_id = $r->status_id;
         $this->status_text = $r->status_text;
-        $this->in_stock = $r->in_stock == '1' ? true : false;
-        $this->is_active = $r->is_active == '1' ? true : false;
+        $this->in_stock = $r->in_stock == '1';
+        $this->is_active = $r->is_active == '1';
         $this->rent_day_number = $r->rent_day_number;
     }
 
@@ -108,7 +109,7 @@ class LendStatus
      *
      * @return bool
      */
-    public function store()
+    public function store(): bool
     {
         try {
             $values = array();
@@ -132,6 +133,7 @@ class LendStatus
                 $result = $this->zdb->execute($insert);
                 if ($result->count() > 0) {
                     if ($this->zdb->isPostgres()) {
+                        /** @phpstan-ignore-next-line */
                         $this->status_id = $this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_status_id_seq'
                         );
@@ -163,9 +165,9 @@ class LendStatus
      *
      * @param Db $zdb Database instance
      *
-     * @return array
+     * @return LendStatus[]
      */
-    public static function getActiveStatuses(Db $zdb)
+    public static function getActiveStatuses(Db $zdb): array
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
@@ -193,9 +195,9 @@ class LendStatus
      *
      * @param Db $zdb Database instance
      *
-     * @return array
+     * @return LendStatus[]
      */
-    public static function getActiveTakeAwayStatuses(Db $zdb)
+    public static function getActiveTakeAwayStatuses(Db $zdb): array
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
@@ -225,7 +227,7 @@ class LendStatus
      *
      * @return LendStatus[]
      */
-    public static function getActiveStockStatuses(Db $zdb)
+    public static function getActiveStockStatuses(Db $zdb): array
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
@@ -248,7 +250,7 @@ class LendStatus
      *
      * @return boolean
      */
-    public function delete()
+    public function delete(): bool
     {
         try {
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
@@ -268,13 +270,13 @@ class LendStatus
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
-        return $this->$name;
+        return $this->$name ?? null;
     }
 
     /**
@@ -285,7 +287,7 @@ class LendStatus
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         $this->$name = $value;
     }
@@ -293,11 +295,11 @@ class LendStatus
     /**
      * Generic isset function
      *
-     * @param $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return property_exists($this, $name);
     }

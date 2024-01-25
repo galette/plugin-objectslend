@@ -39,8 +39,8 @@ use Galette\Entity\Adherent;
  */
 class PdfObject extends Pdf
 {
-    private $zdb;
-    private $lprefs;
+    private Db $zdb;
+    private LPreferences $lprefs;
 
     /**
      * Main constructor
@@ -64,7 +64,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    private function init()
+    private function init(): void
     {
         // Set document information
         $this->SetTitle(_T('Object card', 'objectslend'));
@@ -83,11 +83,11 @@ class PdfObject extends Pdf
     /**
      * Draw listed object cards
      *
-     * @param array $objects Object list
+     * @param LendObject[] $objects Object list
      *
      * @return void
      */
-    public function drawCards(array $objects)
+    public function drawCards(array $objects): void
     {
         $this->Open();
         foreach ($objects as $object) {
@@ -103,7 +103,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    public function drawCard(LendObject $object)
+    public function drawCard(LendObject $object): void
     {
         $this->SetFont(Pdf::FONT, 'B');
         $wpic = 0;
@@ -219,7 +219,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    private function addCell(string $title, string $value, int $width)
+    private function addCell(string $title, string $value, int $width): void
     {
         if ($width > 0) {
             $this->Cell($width, 0, '');

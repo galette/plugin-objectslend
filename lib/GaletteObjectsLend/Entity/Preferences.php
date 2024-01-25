@@ -54,7 +54,8 @@ class Preferences
     public const PK = 'code';
 
     private Db $zdb;
-    private $prefs;
+    /** @var array<string,mixed> */
+    private array $prefs;
 
     /**
      * Paramètre : voir la liste des catégories en en-têtes de la liste des objets
@@ -160,7 +161,7 @@ class Preferences
      *
      * @return void
      */
-    public function __construct(Db $zdb, $load = true)
+    public function __construct(Db $zdb, bool $load = true)
     {
         $this->zdb = $zdb;
         if ($load) {
@@ -171,9 +172,9 @@ class Preferences
     /**
      * Get preferences
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function getpreferences()
+    public function getPreferences(): array
     {
         if (count($this->prefs) == 0) {
             $this->load();
@@ -184,11 +185,11 @@ class Preferences
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
      * @return false|object the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $forbidden = array();
 
@@ -206,12 +207,12 @@ class Preferences
     /**
      * Store preferences
      *
-     * @param array $data   Posted data
-     * @param array $errors Errors
+     * @param array<string,mixed> $data   Posted data
+     * @param string[]            $errors Errors
      *
      * @return boolean
      */
-    public function store($data, &$errors)
+    public function store(array $data, array &$errors): bool
     {
         foreach ($data as $key => $value) {
             $this->prefs[$key] = $value;
@@ -270,7 +271,7 @@ class Preferences
      *
      * @return boolean
      */
-    public function load()
+    public function load(): bool
     {
         $this->prefs = array();
 
@@ -300,7 +301,7 @@ class Preferences
      *
      * @return integer
      */
-    public function getThumbWidth()
+    public function getThumbWidth(): int
     {
         return $this->prefs['THUMB_MAX_WIDTH'];
     }
@@ -310,7 +311,7 @@ class Preferences
      *
      * @return integer
      */
-    public function getThumbHeight()
+    public function getThumbHeight(): int
     {
         return $this->prefs['THUMB_MAX_HEIGHT'];
     }
@@ -320,7 +321,7 @@ class Preferences
      *
      * @return boolean
      */
-    public function imagesInLists()
+    public function imagesInLists(): bool
     {
         return $this->prefs['VIEW_THUMBNAIL'];
     }
@@ -332,7 +333,7 @@ class Preferences
      *
      * @return boolean
      */
-    public function showFullsize()
+    public function showFullsize(): bool
     {
         return $this->prefs['VIEW_FULLSIZE'];
     }

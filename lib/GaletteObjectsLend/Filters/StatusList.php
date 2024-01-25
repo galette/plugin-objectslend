@@ -39,11 +39,11 @@ use GaletteObjectsLend\Repository\Status;
 class StatusList extends Pagination
 {
     //filters
-    private $filter_str;
-    private $active_filter;
-    private $stock_filter;
+    private ?string $filter_str;
+    private ?int $active_filter;
+    private ?int $stock_filter;
 
-    protected $query;
+    protected string $query;
 
     /** @var array<string> */
     protected array $statuslist_fields = array(

@@ -43,49 +43,46 @@ class LendCategory
     public const TABLE = 'category';
     public const PK = 'category_id';
 
-    private $fields = array(
+    /** @var array<string> */
+    private array $fields = array(
         'category_id' => 'integer',
         'name' => 'varchar(100)',
         'is_active' => 'boolean'
     );
-    private $category_id;
-    private $name = '';
-    private $is_active = true;
-    private $objects_nb = 0;
-    private $objects_price_sum = 0;
+    private int $category_id;
+    private string $name = '';
+    private bool $is_active = true;
+    private int $objects_nb = 0;
+    private float $objects_price_sum = 0.0;
     // Used to have an url for the image
-    private $categ_image_url = '';
-    private $picture;
+    private string $categ_image_url = '';
+    private CategoryPicture $picture;
 
-    private $deps = [
+    /** @var array<string, bool> */
+    private array $deps = [
         'picture'   => true
     ];
 
-    private $zdb;
-    private $plugins;
+    private Db $zdb;
+    private Plugins $plugins;
 
     /**
      * Default constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Plugins    $plugins Pluginsugins instance
-     * @param int|object $args    Maybe null, an RS object or an id from database
-     * @param array      $deps    Dependencies configuration, see LendCategory::$deps
+     * @param Db                                      $zdb     Database instance
+     * @param Plugins                                 $plugins Plugins instance
+     * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
+     * @param array<string,bool>                      $deps    Dependencies configuration, see LendCategory::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, $args = null, $deps = null)
+    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject $args = null, array $deps = null)
     {
         $this->zdb = $zdb;
         $this->plugins = $plugins;
 
-        if ($deps !== null && is_array($deps)) {
+        if ($deps !== null) {
             $this->deps = array_merge(
                 $this->deps,
                 $deps
-            );
-        } elseif ($deps !== null) {
-            Analog::log(
-                '$deps should be an array, ' . gettype($deps) . ' given!',
-                Analog::WARNING
             );
         }
 
@@ -116,11 +113,11 @@ class LendCategory
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string, int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
         $this->category_id = $r->category_id;
         $this->name = $r->name;
@@ -141,11 +138,11 @@ class LendCategory
     }
 
     /**
-     * Enregistre l'élément en cours que ce soit en insert ou update
+     * Store category
      *
-     * @return bool False si l'enregistrement a échoué, true si aucune erreur
+     * @return bool
      */
-    public function store()
+    public function store(): bool
     {
         try {
             $values = array();
@@ -166,6 +163,7 @@ class LendCategory
                 $result = $this->zdb->execute($insert);
                 if ($result->count() > 0) {
                     if ($this->zdb->isPostgres()) {
+                        /** @phpstan-ignore-next-line */
                         $this->category_id = $this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_category_id_seq'
                         );
@@ -173,7 +171,7 @@ class LendCategory
                         $this->category_id = $this->zdb->driver->getLastGeneratedValue();
                     }
                 } else {
-                    throw new \RuntimeException('Unable to add catagory!');
+                    throw new \RuntimeException('Unable to add category!');
                 }
             } else {
                 $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
@@ -193,11 +191,11 @@ class LendCategory
     }
 
     /**
-     * Drop a category. All objects for removed catagory will be assigned to none.
+     * Drop a category. All objects for removed category will be assigned to none.
      *
      * @return boolean
      */
-    public function delete()
+    public function delete(): bool
     {
         try {
             $this->zdb->connection->beginTransaction();
@@ -235,7 +233,7 @@ class LendCategory
      *
      * @return string
      */
-    public function getName($count = true)
+    public function getName(bool $count = true): string
     {
         $name = $this->name !== null ? $this->name : _T("No category", "objectslend");
 
@@ -253,14 +251,14 @@ class LendCategory
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         switch ($name) {
             case 'objects_price_sum':
                 return number_format($this->$name, 2, ',', '');
             case 'is_active':
             default:
-                return $this->$name;
+                return $this->$name ?? null;
         }
     }
 
@@ -272,7 +270,7 @@ class LendCategory
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         $this->$name = $value;
     }
@@ -280,11 +278,11 @@ class LendCategory
     /**
      * Get object ID
      *
-     * @return int
+     * @return ?int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
-        return (int)$this->category_id;
+        return $this->category_id ?? null;
     }
 
     /**
@@ -294,7 +292,7 @@ class LendCategory
      */
     public function isActive(): bool
     {
-        return (bool)$this->is_active;
+        return $this->is_active;
     }
 
     /**
@@ -330,11 +328,11 @@ class LendCategory
     /**
      * Generic isset function
      *
-     * @param $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return property_exists($this, $name);
     }

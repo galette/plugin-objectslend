@@ -23,6 +23,7 @@ namespace GaletteObjectsLend\Filters;
 
 use Analog\Analog;
 use Galette\Core\Pagination;
+use GaletteObjectsLend\Entity\Preferences;
 use GaletteObjectsLend\Repository\Objects;
 use Laminas\Db\Sql\Select;
 use Slim\Views\Twig;
@@ -43,13 +44,14 @@ use Slim\Views\Twig;
 class ObjectsList extends Pagination
 {
     //filters
-    private $filter_str;
-    private $category_filter;
-    private $active_filter;
-    private $field_filter;
-    private $selected;
+    private ?string $filter_str;
+    private ?int $category_filter;
+    private ?int $active_filter;
+    private ?int $field_filter;
+    /** @var array<int> */
+    private array $selected;
 
-    protected $query;
+    protected string $query;
 
     /** @var array<string> */
     protected array $objectslist_fields = array(
@@ -233,7 +235,7 @@ class ObjectsList extends Pagination
      *
      * @return void
      */
-    public function setLimit(Select $select)
+    public function setLimit(Select $select): void
     {
         $this->setLimits($select);
     }
@@ -246,7 +248,7 @@ class ObjectsList extends Pagination
      *
      * @return void
      */
-    public function setViewCommonsFilters($prefs, $view): void
+    public function setViewCommonsFilters(Preferences $prefs, Twig $view): void
     {
         $prefs = $prefs->getPreferences();
 

@@ -147,7 +147,7 @@ class ObjectsController extends AbstractPluginController
                 'objects' => $list,
                 'nb_objects' => count($list),
                 'filters' => $filters,
-                'lendsprefs' => $lendsprefs->getpreferences(),
+                'lendsprefs' => $lendsprefs->getPreferences(),
                 'olendsprefs' => $lendsprefs,
                 'time' => time(),
                 'module_id' => $this->getModuleId(),
@@ -279,10 +279,7 @@ class ObjectsController extends AbstractPluginController
                     ->withHeader('Location', $this->routeparser->urlFor('objectslend_objects_print'));
             }
 
-            $this->flash->addMessage(
-                'error_detected',
-                _T("No action was found. Please contact plugin developpers.")
-            );
+            throw new \RuntimeException('Does not know what to batch :(');
         } else {
             $this->flash->addMessage(
                 'error_detected',
@@ -338,7 +335,7 @@ class ObjectsController extends AbstractPluginController
             'object'        => $object,
             'time'          => time(),
             'action'        => $action,
-            'lendsprefs'    => $lendsprefs->getpreferences(),
+            'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
             'categories'    => $categories_list,
             'statuses'      => $slist
@@ -590,7 +587,7 @@ class ObjectsController extends AbstractPluginController
             'statuses'      => ($action == 'take' ?
                 LendStatus::getActiveTakeAwayStatuses($this->zdb) :
                 LendStatus::getActiveStockStatuses($this->zdb)),
-            'lendsprefs'    => $lendsprefs->getpreferences(),
+            'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
             'ajax'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest',
             'takeorgive'    => $action,

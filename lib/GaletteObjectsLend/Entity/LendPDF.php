@@ -36,9 +36,9 @@ class LendPDF extends \Galette\IO\Pdf
      * Main constructor, set creator and author
      *
      * @param CorePreferences $prefs Preferences
-     * @param PdfModel        $model Related model
+     * @param ?PdfModel       $model Related model
      */
-    public function __construct(CorePreferences $prefs, $model = null)
+    public function __construct(CorePreferences $prefs, ?PdfModel $model = null)
     {
         parent::__construct($prefs, $model);
         $this->SetDisplayMode('real', 'OneColumn');

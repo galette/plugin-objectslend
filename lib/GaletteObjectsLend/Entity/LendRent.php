@@ -52,7 +52,8 @@ class LendRent
     public const TABLE = 'rents';
     public const PK = 'rent_id';
 
-    private $fields = array(
+    /** @var array<string, string> */
+    private array $fields = array(
         'rent_id' => 'integer',
         'object_id' => 'integer',
         'date_begin' => 'datetime',
@@ -62,29 +63,29 @@ class LendRent
         'adherent_id' => 'integer',
         'comments' => 'varchar(200)'
     );
-    private $rent_id;
-    private $object_id;
-    private $date_begin;
-    private $date_forecast;
-    private $date_end;
-    private $status_id;
-    private $adherent_id;
-    private $comments = '';
-    private $in_stock;
-    // Join sur table Status
-    private $status_text;
-    // Left join sur table adhérents
-    private $nom_adh = '';
-    private $prenom_adh = '';
-    private $pseudo_adh = '';
-    private $email_adh = '';
+    private int $rent_id;
+    private int $object_id;
+    private string $date_begin;
+    private ?string $date_forecast;
+    private ?string $date_end;
+    private int $status_id;
+    private ?int $adherent_id;
+    private string $comments = '';
+    private bool $in_stock;
+
+    private string $status_text;
+
+    private ?string $nom_adh = '';
+    private ?string $prenom_adh = '';
+    private ?string $pseudo_adh = '';
+    private ?string $email_adh = '';
 
     /**
      * Default constructor
      *
-     * @param mixed|null $args Either an int with rent id, null, or a resultset row
+     * @param int|ArrayObject<string,int|string>|null $args Either an int with rent id, null, or a resultset row
      */
-    public function __construct($args = null)
+    public function __construct(int|ArrayObject $args = null)
     {
         global $zdb;
 
@@ -114,11 +115,11 @@ class LendRent
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string,int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
         $this->rent_id = $r->rent_id;
         $this->object_id = $r->object_id;
@@ -135,7 +136,7 @@ class LendRent
      *
      * @return bool
      */
-    public function store()
+    public function store(): bool
     {
         global $zdb;
 
@@ -144,7 +145,7 @@ class LendRent
             $values = array();
 
             foreach ($this->fields as $k => $v) {
-                $values[$k] = $this->$k;
+                $values[$k] = $this->$k ?? null;
             }
 
             if (!isset($this->rent_id) || $this->rent_id == '') {
@@ -195,16 +196,15 @@ class LendRent
     }
 
     /**
-     * Retourne tous les historiques d'emprunts pour un objet donné trié par date de début
-     * les plus récents en 1er.
+     * Get rent histroy for a given object sorted
      *
-     * @param integer $object_id ID de l'objet dont on souhaite l'historique d'emprunt
+     * @param integer $object_id Object ID
      * @param boolean $only_last Only retrieve last rent (for list display)
      * @param string  $order     Order clause, defaults to 'date_begin DESC'
      *
-     * @return array
+     * @return LendRent[]
      */
-    public static function getRentsForObjectId($object_id, $only_last = false, $order = 'date_begin desc')
+    public static function getRentsForObjectId(int $object_id, bool $only_last = false, string $order = 'date_begin desc'): array
     {
         global $zdb;
 
@@ -255,14 +255,14 @@ class LendRent
     }
 
     /**
-     * Ferme tous les emprunts ouverts pour un objet donné avec le commentaire indiqué
+     * Close all open rents for a given object with given comment
      *
-     * @param int    $object_id ID de l'objet surlequel fermer les emprunts
-     * @param string $comments  Commentaire à mettre sur les emprunts
+     * @param int    $object_id Object ID
+     * @param string $comments  Comment to add on lend that will be closed
      *
-     * @return boolean True si OK, False si une erreur SQL est survenue
+     * @return boolean
      */
-    public static function closeAllRentsForObject($object_id, $comments)
+    public static function closeAllRentsForObject(int $object_id, string $comments): bool
     {
         global $zdb;
 
@@ -297,9 +297,9 @@ class LendRent
     /**
      * Get active members sorted by name
      *
-     * @return array
+     * @return Adherent[]
      */
-    public static function getAllActivesAdherents()
+    public static function getAllActivesAdherents(): array
     {
         try {
             $filters = new \Galette\Filters\MembersList();
@@ -332,7 +332,7 @@ class LendRent
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         switch ($name) {
             case 'date_begin':
@@ -357,11 +357,11 @@ class LendRent
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         switch ($name) {
             case 'adherent_id':
@@ -408,11 +408,11 @@ class LendRent
     /**
      * Generic isset function
      *
-     * @param $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return property_exists($this, $name);
     }

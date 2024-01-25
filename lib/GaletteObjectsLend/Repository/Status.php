@@ -25,6 +25,7 @@ use ArrayObject;
 use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use GaletteObjectsLend\Filters\StatusList;
 use GaletteObjectsLend\Entity\LendStatus;
@@ -60,16 +61,17 @@ class Status
     private Db $zdb;
     private Login $login;
 
-    private $filters = false;
-    private $count = null;
-    private $errors = array();
+    private StatusList $filters;
+    private ?int $count = null;
+    /** @var array<string> */
+    private array $errors = array();
 
     /**
      * Default constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Login      $login   Logged in instance
-     * @param StatusList $filters Filtering
+     * @param Db          $zdb     Database instance
+     * @param Login       $login   Logged in instance
+     * @param ?StatusList $filters Filtering
      */
     public function __construct(Db $zdb, Login $login, StatusList $filters = null)
     {
@@ -87,22 +89,20 @@ class Status
     /**
      * Get status list
      *
-     * @param boolean $as_stt return the results as an array of
-     *                        Status object.
-     * @param array   $fields field(s) name(s) to get. Should be a string or
-     *                        an array. If null, all fields will be
-     *                        returned
-     * @param boolean $count  true if we want to count members
-     * @param boolean $limit  true if we want records pagination
+     * @param boolean   $as_stt return the results as an array of
+     *                          Status object.
+     * @param ?string[] $fields field(s) name(s) to get. If null, all fields will be returned
+     * @param boolean   $count  true if we want to count members
+     * @param boolean   $limit  true if we want records pagination
      *
-     * @return array|ArrayObject
+     * @return LendStatus[]|ResultSet
      */
     public function getStatusList(
-        $as_stt = false,
-        $fields = null,
-        $count = true,
-        $limit = true
-    ) {
+        bool $as_stt = false,
+        array $fields = null,
+        bool $count = true,
+        bool $limit = true
+    ): array|ResultSet {
         try {
             $select = $this->buildSelect($fields, false, $count);
 
@@ -141,9 +141,9 @@ class Status
      *                        an array. If null, all fields will be
      *                        returned
      *
-     * @return LendStatus[]|ArrayObject
+     * @return LendStatus[]|ResultSet
      */
-    public function getList($as_stt = false, $fields = null)
+    public function getList($as_stt = false, $fields = null): array|ResultSet
     {
         return $this->getStatusList(
             $as_stt,
@@ -156,14 +156,14 @@ class Status
     /**
      * Builds the SELECT statement
      *
-     * @param array $fields fields list to retrieve
-     * @param bool  $photos true if we want to get only members with photos
-     *                      Default to false, only relevant for SHOW_PUBLIC_LIST
-     * @param bool  $count  true if we want to count members, defaults to false
+     * @param string[] $fields fields list to retrieve
+     * @param bool     $photos true if we want to get only members with photos
+     *                         Default to false, only relevant for SHOW_PUBLIC_LIST
+     * @param bool     $count  true if we want to count members, defaults to false
      *
      * @return Select SELECT statement
      */
-    private function buildSelect($fields, $photos, $count = false)
+    private function buildSelect(?array $fields, bool $photos = false, bool $count = false): Select
     {
         try {
             $fieldsList = ($fields != null)
@@ -199,7 +199,7 @@ class Status
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -237,12 +237,12 @@ class Status
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optional.
+     * @param ?string[] $fields Fields list to ensure ORDER clause
+     *                          references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
         switch ($this->filters->orderby) {
@@ -283,7 +283,7 @@ class Status
      *
      * @return void
      */
-    private function buildWhereClause($select)
+    private function buildWhereClause(Select $select): void
     {
         try {
             if ($this->filters->active_filter == self::ACTIVE) {
@@ -321,12 +321,12 @@ class Status
      * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string $field_name Field name to order by
-     * @param array  $fields     SELECTE'ed fields
+     * @param string    $field_name Field name to order by
+     * @param ?string[] $fields     SELECTE'ed fields
      *
      * @return boolean
      */
-    private function canOrderBy($field_name, $fields)
+    private function canOrderBy(string $field_name, ?array $fields): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -347,7 +347,7 @@ class Status
      *
      * @return int
      */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
@@ -355,9 +355,9 @@ class Status
     /**
      * Get registered errors
      *
-     * @return array
+     * @return array<string>
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

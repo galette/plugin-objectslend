@@ -64,7 +64,7 @@ class MainController extends AbstractPluginController
         $params = [
             'page_title'    => _T('ObjectsLend preferences', 'objectslend'),
             'ctypes'        => $ctypes->getList(),
-            'lendsprefs'    => $lendsprefs->getpreferences()
+            'lendsprefs'    => $lendsprefs->getPreferences()
         ];
 
         // display page

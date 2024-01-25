@@ -41,12 +41,12 @@ use Laminas\Db\Sql\Select;
 class CategoriesList extends Pagination
 {
     //filters
-    private $filter_str;
-    private $active_filter;
-    private $not_empty;
-    private $objects_filters;
+    private ?string $filter_str;
+    private ?int $active_filter;
+    private ?bool $not_empty;
+    private ?ObjectsList $objects_filters;
 
-    protected $query;
+    protected string $query;
 
     /** @var array<string> */
     protected array $categorylist_fields = array(
