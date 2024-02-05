@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-12-06 08:20+0100\n"
-"PO-Revision-Date: 2024-01-17 14:06+0000\n"
+"PO-Revision-Date: 2024-02-06 15:01+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ar/>\n"
@@ -793,7 +793,7 @@ msgstr "الإسم:"
 #: ../tempcache/objects_edit.html.twig:75
 #: ../tempcache/take_object.html.twig:106
 msgid "Description:"
-msgstr ""
+msgstr "الوصف :"
 
 #: ../tempcache/objects_edit.html.twig:83
 msgid "--- Select a category ---"
@@ -888,7 +888,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:442
 msgid "Time:"
-msgstr ""
+msgstr "المدة:"
 
 #: ../tempcache/take_object.html.twig:446
 #, php-format
@@ -909,7 +909,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:480
 msgid "Show terms and conditions"
-msgstr ""
+msgstr "إظهار الشروط العامة"
 
 #: ../tempcache/take_object.html.twig:487
 msgid ""
@@ -931,7 +931,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:501
 msgid "Borrow object"
-msgstr ""
+msgstr "إقتراض شيء"
 
 #: ../tempcache/take_object.html.twig:503
 msgid "Return object"
@@ -939,7 +939,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:558
 msgid "You must agree with terms and conditions in order to borrow."
-msgstr ""
+msgstr "يجب أن توافق على الشروط العمة من أجل الاقتراض."
 
 #~ msgid "Delete image"
 #~ msgstr "حذف الصورة"
