@@ -20,7 +20,7 @@
 #}
 {% extends 'page.html.twig' %}
 
-{%  macro yesno_checkbox(label, name, tip, yes, no) %}
+{% macro yesno_checkbox(label, name, tip, yes, no) %}
     <div class="field">
         <div class="inline fields">
             <label title="{{ tip|e() }}">{{ label }}
@@ -85,7 +85,7 @@
                 ] %}
 
                 {% for yesno_box in yesno_boxes %}
-                    {{  _self.yesno_checkbox(
+                    {{ _self.yesno_checkbox(
                         yesno_box.label,
                         yesno_box.name,
                         yesno_box.tip,
@@ -173,7 +173,7 @@
                 ] %}
 
                 {% for yesno_box in yesno_boxes %}
-                    {{  _self.yesno_checkbox(
+                    {{ _self.yesno_checkbox(
                         yesno_box.label,
                         yesno_box.name,
                         yesno_box.tip,
@@ -302,7 +302,7 @@
                 ] %}
 
                 {% for yesno_box in yesno_boxes %}
-                    {{  _self.yesno_checkbox(
+                    {{ _self.yesno_checkbox(
                         yesno_box.label,
                         yesno_box.name,
                         yesno_box.tip ?? null,

@@ -34,7 +34,7 @@
                 <img src="{% if object.object_id %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.object_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail"}) }}{% endif %}"
                 class="picture fright"
                 width="{{ object.picture.getOptimalThumbWidth(olendsprefs) }}"
-                height="{{ object.picture.getOptimalThumbHeight(olendsprefs)}}"
+                height="{{ object.picture.getOptimalThumbHeight(olendsprefs) }}"
                 alt="{{ _T("Object photo", "objectslend") }}"/>
             </div>
 
@@ -162,7 +162,7 @@
                 {% endif %}
             </div>
         </div>
-    {% else  %}
+    {% else %}
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
