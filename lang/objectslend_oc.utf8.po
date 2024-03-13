@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-02-22 21:18+0000\n"
+"PO-Revision-Date: 2024-03-14 11:01+0000\n"
 "Last-Translator: Pèire Bréchet <charrar@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/oc/>\n"
@@ -221,7 +221,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:144
 msgid "Status has not been added :("
-msgstr ""
+msgstr "L'estatut es pas estat ajustat :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:349
 msgid "Object has not been added :("
@@ -301,7 +301,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:269
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:440
 msgid "Delete failed"
-msgstr ""
+msgstr "La supression a mau capitat"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:277
 msgid "An error occurred while storing the category."
