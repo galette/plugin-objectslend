@@ -100,14 +100,20 @@
                 {% endfor %}
 
                 {# TODO: hide this one if AUTO_GENERATE_CONTRIBUTION is off #}
-                {% include "components/forms/select.html.twig" with {
-                    id: 'contribution_type',
-                    name: 'GENERATED_CONTRIBUTION_TYPE_ID',
-                    value: lendsprefs.GENERATED_CONTRIBUTION_TYPE_ID,
-                    values: ctype_list_values,
-                    label: _T("Contribution type:", "objectslend"),
-                    required: lendsprefs.AUTO_GENERATE_CONTRIBUTION == '1'
-                } %}
+                <div class="field{% if lendsprefs.AUTO_GENERATE_CONTRIBUTION == '1' %} required{% endif %}">
+                    <label for="contribution_type">{{ _T("Contribution type:") }}</label>
+                    <div id="contribution_type" class="ui dropdown selection">
+                        {% set selectedid = lendsprefs.GENERATED_CONTRIBUTION_TYPE_ID %}
+                        <input id="id_type_cotis_input" type="hidden" name="id_type_cotis" value="{{ selectedid }}"{% if lendsprefs.AUTO_GENERATE_CONTRIBUTION == '1' %} required="required"{% endif %}>
+                        <i class="dropdown icon"></i>
+                        <div class="text">{% for key, values in type_cotis_options %}{% if key == selectedid %}{{ values.label }}{% endif %}{% endfor %}</div>
+                        <div class="menu">
+                            {% for key, values in type_cotis_options %}
+                                <div class="item{% if key == selectedid %} active selected{% endif %}" data-value="{{ key }}">{{ values.label }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
 
                 {% include "components/forms/text.html.twig" with {
                     id: 'contrib_text',
