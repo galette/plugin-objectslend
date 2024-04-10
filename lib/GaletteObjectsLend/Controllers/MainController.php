@@ -60,10 +60,16 @@ class MainController extends AbstractPluginController
         }
 
         $ctypes = new ContributionsTypes($this->zdb);
+        $types_list = $ctypes->getList();
+        $ctypes_params = [0 => _T("Choose a contribution type", "objectslend")];
+        foreach ($types_list as $id => $type) {
+            $ctypes_params[$id] = $type['label'];
+        }
 
         $params = [
             'page_title'    => _T('ObjectsLend preferences', 'objectslend'),
             'type_cotis_options'        => $ctypes->getList(),
+            'ctypes'        => $ctypes_params,
             'lendsprefs'    => $lendsprefs->getPreferences()
         ];
 

@@ -66,6 +66,9 @@ class PdfObjects extends Pdf
         Plugins $plugins
     ) {
         parent::__construct($prefs);
+        // Enable Auto Page breaks
+        $this->SetAutoPageBreak(true, $this->footer_height + 10);
+
         //TRANS: this is a filename
         $this->filename = _T('objects_cards', 'objectslend') . '.pdf';
         $this->zdb = $zdb;
@@ -73,7 +76,6 @@ class PdfObjects extends Pdf
         $this->filters = $filters;
         $this->login = $login;
         $this->plugins = $plugins;
-        $this->init();
     }
 
     /**
@@ -81,7 +83,7 @@ class PdfObjects extends Pdf
      *
      * @return void
      */
-    private function init(): void
+    public function init(): void
     {
         // Set document information
         $this->SetTitle(_T("Objects list", "objectslend"));
@@ -90,6 +92,11 @@ class PdfObjects extends Pdf
 
         $this->setPageOrientation('L');
         $this->setHeaderMargin(10);
+
+        //enable pagination
+        $this->showPagination();
+
+        parent::init();
     }
 
     /**
@@ -136,9 +143,6 @@ class PdfObjects extends Pdf
      */
     public function drawList(array $objects): void
     {
-        $this->Open();
-        $this->AddPage();
-
         $this->Ln(10); //for Header
 
         // Header
@@ -174,6 +178,7 @@ class PdfObjects extends Pdf
         $sum_price = 0;
         $grant_total = 0;
         $row = 0;
+        $existing_categories = [];
 
         foreach ($objects as $object) {
             if (
@@ -182,25 +187,29 @@ class PdfObjects extends Pdf
             ) {
                 $this->SetFont('', 'B');
 
-                if (($this->login->isAdmin() || $this->login->isStaff()) && $sum_price > 0) {
+                if (($this->login->isAdmin() || $this->login->isStaff()) && $sum_price > 0 && !in_array($object->category_id, $existing_categories)) {
                     $width = $w_checkbox + $w_name + $w_description + $w_serial + $w_price;
                     $this->Cell($width, 0, number_format($sum_price, 2, ',', ''), '', 0, 'R');
                     $sum_price = 0;
                     $this->Ln();
                 }
 
-                if (!empty($object->category_id)) {
+                if (!empty($object->category_id) && !in_array($object->category_id, $existing_categories)) {
                     $category = new LendCategory($this->zdb, $this->plugins, (int)$object->category_id);
                     $text = str_replace(
                         '%category',
                         $category->name,
                         _T("Category: %category", "objectslend")
                     );
-                } else {
+                    $existing_categories[] = $object->category_id;
+                    $this->Cell(0, 0, $text, 0, 1, 'C');
+                } elseif (!in_array(0, $existing_categories)) {
                     $text = _T("No category");
+                    $existing_categories[0] = 0;
+                    $this->Cell(0, 0, $text, 0, 1, 'C');
                 }
 
-                $this->Cell(0, 0, $text, 0, 1, 'C');
+
                 $this->SetFont('');
             }
 

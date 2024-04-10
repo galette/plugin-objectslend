@@ -52,11 +52,13 @@ class PdfObject extends Pdf
     public function __construct(Db $zdb, Preferences $prefs, LPreferences $lprefs)
     {
         parent::__construct($prefs);
+        // Disable Auto Page breaks
+        $this->SetAutoPageBreak(false, $this->footer_height + 10);
+
         $this->zdb = $zdb;
         $this->lprefs = $lprefs;
         //TRANS: this is a filename
         $this->filename = _T('object_card', 'objectslend') . '.pdf';
-        $this->init();
     }
 
     /**
@@ -64,7 +66,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    private function init(): void
+    public function init(): void
     {
         // Set document information
         $this->SetTitle(_T('Object card', 'objectslend'));
@@ -76,8 +78,10 @@ class PdfObject extends Pdf
         // Show full page
         $this->SetDisplayMode('fullpage');
 
-        // Disable Auto Page breaks
-        $this->SetAutoPageBreak(false, 20);
+        //enable pagination
+        $this->showPagination();
+
+        parent::init();
     }
 
     /**
@@ -89,9 +93,12 @@ class PdfObject extends Pdf
      */
     public function drawCards(array $objects): void
     {
-        $this->Open();
+        $first = true;
         foreach ($objects as $object) {
-            $this->AddPage();
+            if (!$first) {
+                $this->AddPage();
+            }
+            $first = false;
             $this->drawCard($object);
         }
     }

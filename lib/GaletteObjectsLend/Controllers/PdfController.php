@@ -88,11 +88,14 @@ class PdfController extends GPdfController
         $lendsprefs = new Preferences($this->zdb);
 
         if (isset($this->session->objectslend_filter_objects)) {
-            $filters =  $this->session->objectslend_filter_objects;
+            $filters =  clone $this->session->objectslend_filter_objects;
         } else {
             $filters = new ObjectsList();
         }
 
+        if ($filters->orderby !== Objects::ORDERBY_CATEGORY) {
+            $filters->orderby = Objects::ORDERBY_CATEGORY;
+        }
         $objects = new Objects($this->zdb, $this->plugins, $lendsprefs, $filters);
         $list = $objects->getObjectsList(true, null, true, false);
 

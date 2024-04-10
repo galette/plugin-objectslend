@@ -65,6 +65,7 @@ class Objects
     public const ORDERBY_BDATE = 6;
     public const ORDERBY_FDATE = 7;
     public const ORDERBY_MEMBER = 8;
+    public const ORDERBY_CATEGORY = 9;
 
     private Db $zdb;
 
@@ -425,6 +426,11 @@ class Objects
                 if ($this->canOrderBy('nom_adh', $fields) && $this->canOrderBy('prenom_adh', $fields)) {
                     $order[] = 'a.nom_adh ' . $this->filters->getDirection() .
                         ', a.prenom_adh ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_CATEGORY:
+                if ($this->canOrderBy('cat_name', $fields)) {
+                    $order[] = 'c.name ' . $this->filters->getDirection();
                 }
                 break;
         }
