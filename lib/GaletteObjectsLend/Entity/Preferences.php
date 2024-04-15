@@ -189,7 +189,7 @@ class Preferences
      *
      * @return false|object the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): false|object
     {
         $forbidden = array();
 

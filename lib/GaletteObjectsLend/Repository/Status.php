@@ -143,7 +143,7 @@ class Status
      *
      * @return LendStatus[]|ResultSet
      */
-    public function getList($as_stt = false, $fields = null): array|ResultSet
+    public function getList(bool $as_stt = false, array $fields = null): array|ResultSet
     {
         return $this->getStatusList(
             $as_stt,

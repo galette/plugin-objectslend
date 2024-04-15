@@ -34,7 +34,7 @@ use Slim\Psr7\Response;
 
 class ImagesController extends GImagesController
 {
-    private $lendsprefs;
+    private Preferences $lendsprefs;
 
     /**
      * Objects lends category or object route

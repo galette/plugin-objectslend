@@ -463,7 +463,7 @@ class LendObject
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
             case 'date_begin':
@@ -491,7 +491,7 @@ class LendObject
      *
      * @return void
      */
-    public function __set(string $name, $value): void
+    public function __set(string $name, mixed $value): void
     {
         $forbidden = ['currency'];
         if (!in_array($name, $forbidden)) {

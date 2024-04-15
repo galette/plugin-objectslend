@@ -274,7 +274,7 @@ class LendStatus
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         return $this->$name ?? null;
     }
@@ -287,7 +287,7 @@ class LendStatus
      *
      * @return void
      */
-    public function __set(string $name, $value): void
+    public function __set(string $name, object $value): void
     {
         $this->$name = $value;
     }

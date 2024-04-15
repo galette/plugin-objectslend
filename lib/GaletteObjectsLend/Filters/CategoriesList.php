@@ -96,26 +96,23 @@ class CategoriesList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
-
-        Analog::log(
-            '[CategoriesList] Getting property `' . $name . '`',
-            Analog::DEBUG
-        );
-
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
             if (in_array($name, $this->categorylist_fields)) {
                 return $this->$name;
-            } else {
-                Analog::log(
-                    '[CategoriesList] Unable to get property `' . $name . '`',
-                    Analog::WARNING
-                );
             }
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
@@ -126,7 +123,7 @@ class CategoriesList extends Pagination
      *
      * @return void
      */
-    public function __set(string $name, $value): void
+    public function __set(string $name, mixed $value): void
     {
 
         if (in_array($name, $this->pagination_fields)) {

@@ -51,7 +51,7 @@ class Picture extends \Galette\Core\Picture
      * @param Plugins    $plugins  Plugins
      * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, $objectid = null)
+    public function __construct(Plugins $plugins, mixed $objectid = null)
     {
         $this->tbl_prefix = LEND_PREFIX;
         $this->plugins = $plugins;
@@ -132,7 +132,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return bool
      */
-    private function createThumb($source, $ext, $dest = null): bool
+    private function createThumb(string $source, string $ext, string $dest = null): bool
     {
         $class = get_class($this);
 
@@ -258,7 +258,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return bool|int
      */
-    public function store($file, bool $ajax = false, array $cropping = null): bool|int
+    public function store(array $file, bool $ajax = false, array $cropping = null): bool|int
     {
         $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
         $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));

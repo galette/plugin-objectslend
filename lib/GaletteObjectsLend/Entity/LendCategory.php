@@ -251,7 +251,7 @@ class LendCategory
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
             case 'objects_price_sum':
@@ -270,7 +270,7 @@ class LendCategory
      *
      * @return void
      */
-    public function __set(string $name, $value): void
+    public function __set(string $name, object $value): void
     {
         $this->$name = $value;
     }

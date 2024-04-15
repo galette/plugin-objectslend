@@ -41,7 +41,7 @@ class CategoryPicture extends Picture
      * @param Plugins    $plugins  Plugins
      * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, $objectid = null)
+    public function __construct(Plugins $plugins, mixed $objectid = null)
     {
         $this->store_path = GALETTE_PHOTOS_PATH . 'objectslend/categories/';
         parent::__construct($plugins, $objectid);
