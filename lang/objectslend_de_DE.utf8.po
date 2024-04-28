@@ -2,13 +2,14 @@
 # Stefanie Schreiner <stefanie-schreiner@hotmail.de>, 2020.
 # Ricardo Santos <buehnenarbeiter@gmail.com>, 2021.
 # klausellus-wallace <muetze.polka0e@icloud.com>, 2023.
+# mr cmuc <github@nextcos.de>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2023-03-02 13:38+0000\n"
-"Last-Translator: klausellus-wallace <muetze.polka0e@icloud.com>\n"
+"PO-Revision-Date: 2024-04-28 16:25+0000\n"
+"Last-Translator: mr cmuc <github@nextcos.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/de/>\n"
 "Language: de_DE\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 5.5.1\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -51,7 +52,7 @@ msgstr "Beschreibung"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:141
 #: ../tempcache/category_edit.html.twig:62
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:144
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:258
@@ -206,7 +207,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:197
 #, php-format
 msgid "Category: %category"
-msgstr ""
+msgstr "Kategorie: %category"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:239
 msgid "Total:"
@@ -231,7 +232,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Entity/LendCategory.php:238
 #: ../tempcache/categories_list.html.twig:369
 msgid "No category"
-msgstr ""
+msgstr "Keine Kategorie"
 
 #: ../lib/GaletteObjectsLend/Entity/Preferences.php:264
 msgid "Unable to store preferences :("
@@ -293,11 +294,11 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:203
 msgid "Edit category"
-msgstr ""
+msgstr "Kategorie bearbeiten"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:205
 msgid "New category"
-msgstr ""
+msgstr "Neue Kategorie"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:269
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:440
@@ -306,16 +307,16 @@ msgstr "Löschen fehlgeschlagen"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:277
 msgid "An error occurred while storing the category."
-msgstr ""
+msgstr "Beim Speichern der Kategorie ist ein Fehler aufgetreten."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:300
 msgid "Category has been saved"
-msgstr ""
+msgstr "Die Kategorie wurde gespeichert"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:353
 #, php-format
 msgid "Remove category %1$s"
-msgstr ""
+msgstr "Kategorie entfernen %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:232
 #, php-format
@@ -463,12 +464,12 @@ msgstr ""
 #, php-format
 msgid "%count category"
 msgid_plural "%count categories"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count Kategorie"
+msgstr[1] "%count Kategorien"
 
 #: ../tempcache/categories_list.html.twig:86
 msgid "Add a category"
-msgstr ""
+msgstr "Kategorie hinzufügen"
 
 #: ../tempcache/categories_list.html.twig:296
 #: ../tempcache/categories_list.html.twig:304
@@ -481,12 +482,12 @@ msgstr "Inaktiv"
 #: ../tempcache/categories_list.html.twig:315
 #, php-format
 msgid "Edit \"%category\""
-msgstr ""
+msgstr "Bearbeite \"%category\""
 
 #: ../tempcache/categories_list.html.twig:325
 #, php-format
 msgid "Remove \"%category\""
-msgstr ""
+msgstr "Entferne \"%category\""
 
 #: ../tempcache/preferences.html.twig:57
 msgid "Plugin preferences"
@@ -502,13 +503,16 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:74
 msgid "Members can borrow:"
-msgstr ""
+msgstr "Mitglieder können ausleihen:"
 
 #: ../tempcache/preferences.html.twig:74
 msgid ""
 "Allow a member (not staff neither admin) to borrow an object. If set to "
 "'No', only admin and staff members can access the 'Take object' page"
 msgstr ""
+"Einem Mitglied (mit Ausnahme Mitarbeiter und Administrator) erlauben, ein "
+"Objekt auszuleihen. Wenn diese Option auf \"Nein\" gesetzt ist, können nur "
+"Administratoren und Mitarbeiter auf die Seite \"Objekt ausleihen\" zugreifen"
 
 #: ../tempcache/preferences.html.twig:76
 msgid "Generate contribution:"
@@ -629,7 +633,7 @@ msgstr "Beschreibung:"
 
 #: ../tempcache/objects_edit.html.twig:84
 msgid "--- Select a category ---"
-msgstr ""
+msgstr "--- Wähle eine Kategorie ---"
 
 #: ../tempcache/objects_edit.html.twig:105
 msgid "Category:"
