@@ -2,19 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
+# Manuela Silva <mmsrs@sky.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-04-29 04:34+0000\n"
+"Last-Translator: Manuela Silva <mmsrs@sky.com>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
+"objectslend-plugin/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.5.1\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -27,7 +30,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:72
 msgid "Labels"
-msgstr ""
+msgstr "Etiquetas"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:136
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:159
@@ -300,7 +303,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:269
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:440
 msgid "Delete failed"
-msgstr ""
+msgstr "Eliminação falhou"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:277
 msgid "An error occurred while storing the category."
