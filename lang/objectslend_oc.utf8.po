@@ -1,13 +1,14 @@
 # Weblate <noreply@weblate.org>, 2020.
 # Quentin PAGÈS <quentinantonin@free.fr>, 2020.
 # Pèire Bréchet <charrar@free.fr>, 2024.
+# Pèire Bréchet <oxytanistzero@tutanota.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-03-14 11:01+0000\n"
-"Last-Translator: Pèire Bréchet <charrar@free.fr>\n"
+"PO-Revision-Date: 2024-05-01 13:07+0000\n"
+"Last-Translator: Pèire Bréchet <oxytanistzero@tutanota.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/oc/>\n"
 "Language: oc\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -891,7 +892,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:452
 msgid "Comments:"
-msgstr ""
+msgstr "Comentaris :"
 
 #: ../tempcache/take_object.html.twig:455
 msgid "remaining characters"
