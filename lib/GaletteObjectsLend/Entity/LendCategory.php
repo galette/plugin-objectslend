@@ -52,7 +52,7 @@ class LendCategory
         'is_active' => 'boolean'
     );
     private int $category_id;
-    private string $name = '';
+    private ?string $name = null;
     private bool $is_active = true;
     private int $objects_nb = 0;
     private float $objects_price_sum = 0.0;
@@ -121,18 +121,17 @@ class LendCategory
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->category_id = $r->category_id;
+        $this->category_id = (int)$r->category_id;
         $this->name = $r->name;
-        $this->is_active = $r->is_active == '1' ? true : false;
+        $this->is_active = $r->is_active == '1';
 
         if (property_exists($r, 'objects_count')) {
-            $this->objects_nb = $r->objects_count;
+            $this->objects_nb = (int)$r->objects_count;
         }
 
-        if (property_exists($r, 'objects_price_sum')) {
-            $this->objects_price_sum = $r->objects_price_sum ?? 0.0;
+        if (property_exists($r, 'objects_price_sum') && $r->objects_price_sum !== null) {
+            $this->objects_price_sum = (float)$r->objects_price_sum;
         }
-
 
         if ($this->deps['picture'] === true) {
             $this->picture = new CategoryPicture($this->plugins, (int)$this->category_id);
@@ -300,11 +299,11 @@ class LendCategory
     /**
      * Get picture
      *
-     * @return CategoryPicture
+     * @return ?CategoryPicture
      */
-    public function getPicture(): CategoryPicture
+    public function getPicture(): ?CategoryPicture
     {
-        return $this->picture;
+        return $this->picture ?? null;
     }
 
     /**

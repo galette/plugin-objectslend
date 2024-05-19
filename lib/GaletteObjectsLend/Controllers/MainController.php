@@ -99,7 +99,7 @@ class MainController extends AbstractPluginController
 
         $error_detected = [];
         $success_detected = [];
-        if ($lendsprefs->store($post, $error_detected)) {
+        if ($lendsprefs->store($post)) {
             $this->flash->addMessage(
                 'success_detected',
                 _T("Preferences have been successfully stored!", "objectslend")

@@ -123,7 +123,7 @@ class Objects
 
             //add limits to retrieve only relevant rows
             if ($limit === true) {
-                $this->filters->setLimit($select);
+                $this->filters->setLimits($select);
             }
 
             $rows = $this->zdb->execute($select);
@@ -207,25 +207,6 @@ class Objects
         }
 
         return false;
-    }
-
-    /**
-     * Disable selected objects
-     *
-     * @param array<int> $ids List of objects id to disable
-     *
-     * @return ResultSet
-     */
-    public function disableObjects(array $ids): ResultSet
-    {
-        $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
-        $update->set(['is_active' => false]);
-        $update->where->in(
-            self::PK,
-            $ids
-        );
-        $results = $this->zdb->execute($update);
-        return $results;
     }
 
     /**
@@ -359,7 +340,7 @@ class Objects
 
             $results = $zdb->execute($countSelect);
 
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
@@ -493,7 +474,7 @@ class Objects
                             );
                         } else {
                             $select->where(
-                                'o.name LIKE ' . $token
+                                'LOWER(o.name) LIKE ' . $token
                             );
                         }
                         break;
@@ -551,9 +532,9 @@ class Objects
     /**
      * Get count for current query
      *
-     * @return int
+     * @return ?int
      */
-    public function getCount(): int
+    public function getCount(): ?int
     {
         return $this->count;
     }

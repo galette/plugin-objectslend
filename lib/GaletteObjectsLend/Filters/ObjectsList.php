@@ -76,11 +76,11 @@ class ObjectsList extends Pagination
     /**
      * Returns the field we want to default set order to
      *
-     * @return string field name
+     * @return int|string
      */
-    protected function getDefaultOrder(): string
+    protected function getDefaultOrder(): int|string
     {
-        return 'name';
+        return Objects::ORDERBY_NAME;
     }
 
     /**
@@ -172,11 +172,12 @@ class ObjectsList extends Pagination
                     }
                     break;
                 case 'filter_str':
+                case 'query':
                     $this->$name = $value;
                     break;
                 case 'category_filter':
                     if (is_numeric($value)) {
-                        $this->$name = $value;
+                        $this->$name = (int)$value;
                     } elseif ($value !== null) {
                         Analog::log(
                             '[ObjectsList] Value for property `' . $name .
@@ -192,7 +193,7 @@ class ObjectsList extends Pagination
                         case Objects::ALL_OBJECTS:
                         case Objects::ACTIVE_OBJECTS:
                         case Objects::INACTIVE_OBJECTS:
-                            $this->active_filter = $value;
+                            $this->active_filter = (int)$value;
                             break;
                         default:
                             Analog::log(
@@ -206,7 +207,7 @@ class ObjectsList extends Pagination
                     break;
                 case 'field_filter':
                     if (is_numeric($value)) {
-                        $this->$name = $value;
+                        $this->$name = (int)$value;
                     } elseif ($value !== null) {
                         Analog::log(
                             '[ObjectsList] Value for property `' . $name .
@@ -215,29 +216,16 @@ class ObjectsList extends Pagination
                         );
                     }
                     break;
-                case 'query':
-                    $this->$name = $value;
-                    break;
                 default:
-                    Analog::log(
-                        '[ObjectsList] Unable to set proprety `' . $name . '`',
-                        Analog::WARNING
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Unable to set property "%s::%s"!',
+                            __CLASS__,
+                            $name
+                        )
                     );
-                    break;
             }
         }
-    }
-
-    /**
-     * Add SQL limit
-     *
-     * @param Select $select Original select
-     *
-     * @return void
-     */
-    public function setLimit(Select $select): void
-    {
-        $this->setLimits($select);
     }
 
     /**

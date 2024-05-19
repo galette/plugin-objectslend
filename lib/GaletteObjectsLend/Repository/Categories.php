@@ -55,6 +55,7 @@ class Categories
     public const FILTER_NAME = 0;
 
     public const ORDERBY_NAME = 0;
+    public const ORDERBY_ACTIVITY = 1;
 
     private CategoriesList $filters;
     private ?int $count = null;
@@ -111,7 +112,7 @@ class Categories
 
             //add limits to retrieve only relevant rows
             if ($limit === true) {
-                $this->filters->setLimit($select);
+                $this->filters->setLimits($select);
             }
 
             $rows = $this->zdb->execute($select);
@@ -221,20 +222,12 @@ class Categories
             $countSelect = clone $select;
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::ORDER);
-            $countSelect->reset($countSelect::HAVING);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->columns(
                 array(
                     'count' => new Expression('count(c.' . self::PK . ')')
                 )
             );
-
-            $have = $select->having;
-            if ($have->count() > 0) {
-                foreach ($have->getPredicates() as $h) {
-                    $countSelect->where($h);
-                }
-            }
 
             $joins = $select->getRawState($select::JOINS);
             foreach ($joins as $join) {
@@ -247,11 +240,11 @@ class Categories
             }
 
             $results = $this->zdb->execute($countSelect);
-
-            $this->count = $results->current()->count;
-            if (isset($this->filters) && $this->count > 0) {
-                $this->filters->setCounter($this->count);
+            $this->count = 0;
+            if ($results->count() > 0) {
+                $this->count = (int)$results->current()->count;
             }
+            $this->filters->setCounter($this->count);
         } catch (\Exception $e) {
             Analog::log(
                 'Cannot count categories | ' . $e->getMessage(),
@@ -276,6 +269,11 @@ class Categories
             case self::ORDERBY_NAME:
                 if ($this->canOrderBy('name', $fields)) {
                     $order[] = 'name ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_ACTIVITY:
+                if ($this->canOrderBy('is_active', $fields)) {
+                    $order[] = 'is_active ' . $this->filters->getDirection();
                 }
                 break;
         }
@@ -317,7 +315,7 @@ class Categories
                 );
 
                 $select->where(
-                    'c.name LIKE ' . $token
+                    'LOWER(c.name) LIKE ' . $token
                 );
             }
 
@@ -343,12 +341,12 @@ class Categories
      * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string        $field_name Field name to order by
-     * @param array<string> $fields     SELECTE'ed fields
+     * @param string         $field_name Field name to order by
+     * @param ?array<string> $fields     SELECTE'ed fields
      *
      * @return bool
      */
-    private function canOrderBy(string $field_name, array $fields): bool
+    private function canOrderBy(string $field_name, ?array $fields): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -367,9 +365,9 @@ class Categories
     /**
      * Get count for current query
      *
-     * @return int
+     * @return ?int
      */
-    public function getCount(): int
+    public function getCount(): ?int
     {
         return $this->count;
     }

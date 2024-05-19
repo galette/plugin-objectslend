@@ -70,11 +70,11 @@ class CategoriesList extends Pagination
     /**
      * Returns the field we want to default set order to
      *
-     * @return string field name
+     * @return int|string
      */
-    protected function getDefaultOrder(): string
+    protected function getDefaultOrder(): int|string
     {
-        return 'name ';
+        return Categories::ORDERBY_NAME;
     }
 
     /**
@@ -160,25 +160,15 @@ class CategoriesList extends Pagination
                     }
                     break;
                 default:
-                    Analog::log(
-                        '[CategoriesList] Unable to set proprety `' . $name . '`',
-                        Analog::WARNING
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Unable to set property "%s::%s"!',
+                            __CLASS__,
+                            $name
+                        )
                     );
-                    break;
             }
         }
-    }
-
-    /**
-     * Add SQL limit
-     *
-     * @param Select $select Original select
-     *
-     * @return void
-     */
-    public function setLimit(Select $select): void
-    {
-        $this->setLimits($select);
     }
 
     /**

@@ -50,7 +50,7 @@
     {% set columns = [
         {'label': '#'},
         {'label': _T("Name", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_NAME')},
-        {'label': _T("Active", "objectslend")},
+        {'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_ACTIVITY')},
     ] %}
     {{ parent() }}
 {% endblock %}

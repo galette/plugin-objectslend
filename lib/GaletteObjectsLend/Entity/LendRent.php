@@ -67,7 +67,7 @@ class LendRent
     );
     private int $rent_id;
     private int $object_id;
-    private string $date_begin;
+    private ?string $date_begin;
     private ?string $date_forecast;
     private ?string $date_end;
     private ?int $status_id;
@@ -123,13 +123,15 @@ class LendRent
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->rent_id = $r->rent_id;
-        $this->object_id = $r->object_id;
+        $this->rent_id = (int)$r->rent_id;
+        $this->object_id = (int)$r->object_id;
         $this->date_begin = $r->date_begin;
         $this->date_forecast = $r->date_forecast;
         $this->date_end = $r->date_end;
-        $this->status_id = $r->status_id;
-        $this->adherent_id = $r->adherent_id;
+        $this->status_id = (int)$r->status_id;
+        if ($r->adherent_id !== null) {
+            $this->adherent_id = (int)$r->adherent_id;
+        }
         $this->comments = $r->comments;
     }
 
@@ -236,8 +238,8 @@ class LendRent
             foreach ($rows as $r) {
                 $rt = new LendRent($r);
                 $rt->status_text = $r->status_text;
-                $rt->status_id = $r->status_id;
-                $rt->in_stock = $r->in_stock == '1' ? true : false;
+                $rt->status_id = (int)$r->status_id;
+                $rt->in_stock = $r->in_stock == '1';
                 $rt->prenom_adh = $r->prenom_adh;
                 $rt->nom_adh = $r->nom_adh;
                 $rt->pseudo_adh = $r->pseudo_adh;
@@ -339,19 +341,19 @@ class LendRent
         switch ($name) {
             case 'date_begin':
             case 'date_end':
-                if ($this->$name != '') {
+                if (($this->$name ?? '') != '') {
                     $dt = new \DateTime($this->$name);
                     return $dt->format(_T('Y-m-d H:i', 'objectslend'));
                 }
                 return '';
             case 'date_forecast':
-                if ($this->$name != '') {
+                if (($this->$name ?? '') != '') {
                     $dt = new \DateTime($this->$name);
                     return $dt->format(_T('Y-m-d'));
                 }
                 return '';
             default:
-                return $this->$name;
+                return $this->$name ?? null;
         }
     }
 

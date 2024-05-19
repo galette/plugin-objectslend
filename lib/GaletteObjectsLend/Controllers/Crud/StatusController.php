@@ -265,7 +265,7 @@ class StatusController extends AbstractPluginController
         $status->in_stock = isset($post['in_stock']);
         $status->is_active = isset($post['is_active']);
         $days = trim($post['rent_day_number']);
-        $status->rent_day_number = strlen($days) > 0 ? intval($days) : null;
+        $status->rent_day_number = strlen($days) > 0 ? (int)$days : null;
         if (!$status->store()) {
             $error_detected[] = _T("An error occurred while storing the status.", "objectslend");
         }

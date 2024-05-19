@@ -223,7 +223,7 @@ class Status
 
             $results = $this->zdb->execute($countSelect);
 
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
@@ -308,7 +308,7 @@ class Status
                 );
 
                 $select->where(
-                    'c.status_text LIKE ' . $token
+                    'LOWER(c.status_text) LIKE ' . $token
                 );
             }
         } catch (\Exception $e) {
@@ -347,9 +347,9 @@ class Status
     /**
      * Get count for current query
      *
-     * @return int
+     * @return ?int
      */
-    public function getCount(): int
+    public function getCount(): ?int
     {
         return $this->count;
     }

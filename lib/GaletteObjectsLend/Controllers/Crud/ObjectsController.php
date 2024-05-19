@@ -136,6 +136,7 @@ class ObjectsController extends AbstractPluginController
         $cat_filters = new CategoriesList();
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
         $cat_filters->not_empty = true; //retrieve only categories with objects
+        $cat_filters->setObjectsFilter($filters); //search for categories corresponding to filtered objects
         $categories = new Categories($this->zdb, $this->login, $this->plugins, $cat_filters);
         $categories_list = $categories->getCategoriesList(true, null, false);
 
@@ -403,7 +404,7 @@ class ObjectsController extends AbstractPluginController
         $object->dimension = $post['dimension'];
         if ($post['weight'] != '') {
             //FIXME: better format handler
-            $object->weight = (int)str_replace(' ', '', str_replace(',', '.', $post['weight']));
+            $object->weight = (float)str_replace(' ', '', str_replace(',', '.', $post['weight']));
         }
         $object->is_active = ($post['is_active'] ?? false) == true;
 

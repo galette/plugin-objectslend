@@ -58,11 +58,11 @@ class StatusList extends Pagination
     /**
      * Returns the field we want to default set order to
      *
-     * @return string field name
+     * @return int|string
      */
-    protected function getDefaultOrder(): string
+    protected function getDefaultOrder(): int|string
     {
-        return 'status_text';
+        return Status::ORDERBY_NAME;
     }
 
     /**
@@ -125,6 +125,7 @@ class StatusList extends Pagination
 
             switch ($name) {
                 case 'filter_str':
+                case 'query':
                     $this->$name = $value;
                     break;
                 case 'active_filter':
@@ -132,7 +133,7 @@ class StatusList extends Pagination
                         case Status::ALL:
                         case Status::ACTIVE:
                         case Status::INACTIVE:
-                            $this->active_filter = $value;
+                            $this->active_filter = (int)$value;
                             break;
                         default:
                             Analog::log(
@@ -149,28 +150,27 @@ class StatusList extends Pagination
                         case Status::DC_STOCK:
                         case Status::IN_STOCK:
                         case Status::OUT_STOCK:
-                            $this->stock_filter = $value;
+                            $this->stock_filter = (int)$value;
                             break;
                         default:
                             Analog::log(
                                 '[StatusList] Value for stock filter should be either ' .
-                                Status::IN_STOCK . ' or ' .
-                                Status::OUT_STOCK . ' (' . $value . ' given)',
+                                Status::IN_STOCK . ', ' . Status::OUT_STOCK . ' or ' .
+                                Status::DC_STOCK . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
                     }
 
                     break;
-                case 'query':
-                    $this->$name = $value;
-                    break;
                 default:
-                    Analog::log(
-                        '[StatusList] Unable to set proprety `' . $name . '`',
-                        Analog::WARNING
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Unable to set property "%s::%s"!',
+                            __CLASS__,
+                            $name
+                        )
                     );
-                    break;
             }
         }
     }

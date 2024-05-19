@@ -99,7 +99,7 @@ class LendStatus
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->status_id = $r->status_id;
+        $this->status_id = (int)$r->status_id;
         $this->status_text = $r->status_text;
         $this->in_stock = $r->in_stock == '1';
         $this->is_active = $r->is_active == '1';

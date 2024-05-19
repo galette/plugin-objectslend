@@ -57,100 +57,100 @@ class Preferences
 
     private Db $zdb;
     /** @var array<string,mixed> */
-    private array $prefs;
+    private array $prefs = [];
 
     /**
-     * Paramètre : voir la liste des catégories en en-têtes de la liste des objets
+     * Show categories at the top of the objects list
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_CATEGORY = 'VIEW_CATEGORY';
 
     /**
-     * Paramètre : voir la colonne "no de série"
+     * Show serial number column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_SERIAL = 'VIEW_SERIAL';
 
     /**
-     * Paramètre : voir la colonne "photo/minitature"
+     * Show thumbnail column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_THUMBNAIL = 'VIEW_THUMBNAIL';
 
     /**
-     * Paramètre : voir la colonne "description"
+     * Show description column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_DESCRIPTION = 'VIEW_DESCRIPTION';
 
     /**
-     * Paramètre :  voir la colonne "prix"
+     * Show price column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_PRICE = 'VIEW_PRICE';
 
     /**
-     * Paramètre : voir la colonne "dimensions"
+     * Show dimensions column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_DIMENSION = 'VIEW_DIMENSION';
 
     /**
-     * Paramètre : voir la colonne "poids"
+     * Show weight column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_WEIGHT = 'VIEW_WEIGHT';
 
     /**
-     * Paramètre : voir la colonne "prix de location"
+     * Show rent price column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_LEND_PRICE = 'VIEW_LEND_PRICE';
 
     /**
-     * Parametre : voir la colonne "retour prevu le"
+     * Show previsional return date column
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_DATE_FORECAST = 'VIEW_DATE_FORECAST';
 
     /**
-     * Parametre : voir la somme des prix sur la liste des objects
+     * Show the sum of prices on the list of objects
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_VIEW_LIST_PRICE_SUM = 'VIEW_LIST_PRICE_SUM';
 
     /**
-     * Paramètre : largeur max d'une miniature (appliquée aux objets/catégories)
+     * Maximum width of a thumbnail (applied to objects/categories)
      * Valeur : largeur en pixels
      */
     public const PARAM_THUMB_MAX_WIDTH = 'THUMB_MAX_WIDTH';
 
     /**
-     * Paramètre : hauteur max d'une miniature (appliquée aux objets/catégories)
+     * Maximum height of a thumbnail (applied to objects/categories)
      * Valeur : largeur en pixels
      */
     public const PARAM_THUMB_MAX_HEIGHT = 'THUMB_MAX_HEIGHT';
 
     /**
-     * Paramètre : Générer automatiquement une contribution lors de la location d'un objet
+     * Generate automatically a contribution when an object is rented
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_AUTO_GENERATE_CONTRIBUTION = 'AUTO_GENERATE_CONTRIBUTION';
 
     /**
-     * Paramètre : Id du type de contribution si auto-génération d'une contribution
+     * Contribution ID to generate when an object is rented
      * Valeur : ID du type de contribution
      */
     public const PARAM_GENERATED_CONTRIBUTION_TYPE_ID = 'GENERATED_CONTRIBUTION_TYPE_ID';
 
     /**
-     * Paramètre : Texte pour la contribution
+     * Text for the contribution
      * Valeur : texte d'info à mettre avec des placeholders à remplacer
      */
     public const PARAM_GENERATED_CONTRIB_INFO_TEXT = 'GENERATED_CONTRIB_INFO_TEXT';
 
     /**
-     * Paramètre : Autoriser les membres non staff ni admin à pouvoir louer un objet = accès à la page take_object.php
+     * Allow non staff members to rent objects
      * Valeur : 0 = false / 1 = true
      */
     public const PARAM_ENABLE_MEMBER_RENT_OBJECT = 'ENABLE_MEMBER_RENT_OBJECT';
@@ -193,28 +193,26 @@ class Preferences
      */
     public function __get(string $name): mixed
     {
-        $forbidden = array();
-
-        if (!in_array($name, $forbidden) && isset($this->prefs[$name])) {
+        if (isset($this->prefs[$name])) {
             return $this->prefs[$name];
-        } else {
-            Analog::log(
-                'Preference `' . $name . '` is not set or is forbidden',
-                Analog::INFO
-            );
-            return false;
         }
+
+        $msg = __CLASS__ . '::' . $name . ' is not set';
+        Analog::log(
+            $msg,
+            Analog::INFO
+        );
+        throw new \RuntimeException($msg);
     }
 
     /**
      * Store preferences
      *
-     * @param array<string,mixed> $data   Posted data
-     * @param string[]            $errors Errors
+     * @param array<string,mixed> $data Posted data
      *
      * @return boolean
      */
-    public function store(array $data, array &$errors): bool
+    public function store(array $data): bool
     {
         foreach ($data as $key => $value) {
             $this->prefs[$key] = $value;
@@ -256,13 +254,6 @@ class Preferences
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             throw $e;
-            Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
-                Analog::ERROR
-            );
-            $errors[] = _T("Unable to store preferences :(", "objectslend");
-            return false;
         }
     }
 

@@ -227,16 +227,16 @@ class LendObject
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->object_id = $r->object_id;
+        $this->object_id = (int)$r->object_id;
         $this->name = $r->name;
         $this->description = $r->description;
         $this->serial_number = $r->serial_number;
-        $this->price = is_numeric($r->price) ? floatval($r->price) : 0.0;
-        $this->rent_price = is_numeric($r->rent_price) ? floatval($r->rent_price) : 0.0;
+        $this->price = is_numeric($r->price) ? (float)$r->price : 0.0;
+        $this->rent_price = is_numeric($r->rent_price) ? (float)$r->rent_price : 0.0;
         $this->price_per_day = $r->price_per_day == '1';
         $this->dimension = $r->dimension;
-        $this->weight = is_numeric($r->weight) ? floatval($r->weight) : 0.0;
-        $this->is_active = $r->is_active == '1' ? true : false;
+        $this->weight = is_numeric($r->weight) ? (float)$r->weight : 0.0;
+        $this->is_active = $r->is_active == '1';
         if (property_exists($r, 'cat_active') && ($r->cat_active == 1 || $r->cat_active === null)) {
             $this->cat_active = true;
         } else {
@@ -245,14 +245,18 @@ class LendObject
         if (property_exists($r, 'cat_name') && $r->cat_name) {
             $this->cat_name = $r->cat_name;
         }
-        $this->category_id = $r->category_id;
-        $this->nb_available = $r->nb_available;
-        $this->rent_id = $r->rent_id;
+        if ($r->category_id != null) {
+            $this->category_id = (int)$r->category_id;
+        }
+        $this->nb_available = (int)$r->nb_available;
+        if ($r->rent_id != null) {
+            $this->rent_id = (int)$r->rent_id;
+        }
 
         //load last rent infos (status, member, and so on
-        if ($this->rent_id) {
+        if (isset($this->rent_id)) {
             if (property_exists($r, 'status_id')) {
-                $this->status_id = $r->status_id;
+                $this->status_id = (int)$r->status_id;
             }
 
             if (property_exists($r, 'status_text')) {
@@ -272,22 +276,16 @@ class LendObject
             }
 
             if (property_exists($r, Adherent::PK)) {
-                $this->id_adh = $r->{Adherent::PK};
+                $this->id_adh = (int)$r->{Adherent::PK};
             }
 
             if (property_exists($r, 'in_stock')) {
-                $this->in_stock = $r->in_stock;
+                $this->in_stock = (bool)$r->in_stock;
             }
         }
 
-        $this->category_id = $r->category_id;
-
         if ($this->object_id && $this->deps['rents'] === true) {
-            $only_last = false;
-            if ($this->deps['rents'] === false && $this->deps['last_rent'] === true) {
-                $only_last = true;
-            }
-            $this->rents = LendRent::getRentsForObjectId($this->object_id, $only_last);
+            $this->rents = LendRent::getRentsForObjectId($this->object_id);
         }
 
         if ($this->deps['picture'] === true) {
@@ -368,97 +366,6 @@ class LendObject
     }
 
     /**
-     * Get object rent status and rent user information.
-     *
-     * @param LendObject $object Object instance to be modified
-     *
-     * @return void
-     */
-    public static function getStatusForObject(LendObject $object): void
-    {
-        global $zdb;
-
-        // Statut
-        $select_rent = $zdb->select(LEND_PREFIX . LendRent::TABLE)
-            ->join(
-                PREFIX_DB . LEND_PREFIX . LendStatus::TABLE,
-                PREFIX_DB . LEND_PREFIX . LendRent::TABLE . '.status_id = ' .
-                PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id'
-            )
-            ->join(
-                PREFIX_DB . Adherent::TABLE,
-                PREFIX_DB . Adherent::TABLE . '.id_adh = ' . PREFIX_DB . LEND_PREFIX . LendRent::TABLE . '.adherent_id',
-                '*',
-                'left'
-            )
-                ->where(array('object_id' => $object->object_id))
-                ->limit(1)
-                ->offset(0)
-                ->order('date_begin desc');
-
-        $results = $zdb->execute($select_rent);
-        if ($results->count() == 1) {
-            $rent = $results->current();
-            $object->date_begin = $rent->date_begin;
-            $object->date_forecast = $rent->date_forecast;
-            $object->date_end = $rent->date_end;
-            $object->status_text = $rent->status_text;
-            $object->comments = $rent->comments;
-            $object->in_stock = $rent->in_stock == '1' ? true : false;
-            $object->nom_adh = $rent->nom_adh;
-            $object->prenom_adh = $rent->prenom_adh;
-            $object->email_adh = $rent->email_adh;
-            $object->id_adh = $rent->id_adh;
-        } else {
-            $object->in_stock = true;
-        }
-    }
-
-    /**
-     * Get requested objects
-     *
-     * @param array<int> $ids Objects to retrieve IDs
-     *
-     * @return LendObject[]
-     */
-    public static function getMoreObjectsByIds(array $ids): array
-    {
-        global $zdb, $plugins;
-
-        $myids = array();
-        foreach ($ids as $id) {
-            if (is_numeric($id)) {
-                $myids[] = $id;
-            }
-        }
-
-        try {
-            $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $myids));
-
-            $results = array();
-
-            $rows = $zdb->execute($select);
-            foreach ($rows as $r) {
-                $o = new self($zdb, $plugins, $r);
-
-                self::getStatusForObject($o);
-
-                $results[] = $o;
-            }
-
-            return $results;
-        } catch (\Exception $e) {
-            Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
-                Analog::ERROR
-            );
-            throw $e;
-        }
-    }
-
-    /**
      * Global getter method
      *
      * @param string $name name of the property we want to retrieve
@@ -476,8 +383,6 @@ class LendObject
                 return number_format($this->$name, 2, ',', ' ');
             case 'value_rent_price':
                 return $this->rent_price;
-            case 'weight_bulk':
-                return $this->weight;
             case 'weight':
                 return number_format($this->weight, 3, ',', ' ');
             default:
@@ -501,6 +406,8 @@ class LendObject
                 case 'category_id':
                     if ($value == '') {
                         $value = null;
+                    } else {
+                        $value = (int)$value;
                     }
                     //no break for value to be set in default
                 default:
@@ -527,7 +434,7 @@ class LendObject
      */
     public function getCurrentRent(): ?LendRent
     {
-        if (is_array($this->rents) && count($this->rents) > 0) {
+        if (isset($this->rents) && is_array($this->rents) && count($this->rents) > 0) {
             return $this->rents[0];
         }
         return null;
@@ -585,10 +492,8 @@ class LendObject
             return $this->$field;
         }
 
-        $untokenized = trim($filters->filter_str ?? '', '%');
-        mb_internal_encoding('UTF-8');
         return preg_replace(
-            '/(' . $untokenized . ')/iu',
+            '/(' . trim($filters->filter_str ?? '', '%') . ')/iu',
             '<span class="search">$1</span>',
             $this->$field
         );
@@ -652,8 +557,13 @@ class LendObject
         try {
             $this->zdb->connection->beginTransaction();
             //remove rents
+            $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
+                    ->set([LendRent::PK => null])
+                    ->where(array(self::PK => $this->object_id));
+            $this->zdb->execute($update);
             $delete = $this->zdb->delete(LEND_PREFIX . LendRent::TABLE)
                     ->where(array(self::PK => $this->object_id));
+            $this->zdb->execute($delete);
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
                     ->where(array(self::PK => $this->object_id));
             $this->zdb->execute($delete);
@@ -813,7 +723,7 @@ class LendObject
      */
     public function getRentId(): ?int
     {
-        return $this->rent_id;
+        return $this->rent_id ?? null;
     }
 
     /**
@@ -857,7 +767,7 @@ class LendObject
     /**
      * Generic isset function
      *
-     * @param $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
