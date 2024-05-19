@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
@@ -335,11 +337,11 @@ class LendObject
                 if ($result->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         /** @phpstan-ignore-next-line */
-                        $this->object_id = $this->zdb->driver->getLastGeneratedValue(
+                        $this->object_id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_objects_id_seq'
                         );
                     } else {
-                        $this->object_id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->object_id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     if ($this->deps['picture'] === true) {

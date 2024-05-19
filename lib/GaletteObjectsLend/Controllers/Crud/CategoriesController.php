@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
@@ -240,7 +242,7 @@ class CategoriesController extends AbstractPluginController
         $error_detected = [];
 
         $category->name = $post['name'];
-        $category->is_active = $post['is_active'] == true;
+        $category->is_active = ($post['is_active'] ?? false) == true;
         if ($category->store()) {
             // picture upload
             if (isset($_FILES['picture'])) {

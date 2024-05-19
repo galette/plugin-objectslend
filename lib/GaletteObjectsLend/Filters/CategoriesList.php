@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Filters;
 
 use Analog\Analog;
@@ -145,7 +147,7 @@ class CategoriesList extends Pagination
                         case Categories::ALL_CATEGORIES:
                         case Categories::ACTIVE_CATEGORIES:
                         case Categories::INACTIVE_CATEGORIES:
-                            $this->active_filter = $value;
+                            $this->active_filter = (int)$value;
                             break;
                         default:
                             Analog::log(

@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
@@ -128,7 +130,7 @@ class LendCategory
         }
 
         if (property_exists($r, 'objects_price_sum')) {
-            $this->objects_price_sum = $r->objects_price_sum;
+            $this->objects_price_sum = $r->objects_price_sum ?? 0.0;
         }
 
 
@@ -152,7 +154,7 @@ class LendCategory
                     //Handle booleans for postgres ; bugs #18899 and #19354
                     $values[$k] = $this->zdb->isPostgres() ? 'false' : 0;
                 } else {
-                    $values[$k] = $this->$k;
+                    $values[$k] = $this->$k ?? null;
                 }
             }
 
@@ -164,11 +166,11 @@ class LendCategory
                 if ($result->count() > 0) {
                     if ($this->zdb->isPostgres()) {
                         /** @phpstan-ignore-next-line */
-                        $this->category_id = $this->zdb->driver->getLastGeneratedValue(
+                        $this->category_id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_category_id_seq'
                         );
                     } else {
-                        $this->category_id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->category_id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
                 } else {
                     throw new \RuntimeException('Unable to add category!');
@@ -266,11 +268,11 @@ class LendCategory
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set(string $name, object $value): void
+    public function __set(string $name, mixed $value): void
     {
         $this->$name = $value;
     }

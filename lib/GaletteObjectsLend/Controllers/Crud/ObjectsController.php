@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
@@ -541,7 +543,7 @@ class ObjectsController extends AbstractPluginController
                 'success_detected',
                 str_replace(
                     '%id',
-                    $id,
+                    (string)$id,
                     _T('Successfully cloned from #%id.<br/>You can now edit it.', 'objectslend')
                 )
             );
@@ -1003,7 +1005,7 @@ class ObjectsController extends AbstractPluginController
     protected function getIdsToRemove(array &$args, ?array $post): array|int|null
     {
         if (isset($args['id'])) {
-            return $args['id'];
+            return (int)$args['id'];
         } else {
             $filters = $this->session->objectslend_filter_objects;
             return $filters->selected;

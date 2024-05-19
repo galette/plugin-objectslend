@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
@@ -237,8 +239,8 @@ class Picture extends \Galette\Core\Picture
     public function delete(bool $transaction = true): bool
     {
         //find and delete any thumb
-        $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
-        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
+        $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
 
         $thumb = $filename . '_th.' . $ext;
 
@@ -260,8 +262,8 @@ class Picture extends \Galette\Core\Picture
      */
     public function store(array $file, bool $ajax = false, array $cropping = null): bool|int
     {
-        $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
-        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
+        $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
         $thumb = $filename . '_th.' . $ext;
 
         if (is_file($thumb)) {

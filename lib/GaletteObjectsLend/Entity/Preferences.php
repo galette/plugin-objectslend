@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
@@ -187,9 +189,9 @@ class Preferences
      *
      * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
-    public function __get(string $name): false|object
+    public function __get(string $name): mixed
     {
         $forbidden = array();
 
@@ -238,10 +240,8 @@ class Preferences
             )->where->equalTo(self::PK, ':' . self::PK);
             $stmt = $this->zdb->sql->prepareStatementForSqlObject($update);
 
+            unset($data['csrf_value'], $data['csrf_name'], $data['GENERATED_CONTRIB_INFO_TEXT']);
             foreach ($data as $key => $value) {
-                if ($key === 'GENERATED_CONTRIB_INFO_TEXT') {
-                    continue;
-                }
                 $stmt->execute(
                     [
                         'value_numeric'     => $value,
@@ -303,7 +303,7 @@ class Preferences
      */
     public function getThumbWidth(): int
     {
-        return $this->prefs['THUMB_MAX_WIDTH'];
+        return (int)$this->prefs['THUMB_MAX_WIDTH'];
     }
 
     /**
@@ -313,7 +313,7 @@ class Preferences
      */
     public function getThumbHeight(): int
     {
-        return $this->prefs['THUMB_MAX_HEIGHT'];
+        return (int)$this->prefs['THUMB_MAX_HEIGHT'];
     }
 
     /**
@@ -323,7 +323,7 @@ class Preferences
      */
     public function imagesInLists(): bool
     {
-        return $this->prefs['VIEW_THUMBNAIL'];
+        return (bool)$this->prefs['VIEW_THUMBNAIL'];
     }
 
     /**
@@ -335,6 +335,6 @@ class Preferences
      */
     public function showFullsize(): bool
     {
-        return $this->prefs['VIEW_FULLSIZE'];
+        return (bool)$this->prefs['VIEW_FULLSIZE'];
     }
 }

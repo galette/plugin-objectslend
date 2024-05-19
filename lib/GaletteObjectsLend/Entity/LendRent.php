@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
@@ -68,7 +70,7 @@ class LendRent
     private string $date_begin;
     private ?string $date_forecast;
     private ?string $date_end;
-    private int $status_id;
+    private ?int $status_id;
     private ?int $adherent_id;
     private string $comments = '';
     private bool $in_stock;
@@ -155,11 +157,11 @@ class LendRent
                 $result = $zdb->execute($insert);
                 if ($result->count() > 0) {
                     if ($zdb->isPostgres()) {
-                        $this->rent_id = $zdb->driver->getLastGeneratedValue(
+                        $this->rent_id = (int)$zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_rents_id_seq'
                         );
                     } else {
-                        $this->rent_id = $zdb->driver->getLastGeneratedValue();
+                        $this->rent_id = (int)$zdb->driver->getLastGeneratedValue();
                     }
                     Analog::log(
                         'Rent #' . $this->rent_id . ' added.',
@@ -196,7 +198,7 @@ class LendRent
     }
 
     /**
-     * Get rent histroy for a given object sorted
+     * Get rent history for a given object sorted
      *
      * @param integer $object_id Object ID
      * @param boolean $only_last Only retrieve last rent (for list display)
@@ -369,6 +371,11 @@ class LendRent
                     $this->$name = (int)$value;
                 } else {
                     $this->$name = null;
+                }
+                break;
+            case 'status_id':
+                if ((int)$value > 0) {
+                    $this->$name = (int)$value;
                 }
                 break;
             case 'date_forecast':
