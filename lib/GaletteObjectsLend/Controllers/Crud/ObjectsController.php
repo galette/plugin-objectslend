@@ -550,7 +550,7 @@ class ObjectsController extends AbstractPluginController
         } else {
             $this->flash->addMessage(
                 'error_detected',
-                _T('An error occured cloning object :(', 'objectslend')
+                _T('An error occurred cloning object :(', 'objectslend')
             );
         }
 

@@ -272,7 +272,7 @@ msgid "New status"
 msgstr "Nouveau statut"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:268
-msgid "An error occured while storing the status."
+msgid "An error occurred while storing the status."
 msgstr "Une erreur est survenue à l'enregistrement du statut."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:294
@@ -346,7 +346,7 @@ msgid "Successfully cloned from #%id.<br/>You can now edit it."
 msgstr "Clôné avec succès depuis #%id.<br/>Vous pouvez mainenant le modifier."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
-msgid "An error occured cloning object :("
+msgid "An error occurred cloning object :("
 msgstr "Une erreur est survenue au clonage de l'objet :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:582
@@ -1261,7 +1261,7 @@ msgstr "Vous devez accepter les conditions générales pour emprunter."
 #~ msgid "Filter"
 #~ msgstr "Filter"
 
-#~ msgid "An SQL error has occured."
+#~ msgid "An SQL error has occurred."
 #~ msgstr "Une erreur SQL est survenue."
 
 #~ msgid "Records per page:"

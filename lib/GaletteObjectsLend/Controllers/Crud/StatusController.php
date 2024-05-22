@@ -267,7 +267,7 @@ class StatusController extends AbstractPluginController
         $days = trim($post['rent_day_number']);
         $status->rent_day_number = strlen($days) > 0 ? intval($days) : null;
         if (!$status->store()) {
-            $error_detected[] = _T("An error occured while storing the status.", "objectslend");
+            $error_detected[] = _T("An error occurred while storing the status.", "objectslend");
         }
 
         if (count($error_detected)) {

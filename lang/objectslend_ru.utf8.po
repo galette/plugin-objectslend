@@ -277,7 +277,7 @@ msgid "New status"
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:268
-msgid "An error occured while storing the status."
+msgid "An error occurred while storing the status."
 msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:294
@@ -352,7 +352,7 @@ msgid "Successfully cloned from #%id.<br/>You can now edit it."
 msgstr "Успешно клонировано из #%id.<br> Теперь вы можете редактировать его."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
-msgid "An error occured cloning object :("
+msgid "An error occurred cloning object :("
 msgstr "Произошла ошибка при клонировании объекта :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:582

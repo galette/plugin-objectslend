@@ -317,7 +317,7 @@ class Picture extends \Galette\Core\Picture
                 $e->getTraceAsString(),
                 Analog::ERROR
             );
-            $error[] = _T("An error occured :(");
+            $error[] = _T("An error occurred :(");
         }
     }
 
