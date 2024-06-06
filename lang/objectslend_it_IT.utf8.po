@@ -2,13 +2,14 @@
 # Luca De Filippo <luca.defilippo@translationcommons.org>, 2020.
 # Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
 # Giacomo Alessandroni <g.alessandroni@gmail.com>, 2021.
+# Marco Ciampa <ciampix@posteo.net>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2021-12-20 22:53+0000\n"
-"Last-Translator: Giacomo Alessandroni <g.alessandroni@gmail.com>\n"
+"PO-Revision-Date: 2024-06-06 06:40+0000\n"
+"Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
 "Language: it_IT\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -127,7 +128,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:196
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:168
 msgid "Member"
-msgstr ""
+msgstr "Socio"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:172
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:169
