@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Categories list filters and paginator
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Filters
- * @package   Galette
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     2017-02-10
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Filters;
 
@@ -45,14 +31,7 @@ use Laminas\Db\Sql\Select;
 /**
  * Categories list filters and paginator
  *
- * @name      CategoriesList
- * @category  Filters
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property ?string $filter_str
  * @property ?int $active_filter
@@ -64,14 +43,15 @@ use Laminas\Db\Sql\Select;
 class CategoriesList extends Pagination
 {
     //filters
-    private $filter_str;
-    private $active_filter;
-    private $not_empty;
-    private $objects_filters;
+    private ?string $filter_str;
+    private ?int $active_filter;
+    private ?bool $not_empty;
+    private ?ObjectsList $objects_filters;
 
-    protected $query;
+    protected string $query;
 
-    protected $categorylist_fields = array(
+    /** @var array<string> */
+    protected array $categorylist_fields = array(
         'filter_str',
         'active_filter',
         'not_empty',
@@ -90,11 +70,11 @@ class CategoriesList extends Pagination
     /**
      * Returns the field we want to default set order to
      *
-     * @return string field name
+     * @return int|string
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
-        return 'name ';
+        return Categories::ORDERBY_NAME;
     }
 
     /**
@@ -102,7 +82,7 @@ class CategoriesList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->filter_str = null;
@@ -118,26 +98,23 @@ class CategoriesList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-
-        Analog::log(
-            '[CategoriesList] Getting property `' . $name . '`',
-            Analog::DEBUG
-        );
-
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
             if (in_array($name, $this->categorylist_fields)) {
                 return $this->$name;
-            } else {
-                Analog::log(
-                    '[CategoriesList] Unable to get property `' . $name . '`',
-                    Analog::WARNING
-                );
             }
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
@@ -148,7 +125,7 @@ class CategoriesList extends Pagination
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
 
         if (in_array($name, $this->pagination_fields)) {
@@ -170,7 +147,7 @@ class CategoriesList extends Pagination
                         case Categories::ALL_CATEGORIES:
                         case Categories::ACTIVE_CATEGORIES:
                         case Categories::INACTIVE_CATEGORIES:
-                            $this->active_filter = $value;
+                            $this->active_filter = (int)$value;
                             break;
                         default:
                             Analog::log(
@@ -183,38 +160,15 @@ class CategoriesList extends Pagination
                     }
                     break;
                 default:
-                    Analog::log(
-                        '[CategoriesList] Unable to set proprety `' . $name . '`',
-                        Analog::WARNING
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Unable to set property "%s::%s"!',
+                            __CLASS__,
+                            $name
+                        )
                     );
-                    break;
             }
         }
-    }
-
-    /**
-     * Add SQL limit
-     *
-     * @param Select $select Original select
-     *
-     * @return void
-     */
-    public function setLimit($select)
-    {
-        $this->setLimits($select);
-    }
-
-    /**
-     * Set counter
-     *
-     * @param int $c Count
-     *
-     * @return void
-     */
-    public function setCounter($c)
-    {
-        $this->counter = (int)$c;
-        $this->countPages();
     }
 
     /**
@@ -222,9 +176,9 @@ class CategoriesList extends Pagination
      *
      * @param ObjectsList $filters Filters for objects list
      *
-     * @return CategoriesList
+     * @return self
      */
-    public function setObjectsFilter(ObjectsList $filters)
+    public function setObjectsFilter(ObjectsList $filters): self
     {
         $this->objects_filters = $filters;
         return $this;

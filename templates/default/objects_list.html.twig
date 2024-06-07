@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'elements/list.html.twig' %}
 {% import "macros.twig" as macros %}
 
@@ -313,7 +333,7 @@
                             'icon': 'file pdf grey'
                         },
                         {
-                            'label': _T("Remove %object from database", "objectslend")|replace({ '%object': object.getName() }),
+                            'label': _T("Remove %object from database", "objectslend")|replace({'%object': object.getName()}),
                             'route': {
                                 'name': 'objectslend_remove_object',
                                 'args': {'id': object.getId()}
@@ -381,7 +401,7 @@
             }
         } %}
 
-        {%  set batch_actions = [
+        {% set batch_actions = [
             {
                 'name': 'print_list__directdownload',
                 'label': _T("Print objects list", "objectslend"),
@@ -411,7 +431,7 @@
                 datatype: 'html',
                 {% include "elements/js/loader.js.twig" with {
                     loader: "action",
-                }%},
+                } %},
                 success: function(res){
                     var _content = $($.parseHTML(res)).find('div.main-content').children();
                     {% include "elements/js/modal.js.twig" with {
@@ -446,7 +466,7 @@
                 datatype: 'html',
                 {% include "elements/js/loader.js.twig" with {
                     loader: "action",
-                }%},
+                } %},
                 success: function(res){
                     var _content = $($.parseHTML(res)).find('div.main-content').children();
                     {% include "elements/js/modal.js.twig" with {

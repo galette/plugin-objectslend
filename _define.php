@@ -1,49 +1,34 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Configuration file for ObjectsLend plugin
- *
- * PHP version 5
- *
- * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2023 The Galette Team
+ * Copyright © 2003-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
- * ObjectsLend is free software: you can redistribute it and/or modify
+ * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ObjectsLend is distributed in the hope that it will be useful,
+ * Galette is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   ObjectsLend
- *
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
  */
+
+declare(strict_types=1);
 
 $this->register(
     'Galette Objects Lend',             //Name
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
-    '2.0.0',                            //Version
-    '1.0.0',                            //Galette version compatibility
+    '2.1.0',                            //Version
+    '1.1.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2023-12-07',                       //Date
+    '2024-06-08',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',

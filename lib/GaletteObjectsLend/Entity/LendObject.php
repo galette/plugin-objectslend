@@ -1,41 +1,25 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Public Class LendObject
- * Store information about an object to lend
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
+ * This file is part of Galette (https://galette.eu).
  *
- * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
- *
- * ObjectsLend is free software: you can redistribute it and/or modify
+ * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ObjectsLend is distributed in the hope that it will be useful,
+ * Galette is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   ObjectsLend
- *
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Entity;
 
@@ -50,15 +34,8 @@ use GaletteObjectsLend\Repository\Objects;
 /**
  * Object
  *
- * @name      LendObject
- * @category  Entity
- * @package   ObjectsLend
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
+ * @author Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property ?int $object_id
  * @property ObjectPicture $picture
@@ -79,13 +56,18 @@ use GaletteObjectsLend\Repository\Objects;
  * @property string $date_forecast
  * @property array $rents
  * @property int $category_id
+ * @property string $nom_adh
+ * @property string $prenom_adh
+ * @property string $currency
+ * @property bool $in_stock
  */
 class LendObject
 {
     public const TABLE = 'objects';
     public const PK = 'object_id';
 
-    private $fields = array(
+    /** @var array<string,string> */
+    private array $fields = array(
         'object_id' => 'integer',
         'name' => 'varchar(100)',
         'description' => 'varchar(500)',
@@ -99,39 +81,40 @@ class LendObject
         'category_id' => 'int',
         'nb_available' => 'int',
     );
-    private $object_id;
-    private $name = '';
-    private $description = '';
-    private $serial_number = '';
-    private $price = 0.0;
-    private $rent_price = 0.0;
-    private $price_per_day = false;
-    private $dimension = '';
-    private $weight = 0.0;
-    private $is_active = true;
-    private $category_id;
-    private $nb_available = 1;
-    // Requête sur le dernier statut de l'objet
-    private $date_begin;
-    private $date_forecast;
-    private $date_end;
-    private $status_text;
-    private $status_id;
-    private $in_stock = true;
-    // Requête sur l'adhérent associé au statut
-    private $nom_adh = '';
-    private $prenom_adh = '';
-    private $email_adh = '';
-    private $id_adh;
-    private $rent_id;
-    private $comments;
-    private $currency = '€';
-    private $picture;
-    private $cat_active = true;
-    private $cat_name;
-    private $member;
+    private ?int $object_id;
+    private string $name = '';
+    private string $description = '';
+    private string $serial_number = '';
+    private float $price = 0.0;
+    private float $rent_price = 0.0;
+    private bool $price_per_day = false;
+    private string $dimension = '';
+    private float $weight = 0.0;
+    private bool $is_active = true;
+    private ?int $category_id;
+    private int $nb_available = 1;
 
-    private $deps = [
+    private string $date_begin;
+    private ?string $date_forecast;
+    private ?string $date_end;
+    private string $status_text = '';
+    private int $status_id;
+    private bool $in_stock = true;
+
+    private string $nom_adh = '';
+    private string $prenom_adh = '';
+    private string $email_adh = '';
+    private ?int $id_adh;
+    private ?int $rent_id;
+    private string $comments = '';
+    private string $currency = '€';
+    private ObjectPicture $picture;
+    private bool $cat_active = true;
+    private ?string $cat_name = null;
+    private Adherent $member;
+
+    /** @var array<string,bool> */
+    private array $deps = [
         'picture'   => true,
         'rents'     => false,
         'last_rent' => false,
@@ -140,37 +123,32 @@ class LendObject
         'category'  => false
     ];
 
-    private $zdb;
-    private $plugins;
+    private Db $zdb;
+    private Plugins $plugins;
 
     /**
      * @var LendRent[]
      * Rents list for the object
      */
-    private $rents;
+    private array $rents;
 
     /**
      * Default constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Plugins    $plugins Plugins instance
-     * @param int|object $args    Maybe null, an RS object or an id from database
-     * @param array      $deps    Dependencies configuration, see LendOb::$deps
+     * @param Db                                      $zdb     Database instance
+     * @param Plugins                                 $plugins Plugins instance
+     * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
+     * @param array<string,bool>                      $deps    Dependencies configuration, see LendOb::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, $args = null, $deps = null)
+    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject $args = null, array $deps = null)
     {
         $this->zdb = $zdb;
         $this->plugins = $plugins;
 
-        if ($deps !== null && is_array($deps)) {
+        if ($deps !== null) {
             $this->deps = array_merge(
                 $this->deps,
                 $deps
-            );
-        } elseif ($deps !== null) {
-            Analog::log(
-                '$deps should be an array, ' . gettype($deps) . ' given!',
-                Analog::WARNING
             );
         }
 
@@ -243,22 +221,22 @@ class LendObject
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string,int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
-        $this->object_id = $r->object_id;
+        $this->object_id = (int)$r->object_id;
         $this->name = $r->name;
         $this->description = $r->description;
         $this->serial_number = $r->serial_number;
-        $this->price = is_numeric($r->price) ? floatval($r->price) : 0.0;
-        $this->rent_price = is_numeric($r->rent_price) ? floatval($r->rent_price) : 0.0;
+        $this->price = is_numeric($r->price) ? (float)$r->price : 0.0;
+        $this->rent_price = is_numeric($r->rent_price) ? (float)$r->rent_price : 0.0;
         $this->price_per_day = $r->price_per_day == '1';
         $this->dimension = $r->dimension;
-        $this->weight = is_numeric($r->weight) ? floatval($r->weight) : 0.0;
-        $this->is_active = $r->is_active == '1' ? true : false;
+        $this->weight = is_numeric($r->weight) ? (float)$r->weight : 0.0;
+        $this->is_active = $r->is_active == '1';
         if (property_exists($r, 'cat_active') && ($r->cat_active == 1 || $r->cat_active === null)) {
             $this->cat_active = true;
         } else {
@@ -267,14 +245,18 @@ class LendObject
         if (property_exists($r, 'cat_name') && $r->cat_name) {
             $this->cat_name = $r->cat_name;
         }
-        $this->category_id = $r->category_id;
-        $this->nb_available = $r->nb_available;
-        $this->rent_id = $r->rent_id;
+        if ($r->category_id != null) {
+            $this->category_id = (int)$r->category_id;
+        }
+        $this->nb_available = (int)$r->nb_available;
+        if ($r->rent_id != null) {
+            $this->rent_id = (int)$r->rent_id;
+        }
 
         //load last rent infos (status, member, and so on
-        if ($this->rent_id) {
+        if (isset($this->rent_id)) {
             if (property_exists($r, 'status_id')) {
-                $this->status_id = $r->status_id;
+                $this->status_id = (int)$r->status_id;
             }
 
             if (property_exists($r, 'status_text')) {
@@ -294,22 +276,16 @@ class LendObject
             }
 
             if (property_exists($r, Adherent::PK)) {
-                $this->id_adh = $r->{Adherent::PK};
+                $this->id_adh = (int)$r->{Adherent::PK};
             }
 
             if (property_exists($r, 'in_stock')) {
-                $this->in_stock = $r->in_stock;
+                $this->in_stock = (bool)$r->in_stock;
             }
         }
 
-        $this->category_id = $r->category_id;
-
         if ($this->object_id && $this->deps['rents'] === true) {
-            $only_last = false;
-            if ($this->deps['rents'] === false && $this->deps['last_rent'] === true) {
-                $only_last = true;
-            }
-            $this->rents = LendRent::getRentsForObjectId($this->object_id, $only_last);
+            $this->rents = LendRent::getRentsForObjectId($this->object_id);
         }
 
         if ($this->deps['picture'] === true) {
@@ -330,11 +306,11 @@ class LendObject
     }
 
     /**
-     * Enregistre l'élément en cours que ce soit en insert ou update
+     * Store object
      *
-     * @return bool False si l'enregistrement a échoué, true si aucune erreur
+     * @return bool
      */
-    public function store()
+    public function store(): bool
     {
         try {
             $values = array();
@@ -347,7 +323,7 @@ class LendObject
                     //Handle booleans for postgres ; bugs #18899 and #19354
                     $values[$k] = $this->zdb->isPostgres() ? 'false' : 0;
                 } else {
-                    $values[$k] = $this->$k;
+                    $values[$k] = $this->$k ?? null;
                 }
             }
 
@@ -358,11 +334,12 @@ class LendObject
                 $result = $this->zdb->execute($insert);
                 if ($result->count() > 0) {
                     if ($this->zdb->isPostgres()) {
-                        $this->object_id = $this->zdb->driver->getLastGeneratedValue(
+                        /** @phpstan-ignore-next-line */
+                        $this->object_id = (int)$this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_objects_id_seq'
                         );
                     } else {
-                        $this->object_id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->object_id = (int)$this->zdb->driver->getLastGeneratedValue();
                     }
 
                     if ($this->deps['picture'] === true) {
@@ -389,104 +366,13 @@ class LendObject
     }
 
     /**
-     * Get object rent status and rent user informations.
-     *
-     * @param LendObject $object L'objet dont on cherche le statut. Est automatiquement modifié.
-     *
-     * @return void
-     */
-    public static function getStatusForObject($object)
-    {
-        global $zdb;
-
-        // Statut
-        $select_rent = $zdb->select(LEND_PREFIX . LendRent::TABLE)
-            ->join(
-                PREFIX_DB . LEND_PREFIX . LendStatus::TABLE,
-                PREFIX_DB . LEND_PREFIX . LendRent::TABLE . '.status_id = ' .
-                PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id'
-            )
-            ->join(
-                PREFIX_DB . Adherent::TABLE,
-                PREFIX_DB . Adherent::TABLE . '.id_adh = ' . PREFIX_DB . LEND_PREFIX . LendRent::TABLE . '.adherent_id',
-                '*',
-                'left'
-            )
-                ->where(array('object_id' => $object->object_id))
-                ->limit(1)
-                ->offset(0)
-                ->order('date_begin desc');
-
-        $results = $zdb->execute($select_rent);
-        if ($results->count() == 1) {
-            $rent = $results->current();
-            $object->date_begin = $rent->date_begin;
-            $object->date_forecast = $rent->date_forecast;
-            $object->date_end = $rent->date_end;
-            $object->status_text = $rent->status_text;
-            $object->comments = $rent->comments;
-            $object->in_stock = $rent->in_stock == '1' ? true : false;
-            $object->nom_adh = $rent->nom_adh;
-            $object->prenom_adh = $rent->prenom_adh;
-            $object->email_adh = $rent->email_adh;
-            $object->id_adh = $rent->id_adh;
-        } else {
-            $object->in_stock = true;
-        }
-    }
-
-    /**
-     * Renvoit tous les objects correspondant aux IDs donnés.
-     *
-     * @param array $ids Tableau des IDs pour lequels on souhaite avoir les objects
-     *
-     * @return LendObject[] Tableau des objets correspondant aux IDs
-     */
-    public static function getMoreObjectsByIds($ids)
-    {
-        global $zdb, $plugins;
-
-        $myids = array();
-        foreach ($ids as $id) {
-            if (is_numeric($id)) {
-                $myids[] = $id;
-            }
-        }
-
-        try {
-            $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $myids));
-
-            $results = array();
-
-            $rows = $zdb->execute($select);
-            foreach ($rows as $r) {
-                $o = new self($zdb, $plugins, $r);
-
-                self::getStatusForObject($o);
-
-                $results[] = $o;
-            }
-
-            return $results;
-        } catch (\Exception $e) {
-            Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
-                Analog::ERROR
-            );
-            throw $e;
-        }
-    }
-
-    /**
      * Global getter method
      *
      * @param string $name name of the property we want to retrieve
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
             case 'date_begin':
@@ -497,12 +383,10 @@ class LendObject
                 return number_format($this->$name, 2, ',', ' ');
             case 'value_rent_price':
                 return $this->rent_price;
-            case 'weight_bulk':
-                return $this->weight;
             case 'weight':
                 return number_format($this->weight, 3, ',', ' ');
             default:
-                return $this->$name;
+                return $this->$name ?? null;
         }
     }
 
@@ -510,11 +394,11 @@ class LendObject
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
         $forbidden = ['currency'];
         if (!in_array($name, $forbidden)) {
@@ -522,6 +406,8 @@ class LendObject
                 case 'category_id':
                     if ($value == '') {
                         $value = null;
+                    } else {
+                        $value = (int)$value;
                     }
                     //no break for value to be set in default
                 default:
@@ -536,7 +422,7 @@ class LendObject
      *
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -544,13 +430,14 @@ class LendObject
     /**
      * Get current rent
      *
-     * @return LendRent|void
+     * @return LendRent|null
      */
-    public function getCurrentRent()
+    public function getCurrentRent(): ?LendRent
     {
-        if (is_array($this->rents) && count($this->rents) > 0) {
+        if (isset($this->rents) && is_array($this->rents) && count($this->rents) > 0) {
             return $this->rents[0];
         }
+        return null;
     }
 
     /**
@@ -560,7 +447,7 @@ class LendObject
      *
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->is_active && $this->cat_active;
     }
@@ -573,7 +460,7 @@ class LendObject
      *
      * @return string
      */
-    private function getHighlighted(ObjectsList $filters, $field)
+    private function getHighlighted(ObjectsList $filters, string $field): string
     {
         //check if search concerns field
         $process = false;
@@ -605,10 +492,8 @@ class LendObject
             return $this->$field;
         }
 
-        $untokenized = trim($filters->filter_str ?? '', '%');
-        mb_internal_encoding('UTF-8');
         return preg_replace(
-            '/(' . $untokenized . ')/iu',
+            '/(' . trim($filters->filter_str ?? '', '%') . ')/iu',
             '<span class="search">$1</span>',
             $this->$field
         );
@@ -621,7 +506,7 @@ class LendObject
      *
      * @return string
      */
-    public function displayName(ObjectsList $filters)
+    public function displayName(ObjectsList $filters): string
     {
         return $this->getHighlighted($filters, 'name');
     }
@@ -633,7 +518,7 @@ class LendObject
      *
      * @return string
      */
-    public function displayDescription(ObjectsList $filters)
+    public function displayDescription(ObjectsList $filters): string
     {
         return $this->getHighlighted($filters, 'description');
     }
@@ -645,7 +530,7 @@ class LendObject
      *
      * @return string
      */
-    public function displaySerial(ObjectsList $filters)
+    public function displaySerial(ObjectsList $filters): string
     {
         return $this->getHighlighted($filters, 'serial_number');
     }
@@ -657,7 +542,7 @@ class LendObject
      *
      * @return string
      */
-    public function displayDimension(ObjectsList $filters)
+    public function displayDimension(ObjectsList $filters): string
     {
         return $this->getHighlighted($filters, 'dimension');
     }
@@ -667,13 +552,18 @@ class LendObject
      *
      * @return boolean
      */
-    public function delete()
+    public function delete(): bool
     {
         try {
             $this->zdb->connection->beginTransaction();
             //remove rents
+            $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
+                    ->set([LendRent::PK => null])
+                    ->where(array(self::PK => $this->object_id));
+            $this->zdb->execute($update);
             $delete = $this->zdb->delete(LEND_PREFIX . LendRent::TABLE)
                     ->where(array(self::PK => $this->object_id));
+            $this->zdb->execute($delete);
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
                     ->where(array(self::PK => $this->object_id));
             $this->zdb->execute($delete);
@@ -695,10 +585,10 @@ class LendObject
      *
      * @return boolean
      */
-    public function clone()
+    public function clone(): bool
     {
         //unset id so this is considered as new object
-        $this->object_id = null;
+        unset($this->object_id);
         //unset image
         $this->picture = new ObjectPicture($this->plugins);
         return $this->store();
@@ -707,11 +597,11 @@ class LendObject
     /**
      * Get ID
      *
-     * @return int
+     * @return ?int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
-        return (int)$this->object_id;
+        return $this->object_id ?? null;
     }
 
     /**
@@ -777,9 +667,9 @@ class LendObject
     /**
      * Get textual status
      *
-     * @return mixed
+     * @return string
      */
-    public function getStatusText()
+    public function getStatusText(): string
     {
         return $this->status_text;
     }
@@ -819,31 +709,31 @@ class LendObject
     /**
      * Get member ID
      *
-     * @return mixed
+     * @return ?int
      */
-    public function getIdAdh()
+    public function getIdAdh(): ?int
     {
-        return $this->id_adh;
+        return $this->id_adh ?? null;
     }
 
     /**
      * Get rent ID
      *
-     * @return mixed
+     * @return ?int
      */
-    public function getRentId()
+    public function getRentId(): ?int
     {
-        return $this->rent_id;
+        return $this->rent_id ?? null;
     }
 
     /**
      * Get category ID
      *
-     * @return mixed
+     * @return ?int
      */
-    public function getCategoryId()
+    public function getCategoryId(): ?int
     {
-        return $this->category_id;
+        return $this->category_id ?? null;
     }
 
     /**
@@ -851,7 +741,7 @@ class LendObject
      *
      * @return string
      */
-    public function getSerialNumber()
+    public function getSerialNumber(): string
     {
         return $this->serial_number;
     }
@@ -864,9 +754,9 @@ class LendObject
      * @return string
      * @throws \Exception
      */
-    protected function getDateField($name): string
+    protected function getDateField(string $name): string
     {
-        $date = $this->$name;
+        $date = $this->$name ?? null;
         if ($date == '' || $date == null) {
             return '';
         }
@@ -877,11 +767,11 @@ class LendObject
     /**
      * Generic isset function
      *
-     * @param $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return property_exists($this, $name);
     }

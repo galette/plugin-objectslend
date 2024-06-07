@@ -6,12 +6,14 @@ parameters:
         - lib/
     scanFiles:
         - _config.inc.php
-        - ../../config/paths.inc.php
+        - ../../includes/sys_config/paths.inc.php
         - ../../config/config.inc.php.dist
-        - ../../config/galette_tcpdf_config.php
+        - ../../includes/sys_config/galette_tcpdf_config.php
     scanDirectories:
         - ../../includes/
         - ../../lib/
+    universalObjectCratesClasses:
+        - RKA\Session
     ignoreErrors:
         - '/Cannot access property .* on .*ArrayObject.*/'
         - '/Access to an undefined property ArrayObject.*/'

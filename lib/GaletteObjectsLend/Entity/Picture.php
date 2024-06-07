@@ -1,40 +1,25 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Plugin's Pictures
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
+ * This file is part of Galette (https://galette.eu).
  *
- * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
- *
- * ObjectsLend is free software: you can redistribute it and/or modify
+ * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ObjectsLend is distributed in the hope that it will be useful,
+ * Galette is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   ObjectsLend
- *
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Entity;
 
@@ -46,26 +31,19 @@ use Slim\Psr7\Stream;
 /**
  * Picture handling
  *
- * @name      Picture
- * @category  Entity
- * @package   ObjectsLend
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
+ * @author Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Picture extends \Galette\Core\Picture
 {
-    protected $max_width = 800;
-    protected $max_height = 800;
+    protected int $max_width = 800;
+    protected int $max_height = 800;
 
-    protected $thumb_max_width;
-    protected $thumb_max_height;
+    protected int $thumb_max_width;
+    protected int $thumb_max_height;
 
-    protected $thumb_optimal_height;
-    protected $thumb_optimal_width;
+    protected int $thumb_optimal_height;
+    protected int $thumb_optimal_width;
 
     protected Plugins $plugins;
 
@@ -75,7 +53,7 @@ class Picture extends \Galette\Core\Picture
      * @param Plugins    $plugins  Plugins
      * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, $objectid = null)
+    public function __construct(Plugins $plugins, mixed $objectid = null)
     {
         $this->tbl_prefix = LEND_PREFIX;
         $this->plugins = $plugins;
@@ -110,9 +88,9 @@ class Picture extends \Galette\Core\Picture
      *
      * @return void
      */
-    protected function getDefaultPicture()
+    protected function getDefaultPicture(): void
     {
-        $this->file_path = realpath(
+        $this->file_path = (string)realpath(
             $this->plugins->getTemplatesPathFromName('Galette Objects Lend') .
             '/../../webroot/images/1f5bc.png'
         );
@@ -129,7 +107,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return Response
      */
-    public function displayThumb(Response $response, Preferences $prefs)
+    public function displayThumb(Response $response, Preferences $prefs): Response
     {
         $this->setThumbSizes($prefs);
         $response = $response->withHeader('Content-Type', $this->mime)
@@ -154,9 +132,9 @@ class Picture extends \Galette\Core\Picture
      * @param string $dest   the destination image.
      *                       If null, we'll use the source image. Defaults to null
      *
-     * @return void|false
+     * @return bool
      */
-    private function createThumb($source, $ext, $dest = null)
+    private function createThumb(string $source, string $ext, string $dest = null): bool
     {
         $class = get_class($this);
 
@@ -239,12 +217,15 @@ class Picture extends \Galette\Core\Picture
                     imagegif($thumb, $dest);
                     break;
             }
+
+            return true;
         } else {
             Analog::log(
                 '[' . $class . '] GD is not present - ' .
                 'pictures could not be resized!',
                 Analog::ERROR
             );
+            return false;
         }
     }
 
@@ -255,11 +236,11 @@ class Picture extends \Galette\Core\Picture
      *
      * @return boolean true if image was successfully deleted, false otherwise
      */
-    public function delete($transaction = true)
+    public function delete(bool $transaction = true): bool
     {
         //find and delete any thumb
-        $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
-        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
+        $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
 
         $thumb = $filename . '_th.' . $ext;
 
@@ -273,16 +254,16 @@ class Picture extends \Galette\Core\Picture
     /**
      * Stores an image on the disk and in the database
      *
-     * @param object $file     the uploaded file
-     * @param bool   $ajax     not used
-     * @param array  $cropping not used
+     * @param array<string, mixed>  $file     The uploaded file
+     * @param boolean               $ajax     If the image comes from an ajax call (dnd)
+     * @param ?array<string, mixed> $cropping Cropping properties
      *
-     * @return true|false result of the storage process
+     * @return bool|int
      */
-    public function store($file, $ajax = false, $cropping = null)
+    public function store(array $file, bool $ajax = false, array $cropping = null): bool|int
     {
-        $ext = strlen(pathinfo($this->file_path, PATHINFO_EXTENSION)) + 1;
-        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext));
+        $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
+        $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
         $thumb = $filename . '_th.' . $ext;
 
         if (is_file($thumb)) {
@@ -295,12 +276,12 @@ class Picture extends \Galette\Core\Picture
     /**
      * Restore objects images from database blob
      *
-     * @param array $success Success messages
-     * @param array $error   Error messages
+     * @param string[] $success Success messages
+     * @param string[] $error   Error messages
      *
      * @return void
      */
-    public function restorePictures(&$success, &$error)
+    public function restorePictures(array &$success, array &$error): void
     {
         global $zdb;
 
@@ -336,7 +317,7 @@ class Picture extends \Galette\Core\Picture
                 $e->getTraceAsString(),
                 Analog::ERROR
             );
-            $error[] = _T("An error occured :(");
+            $error[] = _T("An error occurred :(");
         }
     }
 
@@ -345,7 +326,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return string
      */
-    public function getThumbPath()
+    public function getThumbPath(): string
     {
         if ($this->has_picture) {
             $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
@@ -368,7 +349,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return void
      */
-    private function setThumbSizes(Preferences $prefs)
+    private function setThumbSizes(Preferences $prefs): void
     {
         $thumb = $this->getThumbPath();
         $this->thumb_max_width = $prefs->getThumbWidth();
@@ -415,9 +396,9 @@ class Picture extends \Galette\Core\Picture
      *
      * @return int optimal height
      */
-    public function getOptimalThumbHeight(Preferences $prefs)
+    public function getOptimalThumbHeight(Preferences $prefs): int
     {
-        if (!$this->thumb_optimal_height) {
+        if (!isset($this->thumb_optimal_height)) {
             $this->setThumbSizes($prefs);
         }
         return (int)round($this->thumb_optimal_height, 1);
@@ -430,9 +411,9 @@ class Picture extends \Galette\Core\Picture
      *
      * @return int optimal width
      */
-    public function getOptimalThumbWidth(Preferences $prefs)
+    public function getOptimalThumbWidth(Preferences $prefs): int
     {
-        if (!$this->thumb_optimal_width) {
+        if (!isset($this->thumb_optimal_width)) {
             $this->setThumbSizes($prefs);
         }
         return (int)round($this->thumb_optimal_width, 1);
@@ -443,7 +424,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return string
      */
-    public function getDir()
+    public function getDir(): string
     {
         return $this->store_path;
     }

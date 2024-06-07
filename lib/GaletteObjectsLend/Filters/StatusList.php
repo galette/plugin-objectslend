@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Categories list filters and paginator
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Filters
- * @package   Galette
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     2017-02-10
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Filters;
 
@@ -44,14 +30,7 @@ use GaletteObjectsLend\Repository\Status;
 /**
  * Status list filters and paginator
  *
- * @name      StatusList
- * @category  Filters
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property ?string $filter_str
  * @property ?int $active_filter
@@ -62,13 +41,14 @@ use GaletteObjectsLend\Repository\Status;
 class StatusList extends Pagination
 {
     //filters
-    private $filter_str;
-    private $active_filter;
-    private $stock_filter;
+    private ?string $filter_str;
+    private ?int $active_filter;
+    private ?int $stock_filter;
 
-    protected $query;
+    protected string $query;
 
-    protected $statuslist_fields = array(
+    /** @var array<string> */
+    protected array $statuslist_fields = array(
         'filter_str',
         'active_filter',
         'stock_filter',
@@ -78,11 +58,11 @@ class StatusList extends Pagination
     /**
      * Returns the field we want to default set order to
      *
-     * @return string field name
+     * @return int|string
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): int|string
     {
-        return 'status_text';
+        return Status::ORDERBY_NAME;
     }
 
     /**
@@ -90,7 +70,7 @@ class StatusList extends Pagination
      *
      * @return void
      */
-    public function reinit()
+    public function reinit(): void
     {
         parent::reinit();
         $this->filter_str = null;
@@ -105,26 +85,23 @@ class StatusList extends Pagination
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-
-        Analog::log(
-            '[StatusList] Getting property `' . $name . '`',
-            Analog::DEBUG
-        );
-
         if (in_array($name, $this->pagination_fields)) {
             return parent::__get($name);
         } else {
             if (in_array($name, $this->statuslist_fields)) {
                 return $this->$name;
-            } else {
-                Analog::log(
-                    '[StatusList] Unable to get property `' . $name . '`',
-                    Analog::WARNING
-                );
             }
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
@@ -135,7 +112,7 @@ class StatusList extends Pagination
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
 
         if (in_array($name, $this->pagination_fields)) {
@@ -148,6 +125,7 @@ class StatusList extends Pagination
 
             switch ($name) {
                 case 'filter_str':
+                case 'query':
                     $this->$name = $value;
                     break;
                 case 'active_filter':
@@ -155,7 +133,7 @@ class StatusList extends Pagination
                         case Status::ALL:
                         case Status::ACTIVE:
                         case Status::INACTIVE:
-                            $this->active_filter = $value;
+                            $this->active_filter = (int)$value;
                             break;
                         default:
                             Analog::log(
@@ -172,28 +150,27 @@ class StatusList extends Pagination
                         case Status::DC_STOCK:
                         case Status::IN_STOCK:
                         case Status::OUT_STOCK:
-                            $this->stock_filter = $value;
+                            $this->stock_filter = (int)$value;
                             break;
                         default:
                             Analog::log(
                                 '[StatusList] Value for stock filter should be either ' .
-                                Status::IN_STOCK . ' or ' .
-                                Status::OUT_STOCK . ' (' . $value . ' given)',
+                                Status::IN_STOCK . ', ' . Status::OUT_STOCK . ' or ' .
+                                Status::DC_STOCK . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
                     }
 
                     break;
-                case 'query':
-                    $this->$name = $value;
-                    break;
                 default:
-                    Analog::log(
-                        '[StatusList] Unable to set proprety `' . $name . '`',
-                        Analog::WARNING
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Unable to set property "%s::%s"!',
+                            __CLASS__,
+                            $name
+                        )
                     );
-                    break;
             }
         }
     }

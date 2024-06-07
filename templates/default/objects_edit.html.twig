@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'page.html.twig' %}
 
 {% block content %}
@@ -145,7 +165,7 @@
                 <i class="print icon"></i> {{ _T("Print object", "objectslend") }}
             </a>
     {% endif %}
-            <input type="hidden" name="object_id" value="{{ object.getId()}}">
+            <input type="hidden" name="object_id" value="{{ object.getId() }}">
         </div>
         {% include "components/forms/csrf.html.twig" %}
     </form>
@@ -195,13 +215,18 @@
                         } %}
 
                         <div class="inline field">
-                            <label for="new_adh">{{ _T("Member:", "objectslend") }}</label>
-                            <select name="new_adh" id="id_adh" class="nochosen">
-                                <option value="">{{ _T("Search for name or ID and pick member") }}</option>
+                            <div id="id_adh" class="jsonly search-dropdown ui input nochosen paginated">
+                                <input id="id_adh_input" type="text" name="new_adh" value="" placeholder="{{ _T("Member ID") }}">
+                                <i class="jsonly displaynone dropdown icon" aria-hidden="true"></i>
+                                <span class="ui mini compact icon disabled button prev-results"><i class="jsonly displaynone chevron circle left icon disabled button tooltip" title="{{ _T("Load previous members...") }}" aria-hidden="true"></i></span>
+                                <span class="ui mini compact icon disabled button next-results"><i class="jsonly displaynone chevron circle right icon disabled button tooltip" title="{{ _T("Load following members...") }}" aria-hidden="true"></i></span>
+                                <div class="jsonly displaynone default text">{{ _T("Search for name or ID and pick member") }}</div>
+                                <div class="jsonly displaynone menu">
                                 {% for k, v in members.list %}
-                                    <option value="{{ k }}"{% if login.id == k %} selected="selected"{% endif %}>{{ v }}</option>
+                                    <div class="item" data-value="{{ k }}">{{ v }}</div>
                                 {% endfor %}
-                            </select>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -217,4 +242,10 @@
             </form>
         </div>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+        <script type="text/javascript">
+            {% include "elements/js/choose_adh.js.twig" %}
+        </script>
 {% endblock %}

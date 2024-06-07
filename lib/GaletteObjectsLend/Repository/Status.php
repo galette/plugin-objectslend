@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Status list
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   Galette
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2018-01-07
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
@@ -40,13 +27,9 @@ use ArrayObject;
 use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
-use Galette\Repository\Repository;
 use GaletteObjectsLend\Filters\StatusList;
-use GaletteObjectsLend\Entity\Preferences;
-use GaletteObjectsLend\Entity\LendObject;
-use GaletteObjectsLend\Entity\LendCategory;
-use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\LendStatus;
 use Galette\Core\Login;
 use Laminas\Db\Sql\Select;
@@ -54,14 +37,7 @@ use Laminas\Db\Sql\Select;
 /**
  * Status list
  *
- * @name      Status
- * @category  Repository
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Status
 {
@@ -87,16 +63,17 @@ class Status
     private Db $zdb;
     private Login $login;
 
-    private $filters = false;
-    private $count = null;
-    private $errors = array();
+    private StatusList $filters;
+    private ?int $count = null;
+    /** @var array<string> */
+    private array $errors = array();
 
     /**
      * Default constructor
      *
-     * @param Db         $zdb     Database instance
-     * @param Login      $login   Logged in instance
-     * @param StatusList $filters Filtering
+     * @param Db          $zdb     Database instance
+     * @param Login       $login   Logged in instance
+     * @param ?StatusList $filters Filtering
      */
     public function __construct(Db $zdb, Login $login, StatusList $filters = null)
     {
@@ -114,22 +91,20 @@ class Status
     /**
      * Get status list
      *
-     * @param boolean $as_stt return the results as an array of
-     *                        Status object.
-     * @param array   $fields field(s) name(s) to get. Should be a string or
-     *                        an array. If null, all fields will be
-     *                        returned
-     * @param boolean $count  true if we want to count members
-     * @param boolean $limit  true if we want records pagination
+     * @param boolean   $as_stt return the results as an array of
+     *                          Status object.
+     * @param ?string[] $fields field(s) name(s) to get. If null, all fields will be returned
+     * @param boolean   $count  true if we want to count members
+     * @param boolean   $limit  true if we want records pagination
      *
-     * @return array|ArrayObject
+     * @return LendStatus[]|ResultSet
      */
     public function getStatusList(
-        $as_stt = false,
-        $fields = null,
-        $count = true,
-        $limit = true
-    ) {
+        bool $as_stt = false,
+        array $fields = null,
+        bool $count = true,
+        bool $limit = true
+    ): array|ResultSet {
         try {
             $select = $this->buildSelect($fields, false, $count);
 
@@ -168,9 +143,9 @@ class Status
      *                        an array. If null, all fields will be
      *                        returned
      *
-     * @return LendStatus[]|ArrayObject
+     * @return LendStatus[]|ResultSet
      */
-    public function getList($as_stt = false, $fields = null)
+    public function getList(bool $as_stt = false, array $fields = null): array|ResultSet
     {
         return $this->getStatusList(
             $as_stt,
@@ -183,14 +158,14 @@ class Status
     /**
      * Builds the SELECT statement
      *
-     * @param array $fields fields list to retrieve
-     * @param bool  $photos true if we want to get only members with photos
-     *                      Default to false, only relevant for SHOW_PUBLIC_LIST
-     * @param bool  $count  true if we want to count members, defaults to false
+     * @param string[] $fields fields list to retrieve
+     * @param bool     $photos true if we want to get only members with photos
+     *                         Default to false, only relevant for SHOW_PUBLIC_LIST
+     * @param bool     $count  true if we want to count members, defaults to false
      *
      * @return Select SELECT statement
      */
-    private function buildSelect($fields, $photos, $count = false)
+    private function buildSelect(?array $fields, bool $photos = false, bool $count = false): Select
     {
         try {
             $fieldsList = ($fields != null)
@@ -226,7 +201,7 @@ class Status
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -248,8 +223,7 @@ class Status
 
             $results = $this->zdb->execute($countSelect);
 
-            //@phpstan-ignore-next-line
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
@@ -265,12 +239,12 @@ class Status
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optional.
+     * @param ?string[] $fields Fields list to ensure ORDER clause
+     *                          references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
         switch ($this->filters->orderby) {
@@ -311,7 +285,7 @@ class Status
      *
      * @return void
      */
-    private function buildWhereClause($select)
+    private function buildWhereClause(Select $select): void
     {
         try {
             if ($this->filters->active_filter == self::ACTIVE) {
@@ -334,7 +308,7 @@ class Status
                 );
 
                 $select->where(
-                    'c.status_text LIKE ' . $token
+                    'LOWER(c.status_text) LIKE ' . $token
                 );
             }
         } catch (\Exception $e) {
@@ -349,12 +323,12 @@ class Status
      * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string $field_name Field name to order by
-     * @param array  $fields     SELECTE'ed fields
+     * @param string    $field_name Field name to order by
+     * @param ?string[] $fields     SELECTE'ed fields
      *
      * @return boolean
      */
-    private function canOrderBy($field_name, $fields)
+    private function canOrderBy(string $field_name, ?array $fields): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -373,9 +347,9 @@ class Status
     /**
      * Get count for current query
      *
-     * @return int
+     * @return ?int
      */
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->count;
     }
@@ -383,9 +357,9 @@ class Status
     /**
      * Get registered errors
      *
-     * @return array
+     * @return array<string>
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

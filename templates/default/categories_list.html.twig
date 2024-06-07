@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'elements/list.html.twig' %}
 {% import "macros.twig" as macros %}
 
@@ -30,7 +50,7 @@
     {% set columns = [
         {'label': '#'},
         {'label': _T("Name", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_NAME')},
-        {'label': _T("Active", "objectslend")},
+        {'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_ACTIVITY')},
     ] %}
     {{ parent() }}
 {% endblock %}
@@ -40,7 +60,7 @@
         <div class="ui secondary yellow segment">
             <div class="ui three fields">
                 <div class="field">
-                    <label for="filter_str">{{_T("Search:") }}</label>
+                    <label for="filter_str">{{ _T("Search:") }}</label>
                     <input type="text" name="filter_str" id="filter_str" value="{{ filters.filter_str }}" type="search" placeholder="{{ _T("Enter a value") }}"/>
                 </div>
                 <div class="field">
@@ -48,7 +68,7 @@
                     <div class="inline fields">
                         <div class="field inline">
                             <div class="ui radio checkbox">
-                                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Categories::ALL_CATEGORIES')}}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::ALL') %} checked="checked"{% endif %}>
+                                <input type="radio" name="active_filter" id="filter_dc_active" value="{{ constant('GaletteObjectsLend\\Repository\\Categories::ALL_CATEGORIES') }}"{% if filters.active_filter == constant('GaletteObjectsLend\\Repository\\Status::ALL') %} checked="checked"{% endif %}>
                                 <label for="filter_dc_active" >{{ _T("Don't care") }}</label>
                             </div>
                         </div>

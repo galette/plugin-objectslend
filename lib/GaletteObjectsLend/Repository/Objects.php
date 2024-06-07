@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Objects list
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   Galette
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2017-02-10
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
@@ -55,14 +42,7 @@ use Laminas\Db\Sql\Select;
 /**
  * Objects list
  *
- * @name Objects
- * @category  Repository
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Objects
 {
@@ -87,22 +67,24 @@ class Objects
     public const ORDERBY_BDATE = 6;
     public const ORDERBY_FDATE = 7;
     public const ORDERBY_MEMBER = 8;
+    public const ORDERBY_CATEGORY = 9;
 
     private Db $zdb;
 
-    private $filters = false;
-    private $count = null;
-    private $errors = array();
+    private ObjectsList $filters;
+    private ?int $count = null;
+    /** @var array<string> */
+    private array $errors = array();
     private Preferences $prefs;
     private Plugins $plugins;
 
     /**
      * Default constructor
      *
-     * @param Db          $zdb     Database instance
-     * @param Plugins     $plugins Plugins instance
-     * @param Preferences $lprefs  Lends preferences instance
-     * @param ObjectsList $filters Filtering
+     * @param Db           $zdb     Database instance
+     * @param Plugins      $plugins Plugins instance
+     * @param Preferences  $lprefs  Lends preferences instance
+     * @param ?ObjectsList $filters Filtering
      */
     public function __construct(Db $zdb, Plugins $plugins, Preferences $lprefs, ObjectsList $filters = null)
     {
@@ -120,30 +102,28 @@ class Objects
     /**
      * Get objects list
      *
-     * @param boolean $as_objects return the results as an array of
-     *                            Object object.
-     * @param array   $fields     field(s) name(s) to get. Should be a string or
-     *                            an array. If null, all fields will be
-     *                            returned
-     * @param boolean $count      true if we want to count members
-     * @param boolean $limit      true if we want records pagination
-     * @param boolean $all_rents  true to load rents along with objects
+     * @param boolean       $as_objects return the results as an array of
+     *                                  Object object.
+     * @param array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
+     * @param boolean       $count      true if we want to count members
+     * @param boolean       $limit      true if we want records pagination
+     * @param boolean       $all_rents  true to load rents along with objects
      *
-     * @return array|ArrayObject
+     * @return LendObject[]|ResultSet
      */
     public function getObjectsList(
-        $as_objects = false,
-        $fields = null,
-        $count = true,
-        $limit = true,
-        $all_rents = false
-    ) {
+        bool $as_objects = false,
+        array $fields = null,
+        bool $count = true,
+        bool $limit = true,
+        bool $all_rents = false
+    ): array|ResultSet {
         try {
             $select = $this->buildSelect($fields, $count);
 
             //add limits to retrieve only relevant rows
             if ($limit === true) {
-                $this->filters->setLimit($select);
+                $this->filters->setLimits($select);
             }
 
             $rows = $this->zdb->execute($select);
@@ -174,11 +154,11 @@ class Objects
     /**
      * Remove specified objects, and their full history
      *
-     * @param array $ids Objects identifiers to delete
+     * @param array<int> $ids Objects identifiers to delete
      *
      * @return bool
      */
-    public function removeObjects(array $ids)
+    public function removeObjects(array $ids): bool
     {
         try {
             $this->zdb->connection->beginTransaction();
@@ -230,36 +210,15 @@ class Objects
     }
 
     /**
-     * Disable selected objects
-     *
-     * @param array $ids List of objects id to disable
-     *
-     * @return ResultSet
-     */
-    public function disableObjects(array $ids)
-    {
-        $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
-        $update->set(['is_active' => false]);
-        $update->where->in(
-            self::PK,
-            $ids
-        );
-        $results = $this->zdb->execute($update);
-        return $results;
-    }
-
-    /**
      * Get Objects list
      *
-     * @param boolean $as_objects return the results as an array of
-     *                            Object object.
-     * @param array   $fields     field(s) name(s) to get. Should be a string or
-     *                            an array. If null, all fields will be
-     *                            returned
+     * @param boolean        $as_objects return the results as an array of
+     *                                   Object object.
+     * @param ?array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
      *
-     * @return array|ArrayObject
+     * @return LendObject[]|ResultSet
      */
-    public function getList($as_objects = false, $fields = null)
+    public function getList(bool $as_objects = false, array $fields = null): array|ResultSet
     {
         return $this->getObjectsList(
             $as_objects,
@@ -273,12 +232,12 @@ class Objects
     /**
      * Builds the SELECT statement
      *
-     * @param array $fields fields list to retrieve
-     * @param bool  $count  true if we want to count members, defaults to false
+     * @param ?string[] $fields fields list to retrieve
+     * @param bool      $count  true if we want to count members, defaults to false
      *
      * @return Select SELECT statement
      */
-    private function buildSelect($fields, $count = false)
+    private function buildSelect(?array $fields, bool $count = false): Select
     {
         global $zdb, $login;
 
@@ -346,7 +305,7 @@ class Objects
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         global $zdb;
 
@@ -381,7 +340,7 @@ class Objects
 
             $results = $zdb->execute($countSelect);
 
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if (isset($this->filters) && $this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
@@ -397,12 +356,12 @@ class Objects
     /**
      * Builds the order clause
      *
-     * @param array $fields Fields list to ensure ORDER clause
-     *                      references selected fields. Optionnal.
+     * @param array<string> $fields Fields list to ensure ORDER clause
+     *                              references selected fields. Optional.
      *
-     * @return array SQL ORDER clauses
+     * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause($fields = null)
+    private function buildOrderClause(array $fields = null): array
     {
         $order = array();
         switch ($this->filters->orderby) {
@@ -452,6 +411,11 @@ class Objects
                         ', a.prenom_adh ' . $this->filters->getDirection();
                 }
                 break;
+            case self::ORDERBY_CATEGORY:
+                if ($this->canOrderBy('cat_name', $fields)) {
+                    $order[] = 'c.name ' . $this->filters->getDirection();
+                }
+                break;
         }
 
         return $order;
@@ -464,10 +428,8 @@ class Objects
      *
      * @return void
      */
-    public function buildWhereClause($select)
+    public function buildWhereClause(Select $select): void
     {
-        global $login;
-
         try {
             if (is_array($this->filters->selected) && count($this->filters->selected) > 0) {
                 $select->where->in('o.' . self::PK, $this->filters->selected);
@@ -512,7 +474,7 @@ class Objects
                             );
                         } else {
                             $select->where(
-                                'o.name LIKE ' . $token
+                                'LOWER(o.name) LIKE ' . $token
                             );
                         }
                         break;
@@ -546,12 +508,12 @@ class Objects
      * Is field allowed to order? it should be present in
      * provided fields list (those that are SELECT'ed).
      *
-     * @param string $field_name Field name to order by
-     * @param array  $fields     SELECTE'ed fields
+     * @param string    $field_name Field name to order by
+     * @param ?string[] $fields     SELECTE'ed fields
      *
      * @return boolean
      */
-    private function canOrderBy($field_name, $fields)
+    private function canOrderBy(string $field_name, ?array $fields): bool
     {
         if (!is_array($fields)) {
             return true;
@@ -570,9 +532,9 @@ class Objects
     /**
      * Get count for current query
      *
-     * @return int
+     * @return ?int
      */
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->count;
     }
@@ -580,9 +542,9 @@ class Objects
     /**
      * Get registered errors
      *
-     * @return array
+     * @return array<string>
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

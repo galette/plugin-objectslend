@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Object card PDF
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  IO
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\IO;
 
@@ -49,18 +37,12 @@ use Galette\Entity\Adherent;
 /**
  * Object card PDF
  *
- * @category  IO
- * @name      PdfObject
- * @package   GaletteObjectsLend
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class PdfObject extends Pdf
 {
-    private $zdb;
-    private $lprefs;
+    private Db $zdb;
+    private LPreferences $lprefs;
 
     /**
      * Main constructor
@@ -72,11 +54,13 @@ class PdfObject extends Pdf
     public function __construct(Db $zdb, Preferences $prefs, LPreferences $lprefs)
     {
         parent::__construct($prefs);
+        // Disable Auto Page breaks
+        $this->SetAutoPageBreak(false, $this->footer_height + 10);
+
         $this->zdb = $zdb;
         $this->lprefs = $lprefs;
         //TRANS: this is a filename
         $this->filename = _T('object_card', 'objectslend') . '.pdf';
-        $this->init();
     }
 
     /**
@@ -84,7 +68,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    private function init()
+    public function init(): void
     {
         // Set document information
         $this->SetTitle(_T('Object card', 'objectslend'));
@@ -96,22 +80,27 @@ class PdfObject extends Pdf
         // Show full page
         $this->SetDisplayMode('fullpage');
 
-        // Disable Auto Page breaks
-        $this->SetAutoPageBreak(false, 20);
+        //enable pagination
+        $this->showPagination();
+
+        parent::init();
     }
 
     /**
      * Draw listed object cards
      *
-     * @param array $objects Object list
+     * @param LendObject[] $objects Object list
      *
      * @return void
      */
-    public function drawCards(array $objects)
+    public function drawCards(array $objects): void
     {
-        $this->Open();
+        $first = true;
         foreach ($objects as $object) {
-            $this->AddPage();
+            if (!$first) {
+                $this->AddPage();
+            }
+            $first = false;
             $this->drawCard($object);
         }
     }
@@ -123,7 +112,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    public function drawCard(LendObject $object)
+    public function drawCard(LendObject $object): void
     {
         $this->SetFont(Pdf::FONT, 'B');
         $wpic = 0;
@@ -239,7 +228,7 @@ class PdfObject extends Pdf
      *
      * @return void
      */
-    private function addCell(string $title, string $value, int $width)
+    private function addCell(string $title, string $value, int $width): void
     {
         if ($width > 0) {
             $this->Cell($width, 0, '');

@@ -1,41 +1,25 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Public Class LendRent
- * Store all information about rent status and time of an object
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
+ * This file is part of Galette (https://galette.eu).
  *
- * Copyright © 2013-2016 Mélissa Djebel
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
- *
- * ObjectsLend is free software: you can redistribute it and/or modify
+ * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ObjectsLend is distributed in the hope that it will be useful,
+ * Galette is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   ObjectsLend
- *
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @Copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\Entity;
 
@@ -47,15 +31,8 @@ use Galette\Repository\Members;
 /**
  * Rents
  *
- * @name      LendRent
- * @category  Entity
- * @package   ObjectsLend
- * @author    Mélissa Djebel <melissa.djebel@gmx.net>
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2013-2016 Mélissa Djebel
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
+ * @author Mélissa Djebel <melissa.djebel@gmx.net>
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property integer $rent_id
  * @property integer $object_id
@@ -77,7 +54,8 @@ class LendRent
     public const TABLE = 'rents';
     public const PK = 'rent_id';
 
-    private $fields = array(
+    /** @var array<string, string> */
+    private array $fields = array(
         'rent_id' => 'integer',
         'object_id' => 'integer',
         'date_begin' => 'datetime',
@@ -87,29 +65,29 @@ class LendRent
         'adherent_id' => 'integer',
         'comments' => 'varchar(200)'
     );
-    private $rent_id;
-    private $object_id;
-    private $date_begin;
-    private $date_forecast;
-    private $date_end;
-    private $status_id;
-    private $adherent_id;
-    private $comments = '';
-    private $in_stock;
-    // Join sur table Status
-    private $status_text;
-    // Left join sur table adhérents
-    private $nom_adh = '';
-    private $prenom_adh = '';
-    private $pseudo_adh = '';
-    private $email_adh = '';
+    private int $rent_id;
+    private int $object_id;
+    private ?string $date_begin;
+    private ?string $date_forecast;
+    private ?string $date_end;
+    private ?int $status_id;
+    private ?int $adherent_id;
+    private string $comments = '';
+    private bool $in_stock;
+
+    private string $status_text;
+
+    private ?string $nom_adh = '';
+    private ?string $prenom_adh = '';
+    private ?string $pseudo_adh = '';
+    private ?string $email_adh = '';
 
     /**
      * Default constructor
      *
-     * @param mixed|null $args Either an int with rent id, null, or a resultset row
+     * @param int|ArrayObject<string,int|string>|null $args Either an int with rent id, null, or a resultset row
      */
-    public function __construct($args = null)
+    public function __construct(int|ArrayObject $args = null)
     {
         global $zdb;
 
@@ -139,19 +117,21 @@ class LendRent
     /**
      * Populate object from a resultset row
      *
-     * @param ArrayObject $r the resultset row
+     * @param ArrayObject<string,int|string> $r the resultset row
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
-        $this->rent_id = $r->rent_id;
-        $this->object_id = $r->object_id;
+        $this->rent_id = (int)$r->rent_id;
+        $this->object_id = (int)$r->object_id;
         $this->date_begin = $r->date_begin;
         $this->date_forecast = $r->date_forecast;
         $this->date_end = $r->date_end;
-        $this->status_id = $r->status_id;
-        $this->adherent_id = $r->adherent_id;
+        $this->status_id = (int)$r->status_id;
+        if ($r->adherent_id !== null) {
+            $this->adherent_id = (int)$r->adherent_id;
+        }
         $this->comments = $r->comments;
     }
 
@@ -160,7 +140,7 @@ class LendRent
      *
      * @return bool
      */
-    public function store()
+    public function store(): bool
     {
         global $zdb;
 
@@ -169,7 +149,7 @@ class LendRent
             $values = array();
 
             foreach ($this->fields as $k => $v) {
-                $values[$k] = $this->$k;
+                $values[$k] = $this->$k ?? null;
             }
 
             if (!isset($this->rent_id) || $this->rent_id == '') {
@@ -179,11 +159,11 @@ class LendRent
                 $result = $zdb->execute($insert);
                 if ($result->count() > 0) {
                     if ($zdb->isPostgres()) {
-                        $this->rent_id = $zdb->driver->getLastGeneratedValue(
+                        $this->rent_id = (int)$zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . 'lend_rents_id_seq'
                         );
                     } else {
-                        $this->rent_id = $zdb->driver->getLastGeneratedValue();
+                        $this->rent_id = (int)$zdb->driver->getLastGeneratedValue();
                     }
                     Analog::log(
                         'Rent #' . $this->rent_id . ' added.',
@@ -220,16 +200,15 @@ class LendRent
     }
 
     /**
-     * Retourne tous les historiques d'emprunts pour un objet donné trié par date de début
-     * les plus récents en 1er.
+     * Get rent history for a given object sorted
      *
-     * @param integer $object_id ID de l'objet dont on souhaite l'historique d'emprunt
+     * @param integer $object_id Object ID
      * @param boolean $only_last Only retrieve last rent (for list display)
      * @param string  $order     Order clause, defaults to 'date_begin DESC'
      *
-     * @return array
+     * @return LendRent[]
      */
-    public static function getRentsForObjectId($object_id, $only_last = false, $order = 'date_begin desc')
+    public static function getRentsForObjectId(int $object_id, bool $only_last = false, string $order = 'date_begin desc'): array
     {
         global $zdb;
 
@@ -259,8 +238,8 @@ class LendRent
             foreach ($rows as $r) {
                 $rt = new LendRent($r);
                 $rt->status_text = $r->status_text;
-                $rt->status_id = $r->status_id;
-                $rt->in_stock = $r->in_stock == '1' ? true : false;
+                $rt->status_id = (int)$r->status_id;
+                $rt->in_stock = $r->in_stock == '1';
                 $rt->prenom_adh = $r->prenom_adh;
                 $rt->nom_adh = $r->nom_adh;
                 $rt->pseudo_adh = $r->pseudo_adh;
@@ -280,14 +259,14 @@ class LendRent
     }
 
     /**
-     * Ferme tous les emprunts ouverts pour un objet donné avec le commentaire indiqué
+     * Close all open rents for a given object with given comment
      *
-     * @param int    $object_id ID de l'objet surlequel fermer les emprunts
-     * @param string $comments  Commentaire à mettre sur les emprunts
+     * @param int    $object_id Object ID
+     * @param string $comments  Comment to add on lend that will be closed
      *
-     * @return boolean True si OK, False si une erreur SQL est survenue
+     * @return boolean
      */
-    public static function closeAllRentsForObject($object_id, $comments)
+    public static function closeAllRentsForObject(int $object_id, string $comments): bool
     {
         global $zdb;
 
@@ -322,9 +301,9 @@ class LendRent
     /**
      * Get active members sorted by name
      *
-     * @return array
+     * @return Adherent[]
      */
-    public static function getAllActivesAdherents()
+    public static function getAllActivesAdherents(): array
     {
         try {
             $filters = new \Galette\Filters\MembersList();
@@ -357,24 +336,24 @@ class LendRent
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
             case 'date_begin':
             case 'date_end':
-                if ($this->$name != '') {
+                if (($this->$name ?? '') != '') {
                     $dt = new \DateTime($this->$name);
                     return $dt->format(_T('Y-m-d H:i', 'objectslend'));
                 }
                 return '';
             case 'date_forecast':
-                if ($this->$name != '') {
+                if (($this->$name ?? '') != '') {
                     $dt = new \DateTime($this->$name);
                     return $dt->format(_T('Y-m-d'));
                 }
                 return '';
             default:
-                return $this->$name;
+                return $this->$name ?? null;
         }
     }
 
@@ -382,11 +361,11 @@ class LendRent
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
         switch ($name) {
             case 'adherent_id':
@@ -394,6 +373,11 @@ class LendRent
                     $this->$name = (int)$value;
                 } else {
                     $this->$name = null;
+                }
+                break;
+            case 'status_id':
+                if ((int)$value > 0) {
+                    $this->$name = (int)$value;
                 }
                 break;
             case 'date_forecast':
@@ -433,11 +417,11 @@ class LendRent
     /**
      * Generic isset function
      *
-     * @param $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return property_exists($this, $name);
     }

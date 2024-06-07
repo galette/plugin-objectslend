@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Objects PDF list
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2018-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  IO
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend\IO;
 
@@ -41,6 +29,7 @@ use Galette\IO\Pdf;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
 use Analog\Analog;
+use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\Preferences as LendPreferences;
@@ -48,21 +37,15 @@ use GaletteObjectsLend\Entity\Preferences as LendPreferences;
 /**
  * Object labels PDF
  *
- * @category  IO
- * @name      PDFObjects
- * @package   GaletteObjectsLend
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2018-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class PdfObjects extends Pdf
 {
     public const LIST_FONT = self::FONT_SIZE - 2;
 
     private Db $zdb;
-    private $lendsprefs;
-    private $filters;
+    private LendPreferences $lendsprefs;
+    private ObjectsList $filters;
     private Login $login;
     private Plugins $plugins;
 
@@ -85,6 +68,9 @@ class PdfObjects extends Pdf
         Plugins $plugins
     ) {
         parent::__construct($prefs);
+        // Enable Auto Page breaks
+        $this->SetAutoPageBreak(true, $this->footer_height + 10);
+
         //TRANS: this is a filename
         $this->filename = _T('objects_cards', 'objectslend') . '.pdf';
         $this->zdb = $zdb;
@@ -92,7 +78,6 @@ class PdfObjects extends Pdf
         $this->filters = $filters;
         $this->login = $login;
         $this->plugins = $plugins;
-        $this->init();
     }
 
     /**
@@ -100,7 +85,7 @@ class PdfObjects extends Pdf
      *
      * @return void
      */
-    private function init()
+    public function init(): void
     {
         // Set document information
         $this->SetTitle(_T("Objects list", "objectslend"));
@@ -109,6 +94,11 @@ class PdfObjects extends Pdf
 
         $this->setPageOrientation('L');
         $this->setHeaderMargin(10);
+
+        //enable pagination
+        $this->showPagination();
+
+        parent::init();
     }
 
     /**
@@ -118,7 +108,7 @@ class PdfObjects extends Pdf
      *
      * @phpcs:disable
      */
-    public function Header()
+    public function Header(): void
     {
         // @phpcs:enable
         $this->SetFont(Pdf::FONT, 'B');
@@ -149,15 +139,12 @@ class PdfObjects extends Pdf
     /**
      * Draw objects list
      *
-     * @param array $objects List of objects
+     * @param LendObject[] $objects List of objects
      *
      * @return void
      */
-    public function drawList($objects)
+    public function drawList(array $objects): void
     {
-        $this->Open();
-        $this->AddPage();
-
         $this->Ln(10); //for Header
 
         // Header
@@ -193,6 +180,7 @@ class PdfObjects extends Pdf
         $sum_price = 0;
         $grant_total = 0;
         $row = 0;
+        $existing_categories = [];
 
         foreach ($objects as $object) {
             if (
@@ -201,25 +189,29 @@ class PdfObjects extends Pdf
             ) {
                 $this->SetFont('', 'B');
 
-                if (($this->login->isAdmin() || $this->login->isStaff()) && $sum_price > 0) {
+                if (($this->login->isAdmin() || $this->login->isStaff()) && $sum_price > 0 && !in_array($object->category_id, $existing_categories)) {
                     $width = $w_checkbox + $w_name + $w_description + $w_serial + $w_price;
                     $this->Cell($width, 0, number_format($sum_price, 2, ',', ''), '', 0, 'R');
                     $sum_price = 0;
                     $this->Ln();
                 }
 
-                if (!empty($object->category_id)) {
+                if (!empty($object->category_id) && !in_array($object->category_id, $existing_categories)) {
                     $category = new LendCategory($this->zdb, $this->plugins, (int)$object->category_id);
                     $text = str_replace(
                         '%category',
                         $category->name,
                         _T("Category: %category", "objectslend")
                     );
-                } else {
+                    $existing_categories[] = $object->category_id;
+                    $this->Cell(0, 0, $text, 0, 1, 'C');
+                } elseif (!in_array(0, $existing_categories)) {
                     $text = _T("No category");
+                    $existing_categories[0] = 0;
+                    $this->Cell(0, 0, $text, 0, 1, 'C');
                 }
 
-                $this->Cell(0, 0, $text, 0, 1, 'C');
+
                 $this->SetFont('');
             }
 

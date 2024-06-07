@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Plugin Galette Objects Lend
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2022-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteObjectsLend
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 2.0.0dev - 2022-05-29
  */
+
+declare(strict_types=1);
 
 namespace GaletteObjectsLend;
 
@@ -44,14 +30,7 @@ use Galette\Core\GalettePlugin;
 /**
  * Plugin Galette Objects Lend
  *
- * @category  Plugins
- * @name      PluginObjectsLend
- * @package   GaletteObjectsLend
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 2.0.0dev - 2022-05-29
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
 class PluginGaletteObjectslend extends GalettePlugin
@@ -59,7 +38,7 @@ class PluginGaletteObjectslend extends GalettePlugin
     /**
      * Extra menus entries
      *
-     * @return array|array[]
+     * @return array<string, string|array<string,mixed>>
      */
     public static function getMenusContents(): array
     {
@@ -120,7 +99,7 @@ class PluginGaletteObjectslend extends GalettePlugin
     /**
      * Extra public menus entries
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getPublicMenusItemsList(): array
     {
@@ -130,7 +109,7 @@ class PluginGaletteObjectslend extends GalettePlugin
     /**
      * Get dashboards contents
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getDashboardsContents(): array
     {
@@ -142,7 +121,7 @@ class PluginGaletteObjectslend extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getListActionsContents(Adherent $member): array
     {
@@ -154,7 +133,7 @@ class PluginGaletteObjectslend extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getDetailedActionsContents(Adherent $member): array
     {
@@ -164,7 +143,7 @@ class PluginGaletteObjectslend extends GalettePlugin
     /**
      * Get batch actions contents
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getBatchActionsContents(): array
     {
