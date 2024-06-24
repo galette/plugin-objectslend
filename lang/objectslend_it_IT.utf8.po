@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-06-18 05:58+0000\n"
+"PO-Revision-Date: 2024-06-24 16:24+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -50,7 +50,7 @@ msgstr "Nome"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:138
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:160
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:141
 #: ../tempcache/category_edit.html.twig:62
