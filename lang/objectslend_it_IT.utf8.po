@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-06-24 16:24+0000\n"
+"PO-Revision-Date: 2024-06-29 13:09+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -278,7 +278,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:228
 msgid "New status"
-msgstr ""
+msgstr "Nuovo stato"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:268
 msgid "An error occurred while storing the status."
