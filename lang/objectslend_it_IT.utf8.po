@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-06-29 13:09+0000\n"
+"PO-Revision-Date: 2024-07-01 09:11+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -692,7 +692,7 @@ msgstr ""
 
 #: ../tempcache/objects_edit.html.twig:265
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplica"
 
 #: ../tempcache/objects_edit.html.twig:274
 msgid "Print object"
