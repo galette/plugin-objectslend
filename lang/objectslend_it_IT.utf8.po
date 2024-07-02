@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-07-02 19:12+0000\n"
+"PO-Revision-Date: 2024-07-02 19:45+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -245,27 +245,27 @@ msgstr "Impossibile memorizzare le preferenze :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendRent.php:177
 msgid "Rent has not been added"
-msgstr ""
+msgstr "Il noleggio non è stato aggiunto"
 
 #: ../lib/GaletteObjectsLend/Entity/LendRent.php:342
 msgid "Y-m-d H:i"
-msgstr ""
+msgstr "Y-m-d H:i"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:65
 msgid "ObjectsLend preferences"
-msgstr ""
+msgstr "Preferenze ObjectsLend"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:97
 msgid "Preferences have been successfully stored!"
-msgstr ""
+msgstr "Le preferenze sono state memorizzate con successo!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:113
 msgid "Please add at last one status \"in stock\"!"
-msgstr ""
+msgstr "Aggiungere alla fine lo stato \"a magazzino\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:119
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr ""
+msgstr "Aggiungere almeno lo stato \"oggetto preso in prestito\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:134
 msgid "Status list"
