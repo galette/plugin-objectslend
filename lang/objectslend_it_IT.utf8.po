@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-07-02 19:45+0000\n"
+"PO-Revision-Date: 2024-07-03 20:09+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -23,13 +23,11 @@ msgstr ""
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
 msgid "object_card"
-msgstr ""
+msgstr "tessera_oggetto"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:70
-#, fuzzy
-#| msgid "Objects lend"
 msgid "Object card"
-msgstr "Prestiti oggetti"
+msgstr "Tessera oggetto"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:72
 msgid "Labels"
@@ -179,10 +177,8 @@ msgstr "Osservazioni"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:70
-#, fuzzy
-#| msgid "Objects lend"
 msgid "objects_cards"
-msgstr "Prestiti oggetti"
+msgstr "tessere_oggetto"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:87
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
@@ -269,12 +265,12 @@ msgstr "Aggiungere almeno lo stato \"oggetto preso in prestito\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:134
 msgid "Status list"
-msgstr ""
+msgstr "Elenco degli stati"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:225
 #, php-format
 msgid "Edit status %status"
-msgstr ""
+msgstr "Modifica stato %status"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:228
 msgid "New status"
@@ -282,28 +278,28 @@ msgstr "Nuovo stato"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:268
 msgid "An error occurred while storing the status."
-msgstr ""
+msgstr "Si è verificato un errore durante la memorizzazione dello stato."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:294
 msgid "Status has been saved"
-msgstr ""
+msgstr "Stato salvato"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:347
 #, php-format
 msgid "Remove status %1$s"
-msgstr ""
+msgstr "Rimuovere lo stato %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:122
 msgid "Categories list"
-msgstr ""
+msgstr "Elenco categorie"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:203
 msgid "Edit category"
-msgstr ""
+msgstr "Modifica categoria"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:205
 msgid "New category"
-msgstr ""
+msgstr "Nuova categoria"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:269
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:440
@@ -312,93 +308,93 @@ msgstr "Rimozione fallita"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:277
 msgid "An error occurred while storing the category."
-msgstr ""
+msgstr "Si è verificato un errore durante la memorizzazione della categoria."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:300
 msgid "Category has been saved"
-msgstr ""
+msgstr "La categoria è stata salvata"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:353
 #, php-format
 msgid "Remove category %1$s"
-msgstr ""
+msgstr "Rimuovi categoria %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:232
 #, php-format
 msgid "Rents list for %object"
-msgstr ""
+msgstr "Elenco noleggi per %object"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:322
 #: ../tempcache/objects_list.html.twig:747
 msgid "Edit object"
-msgstr ""
+msgstr "Modifica oggetto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:324
 msgid "New object"
-msgstr ""
+msgstr "Nuovo oggetto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:448
 msgid "Something went wrong saving object :("
-msgstr ""
+msgstr "Qualcosa è andato storto salvando l'oggetto :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:474
 msgid "Object has been saved"
-msgstr ""
+msgstr "L'oggetto è stato salvato"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:515
 msgid "Status has been updated"
-msgstr ""
+msgstr "Stato aggiornato"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr ""
+msgstr "Clonato con successo da #%id.<br/> Ora si può modificarlo."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
 msgid "An error occurred cloning object :("
-msgstr ""
+msgstr "Errore durante la clonazione di un oggetto :("
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:582
 msgid "Borrow an object"
-msgstr ""
+msgstr "Prendi a prestito un oggetto"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:583
 msgid "Return a borrowed object"
-msgstr ""
+msgstr "Restituisci un oggetto preso in prestito"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:744
 msgid "You do not have rights to borrow objects!"
-msgstr ""
+msgstr "Non hai i permessi per prendere in prestito oggetti!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
 msgid "%object is currently not available"
-msgstr ""
+msgstr "%object non è attualmente disponibile"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:694
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:914
 msgid "You do not have rights to return objects!"
-msgstr ""
+msgstr "Non hai i permessi per restituire oggetti!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:849
 #, php-format
 msgid "You have just borrowed %object :)"
-msgstr ""
+msgstr "Avete appena preso in prestito %object :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:939
 #, php-format
 msgid "%object has been returned :)"
-msgstr ""
+msgstr "%object è stato restituito :)"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:1026
 #, php-format
 msgid "Remove object %1$s"
-msgstr ""
+msgstr "Rimuovi l'oggetto %1$s"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:1035
 #, php-format
 msgid "You are about to remove %count objects."
-msgstr ""
+msgstr "Stai per rimuovere %count oggetti."
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:48
 msgid "Objects lend"
@@ -406,11 +402,11 @@ msgstr "Prestiti oggetti"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Borrow status"
-msgstr ""
+msgstr "Stato del prestito"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:78
 msgid "Object categories"
-msgstr ""
+msgstr "Categorie oggetti"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:85
 msgid "Preferences"
@@ -418,12 +414,12 @@ msgstr "Preferenze"
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:257
 msgid "Name/description"
-msgstr ""
+msgstr "Nome/descrizione"
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:259
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: ../tempcache/status_edit.html.twig:69 ../tempcache/take_object.html.twig:372
 #: ../tempcache/take_object.html.twig:435
@@ -432,17 +428,20 @@ msgstr "Stato:"
 
 #: ../tempcache/status_edit.html.twig:74 ../tempcache/status_list.html.twig:189
 msgid "In stock:"
-msgstr ""
+msgstr "A magazzino:"
 
 #: ../tempcache/status_edit.html.twig:74
 msgid "Is object in stock or borrowed"
-msgstr ""
+msgstr "Oggetto in magazzino o in prestito"
 
 #: ../tempcache/status_edit.html.twig:75
 msgid ""
 "Check if the object is available to be borrowed;<br/>uncheck if object is "
 "already borrowed and should be given back"
 msgstr ""
+"Selezionare se l'oggetto nella disponibilità per il prestito;<br/> "
+"deselezionare se l'oggetto è già stato preso in prestito e deve essere "
+"restituito"
 
 #: ../tempcache/status_edit.html.twig:80
 #: ../tempcache/categories_list.html.twig:131
@@ -450,31 +449,31 @@ msgstr ""
 #: ../tempcache/status_list.html.twig:133
 #: ../tempcache/objects_list.html.twig:286
 msgid "Active:"
-msgstr ""
+msgstr "Attivo:"
 
 #: ../tempcache/status_edit.html.twig:87 ../tempcache/status_list.html.twig:98
 #: ../tempcache/status_list.html.twig:380
 msgid "Days for rent"
-msgstr ""
+msgstr "Giorni in affitto"
 
 #: ../tempcache/status_edit.html.twig:87
 msgid "Number of days to rent per default"
-msgstr ""
+msgstr "Numero di giorni in affitto predefiniti"
 
 #: ../tempcache/status_edit.html.twig:87
 msgid "used to compute return date"
-msgstr ""
+msgstr "usato per calcolare la data di ritorno"
 
 #: ../tempcache/categories_list.html.twig:62
 #, php-format
 msgid "%count category"
 msgid_plural "%count categories"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count categoria"
+msgstr[1] "%count categorie"
 
 #: ../tempcache/categories_list.html.twig:86
 msgid "Add a category"
-msgstr ""
+msgstr "Aggiungi una categoria"
 
 #: ../tempcache/categories_list.html.twig:296
 #: ../tempcache/categories_list.html.twig:304
@@ -487,48 +486,53 @@ msgstr "Inattivo"
 #: ../tempcache/categories_list.html.twig:315
 #, php-format
 msgid "Edit \"%category\""
-msgstr ""
+msgstr "Modifica \"%category\""
 
 #: ../tempcache/categories_list.html.twig:325
 #, php-format
 msgid "Remove \"%category\""
-msgstr ""
+msgstr "Rimuovi \"%category\""
 
 #: ../tempcache/preferences.html.twig:57
 msgid "Plugin preferences"
-msgstr ""
+msgstr "Preferenze plugin"
 
 #: ../tempcache/preferences.html.twig:61
 msgid "Images related"
-msgstr ""
+msgstr "Immagini relative"
 
 #: ../tempcache/preferences.html.twig:65
 msgid "Display preferences"
-msgstr ""
+msgstr "Preferenze di visualizzazione"
 
 #: ../tempcache/preferences.html.twig:74
 msgid "Members can borrow:"
-msgstr ""
+msgstr "I membri possono prendere in prestito:"
 
 #: ../tempcache/preferences.html.twig:74
 msgid ""
 "Allow a member (not staff neither admin) to borrow an object. If set to "
 "'No', only admin and staff members can access the 'Take object' page"
 msgstr ""
+"Permettere a un socio (non al personale né all'amministratore) di prendere "
+"in prestito un oggetto. Se impostato su 'No', solo gli amministratori e i "
+"membri del personale possono accedere alla pagina 'Prendi l'oggetto'"
 
 #: ../tempcache/preferences.html.twig:76
 msgid "Generate contribution:"
-msgstr ""
+msgstr "Genera contributo:"
 
 #: ../tempcache/preferences.html.twig:76
 msgid ""
 "Automatically generate a contribution for the member of the amount of the "
 "rental price of the object"
 msgstr ""
+"Genera automaticamente un contributo per il socio dell'importo del prezzo di "
+"affitto dell'oggetto"
 
 #: ../tempcache/preferences.html.twig:105
 msgid "Choose a contribution type"
-msgstr ""
+msgstr "Scegli un tipo di contributo"
 
 #: ../tempcache/preferences.html.twig:127
 msgid "Contribution type:"
@@ -536,11 +540,11 @@ msgstr "Tipo di contributo:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
-msgstr ""
+msgstr "Testo del contributo:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Comment text to add on generated contribution"
-msgstr ""
+msgstr "Testo del commento da aggiungere sul contributo generato"
 
 #: ../tempcache/preferences.html.twig:134
 msgid ""
@@ -549,6 +553,10 @@ msgid ""
 "Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- "
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
+"Commenta il testo da aggiungere sul contributo generato. Valori "
+"automaticamente sostituiti (mettere in parentesi graffe): <br/>- NAME: nome<"
+"br/>- DESCRIPTION: descrizione<br/>- SERIAL_NUMBER: numero di serie<br/>- "
+"PRICE: prezzo<br/>- RENT_PRICE: costo del noleggio<br/>- WEIGHT: peso<br/>"
 
 #: ../tempcache/preferences.html.twig:148
 msgid "Max thumb height (in px)"
@@ -610,19 +618,19 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:208
 msgid "View buy price:"
-msgstr ""
+msgstr "Visualizza il prezzo di acquisto:"
 
 #: ../tempcache/preferences.html.twig:210
 msgid "View serial number:"
-msgstr ""
+msgstr "Visualizza il numero di serie:"
 
 #: ../tempcache/preferences.html.twig:212
 msgid "View weight"
-msgstr ""
+msgstr "Visualizza peso"
 
 #: ../tempcache/objects_edit.html.twig:63 ../tempcache/take_object.html.twig:63
 msgid "Object"
-msgstr ""
+msgstr "Oggetto"
 
 #: ../tempcache/objects_edit.html.twig:70 ../tempcache/take_object.html.twig:70
 msgid "Name:"
@@ -635,60 +643,62 @@ msgstr "Descrizione:"
 
 #: ../tempcache/objects_edit.html.twig:84
 msgid "--- Select a category ---"
-msgstr ""
+msgstr "--- Seleziona una categoria ---"
 
 #: ../tempcache/objects_edit.html.twig:105
 msgid "Category:"
-msgstr ""
+msgstr "Categoria:"
 
 #: ../tempcache/objects_edit.html.twig:115
 #: ../tempcache/take_object.html.twig:124
 msgid "Serial number:"
-msgstr ""
+msgstr "Numero di serie:"
 
 #: ../tempcache/objects_edit.html.twig:121
 #: ../tempcache/take_object.html.twig:142
 msgid "Price:"
-msgstr ""
+msgstr "Prezzo:"
 
 #: ../tempcache/objects_edit.html.twig:128
 #: ../tempcache/take_object.html.twig:218
 msgid "Borrow price:"
-msgstr ""
+msgstr "Costo del noleggio:"
 
 #: ../tempcache/objects_edit.html.twig:134
 msgid "Price per rental day:"
-msgstr ""
+msgstr "Prezzo al giorno di noleggio:"
 
 #: ../tempcache/objects_edit.html.twig:134
 msgid "The price applies on each rental day if checked, only once otherwise"
 msgstr ""
+"Il prezzo si applica ogni giorno di noleggio se selezionata, altrimenti solo "
+"una volta"
 
 #: ../tempcache/objects_edit.html.twig:141
 #: ../tempcache/take_object.html.twig:162
 msgid "Dimensions:"
-msgstr ""
+msgstr "Dimensioni:"
 
 #: ../tempcache/objects_edit.html.twig:147
 #: ../tempcache/take_object.html.twig:192
 msgid "Weight:"
-msgstr ""
+msgstr "Peso:"
 
 #: ../tempcache/objects_edit.html.twig:162
 #: ../tempcache/objects_edit.html.twig:328
 #: ../tempcache/take_object.html.twig:340
 #: ../tempcache/take_object.html.twig:415
 msgid "--- Select a status ---"
-msgstr ""
+msgstr "--- Seleziona uno stato ---"
 
 #: ../tempcache/objects_edit.html.twig:182
 msgid "Where is the object?"
-msgstr ""
+msgstr "Dov'è l'oggetto?"
 
 #: ../tempcache/objects_edit.html.twig:195
 #: ../tempcache/objects_edit.html.twig:219
 msgid "Object's photo"
-msgstr ""
+msgstr "Foto oggetto"
 
 #: ../tempcache/objects_edit.html.twig:265
 msgid "Duplicate"
@@ -696,16 +706,16 @@ msgstr "Duplica"
 
 #: ../tempcache/objects_edit.html.twig:274
 msgid "Print object"
-msgstr ""
+msgstr "Stampa oggetto"
 
 #: ../tempcache/objects_edit.html.twig:299
 msgid "History"
-msgstr ""
+msgstr "Cronologia"
 
 #: ../tempcache/objects_edit.html.twig:322
 #: ../tempcache/objects_edit.html.twig:416
 msgid "Change status"
-msgstr ""
+msgstr "Cambia stato"
 
 #: ../tempcache/category_edit.html.twig:74
 msgid "Is active"
@@ -717,7 +727,7 @@ msgstr "Foto:"
 
 #: ../tempcache/category_edit.html.twig:103
 msgid "Category photo"
-msgstr ""
+msgstr "Categoria foto"
 
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Begin date"
@@ -729,44 +739,44 @@ msgstr "Data di fine"
 
 #: ../tempcache/list_lent_object.html.twig:164
 msgid "No lend found"
-msgstr ""
+msgstr "Nessun prestito trovato"
 
 #: ../tempcache/status_list.html.twig:86
 msgid "Add a status"
-msgstr ""
+msgstr "Aggiungi uno stato"
 
 #: ../tempcache/status_list.html.twig:98 ../tempcache/status_list.html.twig:351
 msgid "Stock"
-msgstr ""
+msgstr "Magazzino"
 
 #: ../tempcache/status_list.html.twig:368
 #: ../tempcache/status_list.html.twig:372
 msgid "Not in stock"
-msgstr ""
+msgstr "Non a magazzino"
 
 #: ../tempcache/status_list.html.twig:387
 #: ../tempcache/take_object.html.twig:354
 #, php-format
 msgid "%days days"
-msgstr ""
+msgstr "%days giorni"
 
 #: ../tempcache/status_list.html.twig:400
 #, php-format
 msgid "Edit %status"
-msgstr ""
+msgstr "Modifica %status"
 
 #: ../tempcache/status_list.html.twig:402
 #, php-format
 msgid "Remove %status from database"
-msgstr ""
+msgstr "Rimuovi %status dal database"
 
 #: ../tempcache/status_list.html.twig:438
 msgid "No status has been found"
-msgstr ""
+msgstr "Nessun stato trovato"
 
 #: ../tempcache/headers.html.twig:43
 msgid "Click to view fullsize image"
-msgstr ""
+msgstr "Fare clic per visualizzare l'immagine a pieno schermo"
 
 #: ../tempcache/objects_list.html.twig:57
 #, fuzzy
@@ -779,14 +789,16 @@ msgid ""
 "Please make sure to select at least one object from the list to perform this "
 "action."
 msgstr ""
+"Assicurarsi di selezionare almeno un oggetto dall'elenco per eseguire questa "
+"azione."
 
 #: ../tempcache/objects_list.html.twig:59
 msgid "Print objects list"
-msgstr ""
+msgstr "Stampa elenco oggetti"
 
 #: ../tempcache/objects_list.html.twig:100
 msgid "Add an object"
-msgstr ""
+msgstr "Aggiungi un oggetto"
 
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/objects_list.html.twig:675
@@ -795,30 +807,30 @@ msgstr ""
 
 #: ../tempcache/objects_list.html.twig:378
 msgid "Categories"
-msgstr ""
+msgstr "Categorie"
 
 #: ../tempcache/objects_list.html.twig:532
 #: ../tempcache/take_object.html.twig:95
 msgid "Object photo"
-msgstr ""
+msgstr "Foto oggetto"
 
 #: ../tempcache/objects_list.html.twig:600
 #: ../tempcache/take_object.html.twig:250
 msgid "(per day)"
-msgstr ""
+msgstr "(al giorno)"
 
 #: ../tempcache/objects_list.html.twig:606
 #: ../tempcache/take_object.html.twig:256
 msgid "(at once)"
-msgstr ""
+msgstr "(in una sola volta)"
 
 #: ../tempcache/objects_list.html.twig:723
 msgid "Object is active"
-msgstr ""
+msgstr "L'oggetto è attivo"
 
 #: ../tempcache/objects_list.html.twig:725
 msgid "Object is inactive"
-msgstr ""
+msgstr "L'oggetto è inattivo"
 
 #: ../tempcache/objects_list.html.twig:748
 msgid "Duplicate object"
@@ -826,77 +838,77 @@ msgstr ""
 
 #: ../tempcache/objects_list.html.twig:749
 msgid "Show object lends"
-msgstr ""
+msgstr "Mostra prestiti oggetti"
 
 #: ../tempcache/objects_list.html.twig:750
 msgid "Object card in PDF"
-msgstr ""
+msgstr "Tessera oggetto in PDF"
 
 #: ../tempcache/objects_list.html.twig:751
 #, php-format
 msgid "Remove %object from database"
-msgstr ""
+msgstr "Rimuovi %object dal database"
 
 #: ../tempcache/objects_list.html.twig:767
 msgid "Take away"
-msgstr ""
+msgstr "Porta via"
 
 #: ../tempcache/objects_list.html.twig:778
 msgid "Give back"
-msgstr ""
+msgstr "Restituisci"
 
 #: ../tempcache/objects_list.html.twig:821
 msgid "No object has been found"
-msgstr ""
+msgstr "Nessun oggetto trovato"
 
 #: ../tempcache/objects_list.html.twig:862
 msgid "History of object"
-msgstr ""
+msgstr "Cronologia oggetto"
 
 #: ../tempcache/objects_list.html.twig:868
 msgid "An error occurred loading history display :("
-msgstr ""
+msgstr "Errore nel caricamento visualizzazione cronologia :("
 
 #: ../tempcache/objects_list.html.twig:904
 msgid "Take objects"
-msgstr ""
+msgstr "Prendi gli oggetti"
 
 #: ../tempcache/objects_list.html.twig:921
 msgid "An error occurred loading 'Take away' display :("
-msgstr ""
+msgstr "Errore nel caricamento visualizzazione 'Porta via' :("
 
 #: ../tempcache/objects_list.html.twig:951
 msgid "Give back objects"
-msgstr ""
+msgstr "Restituisci oggetti"
 
 #: ../tempcache/objects_list.html.twig:968
 msgid "An error occurred loading 'Give back' display :("
-msgstr ""
+msgstr "Errore nel caricamento visualizzazione 'Restituisci' :("
 
 #: ../tempcache/take_object.html.twig:275
 msgid "Borrow information"
-msgstr ""
+msgstr "Informazioni sul prestito"
 
 #: ../tempcache/take_object.html.twig:286
 msgid "Member:"
-msgstr ""
+msgstr "Socio:"
 
 #: ../tempcache/take_object.html.twig:380
 msgid "Expected return:"
-msgstr ""
+msgstr "Ritorno previsto:"
 
 #: ../tempcache/take_object.html.twig:408
 msgid "Return information"
-msgstr ""
+msgstr "Informazioni sul ritorno"
 
 #: ../tempcache/take_object.html.twig:442
 msgid "Time:"
-msgstr ""
+msgstr "Tempo:"
 
 #: ../tempcache/take_object.html.twig:446
 #, php-format
 msgid "From %begindate to %enddate"
-msgstr ""
+msgstr "Da %begindate a %enddate"
 
 #: ../tempcache/take_object.html.twig:452
 msgid "Comments:"
@@ -904,15 +916,15 @@ msgstr "Commenti:"
 
 #: ../tempcache/take_object.html.twig:455
 msgid "remaining characters"
-msgstr ""
+msgstr "caratteri rimanenti"
 
 #: ../tempcache/take_object.html.twig:473
 msgid "I have read and I agree with terms and conditions"
-msgstr ""
+msgstr "Ho letto e accettato termini e condizioni"
 
 #: ../tempcache/take_object.html.twig:480
 msgid "Show terms and conditions"
-msgstr ""
+msgstr "Mostra termini e condizioni"
 
 #: ../tempcache/take_object.html.twig:487
 msgid ""
@@ -934,12 +946,12 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:501
 msgid "Borrow object"
-msgstr ""
+msgstr "Prendi a prestito oggetto"
 
 #: ../tempcache/take_object.html.twig:503
 msgid "Return object"
-msgstr ""
+msgstr "Restituisci oggetto"
 
 #: ../tempcache/take_object.html.twig:558
 msgid "You must agree with terms and conditions in order to borrow."
-msgstr ""
+msgstr "È necessario approvare i termini e condizioni per prendere in prestito."
