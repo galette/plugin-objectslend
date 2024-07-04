@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-07-03 20:09+0000\n"
+"PO-Revision-Date: 2024-07-04 23:09+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -560,61 +560,65 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:148
 msgid "Max thumb height (in px)"
-msgstr ""
+msgstr "Altezza massima miniature (in px)"
 
 #: ../tempcache/preferences.html.twig:154
 msgid "Max thumb width (in px)"
-msgstr ""
+msgstr "Larghezza massima miniature (in px)"
 
 #: ../tempcache/preferences.html.twig:159
 msgid "Images in lists:"
-msgstr ""
+msgstr "Immagini in elenchi:"
 
 #: ../tempcache/preferences.html.twig:159
 msgid "Display images in objects and categories lists"
-msgstr ""
+msgstr "Visualizza immagini in elenchi oggetti e categorie"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Enable fullsize:"
-msgstr ""
+msgstr "Abilita dimensione piena:"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Show fullsize image or just thumbs"
-msgstr ""
+msgstr "Mostra immagini a dimensione piena o solo miniature"
 
 #: ../tempcache/preferences.html.twig:161
 msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
+"Permetterà di vedere l'immagine a dimensione piena facendo clic sulle "
+"miniature. <br/>Se disabilitato, verranno visualizzate solo le miniature, ma "
+"le immagini complete verranno comunque conservate."
 
 #: ../tempcache/preferences.html.twig:196
 msgid "View category:"
-msgstr ""
+msgstr "Visualizza categoria:"
 
 #: ../tempcache/preferences.html.twig:198
 msgid "View forecast return date:"
-msgstr ""
+msgstr "Visualizza data di ritorno prevista:"
 
 #: ../tempcache/preferences.html.twig:200
 msgid "View description"
-msgstr ""
+msgstr "Visualizza descrizione"
 
 #: ../tempcache/preferences.html.twig:202
 msgid "View dimensions:"
-msgstr ""
+msgstr "Visualizza dimensioni:"
 
 #: ../tempcache/preferences.html.twig:204
 msgid "View borrow price:"
-msgstr ""
+msgstr "Visualizza prezzo noleggio:"
 
 #: ../tempcache/preferences.html.twig:206
 msgid "View price sum:"
-msgstr ""
+msgstr "Visualizza somma prezzi:"
 
 #: ../tempcache/preferences.html.twig:206
 msgid "View the objects buy price sum on the list under the category"
 msgstr ""
+"Visualizza il prezzo d'acquisto degli oggetti nell'elenco sotto la categoria"
 
 #: ../tempcache/preferences.html.twig:208
 msgid "View buy price:"
@@ -698,7 +702,7 @@ msgstr "Dov'è l'oggetto?"
 #: ../tempcache/objects_edit.html.twig:195
 #: ../tempcache/objects_edit.html.twig:219
 msgid "Object's photo"
-msgstr "Foto oggetto"
+msgstr "Foto dell'oggetto"
 
 #: ../tempcache/objects_edit.html.twig:265
 msgid "Duplicate"
@@ -779,10 +783,8 @@ msgid "Click to view fullsize image"
 msgstr "Fare clic per visualizzare l'immagine a pieno schermo"
 
 #: ../tempcache/objects_list.html.twig:57
-#, fuzzy
-#| msgid "Objects lend"
 msgid "No object selected"
-msgstr "Prestiti oggetti"
+msgstr "Nessun oggetto selezionato"
 
 #: ../tempcache/objects_list.html.twig:57
 msgid ""
@@ -803,7 +805,7 @@ msgstr "Aggiungi un oggetto"
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/objects_list.html.twig:675
 msgid "By"
-msgstr ""
+msgstr "Per"
 
 #: ../tempcache/objects_list.html.twig:378
 msgid "Categories"
@@ -834,7 +836,7 @@ msgstr "L'oggetto è inattivo"
 
 #: ../tempcache/objects_list.html.twig:748
 msgid "Duplicate object"
-msgstr ""
+msgstr "Duplica oggetto"
 
 #: ../tempcache/objects_list.html.twig:749
 msgid "Show object lends"
@@ -943,6 +945,22 @@ msgid ""
 "other cases not listed above and at the discretion of the seller, the "
 "deposit check may also be collected in whole or party."
 msgstr ""
+"Gli articoli offerti in affitto sono considerati in buone condizioni e la "
+"verifica del loro stato avviene al momento del ritiro. Nessun reclamo verrà "
+"accettato dopo il rilascio dell'oggetto. Scrivere al magazzino un elenco di "
+"riserve non esenta il cliente dal controllo del proprio materiale al ritiro. "
+"Il pagamento dell'affitto autorizza l'acquirente a fare uso normale "
+"dell'oggetto prestato. Se l'oggetto viene reso in uno stato degradato, il "
+"venditore si riserva il diritto di raccogliere tutto o parte del deposito di "
+"sicurezza. In caso di deterioramento del noleggio al di là dell'oggetto "
+"standard, sarà richiesto un contributo finanziario per la pulizia "
+"supplementare causata. In caso di danni, perdite o furto della proprietà "
+"affittata, il deposito verrà automaticamente ritenuto come compenso "
+"automatico al danno ai sensi dell'articolo 1152 del codice civile e senza "
+"che sia necessaria di qualsiasi altra formalità legale, giudiziaria o "
+"extragiudiziale. In alcuni altri casi non elencati sopra e a discrezione del "
+"venditore, l'assegno depositato potrà comunque essere trattenuto in tutto o "
+"in parte."
 
 #: ../tempcache/take_object.html.twig:501
 msgid "Borrow object"
