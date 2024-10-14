@@ -5,13 +5,13 @@
 # Alonso Arteaga <alon.arte.r@gmail.com>, 2021.
 # noelia <zizizhuji1@gmail.com>, 2021.
 # Cow <javier.fserrador@gmail.com>, 2022.
-# gallegonovato <fran-carro@hotmail.es>, 2022, 2023.
+# gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2023-12-07 12:05+0000\n"
+"PO-Revision-Date: 2024-10-15 06:43+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.8-rc\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -145,11 +145,11 @@ msgstr "Histórico de objeto alquilado"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 msgid "Begin"
-msgstr "Comienzo"
+msgstr "Iniciar"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "End"
-msgstr "Final"
+msgstr "Terminar"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:194
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:166
