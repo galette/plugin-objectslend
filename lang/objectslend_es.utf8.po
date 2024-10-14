@@ -6,13 +6,14 @@
 # noelia <zizizhuji1@gmail.com>, 2021.
 # Cow <javier.fserrador@gmail.com>, 2022.
 # gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
+# Kamborio <Kamborio15@users.noreply.hosted.weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
 "PO-Revision-Date: 2024-10-15 06:43+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
 "Language: es\n"
@@ -226,7 +227,7 @@ msgstr "Disponible"
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:144
 msgid "Status has not been added :("
-msgstr "Estado que no ha sido añadido :("
+msgstr "No se ha añadido el estado :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:349
 msgid "Object has not been added :("
