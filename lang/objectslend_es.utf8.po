@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-10-15 06:43+0000\n"
+"PO-Revision-Date: 2024-10-15 12:48+0000\n"
 "Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -146,11 +146,11 @@ msgstr "Histórico de objeto alquilado"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 msgid "Begin"
-msgstr "Iniciar"
+msgstr "Comienzo"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "End"
-msgstr "Terminar"
+msgstr "Final"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:194
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:166
@@ -277,7 +277,7 @@ msgstr "Editar estado %status"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:228
 msgid "New status"
-msgstr "Estado nuevo"
+msgstr "Nuevo estado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:268
 msgid "An error occurred while storing the status."
