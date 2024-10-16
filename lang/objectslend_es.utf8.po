@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-10-15 12:48+0000\n"
+"PO-Revision-Date: 2024-10-17 17:16+0000\n"
 "Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/es/>\n"
@@ -350,7 +350,7 @@ msgstr "Estado actualizado"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr "Clonado correcto desde nº %id.<br>Ahora puede editarlo."
+msgstr "Clonado con éxito desde nº %id.<br/>Ahora puedes editarlo."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
 msgid "An error occurred cloning object :("
@@ -401,7 +401,7 @@ msgstr "Va a quitar %count objetos."
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:48
 msgid "Objects lend"
-msgstr "Lente de objetos"
+msgstr "Préstamo de objetos"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Borrow status"
@@ -413,7 +413,7 @@ msgstr "Categorías de objeto"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:85
 msgid "Preferences"
-msgstr "Preferencias"
+msgstr "Ajustes"
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:257
 msgid "Name/description"
@@ -442,8 +442,8 @@ msgid ""
 "Check if the object is available to be borrowed;<br/>uncheck if object is "
 "already borrowed and should be given back"
 msgstr ""
-"Marque si el objeto está disponible para ser alquilado;<br>desmarque si el "
-"objeto ya está alquilado y debería ser devuelto"
+"Marca si el objeto está disponible para ser prestado;<br/>desmarca si el "
+"objeto ya se ha prestado y debería devolverse"
 
 #: ../tempcache/status_edit.html.twig:80
 #: ../tempcache/categories_list.html.twig:131
@@ -590,9 +590,9 @@ msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
-"Permitirá ver imagen en pantalla completa pulsando en huellas.<br>Si "
-"deshabilitó, solamente huelllas serán representadas, pero las imágenes "
-"completas aún están conservadas."
+"Permitirá ver la imagen en pantalla completa haciendo clic en las "
+"miniaturas.<br/>Si se desactivó, solo se mostrarán las miniaturas, pero las "
+"imágenes completas todavía se mantendrán."
 
 #: ../tempcache/preferences.html.twig:196
 msgid "View category:"
