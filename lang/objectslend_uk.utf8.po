@@ -3,22 +3,23 @@
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
 # Ostap <ostapbataj79@gmail.com>, 2022.
 # Artem <artem@molotov.work>, 2022.
+# Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2023-11-22 10:44+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2024-11-20 12:00+0000\n"
+"Last-Translator: Максим Горпиніч <mgorpinic2005@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -127,7 +128,7 @@ msgstr "З"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:196
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:168
 msgid "Member"
-msgstr "Член"
+msgstr "Члени"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:172
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:169
@@ -177,10 +178,8 @@ msgstr "Коментарі"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:70
-#, fuzzy
-#| msgid "object_card"
 msgid "objects_cards"
-msgstr "картка_об'єкта"
+msgstr "картки_об'єктів"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:87
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
@@ -226,7 +225,7 @@ msgstr "Доступно"
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:144
 msgid "Status has not been added :("
-msgstr "Стан не додано :("
+msgstr "Статус не додано :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:349
 msgid "Object has not been added :("
@@ -344,10 +343,8 @@ msgid "Object has been saved"
 msgstr "Об'єкт збережено"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:515
-#, fuzzy
-#| msgid "Status has been saved"
 msgid "Status has been updated"
-msgstr "Стан збережено"
+msgstr "Статус оновлено"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
@@ -367,10 +364,8 @@ msgstr "Повернути позичений об'єкт"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:744
-#, fuzzy
-#| msgid "You do not have rights to take objects!"
 msgid "You do not have rights to borrow objects!"
-msgstr "Ви не маєте прав брати об'єкти!"
+msgstr "Ви не маєте права позичати об'єкти!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
@@ -379,10 +374,8 @@ msgstr "Об'єкт %object зараз недоступний"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:694
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:914
-#, fuzzy
-#| msgid "You do not have rights to take objects!"
 msgid "You do not have rights to return objects!"
-msgstr "Ви не маєте прав брати об'єкти!"
+msgstr "Ви не маєте права повертати об'єкти!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:849
 #, php-format
@@ -643,7 +636,7 @@ msgstr "Об'єкт"
 
 #: ../tempcache/objects_edit.html.twig:70 ../tempcache/take_object.html.twig:70
 msgid "Name:"
-msgstr "Ім'я:"
+msgstr "ім'я:"
 
 #: ../tempcache/objects_edit.html.twig:76
 #: ../tempcache/take_object.html.twig:106
@@ -976,10 +969,8 @@ msgid "Return object"
 msgstr "Повернути об'єкт"
 
 #: ../tempcache/take_object.html.twig:558
-#, fuzzy
-#| msgid "You must agree with terms and conditions in order to take."
 msgid "You must agree with terms and conditions in order to borrow."
-msgstr "Ви повинні погодитися з умовами для того, щоб узяти."
+msgstr "Ви повинні погодитися з умовами, щоб позичити."
 
 #~ msgid "Edit the object"
 #~ msgstr "Редагувати цей об'єкт"
