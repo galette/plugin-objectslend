@@ -98,7 +98,7 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, int|string $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, int|string|null $value = null): Response
     {
         if (isset($this->session->objectslend_filter_objects)) {
             $filters = $this->session->objectslend_filter_objects;
@@ -308,7 +308,7 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->objectslend_object !== null) {
             $object = $this->session->objectslend_object;
@@ -380,7 +380,7 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
 
@@ -496,7 +496,7 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doUpdateStatus(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doUpdateStatus(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
 

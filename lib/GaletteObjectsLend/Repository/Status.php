@@ -75,7 +75,7 @@ class Status
      * @param Login       $login   Logged in instance
      * @param ?StatusList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, StatusList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?StatusList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -101,7 +101,7 @@ class Status
      */
     public function getStatusList(
         bool $as_stt = false,
-        array $fields = null,
+        ?array $fields = null,
         bool $count = true,
         bool $limit = true
     ): array|ResultSet {
@@ -137,15 +137,15 @@ class Status
     /**
      * Get status list
      *
-     * @param boolean $as_stt return the results as an array of
-     *                        Status object.
-     * @param array   $fields field(s) name(s) to get. Should be a string or
-     *                        an array. If null, all fields will be
-     *                        returned
+     * @param boolean   $as_stt return the results as an array of
+     *                          Status object.
+     * @param ?string[] $fields field(s) name(s) to get. Should be a string or
+     *                          an array. If null, all fields will be
+     *                          returned
      *
      * @return LendStatus[]|ResultSet
      */
-    public function getList(bool $as_stt = false, array $fields = null): array|ResultSet
+    public function getList(bool $as_stt = false, ?array $fields = null): array|ResultSet
     {
         return $this->getStatusList(
             $as_stt,
@@ -244,7 +244,7 @@ class Status
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
         switch ($this->filters->orderby) {

@@ -87,7 +87,7 @@ class LendRent
      *
      * @param int|ArrayObject<string,int|string>|null $args Either an int with rent id, null, or a resultset row
      */
-    public function __construct(int|ArrayObject $args = null)
+    public function __construct(int|ArrayObject|null $args = null)
     {
         global $zdb;
 

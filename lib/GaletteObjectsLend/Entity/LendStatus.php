@@ -66,7 +66,7 @@ class LendStatus
      * @param Db                                      $zdb  Database instance
      * @param int|ArrayObject<string,int|string>|null $args Can be null, an ID or a database row
      */
-    public function __construct(Db $zdb, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
 

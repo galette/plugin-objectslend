@@ -49,7 +49,7 @@ class ImagesController extends GImagesController
      *
      * @return Response
      */
-    public function lendPicture(Request $request, Response $response, string $type, string $mode, int $id = null): Response
+    public function lendPicture(Request $request, Response $response, string $type, string $mode, ?int $id = null): Response
     {
         $class = '\GaletteObjectsLend\Entity\\' .
             ($type == 'category' ? 'CategoryPicture' : 'ObjectPicture');

@@ -138,9 +138,9 @@ class LendObject
      * @param Db                                      $zdb     Database instance
      * @param Plugins                                 $plugins Plugins instance
      * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
-     * @param array<string,bool>                      $deps    Dependencies configuration, see LendOb::$deps
+     * @param ?array<string,bool>                     $deps    Dependencies configuration, see LendOb::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject $args = null, array $deps = null)
+    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject|null $args = null, ?array $deps = null)
     {
         $this->zdb = $zdb;
         $this->plugins = $plugins;

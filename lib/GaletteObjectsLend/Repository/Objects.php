@@ -86,7 +86,7 @@ class Objects
      * @param Preferences  $lprefs  Lends preferences instance
      * @param ?ObjectsList $filters Filtering
      */
-    public function __construct(Db $zdb, Plugins $plugins, Preferences $lprefs, ObjectsList $filters = null)
+    public function __construct(Db $zdb, Plugins $plugins, Preferences $lprefs, ?ObjectsList $filters = null)
     {
         $this->zdb = $zdb;
         $this->plugins = $plugins;
@@ -102,18 +102,18 @@ class Objects
     /**
      * Get objects list
      *
-     * @param boolean       $as_objects return the results as an array of
-     *                                  Object object.
-     * @param array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
-     * @param boolean       $count      true if we want to count members
-     * @param boolean       $limit      true if we want records pagination
-     * @param boolean       $all_rents  true to load rents along with objects
+     * @param boolean        $as_objects return the results as an array of
+     *                                   Object object.
+     * @param ?array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
+     * @param boolean        $count      true if we want to count members
+     * @param boolean        $limit      true if we want records pagination
+     * @param boolean        $all_rents  true to load rents along with objects
      *
      * @return LendObject[]|ResultSet
      */
     public function getObjectsList(
         bool $as_objects = false,
-        array $fields = null,
+        ?array $fields = null,
         bool $count = true,
         bool $limit = true,
         bool $all_rents = false
@@ -218,7 +218,7 @@ class Objects
      *
      * @return LendObject[]|ResultSet
      */
-    public function getList(bool $as_objects = false, array $fields = null): array|ResultSet
+    public function getList(bool $as_objects = false, ?array $fields = null): array|ResultSet
     {
         return $this->getObjectsList(
             $as_objects,
@@ -361,7 +361,7 @@ class Objects
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
         switch ($this->filters->orderby) {

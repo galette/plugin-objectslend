@@ -127,14 +127,14 @@ class Picture extends \Galette\Core\Picture
      * Create thumbnail image
      * @see \Galette\Core\Picture::resizeImage()
      *
-     * @param string $source the source image
-     * @param string $ext    file's extension
-     * @param string $dest   the destination image.
-     *                       If null, we'll use the source image. Defaults to null
+     * @param string  $source the source image
+     * @param string  $ext    file's extension
+     * @param ?string $dest   the destination image.
+     *                        If null, we'll use the source image. Defaults to null
      *
      * @return bool
      */
-    private function createThumb(string $source, string $ext, string $dest = null): bool
+    private function createThumb(string $source, string $ext, ?string $dest = null): bool
     {
         $class = get_class($this);
 
@@ -260,7 +260,7 @@ class Picture extends \Galette\Core\Picture
      *
      * @return bool|int
      */
-    public function store(array $file, bool $ajax = false, array $cropping = null): bool|int
+    public function store(array $file, bool $ajax = false, ?array $cropping = null): bool|int
     {
         $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
         $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);

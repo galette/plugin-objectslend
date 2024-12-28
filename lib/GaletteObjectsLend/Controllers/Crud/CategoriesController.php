@@ -88,7 +88,7 @@ class CategoriesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, int|string $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, int|string|null $value = null): Response
     {
         if (isset($this->session->objectslend_filter_categories)) {
             $filters = $this->session->objectslend_filter_categories;
@@ -192,7 +192,7 @@ class CategoriesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->objectslend_category !== null) {
             $category = $this->session->objectslend_category;
@@ -235,7 +235,7 @@ class CategoriesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $category = new LendCategory($this->zdb, $this->plugins, $id);

@@ -74,7 +74,7 @@ class Categories
      * @param Plugins         $plugins Plugins instance
      * @param ?CategoriesList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, Plugins $plugins, CategoriesList $filters = null)
+    public function __construct(Db $zdb, Login $login, Plugins $plugins, ?CategoriesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -91,19 +91,19 @@ class Categories
     /**
      * Get categories list
      *
-     * @param boolean       $as_cat return the results as an array of
-     *                              Categories object.
-     * @param array<string> $fields field(s) name(s) to get. Should be a string or
-     *                              an array. If null, all fields will be
-     *                              returned
-     * @param boolean       $count  true if we want to count members
-     * @param boolean       $limit  true if we want records pagination
+     * @param boolean        $as_cat return the results as an array of
+     *                               Categories object.
+     * @param ?array<string> $fields field(s) name(s) to get. Should be a string or
+     *                               an array. If null, all fields will be
+     *                               returned
+     * @param boolean        $count  true if we want to count members
+     * @param boolean        $limit  true if we want records pagination
      *
      * @return LendCategory[]|ResultSet
      */
     public function getCategoriesList(
         bool $as_cat = false,
-        array $fields = null,
+        ?array $fields = null,
         bool $count = true,
         bool $limit = true
     ): array|ResultSet {
@@ -145,7 +145,7 @@ class Categories
      *
      * @return LendCategory[]|ResultSet
      */
-    public function getList(bool $as_cat = false, array $fields = null): array|ResultSet
+    public function getList(bool $as_cat = false, ?array $fields = null): array|ResultSet
     {
         return $this->getCategoriesList(
             $as_cat,
@@ -262,7 +262,7 @@ class Categories
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
         switch ($this->filters->orderby) {

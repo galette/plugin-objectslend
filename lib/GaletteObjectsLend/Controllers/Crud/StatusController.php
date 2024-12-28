@@ -87,7 +87,7 @@ class StatusController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, int|string $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, int|string|null $value = null): Response
     {
         if (isset($this->session->objectslend_filter_statuses)) {
             $filters = $this->session->objectslend_filter_statuses;
@@ -211,7 +211,7 @@ class StatusController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->objectslend_status !== null) {
             $status = $this->session->objectslend_status;
@@ -255,7 +255,7 @@ class StatusController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $status = new LendStatus($this->zdb, $id);
