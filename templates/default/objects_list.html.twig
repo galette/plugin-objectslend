@@ -222,7 +222,9 @@
         <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
             {% if login.isAdmin() or login.isStaff() %}
                 <td class="center" data-scope="row">
-                    <input type="checkbox" name="entries_sel[]" value="{{ object.getId() }}">
+                    <span class="ui checkbox">
+                        <input type="checkbox" name="entries_sel[]" value="{{ object.getId() }}">
+                    </span>
                 </td>
             {% endif %}
             {% if olendsprefs.imagesInLists() %}
