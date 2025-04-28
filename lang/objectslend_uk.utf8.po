@@ -4,13 +4,14 @@
 # Ostap <ostapbataj79@gmail.com>, 2022.
 # Artem <artem@molotov.work>, 2022.
 # Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
+# Sotski Eugene <jekakmail@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-11-20 12:00+0000\n"
-"Last-Translator: Максим Горпиніч <mgorpinic2005@gmail.com>\n"
+"PO-Revision-Date: 2025-04-28 16:03+0000\n"
+"Last-Translator: Sotski Eugene <jekakmail@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -348,7 +349,7 @@ msgstr "Статус оновлено"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr "Успішно клоновано з #%id.<br>Тепер можна редагувати."
+msgstr "Успішно клоновано з #%id.<br/>Тепер можна редагувати."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
 msgid "An error occurred cloning object :("
