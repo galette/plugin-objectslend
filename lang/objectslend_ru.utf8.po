@@ -4,14 +4,14 @@
 # Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
 # Johan Cwiklinski <trasher@x-tnd.be>, 2023.
 # Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>, 2025.
+# Sotski Eugene <jekakmail@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
 "PO-Revision-Date: 2025-04-28 16:03+0000\n"
-"Last-Translator: Evgeniy Khramov <65224669+thejenja@users.noreply.github.com>"
-"\n"
+"Last-Translator: Sotski Eugene <jekakmail@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ru/>\n"
 "Language: ru\n"
@@ -351,7 +351,7 @@ msgstr "Категория сохранена"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr "Успешно клонировано из #%id.<br> Теперь вы можете редактировать его."
+msgstr "Успешно клонировано из #%id.<br/> Теперь вы можете редактировать его."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
 msgid "An error occurred cloning object :("
