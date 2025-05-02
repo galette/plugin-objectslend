@@ -23,7 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Entity;
 
-use Analog\Analog;
 use Galette\Core\Plugins;
 
 /**

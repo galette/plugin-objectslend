@@ -67,7 +67,7 @@ class LendObject
     public const PK = 'object_id';
 
     /** @var array<string,string> */
-    private array $fields = array(
+    private array $fields = [
         'object_id' => 'integer',
         'name' => 'varchar(100)',
         'description' => 'varchar(500)',
@@ -80,7 +80,7 @@ class LendObject
         'is_active' => 'boolean',
         'category_id' => 'int',
         'nb_available' => 'int',
-    );
+    ];
     private ?int $object_id;
     private string $name = '';
     private string $description = '';
@@ -194,14 +194,14 @@ class LendObject
 
                 if ($this->deps['category'] === true) {
                     $select->join(
-                        array('c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE),
+                        ['c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE],
                         'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
                         ['cat_active'   => 'is_active', 'cat_name' => 'name'],
                         $select::JOIN_LEFT
                     );
                 }
 
-                $select->where(array('o.' . self::PK => $args));
+                $select->where(['o.' . self::PK => $args]);
                 $results = $this->zdb->execute($select);
                 if ($results->count() == 1) {
                     $this->loadFromRS($results->current());
@@ -313,7 +313,7 @@ class LendObject
     public function store(): bool
     {
         try {
-            $values = array();
+            $values = [];
 
             foreach ($this->fields as $k => $v) {
                 if (
@@ -351,7 +351,7 @@ class LendObject
             } else {
                 $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->object_id));
+                        ->where([self::PK => $this->object_id]);
                 $this->zdb->execute($update);
             }
             return true;
@@ -559,13 +559,13 @@ class LendObject
             //remove rents
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                     ->set([LendRent::PK => null])
-                    ->where(array(self::PK => $this->object_id));
+                    ->where([self::PK => $this->object_id]);
             $this->zdb->execute($update);
             $delete = $this->zdb->delete(LEND_PREFIX . LendRent::TABLE)
-                    ->where(array(self::PK => $this->object_id));
+                    ->where([self::PK => $this->object_id]);
             $this->zdb->execute($delete);
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $this->object_id));
+                    ->where([self::PK => $this->object_id]);
             $this->zdb->execute($delete);
             $this->zdb->connection->commit();
             return true;

@@ -23,8 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
-use ArrayObject;
-use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\ResultSet\ResultSet;
@@ -60,7 +58,7 @@ class Categories
     private CategoriesList $filters;
     private ?int $count = null;
     /** @var array<string> */
-    private array $errors = array();
+    private array $errors = [];
 
     private Db $zdb;
     private Plugins $plugins;
@@ -118,7 +116,7 @@ class Categories
             $rows = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $categories = array();
+            $categories = [];
             if ($as_cat) {
                 foreach ($rows as $row) {
                     $categories[] = new LendCategory($this->zdb, $this->plugins, $row);
@@ -180,7 +178,7 @@ class Categories
             $select->columns($fieldsList);
 
             $select->join(
-                array('o' => PREFIX_DB . LEND_PREFIX . LendObject::TABLE),
+                ['o' => PREFIX_DB . LEND_PREFIX . LendObject::TABLE],
                 'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
                 [],
                 $select::JOIN_LEFT
@@ -224,9 +222,9 @@ class Categories
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(c.' . self::PK . ')')
-                )
+                ]
             );
 
             $joins = $select->getRawState($select::JOINS);
@@ -264,7 +262,7 @@ class Categories
      */
     private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
         switch ($this->filters->orderby) {
             case self::ORDERBY_NAME:
                 if ($this->canOrderBy('name', $fields)) {

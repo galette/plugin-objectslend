@@ -59,7 +59,7 @@ class Picture extends \Galette\Core\Picture
         $this->plugins = $plugins;
 
         if (!file_exists($this->store_path)) {
-            if (!mkdir($this->store_path, 0755, true)) {
+            if (!mkdir($this->store_path, 0o755, true)) {
                 Analog::log(
                     'Unable to create photo dir `' . $this->store_path . '`.',
                     Analog::ERROR
@@ -181,7 +181,7 @@ class Picture extends \Galette\Core\Picture
                     return false;
             }
 
-            list($cur_width, $cur_height, $cur_type, $curattr)
+            [$cur_width, $cur_height, $cur_type, $curattr]
                 = getimagesize($source);
 
             $ratio = $cur_width / $cur_height;
@@ -362,7 +362,7 @@ class Picture extends \Galette\Core\Picture
         } else {
             //resize if too small/large
             if (function_exists("gd_info")) {
-                list($cur_width, $cur_height, $cur_type, $curattr)
+                [$cur_width, $cur_height, $cur_type, $curattr]
                     = getimagesize($thumb);
 
                 if (
@@ -384,7 +384,7 @@ class Picture extends \Galette\Core\Picture
             }
         }
 
-        list($width, $height) = getimagesize($thumb);
+        [$width, $height] = getimagesize($thumb);
         $this->thumb_optimal_height = (int)$height;
         $this->thumb_optimal_width = (int)$width;
     }

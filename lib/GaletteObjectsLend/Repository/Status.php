@@ -23,8 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
-use ArrayObject;
-use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\ResultSet\ResultSet;
@@ -66,7 +64,7 @@ class Status
     private StatusList $filters;
     private ?int $count = null;
     /** @var array<string> */
-    private array $errors = array();
+    private array $errors = [];
 
     /**
      * Default constructor
@@ -116,7 +114,7 @@ class Status
             $rows = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $status = array();
+            $status = [];
             if ($as_stt) {
                 foreach ($rows as $row) {
                     $status[] = new LendStatus($this->zdb, $row);
@@ -209,9 +207,9 @@ class Status
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(c.' . self::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;
@@ -246,7 +244,7 @@ class Status
      */
     private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
         switch ($this->filters->orderby) {
             case self::ORDERBY_ID:
                 if ($this->canOrderBy('status_id', $fields)) {

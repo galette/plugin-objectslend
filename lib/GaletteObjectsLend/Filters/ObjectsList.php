@@ -27,7 +27,6 @@ use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Entity\Preferences;
 use GaletteObjectsLend\Repository\Objects;
-use Laminas\Db\Sql\Select;
 use Slim\Views\Twig;
 
 /**
@@ -56,14 +55,14 @@ class ObjectsList extends Pagination
     protected string $query;
 
     /** @var array<string> */
-    protected array $objectslist_fields = array(
+    protected array $objectslist_fields = [
         'filter_str',
         'category_filter',
         'active_filter',
         'field_filter',
         'selected',
         'query'
-    );
+    ];
 
     /**
      * Default constructor
@@ -95,7 +94,7 @@ class ObjectsList extends Pagination
         $this->category_filter = null;
         $this->active_filter = null;
         $this->field_filter = null;
-        $this->selected = array();
+        $this->selected = [];
     }
 
     /**

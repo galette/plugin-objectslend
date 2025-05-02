@@ -144,7 +144,7 @@ class ObjectsController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('objects_list'),
-            array(
+            [
                 'page_title' => _T("Objects list", "objectslend"),
                 'require_dialog' => true,
                 'objects' => $list,
@@ -155,7 +155,7 @@ class ObjectsController extends AbstractPluginController
                 'time' => time(),
                 'module_id' => $this->getModuleId(),
                 'categories' => $categories_list
-            )
+            ]
         );
         return $response;
     }
@@ -581,10 +581,10 @@ class ObjectsController extends AbstractPluginController
         $lendsprefs = new Preferences($this->zdb);
 
         $params = [
-            'page_title'    => ($action == 'take' ?
+            'page_title'    => (
+                $action == 'take' ?
                 _T("Borrow an object", "objectslend") :
                 _T("Return a borrowed object", "objectslend")
-
             ),
             'time'          => time(),
             'statuses'      => ($action == 'take' ?
@@ -656,7 +656,7 @@ class ObjectsController extends AbstractPluginController
                 $params['members']['list'] = $members;
             }
             $params['require_calendar'] = true;
-            $params['rent_price'] = str_replace(array( ',', ' '), array( '.', ''), $object->rent_price); //FIXME :/
+            $params['rent_price'] = str_replace([ ',', ' '], [ '.', ''], $object->rent_price); //FIXME :/
 
             if ($last_rent !== null && !$last_rent->in_stock) {
                 //redirect to objects list
@@ -790,7 +790,7 @@ class ObjectsController extends AbstractPluginController
                 $contrib = new Contribution($this->zdb, $this->login);
 
                 $info = str_replace(
-                    array(
+                    [
                         '{NAME}',
                         '{DESCRIPTION}',
                         '{SERIAL_NUMBER}',
@@ -798,8 +798,8 @@ class ObjectsController extends AbstractPluginController
                         '{RENT_PRICE}',
                         '{WEIGHT}',
                         '{DIMENSION}'
-                    ),
-                    array(
+                    ],
+                    [
                         $object->name,
                         $object->description,
                         $object->serial_number,
@@ -807,11 +807,11 @@ class ObjectsController extends AbstractPluginController
                         $object->rent_price,
                         $object->weight,
                         $object->dimension
-                    ),
+                    ],
                     $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIB_INFO_TEXT}
                 );
 
-                $values = array(
+                $values = [
                     'montant_cotis'         => $rentprice,
                     ContributionsTypes::PK  => $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIBUTION_TYPE_ID},
                     'date_enreg'            => date("Y-m-d"),
@@ -819,8 +819,8 @@ class ObjectsController extends AbstractPluginController
                     'type_paiement_cotis'   => $post['payment_type'],
                     'info_cotis'            => $info,
                     Adherent::PK            => $rent->adherent_id
-                );
-                $contrib->check($values, array(), array());
+                ];
+                $contrib->check($values, [], []);
                 try {
                     $created = $contrib->store();
                 } catch (\OverflowException $e) {

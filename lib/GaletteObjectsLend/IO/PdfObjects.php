@@ -28,7 +28,6 @@ use Galette\Core\Plugins;
 use Galette\IO\Pdf;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
-use Analog\Analog;
 use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Entity\LendCategory;
@@ -236,8 +235,8 @@ class PdfObjects extends Pdf
             $this->Cell($w_date, 0, $this->cut($object->date_forecast, $w_date), 'B', 1, 'L', $fill);
 
             if ($this->login->isAdmin() || $this->login->isStaff()) {
-                $sum_price += (float)str_replace(array(',', ' '), array('.', ''), $object->price);
-                $grant_total += (float)str_replace(array(',', ' '), array('.', ''), $object->price);
+                $sum_price += (float)str_replace([',', ' '], ['.', ''], $object->price);
+                $grant_total += (float)str_replace([',', ' '], ['.', ''], $object->price);
             }
         }
 

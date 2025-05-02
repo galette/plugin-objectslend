@@ -26,7 +26,6 @@ namespace GaletteObjectsLend\Filters;
 use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Categories;
-use Laminas\Db\Sql\Select;
 
 /**
  * Categories list filters and paginator
@@ -51,13 +50,13 @@ class CategoriesList extends Pagination
     protected string $query;
 
     /** @var array<string> */
-    protected array $categorylist_fields = array(
+    protected array $categorylist_fields = [
         'filter_str',
         'active_filter',
         'not_empty',
         'objects_filters',
         'query'
-    );
+    ];
 
     /**
      * Default constructor

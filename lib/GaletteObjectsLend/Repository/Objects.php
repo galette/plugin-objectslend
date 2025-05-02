@@ -23,8 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
-use ArrayObject;
-use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\ResultSet\ResultSet;
@@ -74,7 +72,7 @@ class Objects
     private ObjectsList $filters;
     private ?int $count = null;
     /** @var array<string> */
-    private array $errors = array();
+    private array $errors = [];
     private Preferences $prefs;
     private Plugins $plugins;
 
@@ -129,7 +127,7 @@ class Objects
             $rows = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $objects = array();
+            $objects = [];
             if ($as_objects) {
                 foreach ($rows as $row) {
                     $deps = ['last_rent' => true];
@@ -272,7 +270,7 @@ class Objects
             );
 
             $select->join(
-                array('c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE),
+                ['c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE],
                 'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
                 ['cat_active'   => 'is_active', 'cat_name' => 'name'],
                 $select::JOIN_LEFT
@@ -316,9 +314,9 @@ class Objects
             $countSelect->reset($countSelect::HAVING);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(o.' . self::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;
@@ -363,7 +361,7 @@ class Objects
      */
     private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
         switch ($this->filters->orderby) {
             case self::ORDERBY_NAME:
                 if ($this->canOrderBy('name', $fields)) {

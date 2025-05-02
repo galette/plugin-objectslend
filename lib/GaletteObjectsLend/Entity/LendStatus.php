@@ -47,13 +47,13 @@ class LendStatus
     private Db $zdb;
 
     /** @var array<string,string> */
-    private array $fields = array(
+    private array $fields = [
         'status_id' => 'integer',
         'status_text' => 'varchar(100)',
         'in_stock' => 'boolean',
         'is_active' => 'boolean',
         'rent_day_number' => 'int'
-    );
+    ];
     private int $status_id;
     private string $status_text = '';
     private bool $in_stock = false;
@@ -114,7 +114,7 @@ class LendStatus
     public function store(): bool
     {
         try {
-            $values = array();
+            $values = [];
 
             foreach ($this->fields as $k => $v) {
                 if (
@@ -148,7 +148,7 @@ class LendStatus
             } else {
                 $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->status_id));
+                        ->where([self::PK => $this->status_id]);
                 $this->zdb->execute($update);
             }
             return true;
@@ -173,10 +173,10 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1))
+                    ->where(['is_active' => 1])
                     ->order('status_text');
 
-            $status = array();
+            $status = [];
             $result = $zdb->execute($select);
             foreach ($result as $r) {
                 $status[] = new LendStatus($zdb, $r);
@@ -203,10 +203,10 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1, 'in_stock' => 0))
+                    ->where(['is_active' => 1, 'in_stock' => 0])
                     ->order('status_text');
 
-            $status = array();
+            $status = [];
             $result = $zdb->execute($select);
             foreach ($result as $r) {
                 $status[] = new LendStatus($zdb, $r);
@@ -233,10 +233,10 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1, 'in_stock' => 1))
+                    ->where(['is_active' => 1, 'in_stock' => 1])
                     ->order('status_text');
 
-            $status = array();
+            $status = [];
             $result = $zdb->execute($select);
             foreach ($result as $r) {
                 $status[] = new LendStatus($zdb, $r);
@@ -256,7 +256,7 @@ class LendStatus
     {
         try {
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $this->status_id));
+                    ->where([self::PK => $this->status_id]);
             $this->zdb->execute($delete);
             return true;
         } catch (\Exception $e) {

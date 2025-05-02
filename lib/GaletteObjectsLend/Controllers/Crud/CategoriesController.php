@@ -120,7 +120,7 @@ class CategoriesController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('categories_list'),
-            array(
+            [
                 'page_title'            => _T("Categories list", "objectslend"),
                 'require_dialog'        => true,
                 'categories'            => $list,
@@ -128,7 +128,7 @@ class CategoriesController extends AbstractPluginController
                 'filters'               => $filters,
                 'olendsprefs'           => $lendsprefs,
                 'time'                  => time()
-            )
+            ]
         );
         return $response;
     }

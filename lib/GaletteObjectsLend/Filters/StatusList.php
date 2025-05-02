@@ -48,12 +48,12 @@ class StatusList extends Pagination
     protected string $query;
 
     /** @var array<string> */
-    protected array $statuslist_fields = array(
+    protected array $statuslist_fields = [
         'filter_str',
         'active_filter',
         'stock_filter',
         'query'
-    );
+    ];
 
     /**
      * Returns the field we want to default set order to

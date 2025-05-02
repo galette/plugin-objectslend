@@ -132,7 +132,7 @@ class StatusController extends AbstractPluginController
         $this->view->render(
             $response,
             $this->getTemplate('status_list'),
-            array(
+            [
                 'page_title'            => _T("Status list", "objectslend"),
                 'require_dialog'        => true,
                 'statuses'              => $list,
@@ -140,7 +140,7 @@ class StatusController extends AbstractPluginController
                 'olendsprefs'           => $lendsprefs,
                 'filters'               => $filters,
                 'time'                  => time()
-            )
+            ]
         );
         return $response;
     }
