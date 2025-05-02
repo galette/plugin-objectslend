@@ -26,7 +26,7 @@ $this->register(
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
     '2.1.2',                            //Version
-    '1.1.0',                            //Galette version compatibility
+    '1.2.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
     '2024-10-20',                       //Date
     [

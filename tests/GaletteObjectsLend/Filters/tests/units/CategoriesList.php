@@ -42,7 +42,7 @@ class CategoriesList extends GaletteTestCase
     protected function testDefaults(\GaletteObjectsLend\Filters\CategoriesList $filters): void
     {
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::ORDERBY_NAME, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\CategoriesList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
         $this->assertNull($filters->filter_str);
         $this->assertNull($filters->active_filter);
         $this->assertNull($filters->not_empty);
@@ -63,22 +63,22 @@ class CategoriesList extends GaletteTestCase
         //change order field
         $filters->orderby = \GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY;
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\CategoriesList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
 
         //same order field again: direction inverted
         $filters->orderby = \GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY;
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\CategoriesList::ORDER_DESC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
         //not existing order, same kept
-        $filters->ordered = 42;
+        $filters->setDirection('abcd');
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\CategoriesList::ORDER_DESC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
         //change direction only
-        $filters->ordered = \GaletteObjectsLend\Filters\CategoriesList::ORDER_ASC;
+        $filters->setDirection(\Galette\Enums\SQLOrder::ASC);
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\CategoriesList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
 
         //set string filter
         $filters->filter_str = 'a string';
@@ -89,7 +89,7 @@ class CategoriesList extends GaletteTestCase
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES, $filters->active_filter);
 
         //cast is forced
-        $filters->active_filter = (string)\GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES;
+        $filters->active_filter = \GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES;
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES, $filters->active_filter);
 
         //out of known values, no change
