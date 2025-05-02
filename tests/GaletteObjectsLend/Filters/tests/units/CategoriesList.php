@@ -72,6 +72,10 @@ class CategoriesList extends GaletteTestCase
 
         //not existing order, same kept
         $filters->setDirection('abcd');
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[GaletteObjectsLend\Filters\CategoriesList|Pagination] "abcd" is not a valid backing value for enum Galette\Enums\SQLOrder'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::ORDERBY_ACTIVITY, $filters->orderby);
         $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
@@ -94,6 +98,11 @@ class CategoriesList extends GaletteTestCase
 
         //out of known values, no change
         $filters->active_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[CategoriesList] Value for active filter should be either 0, 1 or 2 (42 given)
+'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Categories::INACTIVE_CATEGORIES, $filters->active_filter);
 
         $ofilters = new \GaletteObjectsLend\Filters\ObjectsList();

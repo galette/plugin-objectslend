@@ -71,6 +71,10 @@ class StatusList extends GaletteTestCase
 
         //not existing order, same kept
         $filters->setDirection('abcd');
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[GaletteObjectsLend\Filters\StatusList|Pagination] "abcd" is not a valid backing value for enum Galette\Enums\SQLOrder'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Status::ORDERBY_STOCK, $filters->orderby);
         $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
@@ -87,12 +91,12 @@ class StatusList extends GaletteTestCase
         $filters->active_filter = \GaletteObjectsLend\Repository\Status::INACTIVE;
         $this->assertSame(\GaletteObjectsLend\Repository\Status::INACTIVE, $filters->active_filter);
 
-        //cast is forced
-        $filters->active_filter = \GaletteObjectsLend\Repository\Status::INACTIVE;
-        $this->assertSame(\GaletteObjectsLend\Repository\Status::INACTIVE, $filters->active_filter);
-
         //out of known values, no change
         $filters->active_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[StatusList] Value for active filter should be either 1 or 2 (42 given)'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Status::INACTIVE, $filters->active_filter);
 
         //set stock filter
@@ -104,6 +108,10 @@ class StatusList extends GaletteTestCase
 
         //out of known values, no change
         $filters->stock_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[StatusList] Value for stock filter should be either 1, 2 or 0 (42 given)'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Status::OUT_STOCK, $filters->stock_filter);
 
         //reinit and test defaults are back

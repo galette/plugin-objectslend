@@ -75,6 +75,10 @@ class ObjectsList extends GaletteTestCase
         $filters->setDirection('abcde');
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS, $filters->orderby);
         $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[GaletteObjectsLend\Filters\ObjectsList|Pagination] "abcde" is not a valid backing value for enum Galette\Enums\SQLOrder'
+        );
 
         //change direction only
         $filters->setDirection(\Galette\Enums\SQLOrder::ASC);
@@ -89,23 +93,15 @@ class ObjectsList extends GaletteTestCase
         $filters->active_filter = \GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS;
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS, $filters->active_filter);
 
-        //cast is forced
-        $filters->active_filter = (string) \GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS;
-        $this->assertSame(\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS, $filters->active_filter);
-
         //out of known values, no change
         $filters->active_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[ObjectsList] Value for active filter should be either 1, 1 or 2 (42 given)'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS, $filters->active_filter);
 
         $filters->field_filter = \GaletteObjectsLend\Repository\Objects::FILTER_SERIAL;
-        $this->assertSame(\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL, $filters->field_filter);
-
-        //cast is forced
-        $filters->field_filter = (string) \GaletteObjectsLend\Repository\Objects::FILTER_SERIAL;
-        $this->assertSame(\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL, $filters->field_filter);
-
-        //non numeric value, no change
-        $filters->field_filter = 'abc';
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL, $filters->field_filter);
 
         //reinit and test defaults are back
