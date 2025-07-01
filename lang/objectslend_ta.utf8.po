@@ -486,7 +486,7 @@ msgstr "செயலற்றது"
 #: ../tempcache/categories_list.html.twig:315
 #, php-format
 msgid "Edit \"%category\""
-msgstr "திருத்து \"%வகை\""
+msgstr "திருத்து \"%category\""
 
 #: ../tempcache/categories_list.html.twig:325
 #, php-format
