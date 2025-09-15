@@ -164,8 +164,8 @@ class ObjectsList extends Pagination
                         $this->$name = $value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[ObjectsList] Value for property `' . $name .
-                            '` should be an array (' . gettype($value) . ' given)',
+                            '[ObjectsList] Value for property `' . $name
+                            . '` should be an array (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     }
@@ -179,8 +179,8 @@ class ObjectsList extends Pagination
                         $this->$name = (int)$value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[ObjectsList] Value for property `' . $name .
-                            '` should be an integer (' . gettype($value) . ' given)',
+                            '[ObjectsList] Value for property `' . $name
+                            . '` should be an integer (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     } else {
@@ -196,9 +196,9 @@ class ObjectsList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[ObjectsList] Value for active filter should be either ' .
-                                Objects::ACTIVE_OBJECTS . ', ' . Objects::ACTIVE_OBJECTS . ' or ' .
-                                Objects::INACTIVE_OBJECTS . ' (' . $value . ' given)',
+                                '[ObjectsList] Value for active filter should be either '
+                                . Objects::ACTIVE_OBJECTS . ', ' . Objects::ACTIVE_OBJECTS . ' or '
+                                . Objects::INACTIVE_OBJECTS . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
@@ -209,8 +209,8 @@ class ObjectsList extends Pagination
                         $this->$name = (int)$value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[ObjectsList] Value for property `' . $name .
-                            '` should be an integer (' . gettype($value) . ' given)',
+                            '[ObjectsList] Value for property `' . $name
+                            . '` should be an integer (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     }
@@ -240,8 +240,8 @@ class ObjectsList extends Pagination
         $prefs = $prefs->getPreferences();
 
         $options = [
-            Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION'] ?
-                _T("Name/description", "objectslend") : _T("Name", "objectslend")),
+            Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION']
+                ? _T("Name/description", "objectslend") : _T("Name", "objectslend")),
             Objects::FILTER_SERIAL  => _T("Serial number", "objectslend"),
             Objects::FILTER_ID      => _T("Id", "objectslend")
         ];

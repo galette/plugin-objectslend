@@ -102,8 +102,8 @@ class LendCategory
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -183,8 +183,8 @@ class LendCategory
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -219,8 +219,8 @@ class LendCategory
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;

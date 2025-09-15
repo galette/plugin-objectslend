@@ -150,9 +150,9 @@ class CategoriesList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[CategoriesList] Value for active filter should be either ' .
-                                Categories::ALL_CATEGORIES . ', ' . Categories::ACTIVE_CATEGORIES . ' or ' .
-                                Categories::INACTIVE_CATEGORIES . ' (' . $value . ' given)',
+                                '[CategoriesList] Value for active filter should be either '
+                                . Categories::ALL_CATEGORIES . ', ' . Categories::ACTIVE_CATEGORIES . ' or '
+                                . Categories::INACTIVE_CATEGORIES . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;

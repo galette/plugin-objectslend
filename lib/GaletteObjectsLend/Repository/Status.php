@@ -334,8 +334,8 @@ class Status
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;

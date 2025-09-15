@@ -137,9 +137,9 @@ class StatusList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[StatusList] Value for active filter should be either ' .
-                                Status::ACTIVE . ' or ' .
-                                Status::INACTIVE . ' (' . $value . ' given)',
+                                '[StatusList] Value for active filter should be either '
+                                . Status::ACTIVE . ' or '
+                                . Status::INACTIVE . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
@@ -154,9 +154,9 @@ class StatusList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[StatusList] Value for stock filter should be either ' .
-                                Status::IN_STOCK . ', ' . Status::OUT_STOCK . ' or ' .
-                                Status::DC_STOCK . ' (' . $value . ' given)',
+                                '[StatusList] Value for stock filter should be either '
+                                . Status::IN_STOCK . ', ' . Status::OUT_STOCK . ' or '
+                                . Status::DC_STOCK . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;

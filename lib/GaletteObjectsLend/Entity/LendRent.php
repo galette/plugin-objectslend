@@ -104,8 +104,8 @@ class LendRent
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                        $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                        . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -191,8 +191,8 @@ class LendRent
         } catch (\Exception $e) {
             $zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -222,8 +222,8 @@ class LendRent
                 )
                 ->join(
                     PREFIX_DB . LEND_PREFIX . LendStatus::TABLE,
-                    PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB .
-                        LEND_PREFIX . self::TABLE . '.status_id'
+                    PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB
+                        . LEND_PREFIX . self::TABLE . '.status_id'
                 )
                 ->where(['object_id' => $object_id])
                 ->order($order);
@@ -250,8 +250,8 @@ class LendRent
             return $rents;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -290,8 +290,8 @@ class LendRent
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -321,8 +321,8 @@ class LendRent
             return $adherents;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;

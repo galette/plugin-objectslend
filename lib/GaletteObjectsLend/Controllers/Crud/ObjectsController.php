@@ -582,14 +582,14 @@ class ObjectsController extends AbstractPluginController
 
         $params = [
             'page_title'    => (
-                $action == 'take' ?
-                _T("Borrow an object", "objectslend") :
-                _T("Return a borrowed object", "objectslend")
+                $action == 'take'
+                ? _T("Borrow an object", "objectslend")
+                : _T("Return a borrowed object", "objectslend")
             ),
             'time'          => time(),
-            'statuses'      => ($action == 'take' ?
-                LendStatus::getActiveTakeAwayStatuses($this->zdb) :
-                LendStatus::getActiveStockStatuses($this->zdb)),
+            'statuses'      => ($action == 'take'
+                ? LendStatus::getActiveTakeAwayStatuses($this->zdb)
+                : LendStatus::getActiveStockStatuses($this->zdb)),
             'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
             'ajax'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest',
@@ -620,8 +620,8 @@ class ObjectsController extends AbstractPluginController
                 && !($this->login->isAdmin() || $this->login->isStaff())
             ) {
                 Analog::log(
-                    'Trying to borrow an object without appropriate rights! (Object ' .
-                    $id . ', user ' . $this->login->login . ')',
+                    'Trying to borrow an object without appropriate rights! (Object '
+                    . $id . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
 
@@ -686,8 +686,8 @@ class ObjectsController extends AbstractPluginController
                 || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
             ) {
                 Analog::log(
-                    'Trying to return an object without appropriate rights! (Object ' .
-                    $id . ', user ' . $this->login->login . ')',
+                    'Trying to return an object without appropriate rights! (Object '
+                    . $id . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
 
@@ -736,8 +736,8 @@ class ObjectsController extends AbstractPluginController
             && !($this->login->isAdmin() || $this->login->isStaff())
         ) {
             Analog::log(
-                'Trying to borrow an object without appropriate rights! (Object ' .
-                $id . ', user ' . $this->login->login . ')',
+                'Trying to borrow an object without appropriate rights! (Object '
+                . $id . ', user ' . $this->login->login . ')',
                 Analog::WARNING
             );
 
@@ -906,8 +906,8 @@ class ObjectsController extends AbstractPluginController
             || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
         ) {
             Analog::log(
-                'Trying to return an object without appropriate rights! (Object ' .
-                $id . ', user ' . $this->login->login . ')',
+                'Trying to return an object without appropriate rights! (Object '
+                . $id . ', user ' . $this->login->login . ')',
                 Analog::WARNING
             );
 

@@ -51,8 +51,8 @@ class ImagesController extends GImagesController
      */
     public function lendPicture(Request $request, Response $response, string $type, string $mode, ?int $id = null): Response
     {
-        $class = '\GaletteObjectsLend\Entity\\' .
-            ($type == 'category' ? 'CategoryPicture' : 'ObjectPicture');
+        $class = '\GaletteObjectsLend\Entity\\'
+            . ($type == 'category' ? 'CategoryPicture' : 'ObjectPicture');
         $picture = new $class($this->plugins, $id);
 
         $this->lendsprefs = new Preferences($this->zdb);

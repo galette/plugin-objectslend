@@ -80,8 +80,8 @@ class LendStatus
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                        $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                        . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -154,8 +154,8 @@ class LendStatus
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -184,8 +184,8 @@ class LendStatus
             return $status;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -214,8 +214,8 @@ class LendStatus
             return $status;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -261,8 +261,8 @@ class LendStatus
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;

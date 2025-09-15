@@ -72,8 +72,8 @@ class Picture extends \Galette\Core\Picture
             }
         } elseif (!is_dir($this->store_path)) {
             Analog::log(
-                'Unable to store plugin images, since `' . $this->store_path .
-                '` is not a directory.',
+                'Unable to store plugin images, since `' . $this->store_path
+                . '` is not a directory.',
                 Analog::WARNING
             );
         }
@@ -91,8 +91,8 @@ class Picture extends \Galette\Core\Picture
     protected function getDefaultPicture(): void
     {
         $this->file_path = (string)realpath(
-            $this->plugins->getTemplatesPathFromName('Galette Objects Lend') .
-            '/../../webroot/images/1f5bc.png'
+            $this->plugins->getTemplatesPathFromName('Galette Objects Lend')
+            . '/../../webroot/images/1f5bc.png'
         );
         $this->format = 'png';
         $this->mime = 'image/png';
@@ -150,8 +150,8 @@ class Picture extends \Galette\Core\Picture
                 case 'jpg':
                     if (!$gdinfo['JPEG Support']) {
                         Analog::log(
-                            '[' . $class . '] GD has no JPEG Support - ' .
-                            'pictures could not be resized!',
+                            '[' . $class . '] GD has no JPEG Support - '
+                            . 'pictures could not be resized!',
                             Analog::ERROR
                         );
                         return false;
@@ -160,8 +160,8 @@ class Picture extends \Galette\Core\Picture
                 case 'png':
                     if (!$gdinfo['PNG Support']) {
                         Analog::log(
-                            '[' . $class . '] GD has no PNG Support - ' .
-                            'pictures could not be resized!',
+                            '[' . $class . '] GD has no PNG Support - '
+                            . 'pictures could not be resized!',
                             Analog::ERROR
                         );
                         return false;
@@ -170,8 +170,8 @@ class Picture extends \Galette\Core\Picture
                 case 'gif':
                     if (!$gdinfo['GIF Create Support']) {
                         Analog::log(
-                            '[' . $class . '] GD has no GIF Support - ' .
-                            'pictures could not be resized!',
+                            '[' . $class . '] GD has no GIF Support - '
+                            . 'pictures could not be resized!',
                             Analog::ERROR
                         );
                         return false;
@@ -221,8 +221,8 @@ class Picture extends \Galette\Core\Picture
             return true;
         } else {
             Analog::log(
-                '[' . $class . '] GD is not present - ' .
-                'pictures could not be resized!',
+                '[' . $class . '] GD is not present - '
+                . 'pictures could not be resized!',
                 Analog::ERROR
             );
             return false;
@@ -313,8 +313,8 @@ class Picture extends \Galette\Core\Picture
             }
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             $error[] = _T("An error occurred :(");

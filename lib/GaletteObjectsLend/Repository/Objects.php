@@ -189,16 +189,16 @@ class Objects
 
             if ($this->zdb->isForeignKeyException($e)) {
                 Analog::log(
-                    'Object mays still have existing dependencies in the ' .
-                    'database.' .
-                    'Please remove dependencies before trying ' .
-                    'to remove it.',
+                    'Object mays still have existing dependencies in the '
+                    . 'database.'
+                    . 'Please remove dependencies before trying '
+                    . 'to remove it.',
                     Analog::ERROR
                 );
             } else {
                 Analog::log(
-                    'Unable to delete selected object(s) |' .
-                    $e->getMessage(),
+                    'Unable to delete selected object(s) |'
+                    . $e->getMessage(),
                     Analog::ERROR
                 );
             }
@@ -405,8 +405,8 @@ class Objects
                 break;
             case self::ORDERBY_MEMBER:
                 if ($this->canOrderBy('nom_adh', $fields) && $this->canOrderBy('prenom_adh', $fields)) {
-                    $order[] = 'a.nom_adh ' . $this->filters->getDirection() .
-                        ', a.prenom_adh ' . $this->filters->getDirection();
+                    $order[] = 'a.nom_adh ' . $this->filters->getDirection()
+                        . ', a.prenom_adh ' . $this->filters->getDirection();
                 }
                 break;
             case self::ORDERBY_CATEGORY:
@@ -465,10 +465,10 @@ class Objects
 
                         if ($this->prefs->getPreferences()['VIEW_DESCRIPTION']) {
                             $select->where(
-                                '(' .
-                                $pre . 'LOWER(o.name)' . $sep .
-                                'LOWER(o.description)' . $post . ' LIKE ' .
-                                $token . ')'
+                                '('
+                                . $pre . 'LOWER(o.name)' . $sep
+                                . 'LOWER(o.description)' . $post . ' LIKE '
+                                . $token . ')'
                             );
                         } else {
                             $select->where(
@@ -478,14 +478,14 @@ class Objects
                         break;
                     case self::FILTER_SERIAL:
                         $select->where(
-                            'LOWER(o.serial_number) LIKE ' .
-                            $token
+                            'LOWER(o.serial_number) LIKE '
+                            . $token
                         );
                         break;
                     case self::FILTER_DIM:
                         $select->where(
-                            'LOWER(o.dimension) LIKE ' .
-                            $token
+                            'LOWER(o.dimension) LIKE '
+                            . $token
                         );
                         break;
                     case self::FILTER_ID:
@@ -519,8 +519,8 @@ class Objects
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;
