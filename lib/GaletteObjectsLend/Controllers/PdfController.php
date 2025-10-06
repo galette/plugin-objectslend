@@ -62,7 +62,6 @@ class PdfController extends GPdfController
         ];
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $id,
             $deps
         );
@@ -98,7 +97,7 @@ class PdfController extends GPdfController
         if ($filters->orderby !== Objects::ORDERBY_CATEGORY) {
             $filters->orderby = Objects::ORDERBY_CATEGORY;
         }
-        $objects = new Objects($this->zdb, $this->plugins, $lendsprefs, $filters);
+        $objects = new Objects($this->zdb, $lendsprefs, $filters);
         $list = $objects->getObjectsList(true, null, true, false);
 
         $pdf = new PdfObjects(
@@ -106,8 +105,7 @@ class PdfController extends GPdfController
             $this->preferences,
             $lendsprefs,
             $filters,
-            $this->login,
-            $this->plugins
+            $this->login
         );
 
         $pdf->drawList($list);

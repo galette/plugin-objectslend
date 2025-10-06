@@ -32,7 +32,6 @@ class LendRent extends GaletteTestCase
 {
     protected int $seed = 20240524220704;
 
-    protected \Galette\Core\Plugins $plugins;
     private int $active_instock_status;
     private int $active_notinstock_status;
     private int $inactive_instock_status;
@@ -45,8 +44,6 @@ class LendRent extends GaletteTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->plugins = $this->container->get('plugins');
-        //$this->createCategories();
         $this->createStatus();
     }
 
@@ -100,7 +97,7 @@ class LendRent extends GaletteTestCase
     {
         $rent = new \GaletteObjectsLend\Entity\LendRent();
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $object->name = 'Test object';
         $this->assertTrue($object->store());
         $oid = $object->object_id;

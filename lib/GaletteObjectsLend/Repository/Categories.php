@@ -33,7 +33,6 @@ use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendObject;
 use Galette\Core\Login;
-use Galette\Core\Plugins;
 use Laminas\Db\Sql\Select;
 
 /**
@@ -61,7 +60,6 @@ class Categories
     private array $errors = [];
 
     private Db $zdb;
-    private Plugins $plugins;
     private Login $login;
 
     /**
@@ -69,14 +67,12 @@ class Categories
      *
      * @param Db              $zdb     Database instance
      * @param Login           $login   Logged in instance
-     * @param Plugins         $plugins Plugins instance
      * @param ?CategoriesList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, Plugins $plugins, ?CategoriesList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?CategoriesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
-        $this->plugins = $plugins;
 
         if ($filters === null) {
             $this->filters = new CategoriesList();
@@ -119,7 +115,7 @@ class Categories
             $categories = [];
             if ($as_cat) {
                 foreach ($rows as $row) {
-                    $categories[] = new LendCategory($this->zdb, $this->plugins, $row);
+                    $categories[] = new LendCategory($this->zdb, $row);
                 }
             } else {
                 $categories = $rows;
@@ -293,7 +289,6 @@ class Categories
             if ($this->filters->objects_filters instanceof ObjectsList) {
                 $objects = new Objects(
                     $this->zdb,
-                    $this->plugins,
                     new \GaletteObjectsLend\Entity\Preferences($this->zdb),
                     $this->filters->objects_filters
                 );

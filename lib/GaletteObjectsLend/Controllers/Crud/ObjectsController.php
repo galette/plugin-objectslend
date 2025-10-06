@@ -25,6 +25,7 @@ namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
 use DI\Attribute\Inject;
+use GaletteObjectsLend\Entity\ObjectPicture;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Filters\StatusList;
@@ -124,7 +125,7 @@ class ObjectsController extends AbstractPluginController
         }
 
         $lendsprefs = new Preferences($this->zdb);
-        $objects = new Objects($this->zdb, $this->plugins, $lendsprefs, $filters);
+        $objects = new Objects($this->zdb, $lendsprefs, $filters);
         $list = $objects->getObjectsList(true);
 
         $this->session->objectslend_filter_objects = $filters;
@@ -137,7 +138,7 @@ class ObjectsController extends AbstractPluginController
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
         $cat_filters->not_empty = true; //retrieve only categories with objects
         $cat_filters->setObjectsFilter($filters); //search for categories corresponding to filtered objects
-        $categories = new Categories($this->zdb, $this->login, $this->plugins, $cat_filters);
+        $categories = new Categories($this->zdb, $this->login, $cat_filters);
         $categories_list = $categories->getCategoriesList(true, null, false);
 
         // display page
@@ -226,7 +227,6 @@ class ObjectsController extends AbstractPluginController
         ];
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $id,
             $deps
         );
@@ -315,10 +315,10 @@ class ObjectsController extends AbstractPluginController
             $this->session->objectslend_object = null;
         } else {
             $deps = ['rents' => true];
-            $object = new LendObject($this->zdb, $this->plugins, $id, $deps);
+            $object = new LendObject($this->zdb, $id, $deps);
         }
 
-        $categories = new Categories($this->zdb, $this->login, $this->plugins);
+        $categories = new Categories($this->zdb, $this->login);
         $categories_list = $categories->getCategoriesList(true);
 
         if ($object->object_id !== null) {
@@ -333,6 +333,7 @@ class ObjectsController extends AbstractPluginController
         $slist = $statuses->getStatusList(true);
 
         $lendsprefs = new Preferences($this->zdb);
+        $picture = new ObjectPicture($object->object_id);
         $params = [
             'page_title'    => $title,
             'object'        => $object,
@@ -341,7 +342,8 @@ class ObjectsController extends AbstractPluginController
             'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
             'categories'    => $categories_list,
-            'statuses'      => $slist
+            'statuses'      => $slist,
+            'picture'       => $picture
         ];
 
         // members
@@ -384,7 +386,7 @@ class ObjectsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        $object = new LendObject($this->zdb, $this->plugins, $id);
+        $object = new LendObject($this->zdb, $id);
         $error_detected = [];
 
         $object->name = $post['name'];
@@ -417,29 +419,12 @@ class ObjectsController extends AbstractPluginController
             }
 
             // picture upload
-            if (isset($_FILES['picture'])) {
-                if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
-                    if ($_FILES['picture']['tmp_name'] != '') {
-                        if (is_uploaded_file($_FILES['picture']['tmp_name'])) {
-                            $res = $object->picture->store($_FILES['picture']);
-                            if ($res < 0) {
-                                $error_detected[] = $object->picture->getErrorMessage($res);
-                            }
-                        }
-                    }
-                } elseif ($_FILES['picture']['error'] !== UPLOAD_ERR_NO_FILE) {
-                    Analog::log(
-                        $object->picture->getPhpErrorMessage($_FILES['picture']['error']),
-                        Analog::WARNING
-                    );
-                    $error_detected[] = $object->picture->getPhpErrorMessage(
-                        $_FILES['picture']['error']
-                    );
-                }
+            if (!$object->picture->upload($request->getUploadedFiles(), 'picture')) {
+                $error_detected = $object->picture->uploadErrors();
             }
 
             if (isset($post['del_picture'])) {
-                if (!$object->picture->delete($object->object_id)) {
+                if (!$object->picture->delete()) {
                     $error_detected[] = _T("Delete failed", "objectslend");
                     Analog::log(
                         'Unable to delete picture for object ' . $object->name,
@@ -500,7 +485,7 @@ class ObjectsController extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        $object = new LendObject($this->zdb, $this->plugins, $id);
+        $object = new LendObject($this->zdb, $id);
 
         LendRent::closeAllRentsForObject($object->getId(), $post['new_comment']);
 
@@ -537,7 +522,7 @@ class ObjectsController extends AbstractPluginController
      */
     public function doClone(Request $request, Response $response, int $id): Response
     {
-        $object = new LendObject($this->zdb, $this->plugins, $id);
+        $object = new LendObject($this->zdb, $id);
 
         if ($object->clone()) {
             $this->flash->addMessage(
@@ -606,7 +591,6 @@ class ObjectsController extends AbstractPluginController
         ];
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $id,
             $deps
         );
@@ -774,7 +758,6 @@ class ObjectsController extends AbstractPluginController
         //retrieve object information
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $object_id
         );
 
@@ -896,7 +879,6 @@ class ObjectsController extends AbstractPluginController
         //retrieve object information
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $object_id,
             $deps
         );
@@ -1024,7 +1006,7 @@ class ObjectsController extends AbstractPluginController
     {
         if (isset($args['id'])) {
             //one object removal
-            $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
+            $object = new LendObject($this->zdb, (int)$args['id']);
             return sprintf(
                 _T('Remove object %1$s', 'objectslend'),
                 $object->name
@@ -1056,7 +1038,7 @@ class ObjectsController extends AbstractPluginController
             $filters = new ObjectsList();
         }
         $lendsprefs = new Preferences($this->zdb);
-        $objects = new Objects($this->zdb, $this->plugins, $lendsprefs, $filters);
+        $objects = new Objects($this->zdb, $lendsprefs, $filters);
 
         if (!is_array($post['id'])) {
             $ids = (array)$post['id'];

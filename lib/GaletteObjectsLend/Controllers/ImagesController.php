@@ -53,7 +53,7 @@ class ImagesController extends GImagesController
     {
         $class = '\GaletteObjectsLend\Entity\\'
             . ($type == 'category' ? 'CategoryPicture' : 'ObjectPicture');
-        $picture = new $class($this->plugins, $id);
+        $picture = new $class($id);
 
         $this->lendsprefs = new Preferences($this->zdb);
         $thumb = false;

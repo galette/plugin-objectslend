@@ -32,19 +32,6 @@ class Status extends GaletteTestCase
 {
     protected int $seed = 20240526084251;
 
-    protected \Galette\Core\Plugins $plugins;
-
-    /**
-     * Set up tests
-     *
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->plugins = $this->container->get('plugins');
-    }
-
     /**
      * Cleanup after each test method
      *

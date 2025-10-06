@@ -32,8 +32,6 @@ class LendObject extends GaletteTestCase
 {
     protected int $seed = 20240522000325;
 
-    protected \Galette\Core\Plugins $plugins;
-
     private int $active_category_id;
     private int $inactive_category_id;
     private int $active_instock_status;
@@ -48,7 +46,6 @@ class LendObject extends GaletteTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->plugins = $this->container->get('plugins');
         $this->createCategories();
         $this->createStatus();
     }
@@ -82,7 +79,7 @@ class LendObject extends GaletteTestCase
      */
     public function testEmpty(): void
     {
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $this->assertSame('€', $object->getCurrency());
         $this->assertNull($object->getCurrentRent());
         $this->assertTrue($object->isActive());
@@ -115,7 +112,7 @@ class LendObject extends GaletteTestCase
             'status' => true,
             'last_rent' => true
         ];
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, null, $deps);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, null, $deps);
 
         $object->name = 'An object';
         $object->category_id = $this->active_category_id;
@@ -139,7 +136,7 @@ class LendObject extends GaletteTestCase
         $rent->object_id = $oid;
         $this->assertTrue($rent->store());
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $oid, $deps);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $oid, $deps);
         $this->assertTrue($object->isActive());
         $this->assertSame(1500.00, $object->getPrice());
         $this->assertSame('1 500,00', $object->price);
@@ -173,7 +170,7 @@ class LendObject extends GaletteTestCase
         $filter->filter_str = '50';
         $this->assertSame('10x<span class="search">50</span>', $object->displayDimension($filter));
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $oid, $deps);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $oid, $deps);
         $this->assertSame('An object (edited)', $object->getName());
 
         //edit category to inactive one
@@ -181,12 +178,12 @@ class LendObject extends GaletteTestCase
         $this->assertNull($object->member);
         $this->assertNull($object->rents);
         $this->assertTrue($object->store());
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $oid, $deps + ['member' => true, 'rents' => true]);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $oid, $deps + ['member' => true, 'rents' => true]);
         $this->assertFalse($object->isActive());
         $this->assertInstanceOf(\Galette\Entity\Adherent::class, $object->member);
 
         //removing category
-        $rm_category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $rm_category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
 
         $rm_category->name = 'Category to be removed';
         $rm_category->is_active = true;
@@ -196,11 +193,11 @@ class LendObject extends GaletteTestCase
         $object->category_id = $category_id;
         $this->assertTrue($object->store());
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $oid, $deps);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $oid, $deps);
         $this->assertSame($category_id, $object->getCategoryId());
 
         $this->assertTrue($rm_category->delete());
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $oid, $deps);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $oid, $deps);
         $this->assertNull($object->getCategoryId());
 
         //clone
@@ -209,9 +206,9 @@ class LendObject extends GaletteTestCase
         $this->assertNotEquals($oid, $clone_id);
         $this->assertSame('An object (edited)', $object->getName());
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $oid);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $oid);
         $this->assertTrue($object->delete());
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins, $clone_id);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $clone_id);
         $this->assertTrue($object->delete());
     }
 
@@ -251,7 +248,7 @@ class LendObject extends GaletteTestCase
      */
     private function createCategories(): void
     {
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
 
         $category->name = 'Active test category';
         $category->is_active = true;
@@ -260,7 +257,7 @@ class LendObject extends GaletteTestCase
         $this->active_category_id = $category->getId();
         $this->assertGreaterThan(0, $this->active_category_id);
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
 
         $category->name = 'Inactive test category';
         $category->is_active = false;

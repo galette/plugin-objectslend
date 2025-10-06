@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use Galette\Core\Plugins;
+use Psr\Http\Message\UploadedFileInterface;
 use Slim\Psr7\Response;
 use Slim\Psr7\Stream;
 
@@ -45,18 +45,14 @@ class Picture extends \Galette\Core\Picture
     protected int $thumb_optimal_height;
     protected int $thumb_optimal_width;
 
-    protected Plugins $plugins;
-
     /**
      * Default constructor.
      *
-     * @param Plugins    $plugins  Plugins
      * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, mixed $objectid = null)
+    public function __construct(mixed $objectid = null)
     {
         $this->tbl_prefix = LEND_PREFIX;
-        $this->plugins = $plugins;
 
         if (!file_exists($this->store_path)) {
             if (!mkdir($this->store_path, 0o755, true)) {
@@ -91,8 +87,7 @@ class Picture extends \Galette\Core\Picture
     protected function getDefaultPicture(): void
     {
         $this->file_path = (string)realpath(
-            $this->plugins->getTemplatesPathFromName('Galette Objects Lend')
-            . '/../../webroot/images/1f5bc.png'
+            __DIR__ . '/../../../webroot/images/1f5bc.png'
         );
         $this->format = 'png';
         $this->mime = 'image/png';
@@ -254,13 +249,12 @@ class Picture extends \Galette\Core\Picture
     /**
      * Stores an image on the disk and in the database
      *
-     * @param array<string, mixed>  $file     The uploaded file
-     * @param boolean               $ajax     If the image comes from an ajax call (dnd)
+     * @param UploadedFileInterface $file     The uploaded file
      * @param ?array<string, mixed> $cropping Cropping properties
      *
-     * @return bool|int
+     * @return true|int
      */
-    public function store(array $file, bool $ajax = false, ?array $cropping = null): bool|int
+    public function storeFile(UploadedFileInterface $file, ?array $cropping = null): bool|int
     {
         $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
         $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
@@ -270,7 +264,7 @@ class Picture extends \Galette\Core\Picture
             unlink($thumb);
         }
 
-        return parent::store($file);
+        return parent::storeFile($file, $cropping);
     }
 
     /**
@@ -290,7 +284,7 @@ class Picture extends \Galette\Core\Picture
             $results = $zdb->execute($select_all);
             $success[] = str_replace(
                 '%count',
-                count($results),
+                (string)count($results),
                 _T("Found %count pictures in database")
             );
             foreach ($results as $picture) {
