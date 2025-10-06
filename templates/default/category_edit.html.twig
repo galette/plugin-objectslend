@@ -47,11 +47,11 @@
                 <img
                     src="{% if category.category_id %}{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail", "id": category.category_id}) }}{% else %}{{ url_for("objectslend_photo", {"type": "category", "mode": "thumbnail"}) }}{% endif %}"
                     class="picture"
-                    width="{{ category.picture.getOptimalThumbWidth(olendsprefs) }}"
-                    height="{{ category.picture.getOptimalThumbHeight(olendsprefs) }}"
+                    width="{{ picture.getOptimalThumbWidth(olendsprefs) }}"
+                    height="{{ picture.getOptimalThumbHeight(olendsprefs) }}"
                     alt="{{ _T("Category photo", "objectslend") }}"/>
                 <br/>
-                {% if category.picture.hasPicture() %}
+                {% if picture.hasPicture() %}
                     {% include "components/forms/checkbox.html.twig" with {
                         id: 'del_photo',
                         value: 1,

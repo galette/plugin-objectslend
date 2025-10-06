@@ -34,7 +34,6 @@ use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\LendStatus;
-use Galette\Core\Plugins;
 use Laminas\Db\Sql\Select;
 
 /**
@@ -74,20 +73,17 @@ class Objects
     /** @var array<string> */
     private array $errors = [];
     private Preferences $prefs;
-    private Plugins $plugins;
 
     /**
      * Default constructor
      *
      * @param Db           $zdb     Database instance
-     * @param Plugins      $plugins Plugins instance
      * @param Preferences  $lprefs  Lends preferences instance
      * @param ?ObjectsList $filters Filtering
      */
-    public function __construct(Db $zdb, Plugins $plugins, Preferences $lprefs, ?ObjectsList $filters = null)
+    public function __construct(Db $zdb, Preferences $lprefs, ?ObjectsList $filters = null)
     {
         $this->zdb = $zdb;
-        $this->plugins = $plugins;
         $this->prefs = $lprefs;
 
         if ($filters === null) {
@@ -134,7 +130,7 @@ class Objects
                     if ($all_rents === true) {
                         $deps['rents'] = true;
                     }
-                    $objects[] = new LendObject($this->zdb, $this->plugins, $row, $deps);
+                    $objects[] = new LendObject($this->zdb, $row, $deps);
                 }
             } else {
                 $objects = $rows;

@@ -25,6 +25,7 @@ namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
 use DI\Attribute\Inject;
+use GaletteObjectsLend\Entity\CategoryPicture;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Repository\Categories;
 use GaletteObjectsLend\Entity\LendCategory;
@@ -107,7 +108,7 @@ class CategoriesController extends AbstractPluginController
             }
         }
 
-        $categories = new Categories($this->zdb, $this->login, $this->plugins, $filters);
+        $categories = new Categories($this->zdb, $this->login, $filters);
         $list = $categories->getCategoriesList(true);
 
         $this->session->objectslend_filter_categories = $filters;
@@ -198,7 +199,7 @@ class CategoriesController extends AbstractPluginController
             $category = $this->session->objectslend_category;
             $this->session->objectslend_category = null;
         } else {
-            $category = new LendCategory($this->zdb, $this->plugins, $id);
+            $category = new LendCategory($this->zdb, $id);
         }
 
         if ($category->category_id !== null) {
@@ -208,12 +209,14 @@ class CategoriesController extends AbstractPluginController
         }
 
         $lendsprefs = new Preferences($this->zdb);
+        $picture = new CategoryPicture($category->category_id);
         $params = [
             'page_title'    => $title,
             'category'      => $category,
             'time'          => time(),
             'action'        => $action,
-            'olendsprefs'   => $lendsprefs
+            'olendsprefs'   => $lendsprefs,
+            'picture'       => $picture
         ];
 
         // display page
@@ -238,36 +241,20 @@ class CategoriesController extends AbstractPluginController
     public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
-        $category = new LendCategory($this->zdb, $this->plugins, $id);
+        $category = new LendCategory($this->zdb, $id);
         $error_detected = [];
 
         $category->name = $post['name'];
         $category->is_active = ($post['is_active'] ?? false) == true;
         if ($category->store()) {
             // picture upload
-            if (isset($_FILES['picture'])) {
-                if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
-                    if ($_FILES['picture']['tmp_name'] != '') {
-                        if (is_uploaded_file($_FILES['picture']['tmp_name'])) {
-                            $res = $category->picture->store($_FILES['picture']);
-                            if ($res < 0) {
-                                $error_detected[] = $category->picture->getErrorMessage($res);
-                            }
-                        }
-                    }
-                } elseif ($_FILES['picture']['error'] !== UPLOAD_ERR_NO_FILE) {
-                    Analog::log(
-                        $category->picture->getPhpErrorMessage($_FILES['picture']['error']),
-                        Analog::WARNING
-                    );
-                    $error_detected[] = $category->picture->getPhpErrorMessage(
-                        $_FILES['picture']['error']
-                    );
-                }
+            $picture = new CategoryPicture($category->category_id);
+            if (!$picture->upload($request->getUploadedFiles(), 'picture')) {
+                $error_detected = $picture->uploadErrors();
             }
 
-            if (isset($post['del_picture'])) {
-                if (!$category->picture->delete($category->category_id)) {
+            if (isset($post['del_photo'])) {
+                if (!$picture->delete()) {
                     $error_detected[] = _T("Delete failed", "objectslend");
                     Analog::log(
                         'Unable to delete picture for category ' . $category->name,
@@ -350,7 +337,7 @@ class CategoriesController extends AbstractPluginController
      */
     public function confirmRemoveTitle(array $args): string
     {
-        $category = new LendCategory($this->zdb, $this->plugins, (int)$args['id']);
+        $category = new LendCategory($this->zdb, (int)$args['id']);
         return sprintf(
             _T('Remove category %1$s', 'objectslend'),
             $category->name
@@ -367,7 +354,7 @@ class CategoriesController extends AbstractPluginController
      */
     protected function doDelete(array $args, array $post): bool
     {
-        $category = new LendCategory($this->zdb, $this->plugins, (int)$args['id']);
+        $category = new LendCategory($this->zdb, (int)$args['id']);
         return $category->delete();
     }
 

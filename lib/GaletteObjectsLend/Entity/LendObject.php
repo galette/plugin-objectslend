@@ -26,7 +26,6 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
-use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Repository\Objects;
@@ -124,7 +123,6 @@ class LendObject
     ];
 
     private Db $zdb;
-    private Plugins $plugins;
 
     /**
      * @var LendRent[]
@@ -135,15 +133,13 @@ class LendObject
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb     Database instance
-     * @param Plugins                                 $plugins Plugins instance
-     * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
-     * @param ?array<string,bool>                     $deps    Dependencies configuration, see LendOb::$deps
+     * @param Db                                      $zdb  Database instance
+     * @param int|ArrayObject<string,int|string>|null $args Maybe null, an RS object or an id from database
+     * @param ?array<string,bool>                     $deps Dependencies configuration, see LendOb::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject|null $args = null, ?array $deps = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null, ?array $deps = null)
     {
         $this->zdb = $zdb;
-        $this->plugins = $plugins;
 
         if ($deps !== null) {
             $this->deps = array_merge(
@@ -153,7 +149,7 @@ class LendObject
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new ObjectPicture($this->plugins);
+            $this->picture = new ObjectPicture();
         }
 
         if (is_int($args)) {
@@ -289,7 +285,7 @@ class LendObject
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+            $this->picture = new ObjectPicture((int)$this->object_id);
         }
 
         if ($this->deps['member'] === true) {
@@ -343,7 +339,7 @@ class LendObject
                     }
 
                     if ($this->deps['picture'] === true) {
-                        $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+                        $this->picture = new ObjectPicture((int)$this->object_id);
                     }
                 } else {
                     throw new \Exception(_T("Object has not been added :(", "objectslend"));
@@ -590,7 +586,7 @@ class LendObject
         //unset id so this is considered as new object
         unset($this->object_id);
         //unset image
-        $this->picture = new ObjectPicture($this->plugins);
+        $this->picture = new ObjectPicture();
         return $this->store();
     }
 

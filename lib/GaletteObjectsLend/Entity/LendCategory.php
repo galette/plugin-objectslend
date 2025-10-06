@@ -26,7 +26,6 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
-use Galette\Core\Plugins;
 use Laminas\Db\Sql\Predicate;
 
 /**
@@ -66,20 +65,17 @@ class LendCategory
     ];
 
     private Db $zdb;
-    private Plugins $plugins;
 
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb     Database instance
-     * @param Plugins                                 $plugins Plugins instance
-     * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
-     * @param ?array<string,bool>                     $deps    Dependencies configuration, see LendCategory::$deps
+     * @param Db                                      $zdb  Database instance
+     * @param int|ArrayObject<string,int|string>|null $args Maybe null, an RS object or an id from database
+     * @param ?array<string,bool>                     $deps Dependencies configuration, see LendCategory::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject|null $args = null, ?array $deps = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null, ?array $deps = null)
     {
         $this->zdb = $zdb;
-        $this->plugins = $plugins;
 
         if ($deps !== null) {
             $this->deps = array_merge(
@@ -89,7 +85,7 @@ class LendCategory
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new CategoryPicture($this->plugins);
+            $this->picture = new CategoryPicture();
         }
 
         if (is_int($args)) {
@@ -134,7 +130,7 @@ class LendCategory
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new CategoryPicture($this->plugins, (int)$this->category_id);
+            $this->picture = new CategoryPicture((int)$this->category_id);
         }
     }
 

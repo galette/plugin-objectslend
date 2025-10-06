@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace GaletteObjectsLend\IO;
 
 use Galette\Core\Db;
-use Galette\Core\Plugins;
 use Galette\IO\Pdf;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
@@ -46,7 +45,6 @@ class PdfObjects extends Pdf
     private LendPreferences $lendsprefs;
     private ObjectsList $filters;
     private Login $login;
-    private Plugins $plugins;
 
     /**
      * Main constructor, set creator and author
@@ -56,7 +54,6 @@ class PdfObjects extends Pdf
      * @param LendPreferences $lendsprefs Plugin preferences
      * @param ObjectsList     $filters    Current filters
      * @param Login           $login      Login instance
-     * @param Plugins         $plugins    Plugins instance
      */
     public function __construct(
         Db $zdb,
@@ -64,7 +61,6 @@ class PdfObjects extends Pdf
         LendPreferences $lendsprefs,
         ObjectsList $filters,
         Login $login,
-        Plugins $plugins
     ) {
         parent::__construct($prefs);
         // Enable Auto Page breaks
@@ -76,7 +72,6 @@ class PdfObjects extends Pdf
         $this->lendsprefs = $lendsprefs;
         $this->filters = $filters;
         $this->login = $login;
-        $this->plugins = $plugins;
     }
 
     /**
@@ -196,7 +191,7 @@ class PdfObjects extends Pdf
                 }
 
                 if (!empty($object->category_id) && !in_array($object->category_id, $existing_categories)) {
-                    $category = new LendCategory($this->zdb, $this->plugins, (int)$object->category_id);
+                    $category = new LendCategory($this->zdb, (int)$object->category_id);
                     $text = str_replace(
                         '%category',
                         $category->name,
