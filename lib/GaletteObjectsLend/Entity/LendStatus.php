@@ -103,7 +103,7 @@ class LendStatus
         $this->status_text = $r->status_text;
         $this->in_stock = $r->in_stock == '1';
         $this->is_active = $r->is_active == '1';
-        $this->rent_day_number = (int)$r->rent_day_number;
+        $this->rent_day_number = $r->rent_day_number != null ? (int)$r->rent_day_number : null;
     }
 
     /**
