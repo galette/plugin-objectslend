@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -42,7 +42,7 @@ class StatusList extends GaletteTestCase
     protected function testDefaults(\GaletteObjectsLend\Filters\StatusList $filters): void
     {
         $this->assertSame(\GaletteObjectsLend\Repository\Status::ORDERBY_NAME, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\StatusList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
         $this->assertNull($filters->filter_str);
         $this->assertNull($filters->active_filter);
         $this->assertNull($filters->stock_filter);
@@ -62,22 +62,26 @@ class StatusList extends GaletteTestCase
         //change order field
         $filters->orderby = \GaletteObjectsLend\Repository\Status::ORDERBY_STOCK;
         $this->assertSame(\GaletteObjectsLend\Repository\Status::ORDERBY_STOCK, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\StatusList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
 
         //same order field again: direction inverted
         $filters->orderby = \GaletteObjectsLend\Repository\Status::ORDERBY_STOCK;
         $this->assertSame(\GaletteObjectsLend\Repository\Status::ORDERBY_STOCK, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\StatusList::ORDER_DESC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
         //not existing order, same kept
-        $filters->ordered = 42;
+        $filters->setDirection('abcd');
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[GaletteObjectsLend\Filters\StatusList|Pagination] "abcd" is not a valid backing value for enum Galette\Enums\SQLOrder'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Status::ORDERBY_STOCK, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\StatusList::ORDER_DESC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
         //change direction only
-        $filters->ordered = \GaletteObjectsLend\Filters\StatusList::ORDER_ASC;
+        $filters->setDirection(\Galette\Enums\SQLOrder::ASC);
         $this->assertSame(\GaletteObjectsLend\Repository\Status::ORDERBY_STOCK, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\StatusList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
 
         //set string filter
         $filters->filter_str = 'a string';
@@ -87,12 +91,12 @@ class StatusList extends GaletteTestCase
         $filters->active_filter = \GaletteObjectsLend\Repository\Status::INACTIVE;
         $this->assertSame(\GaletteObjectsLend\Repository\Status::INACTIVE, $filters->active_filter);
 
-        //cast is forced
-        $filters->active_filter = (string)\GaletteObjectsLend\Repository\Status::INACTIVE;
-        $this->assertSame(\GaletteObjectsLend\Repository\Status::INACTIVE, $filters->active_filter);
-
         //out of known values, no change
         $filters->active_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[StatusList] Value for active filter should be either 1 or 2 (42 given)'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Status::INACTIVE, $filters->active_filter);
 
         //set stock filter
@@ -104,6 +108,10 @@ class StatusList extends GaletteTestCase
 
         //out of known values, no change
         $filters->stock_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[StatusList] Value for stock filter should be either 1, 2 or 0 (42 given)'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Status::OUT_STOCK, $filters->stock_filter);
 
         //reinit and test defaults are back

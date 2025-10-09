@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -42,7 +42,7 @@ class ObjectsList extends GaletteTestCase
     protected function testDefaults(\GaletteObjectsLend\Filters\ObjectsList $filters): void
     {
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::ORDERBY_NAME, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
         $this->assertNull($filters->filter_str);
         $this->assertNull($filters->category_filter);
         $this->assertNull($filters->active_filter);
@@ -64,22 +64,26 @@ class ObjectsList extends GaletteTestCase
         //change order field
         $filters->orderby = \GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS;
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
 
         //same order field again: direction inverted
         $filters->orderby = \GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS;
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\ObjectsList::ORDER_DESC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
 
         //not existing order, same kept
-        $filters->ordered = 42;
+        $filters->setDirection('abcde');
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\ObjectsList::ORDER_DESC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::DESC->value, $filters->getDirection());
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[GaletteObjectsLend\Filters\ObjectsList|Pagination] "abcde" is not a valid backing value for enum Galette\Enums\SQLOrder'
+        );
 
         //change direction only
-        $filters->ordered = \GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC;
+        $filters->setDirection(\Galette\Enums\SQLOrder::ASC);
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::ORDERBY_STATUS, $filters->orderby);
-        $this->assertSame(\GaletteObjectsLend\Filters\ObjectsList::ORDER_ASC, $filters->ordered);
+        $this->assertSame(\Galette\Enums\SQLOrder::ASC->value, $filters->getDirection());
 
         //set string filter
         $filters->filter_str = 'a string';
@@ -89,23 +93,15 @@ class ObjectsList extends GaletteTestCase
         $filters->active_filter = \GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS;
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS, $filters->active_filter);
 
-        //cast is forced
-        $filters->active_filter = (string)\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS;
-        $this->assertSame(\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS, $filters->active_filter);
-
         //out of known values, no change
         $filters->active_filter = 42;
+        $this->expectLogEntry(
+            \Analog::WARNING,
+            '[ObjectsList] Value for active filter should be either 1, 1 or 2 (42 given)'
+        );
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::INACTIVE_OBJECTS, $filters->active_filter);
 
         $filters->field_filter = \GaletteObjectsLend\Repository\Objects::FILTER_SERIAL;
-        $this->assertSame(\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL, $filters->field_filter);
-
-        //cast is forced
-        $filters->field_filter = (string)\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL;
-        $this->assertSame(\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL, $filters->field_filter);
-
-        //non numeric value, no change
-        $filters->field_filter = 'abc';
         $this->assertSame(\GaletteObjectsLend\Repository\Objects::FILTER_SERIAL, $filters->field_filter);
 
         //reinit and test defaults are back

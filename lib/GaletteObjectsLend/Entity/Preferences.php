@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -25,7 +25,6 @@ namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
 use Galette\Core\Db;
-use Laminas\Db\Sql\Predicate;
 
 /**
  * Plugin preferences
@@ -222,19 +221,19 @@ class Preferences
             $this->zdb->connection->beginTransaction();
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
             $update->set(
-                array(
+                [
                     'value_text'        => $data['GENERATED_CONTRIB_INFO_TEXT'],
                     'date_modification' => date('Y-m-d H:i:s')
-                )
+                ]
             )->where->equalTo(self::PK, 'GENERATED_CONTRIB_INFO_TEXT');
             $this->zdb->execute($update);
 
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
             $update->set(
-                array(
+                [
                     'value_numeric'     => ':value_numeric',
                     'date_modification' => ':date_modification'
-                )
+                ]
             )->where->equalTo(self::PK, ':' . self::PK);
             $stmt = $this->zdb->sql->prepareStatementForSqlObject($update);
 
@@ -264,7 +263,7 @@ class Preferences
      */
     public function load(): bool
     {
-        $this->prefs = array();
+        $this->prefs = [];
 
         try {
             $result = $this->zdb->selectAll(LEND_PREFIX . self::TABLE);
@@ -279,8 +278,8 @@ class Preferences
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'ObjectsLend Preferences cannot be loaded. Plugin should not work without ' .
-                'it. Exiting. ' . $e->getMessage(),
+                'ObjectsLend Preferences cannot be loaded. Plugin should not work without '
+                . 'it. Exiting. ' . $e->getMessage(),
                 Analog::URGENT
             );
             return false;

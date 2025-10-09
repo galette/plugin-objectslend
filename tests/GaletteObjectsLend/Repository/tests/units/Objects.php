@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -32,7 +32,6 @@ class Objects extends GaletteTestCase
 {
     protected int $seed = 20240526224135;
 
-    protected \Galette\Core\Plugins $plugins;
     protected \GaletteObjectsLend\Entity\Preferences $lend_prefs;
 
     /**
@@ -43,7 +42,6 @@ class Objects extends GaletteTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->plugins = $this->container->get('plugins');
         $this->lend_prefs = new \GaletteObjectsLend\Entity\Preferences($this->zdb);
     }
 
@@ -70,7 +68,7 @@ class Objects extends GaletteTestCase
      */
     public function testGetList(): void
     {
-        $objects = new \GaletteObjectsLend\Repository\Objects($this->zdb, $this->plugins, $this->lend_prefs);
+        $objects = new \GaletteObjectsLend\Repository\Objects($this->zdb, $this->lend_prefs);
 
         $rs_list = $objects->getList();
         $this->assertInstanceOf(\Laminas\Db\ResultSet\ResultSet::class, $rs_list);
@@ -81,28 +79,28 @@ class Objects extends GaletteTestCase
         $this->assertSame([], $objects->getObjectsList(true));
         $this->assertSame(0, $objects->getCount());
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
         $category->name = 'First category';
         $category->is_active = true;
         $this->assertTrue($category->store());
         $first_category_id = $category->getId();
         $this->assertGreaterThan(0, $first_category_id);
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
         $category->name = 'Second category';
         $category->is_active = true;
         $this->assertTrue($category->store());
         $second_category_id = $category->getId();
         $this->assertGreaterThan(0, $second_category_id);
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $object->name = 'First object';
         $object->category_id = $first_category_id;
         $object->is_active = true;
         $this->assertTrue($object->store());
         $first_object_id = $object->getId();
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $object->name = 'Second object';
         $object->description = 'First description';
         $object->category_id = $first_category_id;
@@ -110,14 +108,14 @@ class Objects extends GaletteTestCase
         $this->assertTrue($object->store());
         $second_object_id = $object->getId();
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $object->name = 'Third object';
         $object->category_id = $second_category_id;
         $object->is_active = true;
         $this->assertTrue($object->store());
         $third_object_id = $object->getId();
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $object->name = 'Fourth object';
         $object->serial_number = 'GGABCDEXX';
         $object->dimension = '210x297';
@@ -126,7 +124,7 @@ class Objects extends GaletteTestCase
         $fourth_object_id = $object->getId();
 
         $filters = new \GaletteObjectsLend\Filters\ObjectsList();
-        $objects = new \GaletteObjectsLend\Repository\Objects($this->zdb, $this->plugins, $this->lend_prefs, $filters);
+        $objects = new \GaletteObjectsLend\Repository\Objects($this->zdb, $this->lend_prefs, $filters);
 
         $this->assertCount(4, $objects->getObjectsList(true));
         $this->assertSame(4, $objects->getCount());

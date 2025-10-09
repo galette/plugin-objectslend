@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -26,7 +26,6 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
-use Galette\Core\Plugins;
 use Laminas\Db\Sql\Predicate;
 
 /**
@@ -46,11 +45,11 @@ class LendCategory
     public const PK = 'category_id';
 
     /** @var array<string> */
-    private array $fields = array(
+    private array $fields = [
         'category_id' => 'integer',
         'name' => 'varchar(100)',
         'is_active' => 'boolean'
-    );
+    ];
     private int $category_id;
     private ?string $name = null;
     private bool $is_active = true;
@@ -66,20 +65,17 @@ class LendCategory
     ];
 
     private Db $zdb;
-    private Plugins $plugins;
 
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb     Database instance
-     * @param Plugins                                 $plugins Plugins instance
-     * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
-     * @param array<string,bool>                      $deps    Dependencies configuration, see LendCategory::$deps
+     * @param Db                                      $zdb  Database instance
+     * @param int|ArrayObject<string,int|string>|null $args Maybe null, an RS object or an id from database
+     * @param ?array<string,bool>                     $deps Dependencies configuration, see LendCategory::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject $args = null, array $deps = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null, ?array $deps = null)
     {
         $this->zdb = $zdb;
-        $this->plugins = $plugins;
 
         if ($deps !== null) {
             $this->deps = array_merge(
@@ -89,21 +85,21 @@ class LendCategory
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new CategoryPicture($this->plugins);
+            $this->picture = new CategoryPicture();
         }
 
         if (is_int($args)) {
             try {
                 $select = $this->zdb->select(LEND_PREFIX . self::TABLE)
-                        ->where(array(self::PK => $args));
+                        ->where([self::PK => $args]);
                 $results = $this->zdb->execute($select);
                 if ($results->count() == 1) {
                     $this->loadFromRS($results->current());
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -134,7 +130,7 @@ class LendCategory
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new CategoryPicture($this->plugins, (int)$this->category_id);
+            $this->picture = new CategoryPicture((int)$this->category_id);
         }
     }
 
@@ -146,7 +142,7 @@ class LendCategory
     public function store(): bool
     {
         try {
-            $values = array();
+            $values = [];
 
             foreach ($this->fields as $k => $v) {
                 if ($k === 'is_active' && $this->$k === false) {
@@ -177,14 +173,14 @@ class LendCategory
             } else {
                 $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->category_id));
+                        ->where([self::PK => $this->category_id]);
                 $this->zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -201,26 +197,26 @@ class LendCategory
         try {
             $this->zdb->connection->beginTransaction();
             $select = $this->zdb->select(LEND_PREFIX . LendObject::TABLE)
-                    ->where(array('category_id' => $this->category_id));
+                    ->where(['category_id' => $this->category_id]);
             $results = $this->zdb->execute($select);
             if ($results->count() > 0) {
                 $values = ['category_id' => new Predicate\Expression('NULL')];
                 $update = $this->zdb->update(LEND_PREFIX . LendObject::TABLE)
                         ->set($values)
-                        ->where(array('category_id' => $this->category_id));
+                        ->where(['category_id' => $this->category_id]);
                 $this->zdb->execute($update);
             }
 
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $this->category_id));
+                    ->where([self::PK => $this->category_id]);
             $this->zdb->execute($delete);
             $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;

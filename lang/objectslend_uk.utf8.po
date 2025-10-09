@@ -3,22 +3,25 @@
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
 # Ostap <ostapbataj79@gmail.com>, 2022.
 # Artem <artem@molotov.work>, 2022.
+# Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
+# Sotski Eugene <jekakmail@gmail.com>, 2025.
+# Максим Горпиніч <maksimgorpinic4@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2023-11-22 10:44+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2025-05-22 16:01+0000\n"
+"Last-Translator: Максим Горпиніч <maksimgorpinic4@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -127,7 +130,7 @@ msgstr "З"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:196
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:168
 msgid "Member"
-msgstr "Член"
+msgstr "Члени"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:172
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:169
@@ -177,10 +180,8 @@ msgstr "Коментарі"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:70
-#, fuzzy
-#| msgid "object_card"
 msgid "objects_cards"
-msgstr "картка_об'єкта"
+msgstr "картки_об'єктів"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:87
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
@@ -226,7 +227,7 @@ msgstr "Доступно"
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:144
 msgid "Status has not been added :("
-msgstr "Стан не додано :("
+msgstr "Статус не додано :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:349
 msgid "Object has not been added :("
@@ -344,14 +345,12 @@ msgid "Object has been saved"
 msgstr "Об'єкт збережено"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:515
-#, fuzzy
-#| msgid "Status has been saved"
 msgid "Status has been updated"
-msgstr "Стан збережено"
+msgstr "Статус оновлено"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
-msgstr "Успішно клоновано з #%id.<br>Тепер можна редагувати."
+msgstr "Успішно клоновано з #%id.<br/>Тепер можна редагувати."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
 msgid "An error occurred cloning object :("
@@ -367,10 +366,8 @@ msgstr "Повернути позичений об'єкт"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:628
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:744
-#, fuzzy
-#| msgid "You do not have rights to take objects!"
 msgid "You do not have rights to borrow objects!"
-msgstr "Ви не маєте прав брати об'єкти!"
+msgstr "Ви не маєте права позичати об'єкти!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:665
 #, php-format
@@ -379,10 +376,8 @@ msgstr "Об'єкт %object зараз недоступний"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:694
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:914
-#, fuzzy
-#| msgid "You do not have rights to take objects!"
 msgid "You do not have rights to return objects!"
-msgstr "Ви не маєте прав брати об'єкти!"
+msgstr "Ви не маєте права повертати об'єкти!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:849
 #, php-format
@@ -406,7 +401,7 @@ msgstr "Ви ось-ось видалите %count об'єктів."
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:48
 msgid "Objects lend"
-msgstr "Objects lend"
+msgstr "Об'єкти позичаються"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Borrow status"
@@ -418,7 +413,7 @@ msgstr "Категорії об'єктів"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:85
 msgid "Preferences"
-msgstr "Налаштування"
+msgstr "Параметрів"
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:257
 msgid "Name/description"
@@ -447,8 +442,8 @@ msgid ""
 "Check if the object is available to be borrowed;<br/>uncheck if object is "
 "already borrowed and should be given back"
 msgstr ""
-"Перевірте, чи доступний об'єкт для позичення;<br>зніміть прапорець, якщо "
-"об'єкт вже позичений і повинен бути повернений."
+"Перевірте, чи об'єкт доступний для позики;<br/>зніміть позначку, якщо об'єкт "
+"вже позичений і його слід повернути"
 
 #: ../tempcache/status_edit.html.twig:80
 #: ../tempcache/categories_list.html.twig:131
@@ -593,9 +588,9 @@ msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
-"Дозволяє переглядати повнорозмірні зображення за натискання на ескіз. <br> "
-"Якщо вимкнено, показуватимуться лише ескізи, але повні зображення будуть "
-"зберігатися."
+"Дозволить перегляд повнорозмірних зображень при натисканні на мініатюри.<br/"
+">Якщо вимкнено, відображатимуться лише мініатюри, але повнорозмірні "
+"зображення все одно зберігатимуться."
 
 #: ../tempcache/preferences.html.twig:196
 msgid "View category:"
@@ -607,7 +602,7 @@ msgstr "Показ приблизної дати повернення:"
 
 #: ../tempcache/preferences.html.twig:200
 msgid "View description"
-msgstr "Показ опису:"
+msgstr "Переглянути опис"
 
 #: ../tempcache/preferences.html.twig:202
 msgid "View dimensions:"
@@ -643,7 +638,7 @@ msgstr "Об'єкт"
 
 #: ../tempcache/objects_edit.html.twig:70 ../tempcache/take_object.html.twig:70
 msgid "Name:"
-msgstr "Ім'я:"
+msgstr "ім'я:"
 
 #: ../tempcache/objects_edit.html.twig:76
 #: ../tempcache/take_object.html.twig:106
@@ -950,22 +945,21 @@ msgid ""
 "other cases not listed above and at the discretion of the seller, the "
 "deposit check may also be collected in whole or party."
 msgstr ""
-"Об'єкти, що пропонуються в оренду, знаходяться в хорошому стані, і перевірка "
-"оренди, що суперечить їх станом, проводиться на мить отримання. Після "
-"отримання об'єкта претензії не приймаються. Написання магазином списку "
-"бронювання не звільняє покупця від перевірки його отримання. Оплата оренди "
-"дає право покупцеві на нормальне використання взятого у тимчасове "
-"користування об'єкта. У разі надання об'єкта в погіршеному стані продавець "
-"залишає за собою право стягнути весь або частину застави. У разі погіршення "
-"стану орендованого об'єкта понад стандартного, потрібен фінансовий внесок за "
-"додаткове очищення тощо.\n"
-"Згідно зі статтею 590 Цивільного кодексу України:\n"
-"\"1. Заставоутримувач набуває право звернення стягнення на предмет застави в "
-"разі, коли зобов'язання не буде виконано у встановлений строк (термін), якщо "
-"інше не встановлено договором або законом.\n"
-"2. Заставоутримувач набуває право звернення стягнення на предмет застави в "
-"разі, коли зобов'язання не буде виконано у встановлений строк (термін), якщо "
-"інше не встановлено договором або законом.\"."
+"Предмети, що пропонуються в оренду, знаходяться в хорошому стані, і "
+"перевірка оренди всупереч їхньому статусу відбувається на момент вилучення. "
+"Після звільнення об'єкта претензії не приймаються. Написання магазином "
+"списку застережень не позбавляє покупця можливості перевірити його "
+"ретрансляцію. Сплата орендної плати дає право покупцеві на нормальне "
+"користування предметом, взятим напрокат. Якщо предмет повертається в "
+"погіршеному стані, продавець залишає за собою право стягнути всю суму "
+"застави або її частину. У разі погіршення стану орендованого об'єкту, що "
+"виходить за рамки стандартного, необхідно буде внести фінансовий внесок за "
+"додаткове прибирання, яке було спричинене. У разі пошкодження, втрати або "
+"крадіжки орендованого майна, застава не повертається автоматично компанії в "
+"якості відшкодування збитків відповідно до статті 1152 Цивільного Кодексу і "
+"без необхідності дотримання будь-яких інших судових або позасудових "
+"формальностей. У деяких інших випадках, не перерахованих вище, і на розсуд "
+"продавця, депозитний чек також може бути стягнутий повністю або частково."
 
 #: ../tempcache/take_object.html.twig:501
 msgid "Borrow object"
@@ -976,10 +970,8 @@ msgid "Return object"
 msgstr "Повернути об'єкт"
 
 #: ../tempcache/take_object.html.twig:558
-#, fuzzy
-#| msgid "You must agree with terms and conditions in order to take."
 msgid "You must agree with terms and conditions in order to borrow."
-msgstr "Ви повинні погодитися з умовами для того, щоб узяти."
+msgstr "Ви повинні погодитися з умовами, щоб позичити."
 
 #~ msgid "Edit the object"
 #~ msgstr "Редагувати цей об'єкт"

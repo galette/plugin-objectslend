@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace GaletteObjectsLend\Entity;
 
 use Analog\Analog;
-use Galette\Core\Plugins;
+use Psr\Http\Message\UploadedFileInterface;
 use Slim\Psr7\Response;
 use Slim\Psr7\Stream;
 
@@ -45,21 +45,17 @@ class Picture extends \Galette\Core\Picture
     protected int $thumb_optimal_height;
     protected int $thumb_optimal_width;
 
-    protected Plugins $plugins;
-
     /**
      * Default constructor.
      *
-     * @param Plugins    $plugins  Plugins
      * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, mixed $objectid = null)
+    public function __construct(mixed $objectid = null)
     {
         $this->tbl_prefix = LEND_PREFIX;
-        $this->plugins = $plugins;
 
         if (!file_exists($this->store_path)) {
-            if (!mkdir($this->store_path, 0755, true)) {
+            if (!mkdir($this->store_path, 0o755, true)) {
                 Analog::log(
                     'Unable to create photo dir `' . $this->store_path . '`.',
                     Analog::ERROR
@@ -72,8 +68,8 @@ class Picture extends \Galette\Core\Picture
             }
         } elseif (!is_dir($this->store_path)) {
             Analog::log(
-                'Unable to store plugin images, since `' . $this->store_path .
-                '` is not a directory.',
+                'Unable to store plugin images, since `' . $this->store_path
+                . '` is not a directory.',
                 Analog::WARNING
             );
         }
@@ -91,8 +87,7 @@ class Picture extends \Galette\Core\Picture
     protected function getDefaultPicture(): void
     {
         $this->file_path = (string)realpath(
-            $this->plugins->getTemplatesPathFromName('Galette Objects Lend') .
-            '/../../webroot/images/1f5bc.png'
+            __DIR__ . '/../../../webroot/images/1f5bc.png'
         );
         $this->format = 'png';
         $this->mime = 'image/png';
@@ -127,14 +122,14 @@ class Picture extends \Galette\Core\Picture
      * Create thumbnail image
      * @see \Galette\Core\Picture::resizeImage()
      *
-     * @param string $source the source image
-     * @param string $ext    file's extension
-     * @param string $dest   the destination image.
-     *                       If null, we'll use the source image. Defaults to null
+     * @param string  $source the source image
+     * @param string  $ext    file's extension
+     * @param ?string $dest   the destination image.
+     *                        If null, we'll use the source image. Defaults to null
      *
      * @return bool
      */
-    private function createThumb(string $source, string $ext, string $dest = null): bool
+    private function createThumb(string $source, string $ext, ?string $dest = null): bool
     {
         $class = get_class($this);
 
@@ -150,8 +145,8 @@ class Picture extends \Galette\Core\Picture
                 case 'jpg':
                     if (!$gdinfo['JPEG Support']) {
                         Analog::log(
-                            '[' . $class . '] GD has no JPEG Support - ' .
-                            'pictures could not be resized!',
+                            '[' . $class . '] GD has no JPEG Support - '
+                            . 'pictures could not be resized!',
                             Analog::ERROR
                         );
                         return false;
@@ -160,8 +155,8 @@ class Picture extends \Galette\Core\Picture
                 case 'png':
                     if (!$gdinfo['PNG Support']) {
                         Analog::log(
-                            '[' . $class . '] GD has no PNG Support - ' .
-                            'pictures could not be resized!',
+                            '[' . $class . '] GD has no PNG Support - '
+                            . 'pictures could not be resized!',
                             Analog::ERROR
                         );
                         return false;
@@ -170,8 +165,8 @@ class Picture extends \Galette\Core\Picture
                 case 'gif':
                     if (!$gdinfo['GIF Create Support']) {
                         Analog::log(
-                            '[' . $class . '] GD has no GIF Support - ' .
-                            'pictures could not be resized!',
+                            '[' . $class . '] GD has no GIF Support - '
+                            . 'pictures could not be resized!',
                             Analog::ERROR
                         );
                         return false;
@@ -181,7 +176,7 @@ class Picture extends \Galette\Core\Picture
                     return false;
             }
 
-            list($cur_width, $cur_height, $cur_type, $curattr)
+            [$cur_width, $cur_height, $cur_type, $curattr]
                 = getimagesize($source);
 
             $ratio = $cur_width / $cur_height;
@@ -221,8 +216,8 @@ class Picture extends \Galette\Core\Picture
             return true;
         } else {
             Analog::log(
-                '[' . $class . '] GD is not present - ' .
-                'pictures could not be resized!',
+                '[' . $class . '] GD is not present - '
+                . 'pictures could not be resized!',
                 Analog::ERROR
             );
             return false;
@@ -254,13 +249,12 @@ class Picture extends \Galette\Core\Picture
     /**
      * Stores an image on the disk and in the database
      *
-     * @param array<string, mixed>  $file     The uploaded file
-     * @param boolean               $ajax     If the image comes from an ajax call (dnd)
+     * @param UploadedFileInterface $file     The uploaded file
      * @param ?array<string, mixed> $cropping Cropping properties
      *
-     * @return bool|int
+     * @return true|int
      */
-    public function store(array $file, bool $ajax = false, array $cropping = null): bool|int
+    public function storeFile(UploadedFileInterface $file, ?array $cropping = null): bool|int
     {
         $ext = pathinfo($this->file_path, PATHINFO_EXTENSION);
         $filename = substr($this->file_path, 0, strlen($this->file_path) - strlen($ext) - 1);
@@ -270,7 +264,7 @@ class Picture extends \Galette\Core\Picture
             unlink($thumb);
         }
 
-        return parent::store($file);
+        return parent::storeFile($file, $cropping);
     }
 
     /**
@@ -290,7 +284,7 @@ class Picture extends \Galette\Core\Picture
             $results = $zdb->execute($select_all);
             $success[] = str_replace(
                 '%count',
-                count($results),
+                (string)count($results),
                 _T("Found %count pictures in database")
             );
             foreach ($results as $picture) {
@@ -313,8 +307,8 @@ class Picture extends \Galette\Core\Picture
             }
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                . $e->getTraceAsString(),
                 Analog::ERROR
             );
             $error[] = _T("An error occurred :(");
@@ -362,7 +356,7 @@ class Picture extends \Galette\Core\Picture
         } else {
             //resize if too small/large
             if (function_exists("gd_info")) {
-                list($cur_width, $cur_height, $cur_type, $curattr)
+                [$cur_width, $cur_height, $cur_type, $curattr]
                     = getimagesize($thumb);
 
                 if (
@@ -384,7 +378,7 @@ class Picture extends \Galette\Core\Picture
             }
         }
 
-        list($width, $height) = getimagesize($thumb);
+        [$width, $height] = getimagesize($thumb);
         $this->thumb_optimal_height = (int)$height;
         $this->thumb_optimal_width = (int)$width;
     }

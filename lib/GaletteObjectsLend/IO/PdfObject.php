@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -27,12 +27,7 @@ use Galette\IO\Pdf;
 use Galette\Core\Db;
 use Galette\Core\Preferences;
 use GaletteObjectsLend\Entity\Preferences as LPreferences;
-use Analog\Analog;
 use GaletteObjectsLend\Entity\LendObject;
-use GaletteObjectsLend\Entity\LendCategory;
-use Galette\IO\PdfAdhesionForm;
-use Galette\Core\Logo;
-use Galette\Entity\Adherent;
 
 /**
  * Object card PDF

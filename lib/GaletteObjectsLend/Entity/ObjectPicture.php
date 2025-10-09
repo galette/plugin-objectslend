@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,9 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Entity;
 
-use Analog\Analog;
-use Galette\Core\Plugins;
-
 /**
  * Picture for objects
  *
@@ -40,12 +37,11 @@ class ObjectPicture extends Picture
     /**
      * Default constructor.
      *
-     * @param Plugins    $plugins  Plugins
      * @param mixed|null $objectid Object id
      */
-    public function __construct(Plugins $plugins, mixed $objectid = null)
+    public function __construct(mixed $objectid = null)
     {
         $this->store_path = GALETTE_PHOTOS_PATH . 'objectslend/objects/';
-        parent::__construct($plugins, $objectid);
+        parent::__construct($objectid);
     }
 }

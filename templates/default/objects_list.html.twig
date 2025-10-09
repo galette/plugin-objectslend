@@ -59,13 +59,19 @@
 
     {% if login.isAdmin() or login.isStaff() %}
         {% set columns = columns|merge([
-            {'label': '#'},
+            {
+                'label': '#',
+                'collapse': true
+            },
         ]) %}
     {% endif %}
 
     {% if olendsprefs.imagesInLists() %}
         {% set columns = columns|merge([
-            {'label': _T("Picture")},
+            {
+                'label': _T("Picture"),
+                'collapse': true
+            },
         ]) %}
     {% endif %}
 
@@ -105,19 +111,28 @@
 
     {% set columns = columns|merge([
         {'label': _T("Status", "objectslend"), 'order': constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_STATUS")},
-        {'label': _T("Since", "objectslend"), 'order': constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_BDATE")},
+        {
+            'label': _T("Since", "objectslend"), 'order': constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_BDATE"),
+            'collapse': true
+        },
         {'label': _T("By", "objectslend"), 'order': constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_MEMBER")},
     ]) %}
 
     {% if lendsprefs.VIEW_DATE_FORECAST %}
         {% set columns = columns|merge([
-            {'label': _T("Return", "objectslend"), 'order': constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_FDATE")},
+            {
+                'label': _T("Return", "objectslend"), 'order': constant("GaletteObjectsLend\\Repository\\Objects::ORDERBY_FDATE"),
+                'collapse': true
+            },
         ]) %}
     {% endif %}
 
     {% if login.isAdmin() or login.isStaff() %}
         {% set columns = columns|merge([
-            {'label': _T("Active", "objectslend")},
+            {
+                'label': _T("Active", "objectslend"),
+                'collapse': true
+            },
         ]) %}
     {% endif %}
 
@@ -221,12 +236,14 @@
     {% for object in objects %}
         <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
             {% if login.isAdmin() or login.isStaff() %}
-                <td class="center" data-scope="row">
-                    <input type="checkbox" name="entries_sel[]" value="{{ object.getId() }}">
+                <td class="center collapsing" data-scope="row">
+                    <span class="ui checkbox">
+                        <input type="checkbox" name="entries_sel[]" value="{{ object.getId() }}">
+                    </span>
                 </td>
             {% endif %}
             {% if olendsprefs.imagesInLists() %}
-                <td class="center" data-col-label="{{ _T("Picture") }}">
+                <td class="center collapsing" data-col-label="{{ _T("Picture") }}">
                     <img src="{{ url_for("objectslend_photo", {"type": "object", "mode": "thumbnail", "id": object.getId()}) }}"
                          class="picture"
                          width="{{ object.getPicture().getOptimalThumbWidth(olendsprefs) }}"
@@ -246,7 +263,7 @@
                 </td>
             {% endif %}
             {% if lendsprefs.VIEW_PRICE %}
-                <td class="right nowrap" data-col-label="{{ _T("Price", "objectslend") }}">
+                <td class="right" data-col-label="{{ _T("Price", "objectslend") }}">
                     {{ object.getPrice() }}&euro;
                 </td>
             {% endif %}
@@ -275,7 +292,7 @@
                     {{ object.getStatusText() }}{% if object.inStock() %} ({{ _T("In stock", "objectslend") }}){% endif %}
                 {% else %}-{% endif %}
             </td>
-            <td class="center nowrap" data-col-label="{{ _T("Since", "objectslend") }}">
+            <td class="center collapsing" data-col-label="{{ _T("Since", "objectslend") }}">
                 {{ object.getDateBegin() }}
             </td>
             <td data-col-label="{{ _T("By", "objectslend") }}">
@@ -284,18 +301,20 @@
                 {% else %}-{% endif %}
             </td>
             {% if lendsprefs.VIEW_DATE_FORECAST %}
-                <td class="center nowrap" data-col-label="{{ _T("Return", "objectslend") }}">
+                <td class="center collapsing" data-col-label="{{ _T("Return", "objectslend") }}">
                     {{ object.getDateForecast() }}
                 </td>
             {% endif %}
-            <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
-                <i
+            {% if login.isAdmin() or login.isStaff() %}
+                <td class="center collapsing" data-col-label="{{ _T("Active", "objectslend") }}">
+                    <i
                         class="thumbs {% if object.isActive() %}up green{% else %}down red{% endif %} icon tooltip"
                         title="{% if object.isActive() %}{{ _T("Object is active", "objectslend") }}{% else %}{{ _T("Object is inactive", "objectslend") }}{% endif %}">
-                </i>
-                <span class="visually-hidden">{% if object.isActive() %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
-            </td>
-            <td class="center actions_row nowrap">
+                    </i>
+                    <span class="visually-hidden">{% if object.isActive() %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
+                </td>
+            {% endif %}
+            <td class="center actions_row collapsing">
                 {% set actions = [] %}
                 {% if login.isAdmin() or login.isStaff() %}
                     {% set actions = [

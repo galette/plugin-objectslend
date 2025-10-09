@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -31,19 +31,6 @@ use Galette\GaletteTestCase;
 class Status extends GaletteTestCase
 {
     protected int $seed = 20240526084251;
-
-    protected \Galette\Core\Plugins $plugins;
-
-    /**
-     * Set up tests
-     *
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->plugins = $this->container->get('plugins');
-    }
 
     /**
      * Cleanup after each test method

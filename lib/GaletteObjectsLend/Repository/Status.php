@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,8 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
-use ArrayObject;
-use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\ResultSet\ResultSet;
@@ -66,7 +64,7 @@ class Status
     private StatusList $filters;
     private ?int $count = null;
     /** @var array<string> */
-    private array $errors = array();
+    private array $errors = [];
 
     /**
      * Default constructor
@@ -75,7 +73,7 @@ class Status
      * @param Login       $login   Logged in instance
      * @param ?StatusList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, StatusList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?StatusList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
@@ -101,7 +99,7 @@ class Status
      */
     public function getStatusList(
         bool $as_stt = false,
-        array $fields = null,
+        ?array $fields = null,
         bool $count = true,
         bool $limit = true
     ): array|ResultSet {
@@ -116,7 +114,7 @@ class Status
             $rows = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $status = array();
+            $status = [];
             if ($as_stt) {
                 foreach ($rows as $row) {
                     $status[] = new LendStatus($this->zdb, $row);
@@ -137,15 +135,15 @@ class Status
     /**
      * Get status list
      *
-     * @param boolean $as_stt return the results as an array of
-     *                        Status object.
-     * @param array   $fields field(s) name(s) to get. Should be a string or
-     *                        an array. If null, all fields will be
-     *                        returned
+     * @param boolean   $as_stt return the results as an array of
+     *                          Status object.
+     * @param ?string[] $fields field(s) name(s) to get. Should be a string or
+     *                          an array. If null, all fields will be
+     *                          returned
      *
      * @return LendStatus[]|ResultSet
      */
-    public function getList(bool $as_stt = false, array $fields = null): array|ResultSet
+    public function getList(bool $as_stt = false, ?array $fields = null): array|ResultSet
     {
         return $this->getStatusList(
             $as_stt,
@@ -209,9 +207,9 @@ class Status
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::HAVING);
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(c.' . self::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;
@@ -224,7 +222,7 @@ class Status
             $results = $this->zdb->execute($countSelect);
 
             $this->count = (int)$results->current()->count;
-            if (isset($this->filters) && $this->count > 0) {
+            if ($this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
         } catch (\Exception $e) {
@@ -244,9 +242,9 @@ class Status
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
         switch ($this->filters->orderby) {
             case self::ORDERBY_ID:
                 if ($this->canOrderBy('status_id', $fields)) {
@@ -336,8 +334,8 @@ class Status
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;

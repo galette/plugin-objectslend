@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,8 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
-use ArrayObject;
-use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\ResultSet\ResultSet;
@@ -36,7 +34,6 @@ use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\LendStatus;
-use Galette\Core\Plugins;
 use Laminas\Db\Sql\Select;
 
 /**
@@ -74,22 +71,19 @@ class Objects
     private ObjectsList $filters;
     private ?int $count = null;
     /** @var array<string> */
-    private array $errors = array();
+    private array $errors = [];
     private Preferences $prefs;
-    private Plugins $plugins;
 
     /**
      * Default constructor
      *
      * @param Db           $zdb     Database instance
-     * @param Plugins      $plugins Plugins instance
      * @param Preferences  $lprefs  Lends preferences instance
      * @param ?ObjectsList $filters Filtering
      */
-    public function __construct(Db $zdb, Plugins $plugins, Preferences $lprefs, ObjectsList $filters = null)
+    public function __construct(Db $zdb, Preferences $lprefs, ?ObjectsList $filters = null)
     {
         $this->zdb = $zdb;
-        $this->plugins = $plugins;
         $this->prefs = $lprefs;
 
         if ($filters === null) {
@@ -102,18 +96,18 @@ class Objects
     /**
      * Get objects list
      *
-     * @param boolean       $as_objects return the results as an array of
-     *                                  Object object.
-     * @param array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
-     * @param boolean       $count      true if we want to count members
-     * @param boolean       $limit      true if we want records pagination
-     * @param boolean       $all_rents  true to load rents along with objects
+     * @param boolean        $as_objects return the results as an array of
+     *                                   Object object.
+     * @param ?array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
+     * @param boolean        $count      true if we want to count members
+     * @param boolean        $limit      true if we want records pagination
+     * @param boolean        $all_rents  true to load rents along with objects
      *
      * @return LendObject[]|ResultSet
      */
     public function getObjectsList(
         bool $as_objects = false,
-        array $fields = null,
+        ?array $fields = null,
         bool $count = true,
         bool $limit = true,
         bool $all_rents = false
@@ -129,14 +123,14 @@ class Objects
             $rows = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $objects = array();
+            $objects = [];
             if ($as_objects) {
                 foreach ($rows as $row) {
                     $deps = ['last_rent' => true];
                     if ($all_rents === true) {
                         $deps['rents'] = true;
                     }
-                    $objects[] = new LendObject($this->zdb, $this->plugins, $row, $deps);
+                    $objects[] = new LendObject($this->zdb, $row, $deps);
                 }
             } else {
                 $objects = $rows;
@@ -191,16 +185,16 @@ class Objects
 
             if ($this->zdb->isForeignKeyException($e)) {
                 Analog::log(
-                    'Object mays still have existing dependencies in the ' .
-                    'database.' .
-                    'Please remove dependencies before trying ' .
-                    'to remove it.',
+                    'Object mays still have existing dependencies in the '
+                    . 'database.'
+                    . 'Please remove dependencies before trying '
+                    . 'to remove it.',
                     Analog::ERROR
                 );
             } else {
                 Analog::log(
-                    'Unable to delete selected object(s) |' .
-                    $e->getMessage(),
+                    'Unable to delete selected object(s) |'
+                    . $e->getMessage(),
                     Analog::ERROR
                 );
             }
@@ -218,7 +212,7 @@ class Objects
      *
      * @return LendObject[]|ResultSet
      */
-    public function getList(bool $as_objects = false, array $fields = null): array|ResultSet
+    public function getList(bool $as_objects = false, ?array $fields = null): array|ResultSet
     {
         return $this->getObjectsList(
             $as_objects,
@@ -272,7 +266,7 @@ class Objects
             );
 
             $select->join(
-                array('c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE),
+                ['c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE],
                 'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
                 ['cat_active'   => 'is_active', 'cat_name' => 'name'],
                 $select::JOIN_LEFT
@@ -316,9 +310,9 @@ class Objects
             $countSelect->reset($countSelect::HAVING);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(o.' . self::PK . ')')
-                )
+                ]
             );
 
             $have = $select->having;
@@ -341,7 +335,7 @@ class Objects
             $results = $zdb->execute($countSelect);
 
             $this->count = (int)$results->current()->count;
-            if (isset($this->filters) && $this->count > 0) {
+            if ($this->count > 0) {
                 $this->filters->setCounter($this->count);
             }
         } catch (\Exception $e) {
@@ -361,9 +355,9 @@ class Objects
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
         switch ($this->filters->orderby) {
             case self::ORDERBY_NAME:
                 if ($this->canOrderBy('name', $fields)) {
@@ -407,8 +401,8 @@ class Objects
                 break;
             case self::ORDERBY_MEMBER:
                 if ($this->canOrderBy('nom_adh', $fields) && $this->canOrderBy('prenom_adh', $fields)) {
-                    $order[] = 'a.nom_adh ' . $this->filters->getDirection() .
-                        ', a.prenom_adh ' . $this->filters->getDirection();
+                    $order[] = 'a.nom_adh ' . $this->filters->getDirection()
+                        . ', a.prenom_adh ' . $this->filters->getDirection();
                 }
                 break;
             case self::ORDERBY_CATEGORY:
@@ -467,10 +461,10 @@ class Objects
 
                         if ($this->prefs->getPreferences()['VIEW_DESCRIPTION']) {
                             $select->where(
-                                '(' .
-                                $pre . 'LOWER(o.name)' . $sep .
-                                'LOWER(o.description)' . $post . ' LIKE ' .
-                                $token . ')'
+                                '('
+                                . $pre . 'LOWER(o.name)' . $sep
+                                . 'LOWER(o.description)' . $post . ' LIKE '
+                                . $token . ')'
                             );
                         } else {
                             $select->where(
@@ -480,14 +474,14 @@ class Objects
                         break;
                     case self::FILTER_SERIAL:
                         $select->where(
-                            'LOWER(o.serial_number) LIKE ' .
-                            $token
+                            'LOWER(o.serial_number) LIKE '
+                            . $token
                         );
                         break;
                     case self::FILTER_DIM:
                         $select->where(
-                            'LOWER(o.dimension) LIKE ' .
-                            $token
+                            'LOWER(o.dimension) LIKE '
+                            . $token
                         );
                         break;
                     case self::FILTER_ID:
@@ -521,8 +515,8 @@ class Objects
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;

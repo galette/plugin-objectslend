@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -47,13 +47,13 @@ class LendStatus
     private Db $zdb;
 
     /** @var array<string,string> */
-    private array $fields = array(
+    private array $fields = [
         'status_id' => 'integer',
         'status_text' => 'varchar(100)',
         'in_stock' => 'boolean',
         'is_active' => 'boolean',
         'rent_day_number' => 'int'
-    );
+    ];
     private int $status_id;
     private string $status_text = '';
     private bool $in_stock = false;
@@ -66,7 +66,7 @@ class LendStatus
      * @param Db                                      $zdb  Database instance
      * @param int|ArrayObject<string,int|string>|null $args Can be null, an ID or a database row
      */
-    public function __construct(Db $zdb, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
 
@@ -80,8 +80,8 @@ class LendStatus
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                        $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                        . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -103,7 +103,7 @@ class LendStatus
         $this->status_text = $r->status_text;
         $this->in_stock = $r->in_stock == '1';
         $this->is_active = $r->is_active == '1';
-        $this->rent_day_number = $r->rent_day_number;
+        $this->rent_day_number = $r->rent_day_number != null ? (int)$r->rent_day_number : null;
     }
 
     /**
@@ -114,7 +114,7 @@ class LendStatus
     public function store(): bool
     {
         try {
-            $values = array();
+            $values = [];
 
             foreach ($this->fields as $k => $v) {
                 if (
@@ -148,14 +148,14 @@ class LendStatus
             } else {
                 $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->status_id));
+                        ->where([self::PK => $this->status_id]);
                 $this->zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -173,10 +173,10 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1))
+                    ->where(['is_active' => 1])
                     ->order('status_text');
 
-            $status = array();
+            $status = [];
             $result = $zdb->execute($select);
             foreach ($result as $r) {
                 $status[] = new LendStatus($zdb, $r);
@@ -184,8 +184,8 @@ class LendStatus
             return $status;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -203,10 +203,10 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1, 'in_stock' => 0))
+                    ->where(['is_active' => 1, 'in_stock' => 0])
                     ->order('status_text');
 
-            $status = array();
+            $status = [];
             $result = $zdb->execute($select);
             foreach ($result as $r) {
                 $status[] = new LendStatus($zdb, $r);
@@ -214,8 +214,8 @@ class LendStatus
             return $status;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -233,10 +233,10 @@ class LendStatus
     {
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                    ->where(array('is_active' => 1, 'in_stock' => 1))
+                    ->where(['is_active' => 1, 'in_stock' => 1])
                     ->order('status_text');
 
-            $status = array();
+            $status = [];
             $result = $zdb->execute($select);
             foreach ($result as $r) {
                 $status[] = new LendStatus($zdb, $r);
@@ -256,13 +256,13 @@ class LendStatus
     {
         try {
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $this->status_id));
+                    ->where([self::PK => $this->status_id]);
             $this->zdb->execute($delete);
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;

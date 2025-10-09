@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -26,7 +26,6 @@ namespace GaletteObjectsLend\Entity;
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
-use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Repository\Objects;
@@ -67,7 +66,7 @@ class LendObject
     public const PK = 'object_id';
 
     /** @var array<string,string> */
-    private array $fields = array(
+    private array $fields = [
         'object_id' => 'integer',
         'name' => 'varchar(100)',
         'description' => 'varchar(500)',
@@ -80,7 +79,7 @@ class LendObject
         'is_active' => 'boolean',
         'category_id' => 'int',
         'nb_available' => 'int',
-    );
+    ];
     private ?int $object_id;
     private string $name = '';
     private string $description = '';
@@ -124,7 +123,6 @@ class LendObject
     ];
 
     private Db $zdb;
-    private Plugins $plugins;
 
     /**
      * @var LendRent[]
@@ -135,15 +133,13 @@ class LendObject
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb     Database instance
-     * @param Plugins                                 $plugins Plugins instance
-     * @param int|ArrayObject<string,int|string>|null $args    Maybe null, an RS object or an id from database
-     * @param array<string,bool>                      $deps    Dependencies configuration, see LendOb::$deps
+     * @param Db                                      $zdb  Database instance
+     * @param int|ArrayObject<string,int|string>|null $args Maybe null, an RS object or an id from database
+     * @param ?array<string,bool>                     $deps Dependencies configuration, see LendOb::$deps
      */
-    public function __construct(Db $zdb, Plugins $plugins, int|ArrayObject $args = null, array $deps = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null, ?array $deps = null)
     {
         $this->zdb = $zdb;
-        $this->plugins = $plugins;
 
         if ($deps !== null) {
             $this->deps = array_merge(
@@ -153,7 +149,7 @@ class LendObject
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new ObjectPicture($this->plugins);
+            $this->picture = new ObjectPicture();
         }
 
         if (is_int($args)) {
@@ -194,22 +190,22 @@ class LendObject
 
                 if ($this->deps['category'] === true) {
                     $select->join(
-                        array('c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE),
+                        ['c' => PREFIX_DB . LEND_PREFIX . LendCategory::TABLE],
                         'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
                         ['cat_active'   => 'is_active', 'cat_name' => 'name'],
                         $select::JOIN_LEFT
                     );
                 }
 
-                $select->where(array('o.' . self::PK => $args));
+                $select->where(['o.' . self::PK => $args]);
                 $results = $this->zdb->execute($select);
                 if ($results->count() == 1) {
                     $this->loadFromRS($results->current());
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                        $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                        . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -289,7 +285,7 @@ class LendObject
         }
 
         if ($this->deps['picture'] === true) {
-            $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+            $this->picture = new ObjectPicture((int)$this->object_id);
         }
 
         if ($this->deps['member'] === true) {
@@ -313,7 +309,7 @@ class LendObject
     public function store(): bool
     {
         try {
-            $values = array();
+            $values = [];
 
             foreach ($this->fields as $k => $v) {
                 if (
@@ -343,7 +339,7 @@ class LendObject
                     }
 
                     if ($this->deps['picture'] === true) {
-                        $this->picture = new ObjectPicture($this->plugins, (int)$this->object_id);
+                        $this->picture = new ObjectPicture((int)$this->object_id);
                     }
                 } else {
                     throw new \Exception(_T("Object has not been added :(", "objectslend"));
@@ -351,14 +347,14 @@ class LendObject
             } else {
                 $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->object_id));
+                        ->where([self::PK => $this->object_id]);
                 $this->zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -559,21 +555,21 @@ class LendObject
             //remove rents
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                     ->set([LendRent::PK => null])
-                    ->where(array(self::PK => $this->object_id));
+                    ->where([self::PK => $this->object_id]);
             $this->zdb->execute($update);
             $delete = $this->zdb->delete(LEND_PREFIX . LendRent::TABLE)
-                    ->where(array(self::PK => $this->object_id));
+                    ->where([self::PK => $this->object_id]);
             $this->zdb->execute($delete);
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
-                    ->where(array(self::PK => $this->object_id));
+                    ->where([self::PK => $this->object_id]);
             $this->zdb->execute($delete);
             $this->zdb->connection->commit();
             return true;
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -590,7 +586,7 @@ class LendObject
         //unset id so this is considered as new object
         unset($this->object_id);
         //unset image
-        $this->picture = new ObjectPicture($this->plugins);
+        $this->picture = new ObjectPicture();
         return $this->store();
     }
 

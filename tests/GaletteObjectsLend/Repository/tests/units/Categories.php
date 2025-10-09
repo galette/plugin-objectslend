@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -32,19 +32,6 @@ class Categories extends GaletteTestCase
 {
     protected int $seed = 20240525091538;
 
-    protected \Galette\Core\Plugins $plugins;
-
-    /**
-     * Set up tests
-     *
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->plugins = $this->container->get('plugins');
-    }
-
     /**
      * Cleanup after each test method
      *
@@ -67,7 +54,7 @@ class Categories extends GaletteTestCase
      */
     public function testGetList(): void
     {
-        $categories = new \GaletteObjectsLend\Repository\Categories($this->zdb, $this->login, $this->plugins);
+        $categories = new \GaletteObjectsLend\Repository\Categories($this->zdb, $this->login);
 
         $rs_list = $categories->getList();
         $this->assertInstanceOf(\Laminas\Db\ResultSet\ResultSet::class, $rs_list);
@@ -78,24 +65,24 @@ class Categories extends GaletteTestCase
         $this->assertSame([], $categories->getCategoriesList(true));
         $this->assertSame(0, $categories->getCount());
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
         $category->name = 'One category';
         $category->is_active = true;
         $this->assertTrue($category->store());
         $cat_one_id = $category->category_id;
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
         $category->name = 'Another category';
         $category->is_active = true;
         $this->assertTrue($category->store());
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
         $category->name = 'Yet another category';
         $category->is_active = false;
         $this->assertTrue($category->store());
 
         $filters = new \GaletteObjectsLend\Filters\CategoriesList();
-        $categories = new \GaletteObjectsLend\Repository\Categories($this->zdb, $this->login, $this->plugins, $filters);
+        $categories = new \GaletteObjectsLend\Repository\Categories($this->zdb, $this->login, $filters);
 
         $this->assertCount(3, $categories->getCategoriesList(true));
         $this->assertSame(3, $categories->getCount());
@@ -113,7 +100,7 @@ class Categories extends GaletteTestCase
         $filters->not_empty = true;
         $this->assertCount(0, $categories->getCategoriesList(true));
 
-        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb, $this->plugins);
+        $object = new \GaletteObjectsLend\Entity\LendObject($this->zdb);
         $object->name = 'One object';
         $object->category_id = $cat_one_id;
         $this->assertTrue($object->store());

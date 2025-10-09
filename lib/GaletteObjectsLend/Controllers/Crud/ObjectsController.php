@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -25,6 +25,7 @@ namespace GaletteObjectsLend\Controllers\Crud;
 
 use Analog\Analog;
 use DI\Attribute\Inject;
+use GaletteObjectsLend\Entity\ObjectPicture;
 use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Filters\StatusList;
@@ -98,7 +99,7 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, int|string $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, int|string|null $value = null): Response
     {
         if (isset($this->session->objectslend_filter_objects)) {
             $filters = $this->session->objectslend_filter_objects;
@@ -124,7 +125,7 @@ class ObjectsController extends AbstractPluginController
         }
 
         $lendsprefs = new Preferences($this->zdb);
-        $objects = new Objects($this->zdb, $this->plugins, $lendsprefs, $filters);
+        $objects = new Objects($this->zdb, $lendsprefs, $filters);
         $list = $objects->getObjectsList(true);
 
         $this->session->objectslend_filter_objects = $filters;
@@ -137,14 +138,14 @@ class ObjectsController extends AbstractPluginController
         $cat_filters->active_filter = Categories::ACTIVE_CATEGORIES; //retrieve only active categories
         $cat_filters->not_empty = true; //retrieve only categories with objects
         $cat_filters->setObjectsFilter($filters); //search for categories corresponding to filtered objects
-        $categories = new Categories($this->zdb, $this->login, $this->plugins, $cat_filters);
+        $categories = new Categories($this->zdb, $this->login, $cat_filters);
         $categories_list = $categories->getCategoriesList(true, null, false);
 
         // display page
         $this->view->render(
             $response,
             $this->getTemplate('objects_list'),
-            array(
+            [
                 'page_title' => _T("Objects list", "objectslend"),
                 'require_dialog' => true,
                 'objects' => $list,
@@ -155,7 +156,7 @@ class ObjectsController extends AbstractPluginController
                 'time' => time(),
                 'module_id' => $this->getModuleId(),
                 'categories' => $categories_list
-            )
+            ]
         );
         return $response;
     }
@@ -226,7 +227,6 @@ class ObjectsController extends AbstractPluginController
         ];
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $id,
             $deps
         );
@@ -308,17 +308,17 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         if ($this->session->objectslend_object !== null) {
             $object = $this->session->objectslend_object;
             $this->session->objectslend_object = null;
         } else {
             $deps = ['rents' => true];
-            $object = new LendObject($this->zdb, $this->plugins, $id, $deps);
+            $object = new LendObject($this->zdb, $id, $deps);
         }
 
-        $categories = new Categories($this->zdb, $this->login, $this->plugins);
+        $categories = new Categories($this->zdb, $this->login);
         $categories_list = $categories->getCategoriesList(true);
 
         if ($object->object_id !== null) {
@@ -333,6 +333,7 @@ class ObjectsController extends AbstractPluginController
         $slist = $statuses->getStatusList(true);
 
         $lendsprefs = new Preferences($this->zdb);
+        $picture = new ObjectPicture($object->object_id);
         $params = [
             'page_title'    => $title,
             'object'        => $object,
@@ -341,7 +342,8 @@ class ObjectsController extends AbstractPluginController
             'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
             'categories'    => $categories_list,
-            'statuses'      => $slist
+            'statuses'      => $slist,
+            'picture'       => $picture
         ];
 
         // members
@@ -380,11 +382,11 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
 
-        $object = new LendObject($this->zdb, $this->plugins, $id);
+        $object = new LendObject($this->zdb, $id);
         $error_detected = [];
 
         $object->name = $post['name'];
@@ -417,29 +419,12 @@ class ObjectsController extends AbstractPluginController
             }
 
             // picture upload
-            if (isset($_FILES['picture'])) {
-                if ($_FILES['picture']['error'] === UPLOAD_ERR_OK) {
-                    if ($_FILES['picture']['tmp_name'] != '') {
-                        if (is_uploaded_file($_FILES['picture']['tmp_name'])) {
-                            $res = $object->picture->store($_FILES['picture']);
-                            if ($res < 0) {
-                                $error_detected[] = $object->picture->getErrorMessage($res);
-                            }
-                        }
-                    }
-                } elseif ($_FILES['picture']['error'] !== UPLOAD_ERR_NO_FILE) {
-                    Analog::log(
-                        $object->picture->getPhpErrorMessage($_FILES['picture']['error']),
-                        Analog::WARNING
-                    );
-                    $error_detected[] = $object->picture->getPhpErrorMessage(
-                        $_FILES['picture']['error']
-                    );
-                }
+            if (!$object->picture->upload($request->getUploadedFiles(), 'picture')) {
+                $error_detected = $object->picture->uploadErrors();
             }
 
             if (isset($post['del_picture'])) {
-                if (!$object->picture->delete($object->object_id)) {
+                if (!$object->picture->delete()) {
                     $error_detected[] = _T("Delete failed", "objectslend");
                     Analog::log(
                         'Unable to delete picture for object ' . $object->name,
@@ -496,11 +481,11 @@ class ObjectsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doUpdateStatus(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doUpdateStatus(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
 
-        $object = new LendObject($this->zdb, $this->plugins, $id);
+        $object = new LendObject($this->zdb, $id);
 
         LendRent::closeAllRentsForObject($object->getId(), $post['new_comment']);
 
@@ -537,7 +522,7 @@ class ObjectsController extends AbstractPluginController
      */
     public function doClone(Request $request, Response $response, int $id): Response
     {
-        $object = new LendObject($this->zdb, $this->plugins, $id);
+        $object = new LendObject($this->zdb, $id);
 
         if ($object->clone()) {
             $this->flash->addMessage(
@@ -581,15 +566,15 @@ class ObjectsController extends AbstractPluginController
         $lendsprefs = new Preferences($this->zdb);
 
         $params = [
-            'page_title'    => ($action == 'take' ?
-                _T("Borrow an object", "objectslend") :
-                _T("Return a borrowed object", "objectslend")
-
+            'page_title'    => (
+                $action == 'take'
+                ? _T("Borrow an object", "objectslend")
+                : _T("Return a borrowed object", "objectslend")
             ),
             'time'          => time(),
-            'statuses'      => ($action == 'take' ?
-                LendStatus::getActiveTakeAwayStatuses($this->zdb) :
-                LendStatus::getActiveStockStatuses($this->zdb)),
+            'statuses'      => ($action == 'take'
+                ? LendStatus::getActiveTakeAwayStatuses($this->zdb)
+                : LendStatus::getActiveStockStatuses($this->zdb)),
             'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
             'ajax'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest',
@@ -606,7 +591,6 @@ class ObjectsController extends AbstractPluginController
         ];
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $id,
             $deps
         );
@@ -620,8 +604,8 @@ class ObjectsController extends AbstractPluginController
                 && !($this->login->isAdmin() || $this->login->isStaff())
             ) {
                 Analog::log(
-                    'Trying to borrow an object without appropriate rights! (Object ' .
-                    $id . ', user ' . $this->login->login . ')',
+                    'Trying to borrow an object without appropriate rights! (Object '
+                    . $id . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
 
@@ -656,7 +640,7 @@ class ObjectsController extends AbstractPluginController
                 $params['members']['list'] = $members;
             }
             $params['require_calendar'] = true;
-            $params['rent_price'] = str_replace(array( ',', ' '), array( '.', ''), $object->rent_price); //FIXME :/
+            $params['rent_price'] = str_replace([ ',', ' '], [ '.', ''], $object->rent_price); //FIXME :/
 
             if ($last_rent !== null && !$last_rent->in_stock) {
                 //redirect to objects list
@@ -686,8 +670,8 @@ class ObjectsController extends AbstractPluginController
                 || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
             ) {
                 Analog::log(
-                    'Trying to return an object without appropriate rights! (Object ' .
-                    $id . ', user ' . $this->login->login . ')',
+                    'Trying to return an object without appropriate rights! (Object '
+                    . $id . ', user ' . $this->login->login . ')',
                     Analog::WARNING
                 );
 
@@ -736,8 +720,8 @@ class ObjectsController extends AbstractPluginController
             && !($this->login->isAdmin() || $this->login->isStaff())
         ) {
             Analog::log(
-                'Trying to borrow an object without appropriate rights! (Object ' .
-                $id . ', user ' . $this->login->login . ')',
+                'Trying to borrow an object without appropriate rights! (Object '
+                . $id . ', user ' . $this->login->login . ')',
                 Analog::WARNING
             );
 
@@ -774,7 +758,6 @@ class ObjectsController extends AbstractPluginController
         //retrieve object information
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $object_id
         );
 
@@ -790,7 +773,7 @@ class ObjectsController extends AbstractPluginController
                 $contrib = new Contribution($this->zdb, $this->login);
 
                 $info = str_replace(
-                    array(
+                    [
                         '{NAME}',
                         '{DESCRIPTION}',
                         '{SERIAL_NUMBER}',
@@ -798,8 +781,8 @@ class ObjectsController extends AbstractPluginController
                         '{RENT_PRICE}',
                         '{WEIGHT}',
                         '{DIMENSION}'
-                    ),
-                    array(
+                    ],
+                    [
                         $object->name,
                         $object->description,
                         $object->serial_number,
@@ -807,11 +790,11 @@ class ObjectsController extends AbstractPluginController
                         $object->rent_price,
                         $object->weight,
                         $object->dimension
-                    ),
+                    ],
                     $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIB_INFO_TEXT}
                 );
 
-                $values = array(
+                $values = [
                     'montant_cotis'         => $rentprice,
                     ContributionsTypes::PK  => $lendsprefs->{Preferences::PARAM_GENERATED_CONTRIBUTION_TYPE_ID},
                     'date_enreg'            => date("Y-m-d"),
@@ -819,8 +802,8 @@ class ObjectsController extends AbstractPluginController
                     'type_paiement_cotis'   => $post['payment_type'],
                     'info_cotis'            => $info,
                     Adherent::PK            => $rent->adherent_id
-                );
-                $contrib->check($values, array(), array());
+                ];
+                $contrib->check($values, [], []);
                 try {
                     $created = $contrib->store();
                 } catch (\OverflowException $e) {
@@ -896,7 +879,6 @@ class ObjectsController extends AbstractPluginController
         //retrieve object information
         $object = new LendObject(
             $this->zdb,
-            $this->plugins,
             $object_id,
             $deps
         );
@@ -906,8 +888,8 @@ class ObjectsController extends AbstractPluginController
             || !($this->login->isAdmin() || $this->login->isStaff() || $this->login->id == $object->getIdAdh())
         ) {
             Analog::log(
-                'Trying to return an object without appropriate rights! (Object ' .
-                $id . ', user ' . $this->login->login . ')',
+                'Trying to return an object without appropriate rights! (Object '
+                . $id . ', user ' . $this->login->login . ')',
                 Analog::WARNING
             );
 
@@ -1024,7 +1006,7 @@ class ObjectsController extends AbstractPluginController
     {
         if (isset($args['id'])) {
             //one object removal
-            $object = new LendObject($this->zdb, $this->plugins, (int)$args['id']);
+            $object = new LendObject($this->zdb, (int)$args['id']);
             return sprintf(
                 _T('Remove object %1$s', 'objectslend'),
                 $object->name
@@ -1056,7 +1038,7 @@ class ObjectsController extends AbstractPluginController
             $filters = new ObjectsList();
         }
         $lendsprefs = new Preferences($this->zdb);
-        $objects = new Objects($this->zdb, $this->plugins, $lendsprefs, $filters);
+        $objects = new Objects($this->zdb, $lendsprefs, $filters);
 
         if (!is_array($post['id'])) {
             $ids = (array)$post['id'];

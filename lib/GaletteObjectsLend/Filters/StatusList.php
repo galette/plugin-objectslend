@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -48,12 +48,12 @@ class StatusList extends Pagination
     protected string $query;
 
     /** @var array<string> */
-    protected array $statuslist_fields = array(
+    protected array $statuslist_fields = [
         'filter_str',
         'active_filter',
         'stock_filter',
         'query'
-    );
+    ];
 
     /**
      * Returns the field we want to default set order to
@@ -137,9 +137,9 @@ class StatusList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[StatusList] Value for active filter should be either ' .
-                                Status::ACTIVE . ' or ' .
-                                Status::INACTIVE . ' (' . $value . ' given)',
+                                '[StatusList] Value for active filter should be either '
+                                . Status::ACTIVE . ' or '
+                                . Status::INACTIVE . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
@@ -154,9 +154,9 @@ class StatusList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[StatusList] Value for stock filter should be either ' .
-                                Status::IN_STOCK . ', ' . Status::OUT_STOCK . ' or ' .
-                                Status::DC_STOCK . ' (' . $value . ' given)',
+                                '[StatusList] Value for stock filter should be either '
+                                . Status::IN_STOCK . ', ' . Status::OUT_STOCK . ' or '
+                                . Status::DC_STOCK . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;

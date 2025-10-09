@@ -2,14 +2,14 @@
 # Luca De Filippo <luca.defilippo@translationcommons.org>, 2020.
 # Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
 # Giacomo Alessandroni <g.alessandroni@gmail.com>, 2021.
-# Marco Ciampa <ciampix@posteo.net>, 2024.
+# Marco Ciampa <ciampix@posteo.net>, 2024, 2025.
 # Ilario Quinson <ilario.quinson@e.email>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-07-04 23:09+0000\n"
+"PO-Revision-Date: 2025-02-18 13:46+0000\n"
 "Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/it/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.10.1-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -65,7 +65,7 @@ msgstr "Numero di serie"
 #: ../tempcache/objects_list.html.twig:159
 #: ../tempcache/objects_list.html.twig:575
 msgid "Price"
-msgstr "Prezzo"
+msgstr "Costo"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
 msgid "Price per rental day"
@@ -127,7 +127,7 @@ msgstr "Da"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:196
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:168
 msgid "Member"
-msgstr "Socio"
+msgstr "Membro"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:172
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:169

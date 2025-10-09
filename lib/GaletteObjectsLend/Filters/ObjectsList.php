@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -27,7 +27,6 @@ use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Entity\Preferences;
 use GaletteObjectsLend\Repository\Objects;
-use Laminas\Db\Sql\Select;
 use Slim\Views\Twig;
 
 /**
@@ -56,14 +55,14 @@ class ObjectsList extends Pagination
     protected string $query;
 
     /** @var array<string> */
-    protected array $objectslist_fields = array(
+    protected array $objectslist_fields = [
         'filter_str',
         'category_filter',
         'active_filter',
         'field_filter',
         'selected',
         'query'
-    );
+    ];
 
     /**
      * Default constructor
@@ -95,7 +94,7 @@ class ObjectsList extends Pagination
         $this->category_filter = null;
         $this->active_filter = null;
         $this->field_filter = null;
-        $this->selected = array();
+        $this->selected = [];
     }
 
     /**
@@ -165,8 +164,8 @@ class ObjectsList extends Pagination
                         $this->$name = $value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[ObjectsList] Value for property `' . $name .
-                            '` should be an array (' . gettype($value) . ' given)',
+                            '[ObjectsList] Value for property `' . $name
+                            . '` should be an array (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     }
@@ -180,8 +179,8 @@ class ObjectsList extends Pagination
                         $this->$name = (int)$value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[ObjectsList] Value for property `' . $name .
-                            '` should be an integer (' . gettype($value) . ' given)',
+                            '[ObjectsList] Value for property `' . $name
+                            . '` should be an integer (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     } else {
@@ -197,9 +196,9 @@ class ObjectsList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[ObjectsList] Value for active filter should be either ' .
-                                Objects::ACTIVE_OBJECTS . ', ' . Objects::ACTIVE_OBJECTS . ' or ' .
-                                Objects::INACTIVE_OBJECTS . ' (' . $value . ' given)',
+                                '[ObjectsList] Value for active filter should be either '
+                                . Objects::ACTIVE_OBJECTS . ', ' . Objects::ACTIVE_OBJECTS . ' or '
+                                . Objects::INACTIVE_OBJECTS . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;
@@ -210,8 +209,8 @@ class ObjectsList extends Pagination
                         $this->$name = (int)$value;
                     } elseif ($value !== null) {
                         Analog::log(
-                            '[ObjectsList] Value for property `' . $name .
-                            '` should be an integer (' . gettype($value) . ' given)',
+                            '[ObjectsList] Value for property `' . $name
+                            . '` should be an integer (' . gettype($value) . ' given)',
                             Analog::WARNING
                         );
                     }
@@ -241,8 +240,8 @@ class ObjectsList extends Pagination
         $prefs = $prefs->getPreferences();
 
         $options = [
-            Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION'] ?
-                _T("Name/description", "objectslend") : _T("Name", "objectslend")),
+            Objects::FILTER_NAME    => ($prefs['VIEW_DESCRIPTION']
+                ? _T("Name/description", "objectslend") : _T("Name", "objectslend")),
             Objects::FILTER_SERIAL  => _T("Serial number", "objectslend"),
             Objects::FILTER_ID      => _T("Id", "objectslend")
         ];

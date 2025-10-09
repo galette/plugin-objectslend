@@ -52,11 +52,23 @@
 
 {% block header %}
     {% set columns = [
-        {'label': '#', order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_ID')},
+        {
+            'label': '#', order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_ID'),
+            'collapse': true
+        },
         {'label': _T("Status", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_NAME')},
-        {'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_ACTIVE')},
-        {'label': _T("Stock", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_STOCK')},
-        {'label': _T("Days for rent", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_RENTDAYS')}
+        {
+            'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_ACTIVE'),
+            'collapse': true
+        },
+        {
+            'label': _T("Stock", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_STOCK'),
+            'collapse': true
+        },
+        {
+            'label': _T("Days for rent", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Status::ORDERBY_RENTDAYS'),
+            'collapse': true
+        }
     ] %}
 
     {{ parent() }}
@@ -135,13 +147,13 @@
 {% block body %}
     {% for status in statuses %}
         <tr class="{% if loop.index is odd %}even{% else %}odd{% endif %}">
-            <td data-scope="id">
+            <td class="collapsing" data-scope="id">
                 {{ status.status_id }}
             </td>
             <td data-col-label="{{ _T("Status", "objectslend") }}">
                 {{ status.status_text }}
             </td>
-            <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
+            <td class="center collapsing" data-col-label="{{ _T("Active", "objectslend") }}">
                 {% if status.is_active %}
                     <i class="thumbs up green icon tooltip" data-html="{{ _T("Active", "objectslend") }}"></i>
                     <span class="visually-hidden">{{ _T("Active", "objectslend") }}</span>
@@ -150,7 +162,7 @@
                     <span class="visually-hidden">{{ _T("Inactive", "objectslend") }}</span>
                 {% endif %}
             </td>
-            <td class="center" data-col-label="{{ _T("Stock", "objectslend") }}">
+            <td class="center collapsing" data-col-label="{{ _T("Stock", "objectslend") }}">
                 {% if status.in_stock %}
                     <i class="thumbs up green icon tooltip" data-html="{{ _T("In stock", "objectslend") }}"></i>
                     <span class="visually-hidden">{{ _T("In stock", "objectslend") }}</span>
@@ -159,14 +171,14 @@
                     <span class="visually-hidden">{{ _T("Not in stock", "objectslend") }}</span>
                 {% endif %}
             </td>
-            <td data-col-label="{{ _T("Days for rent", "objectslend") }}">
+            <td class="collapsing" data-col-label="{{ _T("Days for rent", "objectslend") }}">
                 {% if status.rent_day_number %}
                     {{ _T("%days days", "objectslend")|replace({'%days': status.rent_day_number}) }}
                 {% else %}
                     -
                 {% endif %}
             </td>
-            <td class="center actions_row nowrap">
+            <td class="center actions_row collapsing">
                 {% set actions = [
                     {
                         'label': _T("Edit %status", "objectslend")|replace({'%status': status.status_text}),

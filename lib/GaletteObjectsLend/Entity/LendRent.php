@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -55,7 +55,7 @@ class LendRent
     public const PK = 'rent_id';
 
     /** @var array<string, string> */
-    private array $fields = array(
+    private array $fields = [
         'rent_id' => 'integer',
         'object_id' => 'integer',
         'date_begin' => 'datetime',
@@ -64,7 +64,7 @@ class LendRent
         'status_id' => 'integer',
         'adherent_id' => 'integer',
         'comments' => 'varchar(200)'
-    );
+    ];
     private int $rent_id;
     private int $object_id;
     private ?string $date_begin;
@@ -87,7 +87,7 @@ class LendRent
      *
      * @param int|ArrayObject<string,int|string>|null $args Either an int with rent id, null, or a resultset row
      */
-    public function __construct(int|ArrayObject $args = null)
+    public function __construct(int|ArrayObject|null $args = null)
     {
         global $zdb;
 
@@ -97,15 +97,15 @@ class LendRent
         if (is_int($args)) {
             try {
                 $select = $zdb->select(LEND_PREFIX . self::TABLE)
-                        ->where(array(self::PK => $args));
+                        ->where([self::PK => $args]);
                 $result = $zdb->execute($select);
                 if ($result->count() == 1) {
                     $this->loadFromRS($result->current());
                 }
             } catch (\Exception $e) {
                 Analog::log(
-                    'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                        $e->getTraceAsString(),
+                    'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                        . $e->getTraceAsString(),
                     Analog::ERROR
                 );
             }
@@ -146,7 +146,7 @@ class LendRent
 
         try {
             $zdb->connection->beginTransaction();
-            $values = array();
+            $values = [];
 
             foreach ($this->fields as $k => $v) {
                 $values[$k] = $this->$k ?? null;
@@ -183,7 +183,7 @@ class LendRent
             } else {
                 $update = $zdb->update(LEND_PREFIX . self::TABLE)
                         ->set($values)
-                        ->where(array(self::PK => $this->rent_id));
+                        ->where([self::PK => $this->rent_id]);
                 $zdb->execute($update);
             }
             $zdb->connection->commit();
@@ -191,8 +191,8 @@ class LendRent
         } catch (\Exception $e) {
             $zdb->connection->rollBack();
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -222,17 +222,17 @@ class LendRent
                 )
                 ->join(
                     PREFIX_DB . LEND_PREFIX . LendStatus::TABLE,
-                    PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB .
-                        LEND_PREFIX . self::TABLE . '.status_id'
+                    PREFIX_DB . LEND_PREFIX . LendStatus::TABLE . '.status_id = ' . PREFIX_DB
+                        . LEND_PREFIX . self::TABLE . '.status_id'
                 )
-                ->where(array('object_id' => $object_id))
+                ->where(['object_id' => $object_id])
                 ->order($order);
 
             if ($only_last === true) {
                 $select->offset(0)->limit(1);
             }
 
-            $rents = array();
+            $rents = [];
             $rows = $zdb->execute($select);
 
             foreach ($rows as $r) {
@@ -250,8 +250,8 @@ class LendRent
             return $rents;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;
@@ -273,10 +273,10 @@ class LendRent
         try {
             $select = $zdb->select(LEND_PREFIX . self::TABLE)
                 ->where(
-                    array(
+                    [
                         'object_id' => $object_id,
                         'date_end' => null
-                    )
+                    ]
                 );
             $rows = $zdb->execute($select);
 
@@ -290,8 +290,8 @@ class LendRent
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             return false;
@@ -321,8 +321,8 @@ class LendRent
             return $adherents;
         } catch (\Exception $e) {
             Analog::log(
-                'Something went wrong :\'( | ' . $e->getMessage() . "\n" .
-                    $e->getTraceAsString(),
+                'Something went wrong :\'( | ' . $e->getMessage() . "\n"
+                    . $e->getTraceAsString(),
                 Analog::ERROR
             );
             throw $e;

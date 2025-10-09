@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -26,7 +26,6 @@ namespace GaletteObjectsLend\Filters;
 use Analog\Analog;
 use Galette\Core\Pagination;
 use GaletteObjectsLend\Repository\Categories;
-use Laminas\Db\Sql\Select;
 
 /**
  * Categories list filters and paginator
@@ -51,13 +50,13 @@ class CategoriesList extends Pagination
     protected string $query;
 
     /** @var array<string> */
-    protected array $categorylist_fields = array(
+    protected array $categorylist_fields = [
         'filter_str',
         'active_filter',
         'not_empty',
         'objects_filters',
         'query'
-    );
+    ];
 
     /**
      * Default constructor
@@ -151,9 +150,9 @@ class CategoriesList extends Pagination
                             break;
                         default:
                             Analog::log(
-                                '[CategoriesList] Value for active filter should be either ' .
-                                Categories::ALL_CATEGORIES . ', ' . Categories::ACTIVE_CATEGORIES . ' or ' .
-                                Categories::INACTIVE_CATEGORIES . ' (' . $value . ' given)',
+                                '[CategoriesList] Value for active filter should be either '
+                                . Categories::ALL_CATEGORIES . ', ' . Categories::ACTIVE_CATEGORIES . ' or '
+                                . Categories::INACTIVE_CATEGORIES . ' (' . $value . ' given)',
                                 Analog::WARNING
                             );
                             break;

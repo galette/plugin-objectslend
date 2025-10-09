@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -32,19 +32,6 @@ class LendCategory extends GaletteTestCase
 {
     protected int $seed = 20240521212536;
 
-    protected \Galette\Core\Plugins $plugins;
-
-    /**
-     * Set up tests
-     *
-     * @return void
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->plugins = $this->container->get('plugins');
-    }
-
     /**
      * Cleanup after each test method
      *
@@ -64,7 +51,7 @@ class LendCategory extends GaletteTestCase
      */
     public function testEmpty(): void
     {
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
         $this->assertSame('No category (0)', $category->getName());
         $this->assertSame('No category', $category->getName(false));
         $this->assertInstanceOf(\GaletteObjectsLend\Entity\CategoryPicture::class, $category->getPicture());
@@ -77,7 +64,6 @@ class LendCategory extends GaletteTestCase
 
         $category = new \GaletteObjectsLend\Entity\LendCategory(
             $this->zdb,
-            $this->plugins,
             null,
             ['picture' => false]
         );
@@ -91,7 +77,7 @@ class LendCategory extends GaletteTestCase
      */
     public function testCrud(): void
     {
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb);
 
         $category->name = 'Test category';
         $category->is_active = false;
@@ -100,17 +86,17 @@ class LendCategory extends GaletteTestCase
         $cid = $category->getId();
         $this->assertGreaterThan(0, $cid);
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins, $cid);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $cid);
         $this->assertSame('Test category (0)', $category->getName());
         $this->assertFalse($category->isActive());
 
         $category->name = 'Test category (edited)';
         $this->assertTrue($category->store());
 
-        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins, $cid);
+        $category = new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $cid);
         $this->assertSame('Test category (edited) (0)', $category->getName());
 
         $this->assertTrue($category->delete());
-        new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $this->plugins, $cid);
+        new \GaletteObjectsLend\Entity\LendCategory($this->zdb, $cid);
     }
 }

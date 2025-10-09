@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -25,10 +25,10 @@ $this->register(
     'Galette Objects Lend',             //Name
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
-    '2.1.2',                            //Version
-    '1.1.0',                            //Galette version compatibility
+    '2.2.0',                            //Version
+    '1.2.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2024-10-20',                       //Date
+    '2025-10-09',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',

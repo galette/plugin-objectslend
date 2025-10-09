@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright © 2003-2024 The Galette Team
+ * Copyright © 2003-2025 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,8 +23,6 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend\Repository;
 
-use ArrayObject;
-use Galette\Entity\DynamicFields;
 use Analog\Analog;
 use Galette\Core\Db;
 use Laminas\Db\ResultSet\ResultSet;
@@ -35,7 +33,6 @@ use GaletteObjectsLend\Filters\ObjectsList;
 use GaletteObjectsLend\Entity\LendCategory;
 use GaletteObjectsLend\Entity\LendObject;
 use Galette\Core\Login;
-use Galette\Core\Plugins;
 use Laminas\Db\Sql\Select;
 
 /**
@@ -60,10 +57,9 @@ class Categories
     private CategoriesList $filters;
     private ?int $count = null;
     /** @var array<string> */
-    private array $errors = array();
+    private array $errors = [];
 
     private Db $zdb;
-    private Plugins $plugins;
     private Login $login;
 
     /**
@@ -71,14 +67,12 @@ class Categories
      *
      * @param Db              $zdb     Database instance
      * @param Login           $login   Logged in instance
-     * @param Plugins         $plugins Plugins instance
      * @param ?CategoriesList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, Plugins $plugins, CategoriesList $filters = null)
+    public function __construct(Db $zdb, Login $login, ?CategoriesList $filters = null)
     {
         $this->zdb = $zdb;
         $this->login = $login;
-        $this->plugins = $plugins;
 
         if ($filters === null) {
             $this->filters = new CategoriesList();
@@ -91,19 +85,19 @@ class Categories
     /**
      * Get categories list
      *
-     * @param boolean       $as_cat return the results as an array of
-     *                              Categories object.
-     * @param array<string> $fields field(s) name(s) to get. Should be a string or
-     *                              an array. If null, all fields will be
-     *                              returned
-     * @param boolean       $count  true if we want to count members
-     * @param boolean       $limit  true if we want records pagination
+     * @param boolean        $as_cat return the results as an array of
+     *                               Categories object.
+     * @param ?array<string> $fields field(s) name(s) to get. Should be a string or
+     *                               an array. If null, all fields will be
+     *                               returned
+     * @param boolean        $count  true if we want to count members
+     * @param boolean        $limit  true if we want records pagination
      *
      * @return LendCategory[]|ResultSet
      */
     public function getCategoriesList(
         bool $as_cat = false,
-        array $fields = null,
+        ?array $fields = null,
         bool $count = true,
         bool $limit = true
     ): array|ResultSet {
@@ -118,10 +112,10 @@ class Categories
             $rows = $this->zdb->execute($select);
             $this->filters->query = $this->zdb->query_string;
 
-            $categories = array();
+            $categories = [];
             if ($as_cat) {
                 foreach ($rows as $row) {
-                    $categories[] = new LendCategory($this->zdb, $this->plugins, $row);
+                    $categories[] = new LendCategory($this->zdb, $row);
                 }
             } else {
                 $categories = $rows;
@@ -145,7 +139,7 @@ class Categories
      *
      * @return LendCategory[]|ResultSet
      */
-    public function getList(bool $as_cat = false, array $fields = null): array|ResultSet
+    public function getList(bool $as_cat = false, ?array $fields = null): array|ResultSet
     {
         return $this->getCategoriesList(
             $as_cat,
@@ -180,7 +174,7 @@ class Categories
             $select->columns($fieldsList);
 
             $select->join(
-                array('o' => PREFIX_DB . LEND_PREFIX . LendObject::TABLE),
+                ['o' => PREFIX_DB . LEND_PREFIX . LendObject::TABLE],
                 'o.' . LendCategory::PK . '=c.' . LendCategory::PK,
                 [],
                 $select::JOIN_LEFT
@@ -224,9 +218,9 @@ class Categories
             $countSelect->reset($countSelect::ORDER);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->columns(
-                array(
+                [
                     'count' => new Expression('count(c.' . self::PK . ')')
-                )
+                ]
             );
 
             $joins = $select->getRawState($select::JOINS);
@@ -262,9 +256,9 @@ class Categories
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
-        $order = array();
+        $order = [];
         switch ($this->filters->orderby) {
             case self::ORDERBY_NAME:
                 if ($this->canOrderBy('name', $fields)) {
@@ -295,7 +289,6 @@ class Categories
             if ($this->filters->objects_filters instanceof ObjectsList) {
                 $objects = new Objects(
                     $this->zdb,
-                    $this->plugins,
                     new \GaletteObjectsLend\Entity\Preferences($this->zdb),
                     $this->filters->objects_filters
                 );
@@ -354,8 +347,8 @@ class Categories
             return true;
         } else {
             Analog::log(
-                'Trying to order by ' . $field_name . ' while it is not in ' .
-                'selected fields.',
+                'Trying to order by ' . $field_name . ' while it is not in '
+                . 'selected fields.',
                 Analog::WARNING
             );
             return false;

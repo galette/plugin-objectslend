@@ -48,9 +48,15 @@
 
 {% block header %}
     {% set columns = [
-        {'label': '#'},
+        {
+            'label': '#',
+            'collapse': true
+        },
         {'label': _T("Name", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_NAME')},
-        {'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_ACTIVITY')},
+        {
+            'label': _T("Active", "objectslend"), order: constant('GaletteObjectsLend\\Repository\\Categories::ORDERBY_ACTIVITY'),
+            'collapse': true
+        },
     ] %}
     {{ parent() }}
 {% endblock %}
@@ -105,7 +111,7 @@
 {% block body %}
     {% for categ in categories %}
             <tr class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
-                <td  data-col-label="#">
+                <td class="collapsing" data-col-label="#">
                     {{ categ.category_id }}
                 </td>
                 <td data-col-label="{{ _T("Name", "objectslend") }}">
@@ -118,12 +124,12 @@
         {% endif %}
                     {{ categ.name }}
                 </td>
-                <td class="center" data-col-label="{{ _T("Active", "objectslend") }}">
+                <td class="center collapsing" data-col-label="{{ _T("Active", "objectslend") }}">
                     <i class="thumbs {% if categ.is_active%}up green{% else %}down red{% endif %} icon tooltip" data-html="{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}"></i>
                     <span class="visually-hidden">{% if categ.is_active %}{{ _T("Active", "objectslend") }}{% else %}{{ _T("Inactive", "objectslend") }}{% endif %}</span>
                 </td>
         {% if login.isAdmin() or login.isStaff() %}
-                <td class="center actions_row nowrap">
+                <td class="center actions_row collapsing">
                     {% set actions = [
                         {
                             'label': _T("Edit \"%category\"", "objectslend")|replace({"%category": categ.name}),
