@@ -1,14 +1,14 @@
 # Sineline <sineline@gmail.com>, 2022.
 # Arnau Isern <arnauisern84@gmail.com>, 2022.
-# Johan Cwiklinski <trasher@x-tnd.be>, 2022, 2023.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2022, 2023, 2025.
 # Sotski Eugene <jekakmail@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2025-04-28 16:03+0000\n"
-"Last-Translator: Sotski Eugene <jekakmail@gmail.com>\n"
+"PO-Revision-Date: 2025-10-21 08:40+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
 "Language: ca\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -156,7 +156,7 @@ msgstr ""
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/objects_list.html.twig:644
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:195
 #: ../tempcache/objects_edit.html.twig:342
