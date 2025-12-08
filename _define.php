@@ -25,10 +25,10 @@ $this->register(
     'Galette Objects Lend',             //Name
     'Manage rent/lend of object',       //Short description
     'Mélissa Djebel, Johan Cwiklinski', //Author
-    '2.2.0',                            //Version
+    '2.2.1',                            //Version
     '1.2.0',                            //Galette version compatibility
     'objectslend',                      //routing name and translation domain
-    '2025-10-09',                       //Date
+    '2025-12-08',                       //Date
     [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
