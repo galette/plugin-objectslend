@@ -190,7 +190,7 @@ class LendCategory
     /**
      * Drop a category. All objects for removed category will be assigned to none.
      *
-     * @return boolean
+     * @return bool
      */
     public function delete(): bool
     {

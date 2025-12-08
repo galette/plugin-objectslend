@@ -33,11 +33,11 @@ use Galette\Core\Db;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property integer $status_id
+ * @property int $status_id
  * @property string $status_text
- * @property boolean $in_stock
- * @property boolean $is_active
- * @property integer $rent_day_number
+ * @property bool $in_stock
+ * @property bool $is_active
+ * @property int $rent_day_number
  */
 class LendStatus
 {
@@ -250,7 +250,7 @@ class LendStatus
     /**
      * Delete status
      *
-     * @return boolean
+     * @return bool
      */
     public function delete(): bool
     {

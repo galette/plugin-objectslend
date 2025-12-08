@@ -96,12 +96,12 @@ class Objects
     /**
      * Get objects list
      *
-     * @param boolean        $as_objects return the results as an array of
+     * @param bool           $as_objects return the results as an array of
      *                                   Object object.
      * @param ?array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
-     * @param boolean        $count      true if we want to count members
-     * @param boolean        $limit      true if we want records pagination
-     * @param boolean        $all_rents  true to load rents along with objects
+     * @param bool           $count      true if we want to count members
+     * @param bool           $limit      true if we want records pagination
+     * @param bool           $all_rents  true to load rents along with objects
      *
      * @return LendObject[]|ResultSet
      */
@@ -206,7 +206,7 @@ class Objects
     /**
      * Get Objects list
      *
-     * @param boolean        $as_objects return the results as an array of
+     * @param bool           $as_objects return the results as an array of
      *                                   Object object.
      * @param ?array<string> $fields     field(s) name(s) to get. If null, all fields will be returned
      *
@@ -505,7 +505,7 @@ class Objects
      * @param string    $field_name Field name to order by
      * @param ?string[] $fields     SELECTE'ed fields
      *
-     * @return boolean
+     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {

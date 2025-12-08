@@ -85,13 +85,13 @@ class Categories
     /**
      * Get categories list
      *
-     * @param boolean        $as_cat return the results as an array of
+     * @param bool           $as_cat return the results as an array of
      *                               Categories object.
      * @param ?array<string> $fields field(s) name(s) to get. Should be a string or
      *                               an array. If null, all fields will be
      *                               returned
-     * @param boolean        $count  true if we want to count members
-     * @param boolean        $limit  true if we want records pagination
+     * @param bool           $count  true if we want to count members
+     * @param bool           $limit  true if we want records pagination
      *
      * @return LendCategory[]|ResultSet
      */
@@ -133,9 +133,9 @@ class Categories
     /**
      * Get Categories list
      *
-     * @param boolean $as_cat return the results as an array of
-     *                        Category object.
-     * @param ?array  $fields field(s) name(s) to get. If null, all fields will be returned
+     * @param bool   $as_cat return the results as an array of
+     *                       Category object.
+     * @param ?array $fields field(s) name(s) to get. If null, all fields will be returned
      *
      * @return LendCategory[]|ResultSet
      */

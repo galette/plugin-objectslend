@@ -92,10 +92,10 @@ class ObjectsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request             $request  PSR Request
-     * @param Response            $response PSR Response
-     * @param string|null         $option   One of 'page' or 'order'
-     * @param integer|string|null $value    Value of the option
+     * @param Request         $request  PSR Request
+     * @param Response        $response PSR Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param int|string|null $value    Value of the option
      *
      * @return Response
      */
@@ -983,7 +983,7 @@ class ObjectsController extends AbstractPluginController
      * @param array<string,mixed>  $args Request arguments
      * @param ?array<string,mixed> $post POST values
      *
-     * @return null|integer|integer[]
+     * @return null|int|int[]
      */
     protected function getIdsToRemove(array &$args, ?array $post): array|int|null
     {
@@ -1028,7 +1028,7 @@ class ObjectsController extends AbstractPluginController
      * @param array<string,mixed> $args Route arguments
      * @param array<string,mixed> $post POST values
      *
-     * @return boolean
+     * @return bool
      */
     protected function doDelete(array $args, array $post): bool
     {

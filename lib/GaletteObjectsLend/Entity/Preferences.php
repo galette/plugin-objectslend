@@ -157,8 +157,8 @@ class Preferences
     /**
      * Default constructor
      *
-     * @param Db      $zdb  Db instance
-     * @param boolean $load Automatically load preferences on load
+     * @param Db   $zdb  Db instance
+     * @param bool $load Automatically load preferences on load
      *
      * @return void
      */
@@ -209,7 +209,7 @@ class Preferences
      *
      * @param array<string,mixed> $data Posted data
      *
-     * @return boolean
+     * @return bool
      */
     public function store(array $data): bool
     {
@@ -259,7 +259,7 @@ class Preferences
     /**
      * Load current preferences from database.
      *
-     * @return boolean
+     * @return bool
      */
     public function load(): bool
     {
@@ -289,7 +289,7 @@ class Preferences
     /**
      * Get thumbnail maximum with
      *
-     * @return integer
+     * @return int
      */
     public function getThumbWidth(): int
     {
@@ -299,7 +299,7 @@ class Preferences
     /**
      * Get thumbnail maximum height
      *
-     * @return integer
+     * @return int
      */
     public function getThumbHeight(): int
     {
@@ -309,7 +309,7 @@ class Preferences
     /**
      * Whether to display images (as thumbnails) in lists
      *
-     * @return boolean
+     * @return bool
      */
     public function imagesInLists(): bool
     {
@@ -321,7 +321,7 @@ class Preferences
      *
      * Would appear editing object, and on thumbnails click
      *
-     * @return boolean
+     * @return bool
      */
     public function showFullsize(): bool
     {

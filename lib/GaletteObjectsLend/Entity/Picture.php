@@ -227,9 +227,9 @@ class Picture extends \Galette\Core\Picture
     /**
      * Deletes a picture, from both database and filesystem
      *
-     * @param boolean $transaction Whether to use a transaction here or not
+     * @param bool $transaction Whether to use a transaction here or not
      *
-     * @return boolean true if image was successfully deleted, false otherwise
+     * @return bool true if image was successfully deleted, false otherwise
      */
     public function delete(bool $transaction = true): bool
     {

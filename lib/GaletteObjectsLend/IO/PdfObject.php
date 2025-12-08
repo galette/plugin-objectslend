@@ -217,9 +217,9 @@ class PdfObject extends Pdf
     /**
      * Add a line in the array
      *
-     * @param string  $title Line title
-     * @param string  $value Line value
-     * @param integer $width Cell width
+     * @param string $title Line title
+     * @param string $value Line value
+     * @param int    $width Cell width
      *
      * @return void
      */
