@@ -89,11 +89,11 @@ class Status
     /**
      * Get status list
      *
-     * @param boolean   $as_stt return the results as an array of
+     * @param bool      $as_stt return the results as an array of
      *                          Status object.
      * @param ?string[] $fields field(s) name(s) to get. If null, all fields will be returned
-     * @param boolean   $count  true if we want to count members
-     * @param boolean   $limit  true if we want records pagination
+     * @param bool      $count  true if we want to count members
+     * @param bool      $limit  true if we want records pagination
      *
      * @return LendStatus[]|ResultSet
      */
@@ -135,7 +135,7 @@ class Status
     /**
      * Get status list
      *
-     * @param boolean   $as_stt return the results as an array of
+     * @param bool      $as_stt return the results as an array of
      *                          Status object.
      * @param ?string[] $fields field(s) name(s) to get. Should be a string or
      *                          an array. If null, all fields will be
@@ -324,7 +324,7 @@ class Status
      * @param string    $field_name Field name to order by
      * @param ?string[] $fields     SELECTE'ed fields
      *
-     * @return boolean
+     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {

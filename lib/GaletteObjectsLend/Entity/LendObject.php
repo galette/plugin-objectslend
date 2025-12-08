@@ -311,7 +311,7 @@ class LendObject
         try {
             $values = [];
 
-            foreach ($this->fields as $k => $v) {
+            foreach (array_keys($this->fields) as $k) {
                 if (
                     ($k === 'is_active' || $k === 'price_per_day')
                     && $this->$k === false
@@ -441,7 +441,7 @@ class LendObject
      *
      * Check for activity from object and from its parent category if any
      *
-     * @return boolean
+     * @return bool
      */
     public function isActive(): bool
     {
@@ -546,7 +546,7 @@ class LendObject
     /**
      * Delete object
      *
-     * @return boolean
+     * @return bool
      */
     public function delete(): bool
     {
@@ -579,7 +579,7 @@ class LendObject
     /**
      * Clone object
      *
-     * @return boolean
+     * @return bool
      */
     public function clone(): bool
     {

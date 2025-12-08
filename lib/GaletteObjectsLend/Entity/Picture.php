@@ -176,8 +176,7 @@ class Picture extends \Galette\Core\Picture
                     return false;
             }
 
-            [$cur_width, $cur_height, $cur_type, $curattr]
-                = getimagesize($source);
+            [$cur_width, $cur_height] = getimagesize($source);
 
             $ratio = $cur_width / $cur_height;
 
@@ -227,9 +226,9 @@ class Picture extends \Galette\Core\Picture
     /**
      * Deletes a picture, from both database and filesystem
      *
-     * @param boolean $transaction Whether to use a transaction here or not
+     * @param bool $transaction Whether to use a transaction here or not
      *
-     * @return boolean true if image was successfully deleted, false otherwise
+     * @return bool true if image was successfully deleted, false otherwise
      */
     public function delete(bool $transaction = true): bool
     {
@@ -356,8 +355,7 @@ class Picture extends \Galette\Core\Picture
         } else {
             //resize if too small/large
             if (function_exists("gd_info")) {
-                [$cur_width, $cur_height, $cur_type, $curattr]
-                    = getimagesize($thumb);
+                [$cur_width, $cur_height] = getimagesize($thumb);
 
                 if (
                     $cur_height != $this->getOptimalHeight()

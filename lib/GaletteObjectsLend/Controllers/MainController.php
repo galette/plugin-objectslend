@@ -98,7 +98,6 @@ class MainController extends AbstractPluginController
         $lendsprefs = new Preferences($this->zdb);
 
         $error_detected = [];
-        $success_detected = [];
         if ($lendsprefs->store($post)) {
             $this->flash->addMessage(
                 'success_detected',

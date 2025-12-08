@@ -34,13 +34,13 @@ use Galette\Repository\Members;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property integer $rent_id
- * @property integer $object_id
+ * @property int $rent_id
+ * @property int $object_id
  * @property ?string $date_begin
  * @property ?string $date_forecast
  * @property ?string $date_end
- * @property integer $status_id
- * @property ?integer $adherent_id
+ * @property int $status_id
+ * @property ?int $adherent_id
  * @property string $comments
  * @property bool $in_stock
  * @property string $status_text
@@ -148,7 +148,7 @@ class LendRent
             $zdb->connection->beginTransaction();
             $values = [];
 
-            foreach ($this->fields as $k => $v) {
+            foreach (array_keys($this->fields) as $k) {
                 $values[$k] = $this->$k ?? null;
             }
 
@@ -202,9 +202,9 @@ class LendRent
     /**
      * Get rent history for a given object sorted
      *
-     * @param integer $object_id Object ID
-     * @param boolean $only_last Only retrieve last rent (for list display)
-     * @param string  $order     Order clause, defaults to 'date_begin DESC'
+     * @param int    $object_id Object ID
+     * @param bool   $only_last Only retrieve last rent (for list display)
+     * @param string $order     Order clause, defaults to 'date_begin DESC'
      *
      * @return LendRent[]
      */
@@ -264,7 +264,7 @@ class LendRent
      * @param int    $object_id Object ID
      * @param string $comments  Comment to add on lend that will be closed
      *
-     * @return boolean
+     * @return bool
      */
     public static function closeAllRentsForObject(int $object_id, string $comments): bool
     {
