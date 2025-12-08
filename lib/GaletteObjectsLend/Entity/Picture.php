@@ -176,8 +176,7 @@ class Picture extends \Galette\Core\Picture
                     return false;
             }
 
-            [$cur_width, $cur_height, $cur_type, $curattr]
-                = getimagesize($source);
+            [$cur_width, $cur_height] = getimagesize($source);
 
             $ratio = $cur_width / $cur_height;
 
@@ -356,8 +355,7 @@ class Picture extends \Galette\Core\Picture
         } else {
             //resize if too small/large
             if (function_exists("gd_info")) {
-                [$cur_width, $cur_height, $cur_type, $curattr]
-                    = getimagesize($thumb);
+                [$cur_width, $cur_height] = getimagesize($thumb);
 
                 if (
                     $cur_height != $this->getOptimalHeight()

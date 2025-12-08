@@ -144,7 +144,7 @@ class LendCategory
         try {
             $values = [];
 
-            foreach ($this->fields as $k => $v) {
+            foreach (array_keys($this->fields) as $k) {
                 if ($k === 'is_active' && $this->$k === false) {
                     //Handle booleans for postgres ; bugs #18899 and #19354
                     $values[$k] = $this->zdb->isPostgres() ? 'false' : 0;

@@ -129,7 +129,7 @@ class PdfObject extends Pdf
                 if ($tw > 16) {
                     $wpic = 30;
                 } else {
-                    $wlogo = $tw;
+                    $wpic = $tw;
                 }
                 $hpic = round($wpic / $ratio);
             }

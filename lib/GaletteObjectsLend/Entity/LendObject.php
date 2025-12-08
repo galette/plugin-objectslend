@@ -311,7 +311,7 @@ class LendObject
         try {
             $values = [];
 
-            foreach ($this->fields as $k => $v) {
+            foreach (array_keys($this->fields) as $k) {
                 if (
                     ($k === 'is_active' || $k === 'price_per_day')
                     && $this->$k === false

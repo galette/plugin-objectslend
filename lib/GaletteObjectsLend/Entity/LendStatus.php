@@ -116,7 +116,7 @@ class LendStatus
         try {
             $values = [];
 
-            foreach ($this->fields as $k => $v) {
+            foreach (array_keys($this->fields) as $k) {
                 if (
                     ($k === 'is_active' || $k === 'in_stock')
                     && $this->$k === false

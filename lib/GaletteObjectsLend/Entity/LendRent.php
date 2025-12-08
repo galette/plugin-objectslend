@@ -148,7 +148,7 @@ class LendRent
             $zdb->connection->beginTransaction();
             $values = [];
 
-            foreach ($this->fields as $k => $v) {
+            foreach (array_keys($this->fields) as $k) {
                 $values[$k] = $this->$k ?? null;
             }
 
