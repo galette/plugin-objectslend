@@ -21,7 +21,7 @@
 
 namespace GaletteObjectsLends\Entity\tests\units;
 
-use Galette\GaletteTestCase;
+use Galette\Tests\GaletteTestCase;
 
 /**
  * Preferences tests

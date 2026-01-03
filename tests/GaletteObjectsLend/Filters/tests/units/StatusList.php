@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace GaletteObjectslend\Filters\test\units;
 
-use Galette\GaletteTestCase;
+use Galette\Tests\GaletteTestCase;
 
 /**
  * Status filters tests class

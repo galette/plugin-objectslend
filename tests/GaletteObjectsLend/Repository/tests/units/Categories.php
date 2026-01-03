@@ -21,7 +21,7 @@
 
 namespace GaletteObjectsLends\Repository\tests\units;
 
-use Galette\GaletteTestCase;
+use Galette\Tests\GaletteTestCase;
 
 /**
  * Categories tests
