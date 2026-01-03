@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLends\Entity\tests\units;
 
 use Galette\Tests\GaletteTestCase;
@@ -34,8 +36,6 @@ class LendCategory extends GaletteTestCase
 
     /**
      * Cleanup after each test method
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -46,8 +46,6 @@ class LendCategory extends GaletteTestCase
 
     /**
      * Test empty
-     *
-     * @return void
      */
     public function testEmpty(): void
     {
@@ -72,8 +70,6 @@ class LendCategory extends GaletteTestCase
 
     /**
      * Test add and update
-     *
-     * @return void
      */
     public function testCrud(): void
     {

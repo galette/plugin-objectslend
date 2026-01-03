@@ -34,9 +34,9 @@ use Laminas\Db\Sql\Predicate;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property bool $is_active
- * @property string $name
- * @property int $category_id
+ * @property bool            $is_active
+ * @property string          $name
+ * @property int             $category_id
  * @property CategoryPicture $picture
  */
 class LendCategory
@@ -112,8 +112,6 @@ class LendCategory
      * Populate object from a resultset row
      *
      * @param ArrayObject<string, int|string> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -136,8 +134,6 @@ class LendCategory
 
     /**
      * Store category
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -189,8 +185,6 @@ class LendCategory
 
     /**
      * Drop a category. All objects for removed category will be assigned to none.
-     *
-     * @return bool
      */
     public function delete(): bool
     {
@@ -227,8 +221,6 @@ class LendCategory
      * Get category name
      *
      * @param bool $count Whether to display count along with name (defaults to true)
-     *
-     * @return string
      */
     public function getName(bool $count = true): string
     {
@@ -264,8 +256,6 @@ class LendCategory
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -274,8 +264,6 @@ class LendCategory
 
     /**
      * Get object ID
-     *
-     * @return ?int
      */
     public function getId(): ?int
     {
@@ -284,8 +272,6 @@ class LendCategory
 
     /**
      * Is object active
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -294,8 +280,6 @@ class LendCategory
 
     /**
      * Get picture
-     *
-     * @return ?CategoryPicture
      */
     public function getPicture(): ?CategoryPicture
     {
@@ -304,8 +288,6 @@ class LendCategory
 
     /**
      * Get sum
-     *
-     * @return float
      */
     public function getSum(): float
     {
@@ -314,8 +296,6 @@ class LendCategory
 
     /**
      * Get objects count
-     *
-     * @return int
      */
     public function getObjectsNb(): int
     {
@@ -326,8 +306,6 @@ class LendCategory
      * Generic isset function
      *
      * @param string $name Property name
-     *
-     * @return bool
      */
     public function __isset(string $name): bool
     {

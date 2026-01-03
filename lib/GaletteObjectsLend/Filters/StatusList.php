@@ -33,9 +33,9 @@ use GaletteObjectsLend\Repository\Status;
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property ?string $filter_str
- * @property ?int $active_filter
- * @property ?int $stock_filter
- * @property string $query
+ * @property ?int    $active_filter
+ * @property ?int    $stock_filter
+ * @property string  $query
  */
 
 class StatusList extends Pagination
@@ -57,8 +57,6 @@ class StatusList extends Pagination
 
     /**
      * Returns the field we want to default set order to
-     *
-     * @return int|string
      */
     protected function getDefaultOrder(): int|string
     {
@@ -67,8 +65,6 @@ class StatusList extends Pagination
 
     /**
      * Reinit default parameters
-     *
-     * @return void
      */
     public function reinit(): void
     {
@@ -109,8 +105,6 @@ class StatusList extends Pagination
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {

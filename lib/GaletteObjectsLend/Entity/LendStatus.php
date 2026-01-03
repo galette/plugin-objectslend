@@ -33,11 +33,11 @@ use Galette\Core\Db;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property int $status_id
+ * @property int    $status_id
  * @property string $status_text
- * @property bool $in_stock
- * @property bool $is_active
- * @property int $rent_day_number
+ * @property bool   $in_stock
+ * @property bool   $is_active
+ * @property int    $rent_day_number
  */
 class LendStatus
 {
@@ -94,8 +94,6 @@ class LendStatus
      * Populate object from a resultset row
      *
      * @param ArrayObject<string,int|string> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -108,8 +106,6 @@ class LendStatus
 
     /**
      * Store current element
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -249,8 +245,6 @@ class LendStatus
 
     /**
      * Delete status
-     *
-     * @return bool
      */
     public function delete(): bool
     {
@@ -286,8 +280,6 @@ class LendStatus
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -298,8 +290,6 @@ class LendStatus
      * Generic isset function
      *
      * @param string $name Property name
-     *
-     * @return bool
      */
     public function __isset(string $name): bool
     {

@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLends\Entity\tests\units;
 
 use Galette\Tests\GaletteTestCase;
@@ -34,8 +36,6 @@ class Preferences extends GaletteTestCase
 
     /**
      * Test defaults
-     *
-     * @return void
      */
     public function testDefaults(): void
     {
@@ -63,8 +63,6 @@ class Preferences extends GaletteTestCase
 
     /**
      * Test add and update
-     *
-     * @return void
      */
     public function testCrud(): void
     {

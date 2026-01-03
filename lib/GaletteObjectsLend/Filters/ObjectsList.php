@@ -35,11 +35,11 @@ use Slim\Views\Twig;
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property ?string $filter_str
- * @property ?int $category_filter
- * @property ?int $active_filter
- * @property ?int $field_filter
- * @property array $selected
- * @property string $query
+ * @property ?int    $category_filter
+ * @property ?int    $active_filter
+ * @property ?int    $field_filter
+ * @property array   $selected
+ * @property string  $query
  */
 
 class ObjectsList extends Pagination
@@ -74,8 +74,6 @@ class ObjectsList extends Pagination
 
     /**
      * Returns the field we want to default set order to
-     *
-     * @return int|string
      */
     protected function getDefaultOrder(): int|string
     {
@@ -84,8 +82,6 @@ class ObjectsList extends Pagination
 
     /**
      * Reinit default parameters
-     *
-     * @return void
      */
     public function reinit(): void
     {
@@ -101,8 +97,6 @@ class ObjectsList extends Pagination
      * Default isset
      *
      * @param string $name Property name
-     *
-     * @return bool
      */
     public function __isset(string $name): bool
     {
@@ -144,8 +138,6 @@ class ObjectsList extends Pagination
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -232,8 +224,6 @@ class ObjectsList extends Pagination
      *
      * @param \GaletteObjectsLend\Entity\Preferences $prefs Preferences instance
      * @param Twig                                   $view  Template reference
-     *
-     * @return void
      */
     public function setViewCommonsFilters(Preferences $prefs, Twig $view): void
     {

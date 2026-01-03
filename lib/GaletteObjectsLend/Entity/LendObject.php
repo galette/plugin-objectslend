@@ -36,29 +36,29 @@ use GaletteObjectsLend\Repository\Objects;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property ?int $object_id
+ * @property ?int          $object_id
  * @property ObjectPicture $picture
- * @property string $name
- * @property string $description
- * @property string $serial_number
- * @property float $price
- * @property float $rent_price
- * @property float $value_rent_price
- * @property bool $price_per_day
- * @property string $dimension
- * @property float $weight
- * @property bool $is_active
- * @property string $cat_name
- * @property string $status_text
- * @property string $date_begin
- * @property Adherent $member
- * @property string $date_forecast
- * @property array $rents
- * @property int $category_id
- * @property string $nom_adh
- * @property string $prenom_adh
- * @property string $currency
- * @property bool $in_stock
+ * @property string        $name
+ * @property string        $description
+ * @property string        $serial_number
+ * @property float         $price
+ * @property float         $rent_price
+ * @property float         $value_rent_price
+ * @property bool          $price_per_day
+ * @property string        $dimension
+ * @property float         $weight
+ * @property bool          $is_active
+ * @property string        $cat_name
+ * @property string        $status_text
+ * @property string        $date_begin
+ * @property Adherent      $member
+ * @property string        $date_forecast
+ * @property array         $rents
+ * @property int           $category_id
+ * @property string        $nom_adh
+ * @property string        $prenom_adh
+ * @property string        $currency
+ * @property bool          $in_stock
  */
 class LendObject
 {
@@ -218,8 +218,6 @@ class LendObject
      * Populate object from a resultset row
      *
      * @param ArrayObject<string,int|string> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -303,8 +301,6 @@ class LendObject
 
     /**
      * Store object
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -391,8 +387,6 @@ class LendObject
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -415,8 +409,6 @@ class LendObject
 
     /**
      * Get currency
-     *
-     * @return string
      */
     public function getCurrency(): string
     {
@@ -425,8 +417,6 @@ class LendObject
 
     /**
      * Get current rent
-     *
-     * @return LendRent|null
      */
     public function getCurrentRent(): ?LendRent
     {
@@ -440,8 +430,6 @@ class LendObject
      * Is current object active?
      *
      * Check for activity from object and from its parent category if any
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -453,8 +441,6 @@ class LendObject
      *
      * @param ObjectsList $filters Filters
      * @param string      $field   Field name
-     *
-     * @return string
      */
     private function getHighlighted(ObjectsList $filters, string $field): string
     {
@@ -499,8 +485,6 @@ class LendObject
      * Displays name, with search terms highlighted
      *
      * @param ObjectsList $filters Filters
-     *
-     * @return string
      */
     public function displayName(ObjectsList $filters): string
     {
@@ -511,8 +495,6 @@ class LendObject
      * Displays description, with search terms highlighted
      *
      * @param ObjectsList $filters Filters
-     *
-     * @return string
      */
     public function displayDescription(ObjectsList $filters): string
     {
@@ -523,8 +505,6 @@ class LendObject
      * Displays serial number, with search terms highlighted
      *
      * @param ObjectsList $filters Filters
-     *
-     * @return string
      */
     public function displaySerial(ObjectsList $filters): string
     {
@@ -535,8 +515,6 @@ class LendObject
      * Displays dimension, with search terms highlighted
      *
      * @param ObjectsList $filters Filters
-     *
-     * @return string
      */
     public function displayDimension(ObjectsList $filters): string
     {
@@ -545,8 +523,6 @@ class LendObject
 
     /**
      * Delete object
-     *
-     * @return bool
      */
     public function delete(): bool
     {
@@ -578,8 +554,6 @@ class LendObject
 
     /**
      * Clone object
-     *
-     * @return bool
      */
     public function clone(): bool
     {
@@ -592,8 +566,6 @@ class LendObject
 
     /**
      * Get ID
-     *
-     * @return ?int
      */
     public function getId(): ?int
     {
@@ -602,8 +574,6 @@ class LendObject
 
     /**
      * Get name
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -612,8 +582,6 @@ class LendObject
 
     /**
      * Get picture
-     *
-     * @return ObjectPicture
      */
     public function getPicture(): ObjectPicture
     {
@@ -622,8 +590,6 @@ class LendObject
 
     /**
      * Get price
-     *
-     * @return float
      */
     public function getPrice(): float
     {
@@ -632,8 +598,6 @@ class LendObject
 
     /**
      * Get rent price
-     *
-     * @return float
      */
     public function getRentPrice(): float
     {
@@ -642,8 +606,6 @@ class LendObject
 
     /**
      * Is a price per day
-     *
-     * @return bool
      */
     public function isPricePerDay(): bool
     {
@@ -652,8 +614,6 @@ class LendObject
 
     /**
      * Get weight
-     *
-     * @return float
      */
     public function getWeight(): float
     {
@@ -662,8 +622,6 @@ class LendObject
 
     /**
      * Get textual status
-     *
-     * @return string
      */
     public function getStatusText(): string
     {
@@ -672,8 +630,6 @@ class LendObject
 
     /**
      * Is in stock
-     *
-     * @return bool
      */
     public function inStock(): bool
     {
@@ -683,7 +639,6 @@ class LendObject
     /**
      * Get localized begin date
      *
-     * @return string
      * @throws \Exception
      */
     public function getDateBegin(): string
@@ -694,7 +649,6 @@ class LendObject
     /**
      * Get localized forecast date
      *
-     * @return string
      * @throws \Exception
      */
     public function getDateForecast(): string
@@ -704,8 +658,6 @@ class LendObject
 
     /**
      * Get member ID
-     *
-     * @return ?int
      */
     public function getIdAdh(): ?int
     {
@@ -714,8 +666,6 @@ class LendObject
 
     /**
      * Get rent ID
-     *
-     * @return ?int
      */
     public function getRentId(): ?int
     {
@@ -724,8 +674,6 @@ class LendObject
 
     /**
      * Get category ID
-     *
-     * @return ?int
      */
     public function getCategoryId(): ?int
     {
@@ -734,8 +682,6 @@ class LendObject
 
     /**
      * Get serial number
-     *
-     * @return string
      */
     public function getSerialNumber(): string
     {
@@ -747,7 +693,6 @@ class LendObject
      *
      * @param string $name Field name
      *
-     * @return string
      * @throws \Exception
      */
     protected function getDateField(string $name): string
@@ -764,8 +709,6 @@ class LendObject
      * Generic isset function
      *
      * @param string $name Property name
-     *
-     * @return bool
      */
     public function __isset(string $name): bool
     {

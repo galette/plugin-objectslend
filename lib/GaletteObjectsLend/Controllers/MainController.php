@@ -49,8 +49,6 @@ class MainController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function preferences(Request $request, Response $response): Response
     {
@@ -89,8 +87,6 @@ class MainController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function storePreferences(Request $request, Response $response): Response
     {

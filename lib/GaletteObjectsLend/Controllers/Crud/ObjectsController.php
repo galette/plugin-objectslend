@@ -65,8 +65,6 @@ class ObjectsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function add(Request $request, Response $response): Response
     {
@@ -78,8 +76,6 @@ class ObjectsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function doAdd(Request $request, Response $response): Response
     {
@@ -96,8 +92,6 @@ class ObjectsController extends AbstractPluginController
      * @param Response        $response PSR Response
      * @param string|null     $option   One of 'page' or 'order'
      * @param int|string|null $value    Value of the option
-     *
-     * @return Response
      */
     public function list(Request $request, Response $response, ?string $option = null, int|string|null $value = null): Response
     {
@@ -166,8 +160,6 @@ class ObjectsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function filter(Request $request, Response $response): Response
     {
@@ -211,8 +203,6 @@ class ObjectsController extends AbstractPluginController
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
      * @param int      $id       Object id
-     *
-     * @return Response
      */
     public function show(Request $request, Response $response, int $id): Response
     {
@@ -253,8 +243,6 @@ class ObjectsController extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function handleBatch(Request $request, Response $response): Response
     {
@@ -305,8 +293,6 @@ class ObjectsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param int|null $id       Object id
      * @param string   $action   Action
-     *
-     * @return Response
      */
     public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -379,8 +365,6 @@ class ObjectsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param null|int $id       Object id for edit
      * @param string   $action   Either add or edit
-     *
-     * @return Response
      */
     public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -478,8 +462,6 @@ class ObjectsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param null|int $id       Object id for edit
      * @param string   $action   Either add or edit
-     *
-     * @return Response
      */
     public function doUpdateStatus(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
@@ -517,8 +499,6 @@ class ObjectsController extends AbstractPluginController
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
      * @param int      $id       Object id for edit
-     *
-     * @return Response
      */
     public function doClone(Request $request, Response $response, int $id): Response
     {
@@ -558,8 +538,6 @@ class ObjectsController extends AbstractPluginController
      * @param Response $response PSR Response
      * @param string   $action   Action (either 'take' or 'return')
      * @param int      $id       Objects ID
-     *
-     * @return Response
      */
     public function lend(Request $request, Response $response, string $action, int $id): Response
     {
@@ -705,8 +683,6 @@ class ObjectsController extends AbstractPluginController
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
      * @param int      $id       Objects ID
-     *
-     * @return Response
      */
     public function doTake(Request $request, Response $response, int $id): Response
     {
@@ -860,8 +836,6 @@ class ObjectsController extends AbstractPluginController
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
      * @param int      $id       Objects ID
-     *
-     * @return Response
      */
     public function doReturn(Request $request, Response $response, int $id): Response
     {
@@ -950,8 +924,6 @@ class ObjectsController extends AbstractPluginController
      * Get redirection URI
      *
      * @param array<string,mixed> $args Route arguments
-     *
-     * @return string
      */
     public function redirectUri(array $args): string
     {
@@ -962,8 +934,6 @@ class ObjectsController extends AbstractPluginController
      * Get form URI
      *
      * @param array<string,mixed> $args Route arguments
-     *
-     * @return string
      */
     public function formUri(array $args): string
     {
@@ -999,8 +969,6 @@ class ObjectsController extends AbstractPluginController
      * Get confirmation removal page title
      *
      * @param array<string,mixed> $args Route arguments
-     *
-     * @return string
      */
     public function confirmRemoveTitle(array $args): string
     {
@@ -1027,8 +995,6 @@ class ObjectsController extends AbstractPluginController
      *
      * @param array<string,mixed> $args Route arguments
      * @param array<string,mixed> $post POST values
-     *
-     * @return bool
      */
     protected function doDelete(array $args, array $post): bool
     {

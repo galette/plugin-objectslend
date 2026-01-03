@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLends\Entity\tests\units;
 
 use Galette\Tests\GaletteTestCase;
@@ -38,8 +40,6 @@ class LendRent extends GaletteTestCase
 
     /**
      * Set up tests
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -49,8 +49,6 @@ class LendRent extends GaletteTestCase
 
     /**
      * Cleanup after each test method
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -72,8 +70,6 @@ class LendRent extends GaletteTestCase
 
     /**
      * Test empty
-     *
-     * @return void
      */
     public function testEmpty(): void
     {
@@ -90,8 +86,6 @@ class LendRent extends GaletteTestCase
 
     /**
      * Test add and update
-     *
-     * @return void
      */
     public function testCrud(): void
     {
@@ -217,8 +211,6 @@ class LendRent extends GaletteTestCase
 
     /**
      * Create few status
-     *
-     * @return void
      */
     private function createStatus(): void
     {
@@ -243,5 +235,4 @@ class LendRent extends GaletteTestCase
         $this->assertTrue($status->store());
         $this->inactive_instock_status = $status->status_id;
     }
-
 }

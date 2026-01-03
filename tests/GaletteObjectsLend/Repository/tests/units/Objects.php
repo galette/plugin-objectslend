@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteObjectsLends\Repository\tests\units;
 
 use Galette\Tests\GaletteTestCase;
@@ -36,8 +38,6 @@ class Objects extends GaletteTestCase
 
     /**
      * Set up tests
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -47,8 +47,6 @@ class Objects extends GaletteTestCase
 
     /**
      * Cleanup after each test method
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -63,8 +61,6 @@ class Objects extends GaletteTestCase
 
     /**
      * Test getList
-     *
-     * @return void
      */
     public function testGetList(): void
     {

@@ -32,11 +32,11 @@ use GaletteObjectsLend\Repository\Categories;
  *
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property ?string $filter_str
- * @property ?int $active_filter
- * @property ?bool $not_empty
+ * @property ?string      $filter_str
+ * @property ?int         $active_filter
+ * @property ?bool        $not_empty
  * @property ?ObjectsList $objects_filters
- * @property string $query
+ * @property string       $query
  */
 
 class CategoriesList extends Pagination
@@ -68,8 +68,6 @@ class CategoriesList extends Pagination
 
     /**
      * Returns the field we want to default set order to
-     *
-     * @return int|string
      */
     protected function getDefaultOrder(): int|string
     {
@@ -78,8 +76,6 @@ class CategoriesList extends Pagination
 
     /**
      * Reinit default parameters
-     *
-     * @return void
      */
     public function reinit(): void
     {
@@ -121,8 +117,6 @@ class CategoriesList extends Pagination
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -174,8 +168,6 @@ class CategoriesList extends Pagination
      * Set objects filter
      *
      * @param ObjectsList $filters Filters for objects list
-     *
-     * @return self
      */
     public function setObjectsFilter(ObjectsList $filters): self
     {

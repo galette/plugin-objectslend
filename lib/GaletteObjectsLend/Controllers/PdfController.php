@@ -47,8 +47,6 @@ class PdfController extends GPdfController
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
      * @param int      $id       Object ID
-     *
-     * @return Response
      */
     public function printObject(Request $request, Response $response, int $id): Response
     {
@@ -81,8 +79,6 @@ class PdfController extends GPdfController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     *
-     * @return Response
      */
     public function printObjects(Request $request, Response $response): Response
     {

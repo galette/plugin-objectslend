@@ -34,20 +34,20 @@ use Galette\Repository\Members;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property int $rent_id
- * @property int $object_id
+ * @property int     $rent_id
+ * @property int     $object_id
  * @property ?string $date_begin
  * @property ?string $date_forecast
  * @property ?string $date_end
- * @property int $status_id
- * @property ?int $adherent_id
- * @property string $comments
- * @property bool $in_stock
- * @property string $status_text
- * @property string $nom_adh
- * @property string $prenom_adh
- * @property string $pseudo_adh
- * @property string $email_adh
+ * @property int     $status_id
+ * @property ?int    $adherent_id
+ * @property string  $comments
+ * @property bool    $in_stock
+ * @property string  $status_text
+ * @property string  $nom_adh
+ * @property string  $prenom_adh
+ * @property string  $pseudo_adh
+ * @property string  $email_adh
  */
 class LendRent
 {
@@ -118,8 +118,6 @@ class LendRent
      * Populate object from a resultset row
      *
      * @param ArrayObject<string,int|string> $r the resultset row
-     *
-     * @return void
      */
     private function loadFromRS(ArrayObject $r): void
     {
@@ -137,8 +135,6 @@ class LendRent
 
     /**
      * Store current element
-     *
-     * @return bool
      */
     public function store(): bool
     {
@@ -263,8 +259,6 @@ class LendRent
      *
      * @param int    $object_id Object ID
      * @param string $comments  Comment to add on lend that will be closed
-     *
-     * @return bool
      */
     public static function closeAllRentsForObject(int $object_id, string $comments): bool
     {
@@ -362,8 +356,6 @@ class LendRent
      *
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
-     *
-     * @return void
      */
     public function __set(string $name, mixed $value): void
     {
@@ -418,8 +410,6 @@ class LendRent
      * Generic isset function
      *
      * @param string $name Property name
-     *
-     * @return bool
      */
     public function __isset(string $name): bool
     {

@@ -149,8 +149,6 @@ class Objects
      * Remove specified objects, and their full history
      *
      * @param array<int> $ids Objects identifiers to delete
-     *
-     * @return bool
      */
     public function removeObjects(array $ids): bool
     {
@@ -296,8 +294,6 @@ class Objects
      * Count members from the query
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function proceedCount(Select $select): void
     {
@@ -419,8 +415,6 @@ class Objects
      * Builds where clause, for filtering on simple list mode
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     public function buildWhereClause(Select $select): void
     {
@@ -504,8 +498,6 @@ class Objects
      *
      * @param string    $field_name Field name to order by
      * @param ?string[] $fields     SELECTE'ed fields
-     *
-     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {
@@ -525,8 +517,6 @@ class Objects
 
     /**
      * Get count for current query
-     *
-     * @return ?int
      */
     public function getCount(): ?int
     {

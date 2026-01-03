@@ -46,8 +46,6 @@ class ImagesController extends GImagesController
      * @param string   $type     Requested type (category or object)
      * @param string   $mode     Either thumbnail or photo
      * @param ?int     $id       Object id
-     *
-     * @return Response
      */
     public function lendPicture(Request $request, Response $response, string $type, string $mode, ?int $id = null): Response
     {

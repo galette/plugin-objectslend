@@ -60,8 +60,6 @@ class PdfObject extends Pdf
 
     /**
      * Initialize PDF
-     *
-     * @return void
      */
     public function init(): void
     {
@@ -85,8 +83,6 @@ class PdfObject extends Pdf
      * Draw listed object cards
      *
      * @param LendObject[] $objects Object list
-     *
-     * @return void
      */
     public function drawCards(array $objects): void
     {
@@ -104,8 +100,6 @@ class PdfObject extends Pdf
      * Draw object card
      *
      * @param LendObject $object Object
-     *
-     * @return void
      */
     public function drawCard(LendObject $object): void
     {
@@ -220,8 +214,6 @@ class PdfObject extends Pdf
      * @param string $title Line title
      * @param string $value Line value
      * @param int    $width Cell width
-     *
-     * @return void
      */
     private function addCell(string $title, string $value, int $width): void
     {

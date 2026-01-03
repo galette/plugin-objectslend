@@ -81,8 +81,6 @@ class Picture extends \Galette\Core\Picture
      * Gets the default picture to show, anyway
      *
      * @see Logo::getDefaultPicture()
-     *
-     * @return void
      */
     protected function getDefaultPicture(): void
     {
@@ -99,8 +97,6 @@ class Picture extends \Galette\Core\Picture
      *
      * @param Response    $response Response
      * @param Preferences $prefs    Preferences instance
-     *
-     * @return Response
      */
     public function displayThumb(Response $response, Preferences $prefs): Response
     {
@@ -126,8 +122,6 @@ class Picture extends \Galette\Core\Picture
      * @param string  $ext    file's extension
      * @param ?string $dest   the destination image.
      *                        If null, we'll use the source image. Defaults to null
-     *
-     * @return bool
      */
     private function createThumb(string $source, string $ext, ?string $dest = null): bool
     {
@@ -271,8 +265,6 @@ class Picture extends \Galette\Core\Picture
      *
      * @param string[] $success Success messages
      * @param string[] $error   Error messages
-     *
-     * @return void
      */
     public function restorePictures(array &$success, array &$error): void
     {
@@ -316,8 +308,6 @@ class Picture extends \Galette\Core\Picture
 
     /**
      * Get thumbnail file path
-     *
-     * @return string
      */
     public function getThumbPath(): string
     {
@@ -339,8 +329,6 @@ class Picture extends \Galette\Core\Picture
      * Should override Picture::setSize(), but this one is private :/
      *
      * @param Preferences $prefs Preferences instance
-     *
-     * @return void
      */
     private function setThumbSizes(Preferences $prefs): void
     {
@@ -413,8 +401,6 @@ class Picture extends \Galette\Core\Picture
 
     /**
      * Get storage directory
-     *
-     * @return string
      */
     public function getDir(): string
     {

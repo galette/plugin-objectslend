@@ -196,8 +196,6 @@ class Status
      * Count members from the query
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function proceedCount(Select $select): void
     {
@@ -280,8 +278,6 @@ class Status
      * Builds where clause, for filtering on simple list mode
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function buildWhereClause(Select $select): void
     {
@@ -323,8 +319,6 @@ class Status
      *
      * @param string    $field_name Field name to order by
      * @param ?string[] $fields     SELECTE'ed fields
-     *
-     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {
@@ -344,8 +338,6 @@ class Status
 
     /**
      * Get count for current query
-     *
-     * @return ?int
      */
     public function getCount(): ?int
     {

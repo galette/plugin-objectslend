@@ -76,8 +76,6 @@ class PdfObjects extends Pdf
 
     /**
      * Initialize PDF
-     *
-     * @return void
      */
     public function init(): void
     {
@@ -97,8 +95,6 @@ class PdfObjects extends Pdf
 
     /**
      * Page header
-     *
-     * @return void
      *
      * @phpcs:disable
      */
@@ -134,8 +130,6 @@ class PdfObjects extends Pdf
      * Draw objects list
      *
      * @param LendObject[] $objects List of objects
-     *
-     * @return void
      */
     public function drawList(array $objects): void
     {

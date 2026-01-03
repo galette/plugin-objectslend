@@ -21,24 +21,9 @@
 
 declare(strict_types=1);
 
-use Analog\Analog;
-use Galette\Entity\ContributionsTypes;
-use Galette\Entity\Adherent;
-use Galette\Entity\Contribution;
-use Galette\Repository\Members;
-use GaletteObjectsLend\Entity\Preferences;
-use GaletteObjectsLend\Entity\ObjectPicture;
-use GaletteObjectsLend\Entity\CategoryPicture;
-use GaletteObjectsLend\Entity\LendCategory;
-use GaletteObjectsLend\Entity\LendStatus;
-use GaletteObjectsLend\Entity\LendObject;
-use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Repository\Categories;
 use GaletteObjectsLend\Repository\Objects;
 use GaletteObjectsLend\Repository\Status;
-use GaletteObjectsLend\Filters\StatusList;
-use GaletteObjectsLend\Filters\ObjectsList;
-use GaletteObjectsLend\Filters\CategoriesList;
 use GaletteObjectsLend\Controllers\Crud\CategoriesController;
 use GaletteObjectsLend\Controllers\ImagesController;
 use GaletteObjectsLend\Controllers\Crud\StatusController;

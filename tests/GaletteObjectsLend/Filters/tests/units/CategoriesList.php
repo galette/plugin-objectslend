@@ -36,8 +36,6 @@ class CategoriesList extends GaletteTestCase
      * Test filter defaults values
      *
      * @param \GaletteObjectsLend\Filters\CategoriesList $filters Filters instance
-     *
-     * @return void
      */
     protected function testDefaults(\GaletteObjectsLend\Filters\CategoriesList $filters): void
     {
@@ -51,8 +49,6 @@ class CategoriesList extends GaletteTestCase
 
     /**
      * Test creation
-     *
-     * @return void
      */
     public function testCreate(): void
     {
@@ -116,10 +112,8 @@ class CategoriesList extends GaletteTestCase
 
     /**
      * Test setting non existing filter
-     *
-     * @return void
      */
-    public function testSetNotExisting()
+    public function testSetNotExisting(): void
     {
         $filters = new \GaletteObjectsLend\Filters\CategoriesList();
         $this->testDefaults($filters);
@@ -130,10 +124,8 @@ class CategoriesList extends GaletteTestCase
 
     /**
      * Test getting non existing filter
-     *
-     * @return void
      */
-    public function testGetNotExisting()
+    public function testGetNotExisting(): void
     {
         $filters = new \GaletteObjectsLend\Filters\CategoriesList();
         $this->testDefaults($filters);

@@ -207,8 +207,6 @@ class Categories
      * Count categories from the query
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function proceedCount(Select $select): void
     {
@@ -279,8 +277,6 @@ class Categories
      * Builds where clause, for filtering on simple list mode
      *
      * @param Select $select Original select
-     *
-     * @return void
      */
     private function buildWhereClause(Select $select): void
     {
@@ -336,8 +332,6 @@ class Categories
      *
      * @param string         $field_name Field name to order by
      * @param ?array<string> $fields     SELECTE'ed fields
-     *
-     * @return bool
      */
     private function canOrderBy(string $field_name, ?array $fields): bool
     {
@@ -357,8 +351,6 @@ class Categories
 
     /**
      * Get count for current query
-     *
-     * @return ?int
      */
     public function getCount(): ?int
     {

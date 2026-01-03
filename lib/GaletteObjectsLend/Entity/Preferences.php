@@ -32,22 +32,22 @@ use Galette\Core\Db;
  * @author Mélissa Djebel <melissa.djebel@gmx.net>
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
- * @property bool $ENABLE_MEMBER_RENT_OBJECT
- * @property bool $AUTO_GENERATE_CONTRIBUTION
- * @property int $GENERATED_CONTRIBUTION_TYPE_ID
+ * @property bool   $ENABLE_MEMBER_RENT_OBJECT
+ * @property bool   $AUTO_GENERATE_CONTRIBUTION
+ * @property int    $GENERATED_CONTRIBUTION_TYPE_ID
  * @property string $GENERATED_CONTRIB_INFO_TEXT
- * @property bool $VIEW_CATEGORY
- * @property bool $VIEW_SERIAL
- * @property bool $VIEW_THUMBNAIL
- * @property bool $VIEW_DESCRIPTION
- * @property bool $VIEW_PRICE
- * @property bool $VIEW_DIMENSION
- * @property bool $VIEW_WEIGHT
- * @property bool $VIEW_LEND_PRICE
- * @property bool $VIEW_DATE_FORECAST
- * @property bool $VIEW_LIST_PRICE_SUM
- * @property int $THUMB_MAX_WIDTH
- * @property int $THUMB_MAX_HEIGHT
+ * @property bool   $VIEW_CATEGORY
+ * @property bool   $VIEW_SERIAL
+ * @property bool   $VIEW_THUMBNAIL
+ * @property bool   $VIEW_DESCRIPTION
+ * @property bool   $VIEW_PRICE
+ * @property bool   $VIEW_DIMENSION
+ * @property bool   $VIEW_WEIGHT
+ * @property bool   $VIEW_LEND_PRICE
+ * @property bool   $VIEW_DATE_FORECAST
+ * @property bool   $VIEW_LIST_PRICE_SUM
+ * @property int    $THUMB_MAX_WIDTH
+ * @property int    $THUMB_MAX_HEIGHT
  */
 class Preferences
 {
@@ -208,8 +208,6 @@ class Preferences
      * Store preferences
      *
      * @param array<string,mixed> $data Posted data
-     *
-     * @return bool
      */
     public function store(array $data): bool
     {
@@ -258,8 +256,6 @@ class Preferences
 
     /**
      * Load current preferences from database.
-     *
-     * @return bool
      */
     public function load(): bool
     {
@@ -288,8 +284,6 @@ class Preferences
 
     /**
      * Get thumbnail maximum with
-     *
-     * @return int
      */
     public function getThumbWidth(): int
     {
@@ -298,8 +292,6 @@ class Preferences
 
     /**
      * Get thumbnail maximum height
-     *
-     * @return int
      */
     public function getThumbHeight(): int
     {
@@ -308,8 +300,6 @@ class Preferences
 
     /**
      * Whether to display images (as thumbnails) in lists
-     *
-     * @return bool
      */
     public function imagesInLists(): bool
     {
@@ -320,8 +310,6 @@ class Preferences
      * Shall we show fullsize images?
      *
      * Would appear editing object, and on thumbnails click
-     *
-     * @return bool
      */
     public function showFullsize(): bool
     {
