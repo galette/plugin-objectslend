@@ -1,11 +1,12 @@
 # Ahmet Aylin Öztürk <ahmetaylinozturk@gmail.com>, 2021.
+# 19atlas <o.ustuncelik@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2021-08-29 12:34+0000\n"
-"Last-Translator: Ahmet Aylin Öztürk <ahmetaylinozturk@gmail.com>\n"
+"PO-Revision-Date: 2026-01-23 18:50+0000\n"
+"Last-Translator: 19atlas <o.ustuncelik@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/tr/>\n"
 "Language: tr\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -219,7 +220,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:144
 msgid "Status has not been added :("
-msgstr ""
+msgstr "Status türü eklenemedi :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:349
 msgid "Object has not been added :("
