@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-01-28 12:42+0000\n"
+"PO-Revision-Date: 2026-01-28 15:00+0000\n"
 "Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
@@ -485,7 +485,7 @@ msgstr ""
 #: ../tempcache/status_list.html.twig:343
 #: ../tempcache/objects_list.html.twig:734
 msgid "Inactive"
-msgstr ""
+msgstr "Inactiu"
 
 #: ../tempcache/categories_list.html.twig:315
 #, php-format
@@ -535,7 +535,7 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:127
 msgid "Contribution type:"
-msgstr ""
+msgstr "Tipus de contribució:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
@@ -629,12 +629,12 @@ msgstr ""
 
 #: ../tempcache/objects_edit.html.twig:70 ../tempcache/take_object.html.twig:70
 msgid "Name:"
-msgstr ""
+msgstr "Nom:"
 
 #: ../tempcache/objects_edit.html.twig:76
 #: ../tempcache/take_object.html.twig:106
 msgid "Description:"
-msgstr ""
+msgstr "Descripció:"
 
 #: ../tempcache/objects_edit.html.twig:84
 msgid "--- Select a category ---"
@@ -695,7 +695,7 @@ msgstr ""
 
 #: ../tempcache/objects_edit.html.twig:265
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplicat"
 
 #: ../tempcache/objects_edit.html.twig:274
 msgid "Print object"
@@ -907,7 +907,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:452
 msgid "Comments:"
-msgstr ""
+msgstr "Comentaris:"
 
 #: ../tempcache/take_object.html.twig:455
 msgid "remaining characters"
