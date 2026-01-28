@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-01-28 11:22+0000\n"
+"PO-Revision-Date: 2026-01-28 11:39+0000\n"
 "Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
@@ -42,7 +42,7 @@ msgstr ""
 #: ../tempcache/objects_list.html.twig:140
 #: ../tempcache/objects_list.html.twig:539
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:138
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:160
@@ -146,7 +146,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "End"
-msgstr ""
+msgstr "Final"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:194
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:166
@@ -469,12 +469,11 @@ msgid "used to compute return date"
 msgstr ""
 
 #: ../tempcache/categories_list.html.twig:62
-#, fuzzy, php-format
-#| msgid "Edit category"
+#, php-format
 msgid "%count category"
 msgid_plural "%count categories"
-msgstr[0] "Editar categoria"
-msgstr[1] "Editar categoria"
+msgstr[0] "Categoría de %count"
+msgstr[1] "Categories de %count"
 
 #: ../tempcache/categories_list.html.twig:86
 msgid "Add a category"
