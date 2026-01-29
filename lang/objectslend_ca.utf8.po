@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-01-28 15:00+0000\n"
+"PO-Revision-Date: 2026-01-30 09:01+0000\n"
 "Last-Translator: Laura Quintana Marín <2001lauraquintana@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ca/>\n"
@@ -30,7 +30,7 @@ msgstr "Fitxa d'objecte"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:72
 msgid "Labels"
-msgstr ""
+msgstr "Etiquetes"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:136
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:159
@@ -47,7 +47,7 @@ msgstr "Nom"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:138
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:160
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:141
 #: ../tempcache/category_edit.html.twig:62
@@ -126,7 +126,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:196
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:168
 msgid "Member"
-msgstr ""
+msgstr "Usuari"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:172
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:169
@@ -142,7 +142,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 msgid "Begin"
-msgstr ""
+msgstr "Comença"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "End"
@@ -431,7 +431,7 @@ msgstr ""
 #: ../tempcache/status_edit.html.twig:69 ../tempcache/take_object.html.twig:372
 #: ../tempcache/take_object.html.twig:435
 msgid "Status:"
-msgstr ""
+msgstr "Estat:"
 
 #: ../tempcache/status_edit.html.twig:74 ../tempcache/status_list.html.twig:189
 msgid "In stock:"
@@ -724,7 +724,7 @@ msgstr ""
 
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Begin date"
-msgstr ""
+msgstr "Data d'inici"
 
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "End date"
