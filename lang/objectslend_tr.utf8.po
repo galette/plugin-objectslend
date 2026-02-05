@@ -1,12 +1,13 @@
 # Ahmet Aylin Öztürk <ahmetaylinozturk@gmail.com>, 2021.
 # 19atlas <o.ustuncelik@gmail.com>, 2026.
+# Kehribar <103407696+dpentx@users.noreply.github.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-01-23 18:50+0000\n"
-"Last-Translator: 19atlas <o.ustuncelik@gmail.com>\n"
+"PO-Revision-Date: 2026-02-06 16:01+0000\n"
+"Last-Translator: Kehribar <103407696+dpentx@users.noreply.github.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/tr/>\n"
 "Language: tr\n"
@@ -394,7 +395,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:48
 msgid "Objects lend"
-msgstr ""
+msgstr "Ödünç listesi"
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:71
 msgid "Borrow status"
