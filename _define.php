@@ -21,15 +21,16 @@
 
 declare(strict_types=1);
 
+/** @var \Galette\Core\Plugins $this */
 $this->register(
-    'Galette Objects Lend',             //Name
-    'Manage rent/lend of object',       //Short description
-    'Mélissa Djebel, Johan Cwiklinski', //Author
-    '2.2.1',                            //Version
-    '1.2.0',                            //Galette version compatibility
-    'objectslend',                      //routing name and translation domain
-    '2025-12-08',                       //Date
-    [
+    name: 'Galette Objects Lend',               //Name
+    desc: 'Manage rent/lend of object',         //Short description
+    author: 'Mélissa Djebel, Johan Cwiklinski', //Author
+    version: '2.2.1',                           //Version
+    compver: '1.2.0',                           //Galette version compatibility
+    route: 'objectslend',                       //routing name and translation domain
+    date: '2025-12-08',                         //Date
+    acls: [
         'objectslend_preferences'       => 'admin',
         'store_objectlend_preferences'  => 'admin',
         'objectslend_category_add'      => 'staff',
