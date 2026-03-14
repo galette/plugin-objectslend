@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-03-02 20:00+0000\n"
+"PO-Revision-Date: 2026-03-15 06:18+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/ta/>\n"
@@ -349,7 +349,7 @@ msgstr "நிலை புதுப்பிக்கப்பட்டுள�
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:545
 msgid "Successfully cloned from #%id.<br/>You can now edit it."
 msgstr ""
-"#%ஐடியிலிருந்து வெற்றிகரமாக நகலி செய்யப்பட்டது. <br/> நீங்கள் இப்போது அதைத் திருத்தலாம்."
+"#%id இருந்து வெற்றிகரமாக நகலி செய்யப்பட்டது.<br/> நீங்கள் இப்போது அதைத் திருத்தலாம்."
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:551
 msgid "An error occurred cloning object :("
@@ -441,8 +441,8 @@ msgid ""
 "Check if the object is available to be borrowed;<br/>uncheck if object is "
 "already borrowed and should be given back"
 msgstr ""
-"கடன் வாங்குவதற்கு பொருள் கிடைக்கிறதா என்று சரிபார்க்கவும்; <br/> பொருள் ஏற்கனவே கடன் "
-"வாங்கப்பட்டதா என்பதைத் தேர்வுசெய்க, திருப்பி கொடுக்கப்பட வேண்டும்"
+"கடன் வாங்குவதற்கு பொருள் கிடைக்கிறதா என்று சரிபார்க்கவும்;<br/> பொருள் ஏற்கனவே கடன் "
+"வாங்கப்பட்டதா என்பதைத் தேர்வுசெய்க, திருப்பிக் கொடுக்கப்பட வேண்டும்"
 
 #: ../tempcache/status_edit.html.twig:80
 #: ../tempcache/categories_list.html.twig:131
