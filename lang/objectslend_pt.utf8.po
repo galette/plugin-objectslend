@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
 "PO-Revision-Date: 2026-04-01 04:09+0000\n"
-"Last-Translator: ramon0504 <ramon-sousa@hotmail.com>\n"
+"Last-Translator: Edson Wolf <edsonwolf@vivaldi.net>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/pt/>\n"
 "Language: pt\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
 msgid "object_card"
-msgstr "Ficha do objeto"
+msgstr "cartao_de_objeto"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:70
 msgid "Object card"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:85
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:257
 msgid "Name/description"
