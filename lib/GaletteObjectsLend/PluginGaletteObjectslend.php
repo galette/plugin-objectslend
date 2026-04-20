@@ -28,12 +28,10 @@ use Galette\Core\Db;
 use Galette\Core\Login;
 use Galette\Core\Plugins\InstallableInterface;
 use Galette\Core\Plugins\MenuProviderInterface;
-use Galette\Entity\Adherent;
 use Galette\Core\GalettePlugin;
 use GaletteObjectsLend\Entity\CategoryPicture;
 use GaletteObjectsLend\Entity\LendObject;
 use GaletteObjectsLend\Entity\LendCategory;
-use GaletteObjectsLend\Entity\LandObject;
 use GaletteObjectsLend\Entity\LendRent;
 use GaletteObjectsLend\Entity\ObjectPicture;
 use GaletteObjectsLend\Entity\LendStatus;
@@ -134,6 +132,6 @@ class PluginGaletteObjectslend extends GalettePlugin implements InstallableInter
                 && $this->zdb->tableExists(LEND_PREFIX . LendStatus::class)
                 && $this->zdb->tableExists(LEND_PREFIX . ObjectPicture::class)
                 && $this->zdb->tableExists(LEND_PREFIX . Preferences::class)
-            ;
+        ;
     }
 }
