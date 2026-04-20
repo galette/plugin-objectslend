@@ -31,8 +31,8 @@ namespace GaletteObjectsLend\Entity;
  */
 class CategoryPicture extends Picture
 {
-    public const PK = 'category_id';
-    public const TABLE = 'categories_pictures';
+    public const string PK = 'category_id';
+    public const string TABLE = 'categories_pictures';
 
     /**
      * Default constructor.

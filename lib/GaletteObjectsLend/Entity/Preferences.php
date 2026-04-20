@@ -51,8 +51,8 @@ use Galette\Core\Db;
  */
 class Preferences
 {
-    public const TABLE = 'parameters';
-    public const PK = 'code';
+    public const string TABLE = 'parameters';
+    public const string PK = 'code';
 
     private Db $zdb;
     /** @var array<string,mixed> */
@@ -62,97 +62,97 @@ class Preferences
      * Show categories at the top of the objects list
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_CATEGORY = 'VIEW_CATEGORY';
+    public const string PARAM_VIEW_CATEGORY = 'VIEW_CATEGORY';
 
     /**
      * Show serial number column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_SERIAL = 'VIEW_SERIAL';
+    public const string PARAM_VIEW_SERIAL = 'VIEW_SERIAL';
 
     /**
      * Show thumbnail column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_THUMBNAIL = 'VIEW_THUMBNAIL';
+    public const string PARAM_VIEW_THUMBNAIL = 'VIEW_THUMBNAIL';
 
     /**
      * Show description column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_DESCRIPTION = 'VIEW_DESCRIPTION';
+    public const string PARAM_VIEW_DESCRIPTION = 'VIEW_DESCRIPTION';
 
     /**
      * Show price column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_PRICE = 'VIEW_PRICE';
+    public const string PARAM_VIEW_PRICE = 'VIEW_PRICE';
 
     /**
      * Show dimensions column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_DIMENSION = 'VIEW_DIMENSION';
+    public const string PARAM_VIEW_DIMENSION = 'VIEW_DIMENSION';
 
     /**
      * Show weight column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_WEIGHT = 'VIEW_WEIGHT';
+    public const string PARAM_VIEW_WEIGHT = 'VIEW_WEIGHT';
 
     /**
      * Show rent price column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_LEND_PRICE = 'VIEW_LEND_PRICE';
+    public const string PARAM_VIEW_LEND_PRICE = 'VIEW_LEND_PRICE';
 
     /**
      * Show previsional return date column
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_DATE_FORECAST = 'VIEW_DATE_FORECAST';
+    public const string PARAM_VIEW_DATE_FORECAST = 'VIEW_DATE_FORECAST';
 
     /**
      * Show the sum of prices on the list of objects
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_VIEW_LIST_PRICE_SUM = 'VIEW_LIST_PRICE_SUM';
+    public const string PARAM_VIEW_LIST_PRICE_SUM = 'VIEW_LIST_PRICE_SUM';
 
     /**
      * Maximum width of a thumbnail (applied to objects/categories)
      * Valeur : largeur en pixels
      */
-    public const PARAM_THUMB_MAX_WIDTH = 'THUMB_MAX_WIDTH';
+    public const string PARAM_THUMB_MAX_WIDTH = 'THUMB_MAX_WIDTH';
 
     /**
      * Maximum height of a thumbnail (applied to objects/categories)
      * Valeur : largeur en pixels
      */
-    public const PARAM_THUMB_MAX_HEIGHT = 'THUMB_MAX_HEIGHT';
+    public const string PARAM_THUMB_MAX_HEIGHT = 'THUMB_MAX_HEIGHT';
 
     /**
      * Generate automatically a contribution when an object is rented
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_AUTO_GENERATE_CONTRIBUTION = 'AUTO_GENERATE_CONTRIBUTION';
+    public const string PARAM_AUTO_GENERATE_CONTRIBUTION = 'AUTO_GENERATE_CONTRIBUTION';
 
     /**
      * Contribution ID to generate when an object is rented
      * Valeur : ID du type de contribution
      */
-    public const PARAM_GENERATED_CONTRIBUTION_TYPE_ID = 'GENERATED_CONTRIBUTION_TYPE_ID';
+    public const string PARAM_GENERATED_CONTRIBUTION_TYPE_ID = 'GENERATED_CONTRIBUTION_TYPE_ID';
 
     /**
      * Text for the contribution
      * Valeur : texte d'info à mettre avec des placeholders à remplacer
      */
-    public const PARAM_GENERATED_CONTRIB_INFO_TEXT = 'GENERATED_CONTRIB_INFO_TEXT';
+    public const string PARAM_GENERATED_CONTRIB_INFO_TEXT = 'GENERATED_CONTRIB_INFO_TEXT';
 
     /**
      * Allow non staff members to rent objects
      * Valeur : 0 = false / 1 = true
      */
-    public const PARAM_ENABLE_MEMBER_RENT_OBJECT = 'ENABLE_MEMBER_RENT_OBJECT';
+    public const string PARAM_ENABLE_MEMBER_RENT_OBJECT = 'ENABLE_MEMBER_RENT_OBJECT';
 
     /**
      * Default constructor

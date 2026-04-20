@@ -31,8 +31,8 @@ namespace GaletteObjectsLend\Entity;
  */
 class ObjectPicture extends Picture
 {
-    public const PK = 'object_id';
-    public const TABLE = 'pictures';
+    public const string PK = 'object_id';
+    public const string TABLE = 'pictures';
 
     /**
      * Default constructor.

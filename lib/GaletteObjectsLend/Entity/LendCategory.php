@@ -41,8 +41,8 @@ use Laminas\Db\Sql\Predicate;
  */
 class LendCategory
 {
-    public const TABLE = 'category';
-    public const PK = 'category_id';
+    public const string TABLE = 'category';
+    public const string PK = 'category_id';
 
     /** @var array<string> */
     private array $fields = [

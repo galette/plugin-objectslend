@@ -42,17 +42,17 @@ use Laminas\Db\Sql\Select;
  */
 class Categories
 {
-    public const TABLE = LendCategory::TABLE;
-    public const PK = LendCategory::PK;
+    public const string TABLE = LendCategory::TABLE;
+    public const string PK = LendCategory::PK;
 
-    public const ALL_CATEGORIES = 0;
-    public const ACTIVE_CATEGORIES = 1;
-    public const INACTIVE_CATEGORIES = 2;
+    public const int ALL_CATEGORIES = 0;
+    public const int ACTIVE_CATEGORIES = 1;
+    public const int INACTIVE_CATEGORIES = 2;
 
-    public const FILTER_NAME = 0;
+    public const int FILTER_NAME = 0;
 
-    public const ORDERBY_NAME = 0;
-    public const ORDERBY_ACTIVITY = 1;
+    public const int ORDERBY_NAME = 0;
+    public const int ORDERBY_ACTIVITY = 1;
 
     private CategoriesList $filters;
     private ?int $count = null;

@@ -51,8 +51,8 @@ use Galette\Repository\Members;
  */
 class LendRent
 {
-    public const TABLE = 'rents';
-    public const PK = 'rent_id';
+    public const string TABLE = 'rents';
+    public const string PK = 'rent_id';
 
     /** @var array<string, string> */
     private array $fields = [

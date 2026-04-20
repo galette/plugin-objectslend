@@ -41,8 +41,8 @@ use Galette\Core\Db;
  */
 class LendStatus
 {
-    public const TABLE = 'status';
-    public const PK = 'status_id';
+    public const string TABLE = 'status';
+    public const string PK = 'status_id';
 
     private Db $zdb;
 

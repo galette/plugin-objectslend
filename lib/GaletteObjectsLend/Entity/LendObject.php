@@ -62,8 +62,8 @@ use GaletteObjectsLend\Repository\Objects;
  */
 class LendObject
 {
-    public const TABLE = 'objects';
-    public const PK = 'object_id';
+    public const string TABLE = 'objects';
+    public const string PK = 'object_id';
 
     /** @var array<string,string> */
     private array $fields = [

@@ -39,24 +39,24 @@ use Laminas\Db\Sql\Select;
  */
 class Status
 {
-    public const TABLE = LendStatus::TABLE;
-    public const PK = LendStatus::PK;
+    public const string TABLE = LendStatus::TABLE;
+    public const string PK = LendStatus::PK;
 
-    public const ALL = 0;
-    public const ACTIVE = 1;
-    public const INACTIVE = 2;
+    public const int ALL = 0;
+    public const int ACTIVE = 1;
+    public const int INACTIVE = 2;
 
-    public const DC_STOCK = 0;
-    public const IN_STOCK = 1;
-    public const OUT_STOCK = 2;
+    public const int DC_STOCK = 0;
+    public const int IN_STOCK = 1;
+    public const int OUT_STOCK = 2;
 
-    public const FILTER_NAME = 0;
+    public const int FILTER_NAME = 0;
 
-    public const ORDERBY_ID = 0;
-    public const ORDERBY_NAME = 1;
-    public const ORDERBY_ACTIVE = 2;
-    public const ORDERBY_STOCK = 3;
-    public const ORDERBY_RENTDAYS = 4;
+    public const int ORDERBY_ID = 0;
+    public const int ORDERBY_NAME = 1;
+    public const int ORDERBY_ACTIVE = 2;
+    public const int ORDERBY_STOCK = 3;
+    public const int ORDERBY_RENTDAYS = 4;
 
     private Db $zdb;
     private Login $login;

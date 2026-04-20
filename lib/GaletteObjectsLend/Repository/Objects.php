@@ -43,28 +43,28 @@ use Laminas\Db\Sql\Select;
  */
 class Objects
 {
-    public const TABLE = LendObject::TABLE;
-    public const PK = LendObject::PK;
+    public const string TABLE = LendObject::TABLE;
+    public const string PK = LendObject::PK;
 
-    public const ALL_OBJECTS = 0;
-    public const ACTIVE_OBJECTS = 1;
-    public const INACTIVE_OBJECTS = 2;
+    public const int ALL_OBJECTS = 0;
+    public const int ACTIVE_OBJECTS = 1;
+    public const int INACTIVE_OBJECTS = 2;
 
-    public const FILTER_NAME = 0;
-    public const FILTER_SERIAL = 1;
-    public const FILTER_DIM = 2;
-    public const FILTER_ID = 3;
+    public const int FILTER_NAME = 0;
+    public const int FILTER_SERIAL = 1;
+    public const int FILTER_DIM = 2;
+    public const int FILTER_ID = 3;
 
-    public const ORDERBY_NAME = 0;
-    public const ORDERBY_SERIAL = 1;
-    public const ORDERBY_PRICE = 2;
-    public const ORDERBY_RENTPRICE = 3;
-    public const ORDERBY_WEIGHT = 4;
-    public const ORDERBY_STATUS = 5;
-    public const ORDERBY_BDATE = 6;
-    public const ORDERBY_FDATE = 7;
-    public const ORDERBY_MEMBER = 8;
-    public const ORDERBY_CATEGORY = 9;
+    public const int ORDERBY_NAME = 0;
+    public const int ORDERBY_SERIAL = 1;
+    public const int ORDERBY_PRICE = 2;
+    public const int ORDERBY_RENTPRICE = 3;
+    public const int ORDERBY_WEIGHT = 4;
+    public const int ORDERBY_STATUS = 5;
+    public const int ORDERBY_BDATE = 6;
+    public const int ORDERBY_FDATE = 7;
+    public const int ORDERBY_MEMBER = 8;
+    public const int ORDERBY_CATEGORY = 9;
 
     private Db $zdb;
 

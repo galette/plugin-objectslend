@@ -39,7 +39,7 @@ use GaletteObjectsLend\Entity\Preferences as LendPreferences;
  */
 class PdfObjects extends Pdf
 {
-    public const LIST_FONT = self::FONT_SIZE - 2;
+    public const int LIST_FONT = self::FONT_SIZE - 2;
 
     private Db $zdb;
     private LendPreferences $lendsprefs;
