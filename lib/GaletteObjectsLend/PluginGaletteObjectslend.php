@@ -23,9 +23,21 @@ declare(strict_types=1);
 
 namespace GaletteObjectsLend;
 
+use DI\Attribute\Inject;
+use Galette\Core\Db;
 use Galette\Core\Login;
+use Galette\Core\Plugins\InstallableInterface;
+use Galette\Core\Plugins\MenuProviderInterface;
 use Galette\Entity\Adherent;
 use Galette\Core\GalettePlugin;
+use GaletteObjectsLend\Entity\CategoryPicture;
+use GaletteObjectsLend\Entity\LendObject;
+use GaletteObjectsLend\Entity\LendCategory;
+use GaletteObjectsLend\Entity\LandObject;
+use GaletteObjectsLend\Entity\LendRent;
+use GaletteObjectsLend\Entity\ObjectPicture;
+use GaletteObjectsLend\Entity\LendStatus;
+use GaletteObjectsLend\Entity\Preferences;
 
 /**
  * Plugin Galette Objects Lend
@@ -33,14 +45,17 @@ use Galette\Core\GalettePlugin;
  * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
-class PluginGaletteObjectslend extends GalettePlugin
+class PluginGaletteObjectslend extends GalettePlugin implements InstallableInterface, MenuProviderInterface
 {
+    #[Inject]
+    private readonly Db $zdb; //@phpstan-ignore property.uninitializedReadonly (injected from DI)
+
     /**
      * Extra menus entries
      *
      * @return array<string, string|array<string,mixed>>
      */
-    public static function getMenusContents(): array
+    public function getMenus(): array
     {
         /** @var Login $login */
         global $login;
@@ -101,62 +116,24 @@ class PluginGaletteObjectslend extends GalettePlugin
      *
      * @return array<int, string|array<string,mixed>>
      */
-    public static function getPublicMenusItemsList(): array
+    public function getPublicMenus(): array
     {
         return [];
     }
 
     /**
-     * Get dashboards contents
-     *
-     * @return array<int, string|array<string,mixed>>
+     * Is the plugin fully installed (including database, extra configuration, etc.)?
      */
-    public static function getDashboardsContents(): array
+    public function isInstalled(): bool
     {
-        return [];
-    }
-
-    /**
-     * Get actions contents
-     *
-     * @param Adherent $member Member instance
-     *
-     * @return array<int, string|array<string,mixed>>
-     */
-    public static function getListActionsContents(Adherent $member): array
-    {
-        return [];
-    }
-
-    /**
-     * Get detailed actions contents
-     *
-     * @param Adherent $member Member instance
-     *
-     * @return array<int, string|array<string,mixed>>
-     */
-    public static function getDetailedActionsContents(Adherent $member): array
-    {
-        return static::getListActionsContents($member);
-    }
-
-    /**
-     * Get batch actions contents
-     *
-     * @return array<int, string|array<string,mixed>>
-     */
-    public static function getBatchActionsContents(): array
-    {
-        return [];
-    }
-
-    /**
-     * Get current logged-in user dashboards contents
-     *
-     * @return array<int, string|array<string,mixed>>
-     */
-    public static function getMyDashboardsContents(): array
-    {
-        return [];
+        return
+            $this->zdb->tableExists(LEND_PREFIX . CategoryPicture::class)
+                && $this->zdb->tableExists(LEND_PREFIX . LendCategory::class)
+                && $this->zdb->tableExists(LEND_PREFIX . LendObject::class)
+                && $this->zdb->tableExists(LEND_PREFIX . LendRent::class)
+                && $this->zdb->tableExists(LEND_PREFIX . LendStatus::class)
+                && $this->zdb->tableExists(LEND_PREFIX . ObjectPicture::class)
+                && $this->zdb->tableExists(LEND_PREFIX . Preferences::class)
+            ;
     }
 }
