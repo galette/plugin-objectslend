@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-04-09 14:57+0000\n"
+"PO-Revision-Date: 2026-05-03 14:09+0000\n"
 "Last-Translator: Edson Wolf <edsonwolf@vivaldi.net>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "galette/objectslend-plugin/pt_BR/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:72
 msgid "Labels"
-msgstr ""
+msgstr "Etiquetas"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:136
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:159
