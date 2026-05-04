@@ -1,4 +1,9 @@
--- sequence for objects
+--
+-- This file is part of Galette Objects Lend plugin (https://galette.eu).
+-- SPDX-FileCopyrightText: Copyright © 2013-2026 The Galette Team
+-- SPDX-License-Identifier: GPL-3.0-or-later
+--
+
 DROP SEQUENCE IF EXISTS galette_lend_objects_id_seq;
 CREATE SEQUENCE galette_lend_objects_id_seq
     START 1

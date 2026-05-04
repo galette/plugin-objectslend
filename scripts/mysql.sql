@@ -1,3 +1,9 @@
+--
+-- This file is part of Galette Objects Lend plugin (https://galette.eu).
+-- SPDX-FileCopyrightText: Copyright © 2013-2026 The Galette Team
+-- SPDX-License-Identifier: GPL-3.0-or-later
+--
+
 SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS galette_lend_category;

@@ -109,8 +109,11 @@ jobs:
 
       - name: Headers checks
         run: |
-          cd galette-core/galette/plugins/plugin-objectslend
-          ../../vendor/bin/docheader --docheader=../../../.docheader check lib ./*.php
+          cd galette-core
+          ./bin/console galette:headers:check \
+            --project-name="Galette Objects Lend plugin" \
+            --start-year="2013" \
+            --directory="galette/plugins/plugin-objectslend"
 
   unit-tests:
     runs-on: ubuntu-latest
