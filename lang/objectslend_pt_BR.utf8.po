@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-05-09 18:11+0000\n"
+"PO-Revision-Date: 2026-05-12 22:11+0000\n"
 "Last-Translator: Edson Wolf <edsonwolf@vivaldi.net>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "galette/objectslend-plugin/pt_BR/>\n"
@@ -575,349 +575,356 @@ msgstr "Exibir imagens em listas de objetos e categorias"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Enable fullsize:"
-msgstr ""
+msgstr "Ativar tela cheia:"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Show fullsize image or just thumbs"
-msgstr ""
+msgstr "Mostrar imagem em tamanho real ou apenas miniaturas"
 
 #: ../tempcache/preferences.html.twig:161
 msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
+"Permite visualizar a imagem em tamanho real clicando nas miniaturas.<br/>Se "
+"desativado, apenas as miniaturas serão exibidas, mas as imagens completas "
+"ainda serão mantidas."
 
 #: ../tempcache/preferences.html.twig:196
 msgid "View category:"
-msgstr ""
+msgstr "Ver categoria:"
 
 #: ../tempcache/preferences.html.twig:198
 msgid "View forecast return date:"
-msgstr ""
+msgstr "Veja a data de retorno prevista:"
 
 #: ../tempcache/preferences.html.twig:200
 msgid "View description"
-msgstr ""
+msgstr "Ver descrição"
 
 #: ../tempcache/preferences.html.twig:202
 msgid "View dimensions:"
-msgstr ""
+msgstr "Dimensões da vista:"
 
 #: ../tempcache/preferences.html.twig:204
 msgid "View borrow price:"
-msgstr ""
+msgstr "Ver preço de empréstimo:"
 
 #: ../tempcache/preferences.html.twig:206
 msgid "View price sum:"
-msgstr ""
+msgstr "Ver o valor total:"
 
 #: ../tempcache/preferences.html.twig:206
 msgid "View the objects buy price sum on the list under the category"
-msgstr ""
+msgstr "Veja o preço total de compra dos objetos na lista, dentro da categoria"
 
 #: ../tempcache/preferences.html.twig:208
 msgid "View buy price:"
-msgstr ""
+msgstr "Ver preço de compra:"
 
 #: ../tempcache/preferences.html.twig:210
 msgid "View serial number:"
-msgstr ""
+msgstr "Ver número de série:"
 
 #: ../tempcache/preferences.html.twig:212
 msgid "View weight"
-msgstr ""
+msgstr "Ver peso"
 
 #: ../tempcache/objects_edit.html.twig:63 ../tempcache/take_object.html.twig:63
 msgid "Object"
-msgstr ""
+msgstr "Objeto"
 
 #: ../tempcache/objects_edit.html.twig:70 ../tempcache/take_object.html.twig:70
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: ../tempcache/objects_edit.html.twig:76
 #: ../tempcache/take_object.html.twig:106
 msgid "Description:"
-msgstr ""
+msgstr "Descrição:"
 
 #: ../tempcache/objects_edit.html.twig:84
 msgid "--- Select a category ---"
-msgstr ""
+msgstr "--- Selecione uma categoria ---"
 
 #: ../tempcache/objects_edit.html.twig:105
 msgid "Category:"
-msgstr ""
+msgstr "Categoria:"
 
 #: ../tempcache/objects_edit.html.twig:115
 #: ../tempcache/take_object.html.twig:124
 msgid "Serial number:"
-msgstr ""
+msgstr "Número de série:"
 
 #: ../tempcache/objects_edit.html.twig:121
 #: ../tempcache/take_object.html.twig:142
 msgid "Price:"
-msgstr ""
+msgstr "Preço:"
 
 #: ../tempcache/objects_edit.html.twig:128
 #: ../tempcache/take_object.html.twig:218
 msgid "Borrow price:"
-msgstr ""
+msgstr "Preço do empréstimo:"
 
 #: ../tempcache/objects_edit.html.twig:134
 msgid "Price per rental day:"
-msgstr ""
+msgstr "Preço por dia de aluguel:"
 
 #: ../tempcache/objects_edit.html.twig:134
 msgid "The price applies on each rental day if checked, only once otherwise"
 msgstr ""
+"O preço é aplicado a cada dia de aluguel, se selecionado, ou apenas uma vez "
+"caso contrário"
 
 #: ../tempcache/objects_edit.html.twig:141
 #: ../tempcache/take_object.html.twig:162
 msgid "Dimensions:"
-msgstr ""
+msgstr "Dimensões:"
 
 #: ../tempcache/objects_edit.html.twig:147
 #: ../tempcache/take_object.html.twig:192
 msgid "Weight:"
-msgstr ""
+msgstr "Peso:"
 
 #: ../tempcache/objects_edit.html.twig:162
 #: ../tempcache/objects_edit.html.twig:328
 #: ../tempcache/take_object.html.twig:340
 #: ../tempcache/take_object.html.twig:415
 msgid "--- Select a status ---"
-msgstr ""
+msgstr "--- Selecione um status ---"
 
 #: ../tempcache/objects_edit.html.twig:182
 msgid "Where is the object?"
-msgstr ""
+msgstr "Onde está o objeto?"
 
 #: ../tempcache/objects_edit.html.twig:195
 #: ../tempcache/objects_edit.html.twig:219
 msgid "Object's photo"
-msgstr ""
+msgstr "Foto do objeto"
 
 #: ../tempcache/objects_edit.html.twig:265
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplicado"
 
 #: ../tempcache/objects_edit.html.twig:274
 msgid "Print object"
-msgstr ""
+msgstr "Imprimir objeto"
 
 #: ../tempcache/objects_edit.html.twig:299
 msgid "History"
-msgstr ""
+msgstr "Histórico"
 
 #: ../tempcache/objects_edit.html.twig:322
 #: ../tempcache/objects_edit.html.twig:416
 msgid "Change status"
-msgstr ""
+msgstr "Alterar status"
 
 #: ../tempcache/category_edit.html.twig:74
 msgid "Is active"
-msgstr ""
+msgstr "Está ativo"
 
 #: ../tempcache/category_edit.html.twig:81
 msgid "Picture:"
-msgstr ""
+msgstr "Foto:"
 
 #: ../tempcache/category_edit.html.twig:103
 msgid "Category photo"
-msgstr ""
+msgstr "Foto da categoria"
 
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Begin date"
-msgstr ""
+msgstr "Data de início"
 
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "End date"
-msgstr ""
+msgstr "Data de término"
 
 #: ../tempcache/list_lent_object.html.twig:164
 msgid "No lend found"
-msgstr ""
+msgstr "Nenhum empréstimo encontrado"
 
 #: ../tempcache/status_list.html.twig:86
 msgid "Add a status"
-msgstr ""
+msgstr "Adicionar um status"
 
 #: ../tempcache/status_list.html.twig:98 ../tempcache/status_list.html.twig:351
 msgid "Stock"
-msgstr ""
+msgstr "Estoque"
 
 #: ../tempcache/status_list.html.twig:368
 #: ../tempcache/status_list.html.twig:372
 msgid "Not in stock"
-msgstr ""
+msgstr "Fora de estoque"
 
 #: ../tempcache/status_list.html.twig:387
 #: ../tempcache/take_object.html.twig:354
 #, php-format
 msgid "%days days"
-msgstr ""
+msgstr "%days dias"
 
 #: ../tempcache/status_list.html.twig:400
 #, php-format
 msgid "Edit %status"
-msgstr ""
+msgstr "Editar %status"
 
 #: ../tempcache/status_list.html.twig:402
 #, php-format
 msgid "Remove %status from database"
-msgstr ""
+msgstr "Remover %status do banco de dados"
 
 #: ../tempcache/status_list.html.twig:438
 msgid "No status has been found"
-msgstr ""
+msgstr "Nenhum status foi encontrado"
 
 #: ../tempcache/headers.html.twig:43
 msgid "Click to view fullsize image"
-msgstr ""
+msgstr "Clique para ver a imagem em tamanho real"
 
 #: ../tempcache/objects_list.html.twig:57
 msgid "No object selected"
-msgstr ""
+msgstr "Nenhum objeto selecionado"
 
 #: ../tempcache/objects_list.html.twig:57
 msgid ""
 "Please make sure to select at least one object from the list to perform this "
 "action."
 msgstr ""
+"Certifique-se de selecionar pelo menos um objeto da lista para realizar esta "
+"ação."
 
 #: ../tempcache/objects_list.html.twig:59
 msgid "Print objects list"
-msgstr ""
+msgstr "Imprimir lista de objetos"
 
 #: ../tempcache/objects_list.html.twig:100
 msgid "Add an object"
-msgstr ""
+msgstr "Adicionar um objeto"
 
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/objects_list.html.twig:675
 msgid "By"
-msgstr ""
+msgstr "Por"
 
 #: ../tempcache/objects_list.html.twig:378
 msgid "Categories"
-msgstr ""
+msgstr "Categorias"
 
 #: ../tempcache/objects_list.html.twig:532
 #: ../tempcache/take_object.html.twig:95
 msgid "Object photo"
-msgstr ""
+msgstr "Foto de objeto"
 
 #: ../tempcache/objects_list.html.twig:600
 #: ../tempcache/take_object.html.twig:250
 msgid "(per day)"
-msgstr ""
+msgstr "(por dia)"
 
 #: ../tempcache/objects_list.html.twig:606
 #: ../tempcache/take_object.html.twig:256
 msgid "(at once)"
-msgstr ""
+msgstr "(imediatamente)"
 
 #: ../tempcache/objects_list.html.twig:723
 msgid "Object is active"
-msgstr ""
+msgstr "O objeto está ativo"
 
 #: ../tempcache/objects_list.html.twig:725
 msgid "Object is inactive"
-msgstr ""
+msgstr "O objeto está inativo"
 
 #: ../tempcache/objects_list.html.twig:748
 msgid "Duplicate object"
-msgstr ""
+msgstr "O objeto está duplicado"
 
 #: ../tempcache/objects_list.html.twig:749
 msgid "Show object lends"
-msgstr ""
+msgstr "Exibir empréstimo do objeto"
 
 #: ../tempcache/objects_list.html.twig:750
 msgid "Object card in PDF"
-msgstr ""
+msgstr "Ficha do objeto em PDF"
 
 #: ../tempcache/objects_list.html.twig:751
 #, php-format
 msgid "Remove %object from database"
-msgstr ""
+msgstr "Remover %object do banco de dados"
 
 #: ../tempcache/objects_list.html.twig:767
 msgid "Take away"
-msgstr ""
+msgstr "Remover"
 
 #: ../tempcache/objects_list.html.twig:778
 msgid "Give back"
-msgstr ""
+msgstr "Retribuir"
 
 #: ../tempcache/objects_list.html.twig:821
 msgid "No object has been found"
-msgstr ""
+msgstr "Nenhum objeto foi encontrado"
 
 #: ../tempcache/objects_list.html.twig:862
 msgid "History of object"
-msgstr ""
+msgstr "Histórico do objeto"
 
 #: ../tempcache/objects_list.html.twig:868
 msgid "An error occurred loading history display :("
-msgstr ""
+msgstr "Ocorreu um erro ao carregar a exibição do histórico :("
 
 #: ../tempcache/objects_list.html.twig:904
 msgid "Take objects"
-msgstr ""
+msgstr "Pegue os objetos"
 
 #: ../tempcache/objects_list.html.twig:921
 msgid "An error occurred loading 'Take away' display :("
-msgstr ""
+msgstr "Ocorreu um erro ao carregar a exibição 'Para viagem' :("
 
 #: ../tempcache/objects_list.html.twig:951
 msgid "Give back objects"
-msgstr ""
+msgstr "Devolva os objetos"
 
 #: ../tempcache/objects_list.html.twig:968
 msgid "An error occurred loading 'Give back' display :("
-msgstr ""
+msgstr "Ocorreu um erro ao carregar a tela 'Devolver' :("
 
 #: ../tempcache/take_object.html.twig:275
 msgid "Borrow information"
-msgstr ""
+msgstr "Informações sobre empréstimo"
 
 #: ../tempcache/take_object.html.twig:286
 msgid "Member:"
-msgstr ""
+msgstr "Membros:"
 
 #: ../tempcache/take_object.html.twig:380
 msgid "Expected return:"
-msgstr ""
+msgstr "Retorno esperado:"
 
 #: ../tempcache/take_object.html.twig:408
 msgid "Return information"
-msgstr ""
+msgstr "Informações de devolução"
 
 #: ../tempcache/take_object.html.twig:442
 msgid "Time:"
-msgstr ""
+msgstr "Tempo:"
 
 #: ../tempcache/take_object.html.twig:446
 #, php-format
 msgid "From %begindate to %enddate"
-msgstr ""
+msgstr "De %begindate a %enddate"
 
 #: ../tempcache/take_object.html.twig:452
 msgid "Comments:"
-msgstr ""
+msgstr "Comentários:"
 
 #: ../tempcache/take_object.html.twig:455
 msgid "remaining characters"
-msgstr ""
+msgstr "Personagens restantes"
 
 #: ../tempcache/take_object.html.twig:473
 msgid "I have read and I agree with terms and conditions"
-msgstr ""
+msgstr "Li e concordo com os termos e condições"
 
 #: ../tempcache/take_object.html.twig:480
 msgid "Show terms and conditions"
-msgstr ""
+msgstr "Mostrar termos e condições"
 
 #: ../tempcache/take_object.html.twig:487
 msgid ""
@@ -936,15 +943,31 @@ msgid ""
 "other cases not listed above and at the discretion of the seller, the "
 "deposit check may also be collected in whole or party."
 msgstr ""
+"Os itens oferecidos para aluguel estão em bom estado e a verificação do "
+"aluguel, que contradiz o seu estado, deve ser feita no momento da retirada. "
+"Nenhuma reclamação será aceita após a devolução do objeto. A emissão de um "
+"comprovante de reserva pela loja não isenta o cliente de verificar o item "
+"alugado. O pagamento do aluguel dá ao locatário o direito de usar o objeto "
+"alugado normalmente. Se o objeto for devolvido em estado deteriorado, o "
+"locador reserva-se o direito de reter a totalidade ou parte do depósito de "
+"segurança. Em caso de deterioração do objeto alugado além do padrão normal, "
+"será cobrada uma taxa para a limpeza adicional. Em caso de dano, perda ou "
+"furto do bem alugado, o depósito não será restituído automaticamente à "
+"locadora a título de indenização, nos termos do Artigo 1152 do Código Civil, "
+"sem a necessidade de qualquer outra formalidade judicial ou extrajudicial. "
+"Em outros casos não listados acima e a critério do locador, o depósito de "
+"segurança poderá ser retido integralmente ou parcialmente."
 
 #: ../tempcache/take_object.html.twig:501
 msgid "Borrow object"
-msgstr ""
+msgstr "Objeto emprestado"
 
 #: ../tempcache/take_object.html.twig:503
 msgid "Return object"
-msgstr ""
+msgstr "Objeto de retorno"
 
 #: ../tempcache/take_object.html.twig:558
 msgid "You must agree with terms and conditions in order to borrow."
 msgstr ""
+"Para poder fazer um empréstimo, você precisa concordar com os termos e "
+"condições."
