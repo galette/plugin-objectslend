@@ -226,7 +226,7 @@ class ObjectsController extends AbstractPluginController
             'object' => $object,
             'rents' => $object->rents,
             'time' => time(),
-            'ajax' => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest'
+            'ajax' => $this->isAjax($request)
         ];
 
         // display page
@@ -555,7 +555,7 @@ class ObjectsController extends AbstractPluginController
                 : LendStatus::getActiveStockStatuses($this->zdb)),
             'lendsprefs'    => $lendsprefs->getPreferences(),
             'olendsprefs'   => $lendsprefs,
-            'ajax'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest',
+            'ajax'          => $this->isAjax($request),
             'takeorgive'    => $action,
             'adh_selected'  => ($this->login->isSuperadmin() ? null : $this->login->id),
             'contribution'  => new Contribution($this->zdb, $this->login)
@@ -812,7 +812,7 @@ class ObjectsController extends AbstractPluginController
             )
         );
 
-        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' || $post['mode'] == 'ajax') {
+        if ($this->isAjax($request) || $post['mode'] == 'ajax') {
             return $this->withJson(
                 $response,
                 [
@@ -899,7 +899,7 @@ class ObjectsController extends AbstractPluginController
             )
         );
 
-        if ($request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' || $post['mode'] == 'ajax') {
+        if ($this->isAjax($request) || $post['mode'] == 'ajax') {
             return $this->withJson(
                 $response,
                 [
