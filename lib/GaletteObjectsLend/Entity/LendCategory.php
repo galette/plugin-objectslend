@@ -175,8 +175,11 @@ class LendCategory
      */
     public function delete(): bool
     {
+        $need_transaction = !$this->zdb->inTransaction();
         try {
-            $this->zdb->connection->beginTransaction();
+            if ($need_transaction) {
+                $this->zdb->beginTransaction();
+            }
             $select = $this->zdb->select(LEND_PREFIX . LendObject::TABLE)
                     ->where(['category_id' => $this->category_id]);
             $results = $this->zdb->execute($select);
@@ -191,10 +194,14 @@ class LendCategory
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
                     ->where([self::PK => $this->category_id]);
             $this->zdb->execute($delete);
-            $this->zdb->connection->commit();
+            if ($need_transaction) {
+                $this->zdb->commit();
+            }
             return true;
         } catch (\Exception $e) {
-            $this->zdb->connection->rollBack();
+            if ($need_transaction) {
+                $this->zdb->rollback();
+            }
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n"
                 . $e->getTraceAsString(),

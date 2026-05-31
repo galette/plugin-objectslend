@@ -139,8 +139,11 @@ class Objects
      */
     public function removeObjects(array $ids): bool
     {
+        $need_transaction = !$this->zdb->inTransaction();
         try {
-            $this->zdb->connection->beginTransaction();
+            if ($need_transaction) {
+                $this->zdb->beginTransaction();
+            }
 
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
             $update->set(['rent_id' => null]);
@@ -163,10 +166,14 @@ class Objects
                 $ids
             );
             $this->zdb->execute($delete);
-            $this->zdb->connection->commit();
+            if ($need_transaction) {
+                $this->zdb->commit();
+            }
             return true;
         } catch (\Exception $e) {
-            $this->zdb->connection->rollBack();
+            if ($need_transaction) {
+                $this->zdb->rollback();
+            }
 
             if ($this->zdb->isForeignKeyException($e)) {
                 Analog::log(

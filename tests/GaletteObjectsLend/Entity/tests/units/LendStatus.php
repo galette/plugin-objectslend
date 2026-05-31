@@ -22,6 +22,17 @@ class LendStatus extends GaletteTestCase
     protected int $seed = 20240521230915;
 
     /**
+     * Set up tests
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        //remove default statuses inserted by install SQL
+        $delete = $this->zdb->delete(LEND_PREFIX . \GaletteObjectsLend\Entity\LendStatus::TABLE);
+        $this->zdb->execute($delete);
+    }
+
+    /**
      * Cleanup after each test method
      */
     public function tearDown(): void

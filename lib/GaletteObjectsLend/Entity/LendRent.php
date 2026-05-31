@@ -127,8 +127,11 @@ class LendRent
     {
         global $zdb;
 
+        $need_transaction = !$zdb->inTransaction();
         try {
-            $zdb->connection->beginTransaction();
+            if ($need_transaction) {
+                $zdb->beginTransaction();
+            }
             $values = [];
 
             foreach (array_keys($this->fields) as $k) {
@@ -169,10 +172,14 @@ class LendRent
                         ->where([self::PK => $this->rent_id]);
                 $zdb->execute($update);
             }
-            $zdb->connection->commit();
+            if ($need_transaction) {
+                $zdb->commit();
+            }
             return true;
         } catch (\Exception $e) {
-            $zdb->connection->rollBack();
+            if ($need_transaction) {
+                $zdb->rollback();
+            }
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n"
                     . $e->getTraceAsString(),

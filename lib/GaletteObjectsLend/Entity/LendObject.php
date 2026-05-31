@@ -513,8 +513,11 @@ class LendObject
      */
     public function delete(): bool
     {
+        $need_transaction = !$this->zdb->inTransaction();
         try {
-            $this->zdb->connection->beginTransaction();
+            if ($need_transaction) {
+                $this->zdb->beginTransaction();
+            }
             //remove rents
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE)
                     ->set([LendRent::PK => null])
@@ -526,10 +529,14 @@ class LendObject
             $delete = $this->zdb->delete(LEND_PREFIX . self::TABLE)
                     ->where([self::PK => $this->object_id]);
             $this->zdb->execute($delete);
-            $this->zdb->connection->commit();
+            if ($need_transaction) {
+                $this->zdb->commit();
+            }
             return true;
         } catch (\Exception $e) {
-            $this->zdb->connection->rollBack();
+            if ($need_transaction) {
+                $this->zdb->rollback();
+            }
             Analog::log(
                 'Something went wrong :\'( | ' . $e->getMessage() . "\n"
                     . $e->getTraceAsString(),

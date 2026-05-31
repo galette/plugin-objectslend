@@ -202,8 +202,11 @@ class Preferences
             $this->prefs[$key] = $value;
         }
 
+        $need_transaction = !$this->zdb->inTransaction();
         try {
-            $this->zdb->connection->beginTransaction();
+            if ($need_transaction) {
+                $this->zdb->beginTransaction();
+            }
             $update = $this->zdb->update(LEND_PREFIX . self::TABLE);
             $update->set(
                 [
@@ -233,10 +236,14 @@ class Preferences
                 );
             }
 
-            $this->zdb->connection->commit();
+            if ($need_transaction) {
+                $this->zdb->commit();
+            }
             return true;
         } catch (\Exception $e) {
-            $this->zdb->connection->rollBack();
+            if ($need_transaction) {
+                $this->zdb->rollback();
+            }
             throw $e;
         }
     }
