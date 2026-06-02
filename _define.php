@@ -14,7 +14,7 @@ $this->register(
     desc: 'Manage rent/lend of object',         //Short description
     author: 'Mélissa Djebel, Johan Cwiklinski', //Author
     version: '2.2.1',                           //Version
-    compver: '1.2.0',                           //Galette version compatibility
+    compver: '1.3.0',                           //Galette version compatibility
     route: 'objectslend',                       //routing name and translation domain
     date: '2025-12-08',                         //Date
     acls: [
@@ -54,5 +54,6 @@ $this->register(
         'objectslend_object_take'       => 'member',
         'objectslend_object_dotake'     => 'member',
         'objectslend_object_doreturn'   => 'member'
-    ]
+    ],
+    dbver: 1.00
 );
