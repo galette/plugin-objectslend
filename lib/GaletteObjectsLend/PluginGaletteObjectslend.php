@@ -112,13 +112,13 @@ class PluginGaletteObjectslend extends GalettePlugin implements InstallableInter
     public function isInstalled(): bool
     {
         return
-            $this->zdb->tableExists(LEND_PREFIX . CategoryPicture::class)
-                && $this->zdb->tableExists(LEND_PREFIX . LendCategory::class)
-                && $this->zdb->tableExists(LEND_PREFIX . LendObject::class)
-                && $this->zdb->tableExists(LEND_PREFIX . LendRent::class)
-                && $this->zdb->tableExists(LEND_PREFIX . LendStatus::class)
-                && $this->zdb->tableExists(LEND_PREFIX . ObjectPicture::class)
-                && $this->zdb->tableExists(LEND_PREFIX . Preferences::class)
+            $this->zdb->tableExists(LEND_PREFIX . CategoryPicture::TABLE)
+                && $this->zdb->tableExists(LEND_PREFIX . LendCategory::TABLE)
+                && $this->zdb->tableExists(LEND_PREFIX . LendObject::TABLE)
+                && $this->zdb->tableExists(LEND_PREFIX . LendRent::TABLE)
+                && $this->zdb->tableExists(LEND_PREFIX . LendStatus::TABLE)
+                && $this->zdb->tableExists(LEND_PREFIX . ObjectPicture::TABLE)
+                && $this->zdb->tableExists(LEND_PREFIX . Preferences::TABLE)
         ;
     }
 }
