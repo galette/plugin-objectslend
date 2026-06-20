@@ -3,13 +3,14 @@
 # Ricardo Santos <buehnenarbeiter@gmail.com>, 2021.
 # klausellus-wallace <muetze.polka0e@icloud.com>, 2023.
 # mr cmuc <github@nextcos.de>, 2024.
+# Poly <robloxlucak@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2024-04-28 16:25+0000\n"
-"Last-Translator: mr cmuc <github@nextcos.de>\n"
+"PO-Revision-Date: 2026-06-21 03:01+0000\n"
+"Last-Translator: Poly <robloxlucak@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/de/>\n"
 "Language: de_DE\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.1\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -64,7 +65,7 @@ msgstr ""
 #: ../tempcache/objects_list.html.twig:159
 #: ../tempcache/objects_list.html.twig:575
 msgid "Price"
-msgstr ""
+msgstr "Preis"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
 msgid "Price per rental day"
@@ -707,7 +708,7 @@ msgstr ""
 
 #: ../tempcache/category_edit.html.twig:74
 msgid "Is active"
-msgstr ""
+msgstr "Ist aktiv"
 
 #: ../tempcache/category_edit.html.twig:81
 msgid "Picture:"
