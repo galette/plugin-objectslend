@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-07-08 05:15+0000\n"
+"PO-Revision-Date: 2026-07-09 08:51+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/sl/>\n"
@@ -527,7 +527,7 @@ msgstr ""
 
 #: ../tempcache/preferences.html.twig:127
 msgid "Contribution type:"
-msgstr ""
+msgstr "Vrsta prispevka:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
@@ -893,7 +893,7 @@ msgstr ""
 
 #: ../tempcache/take_object.html.twig:452
 msgid "Comments:"
-msgstr ""
+msgstr "Komentarji:"
 
 #: ../tempcache/take_object.html.twig:455
 msgid "remaining characters"
