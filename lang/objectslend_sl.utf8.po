@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-07-09 09:31+0000\n"
+"PO-Revision-Date: 2026-07-09 12:48+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/sl/>\n"
@@ -273,7 +273,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:228
 msgid "New status"
-msgstr ""
+msgstr "Novo stanje"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:268
 msgid "An error occurred while storing the status."
