@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-07-09 08:51+0000\n"
+"PO-Revision-Date: 2026-07-09 09:31+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/sl/>\n"
@@ -109,7 +109,7 @@ msgstr ""
 #: ../tempcache/objects_list.html.twig:709
 #: ../tempcache/objects_list.html.twig:732
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:168
 msgid "Location"
@@ -303,7 +303,7 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:269
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:440
 msgid "Delete failed"
-msgstr ""
+msgstr "Brisanje ni uspelo"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/CategoriesController.php:277
 msgid "An error occurred while storing the category."
@@ -477,7 +477,7 @@ msgstr ""
 #: ../tempcache/status_list.html.twig:343
 #: ../tempcache/objects_list.html.twig:734
 msgid "Inactive"
-msgstr ""
+msgstr "Neaktivno"
 
 #: ../tempcache/categories_list.html.twig:315
 #, php-format
@@ -626,7 +626,7 @@ msgstr ""
 #: ../tempcache/objects_edit.html.twig:76
 #: ../tempcache/take_object.html.twig:106
 msgid "Description:"
-msgstr ""
+msgstr "Opis:"
 
 #: ../tempcache/objects_edit.html.twig:84
 msgid "--- Select a category ---"
