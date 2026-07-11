@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-07-11 10:38+0000\n"
+"PO-Revision-Date: 2026-07-11 16:01+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/sl/>\n"
@@ -142,11 +142,11 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 msgid "Begin"
-msgstr ""
+msgstr "Začni"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:193
 msgid "End"
-msgstr ""
+msgstr "Konec"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:194
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:166
@@ -423,7 +423,7 @@ msgstr ""
 #: ../tempcache/status_edit.html.twig:69 ../tempcache/take_object.html.twig:372
 #: ../tempcache/take_object.html.twig:435
 msgid "Status:"
-msgstr ""
+msgstr "Stanje:"
 
 #: ../tempcache/status_edit.html.twig:74 ../tempcache/status_list.html.twig:189
 msgid "In stock:"
@@ -621,7 +621,7 @@ msgstr ""
 
 #: ../tempcache/objects_edit.html.twig:70 ../tempcache/take_object.html.twig:70
 msgid "Name:"
-msgstr ""
+msgstr "Priimek:"
 
 #: ../tempcache/objects_edit.html.twig:76
 #: ../tempcache/take_object.html.twig:106
