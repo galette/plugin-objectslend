@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-07-14 10:01+0000\n"
+"PO-Revision-Date: 2026-07-15 07:31+0000\n"
 "Last-Translator: Jože Felicijan <joze@felicijan.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/sl/>\n"
@@ -22,11 +22,11 @@ msgstr ""
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
 msgid "object_card"
-msgstr ""
+msgstr "kartica_objekta"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:70
 msgid "Object card"
-msgstr ""
+msgstr "Kartica predmeta"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:72
 msgid "Labels"
@@ -52,23 +52,23 @@ msgstr "Opis"
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:141
 #: ../tempcache/category_edit.html.twig:62
 msgid "Category"
-msgstr ""
+msgstr "Kategorija"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:144
 #: ../lib/GaletteObjectsLend/Filters/ObjectsList.php:258
 msgid "Serial number"
-msgstr ""
+msgstr "Serijska številka"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:147
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:162
 #: ../tempcache/objects_list.html.twig:159
 #: ../tempcache/objects_list.html.twig:575
 msgid "Price"
-msgstr ""
+msgstr "Cena"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:156
 msgid "Price per rental day"
-msgstr ""
+msgstr "Cena na dan najema"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:164
@@ -76,26 +76,26 @@ msgstr ""
 #: ../tempcache/objects_list.html.twig:181
 #: ../tempcache/objects_list.html.twig:619
 msgid "Dimensions"
-msgstr ""
+msgstr "Dimenzije"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:162
 #: ../tempcache/objects_edit.html.twig:141
 #: ../tempcache/take_object.html.twig:171
 msgid "Cm"
-msgstr ""
+msgstr "Cm"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:165
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:165
 #: ../tempcache/objects_list.html.twig:192
 #: ../tempcache/objects_list.html.twig:633
 msgid "Weight"
-msgstr ""
+msgstr "Teža"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:165
 #: ../tempcache/objects_edit.html.twig:147
 #: ../tempcache/take_object.html.twig:201
 msgid "Kg"
-msgstr ""
+msgstr "Kg"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:167
 #: ../tempcache/categories_list.html.twig:98
@@ -113,14 +113,14 @@ msgstr "Aktivno"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:168
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:169
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:167
 #: ../tempcache/objects_list.html.twig:200
 #: ../tempcache/objects_list.html.twig:666
 msgid "Since"
-msgstr ""
+msgstr "Odkar"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:170
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:196
@@ -134,11 +134,11 @@ msgstr "Član"
 #: ../tempcache/objects_list.html.twig:208
 #: ../tempcache/objects_list.html.twig:698
 msgid "Return"
-msgstr ""
+msgstr "Vrnitev"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:190
 msgid "History of object loans"
-msgstr ""
+msgstr "Zgodovina predmetnih posojil"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:192
 msgid "Begin"
@@ -166,18 +166,18 @@ msgstr "Stanje"
 #: ../tempcache/status_list.html.twig:362
 #: ../tempcache/objects_list.html.twig:654
 msgid "In stock"
-msgstr ""
+msgstr "Na zalogi"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:197
 #: ../tempcache/objects_edit.html.twig:365
 #: ../tempcache/list_lent_object.html.twig:66
 msgid "Comments"
-msgstr ""
+msgstr "Komentarji"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:70
 msgid "objects_cards"
-msgstr ""
+msgstr "predmeti_kartice"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:87
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:89
@@ -185,41 +185,41 @@ msgstr ""
 #: ../lib/GaletteObjectsLend/Controllers/Crud/ObjectsController.php:145
 #: ../lib/GaletteObjectsLend/PluginGaletteObjectslend.php:52
 msgid "Objects list"
-msgstr ""
+msgstr "Seznam predmetov"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:116
 #, php-format
 msgid "Printed on %date"
-msgstr ""
+msgstr "Natisnjeno dne %datum"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:161
 #: ../tempcache/objects_list.html.twig:148
 #: ../tempcache/objects_list.html.twig:561
 msgid "Serial"
-msgstr ""
+msgstr "Serijska"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:163
 #: ../tempcache/objects_list.html.twig:170
 #: ../tempcache/objects_list.html.twig:589
 msgid "Borrow price"
-msgstr ""
+msgstr "Cena izposoje"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:197
 #, php-format
 msgid "Category: %category"
-msgstr ""
+msgstr "Kategorija: %category"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:239
 msgid "Total:"
-msgstr ""
+msgstr "Skupaj:"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:246
 msgid "Borrowed"
-msgstr ""
+msgstr "Izposojeno"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:248
 msgid "Available"
-msgstr ""
+msgstr "Na voljo"
 
 #: ../lib/GaletteObjectsLend/Entity/LendStatus.php:144
 msgid "Status has not been added :("
@@ -227,49 +227,49 @@ msgstr "Status ni bil dodan :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendObject.php:349
 msgid "Object has not been added :("
-msgstr ""
+msgstr "Objekt ni bil dodan :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendCategory.php:238
 #: ../tempcache/categories_list.html.twig:369
 msgid "No category"
-msgstr ""
+msgstr "Brez kategorije"
 
 #: ../lib/GaletteObjectsLend/Entity/Preferences.php:264
 msgid "Unable to store preferences :("
-msgstr ""
+msgstr "Nastavitev ni mogoče shraniti :("
 
 #: ../lib/GaletteObjectsLend/Entity/LendRent.php:177
 msgid "Rent has not been added"
-msgstr ""
+msgstr "Najemnina ni bila dodana"
 
 #: ../lib/GaletteObjectsLend/Entity/LendRent.php:342
 msgid "Y-m-d H:i"
-msgstr ""
+msgstr "Y-m-d H:i"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:65
 msgid "ObjectsLend preferences"
-msgstr ""
+msgstr "Nastavitve posojanja predmetov"
 
 #: ../lib/GaletteObjectsLend/Controllers/MainController.php:97
 msgid "Preferences have been successfully stored!"
-msgstr ""
+msgstr "Nastavitve so bile uspešno shranjene!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:113
 msgid "Please add at last one status \"in stock\"!"
-msgstr ""
+msgstr "Prosim, dodajte vsaj en status \"na zalogi\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:119
 msgid "Please add at least one status \"object borrowed\"!"
-msgstr ""
+msgstr "Prosim, dodajte vsaj en status \"izposojen predmet\"!"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:134
 msgid "Status list"
-msgstr ""
+msgstr "Seznam stanj"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:225
 #, php-format
 msgid "Edit status %status"
-msgstr ""
+msgstr "Uredi stanje %status"
 
 #: ../lib/GaletteObjectsLend/Controllers/Crud/StatusController.php:228
 msgid "New status"
@@ -519,11 +519,11 @@ msgstr ""
 msgid ""
 "Automatically generate a contribution for the member of the amount of the "
 "rental price of the object"
-msgstr ""
+msgstr "Samodejno ustvari prispevek za člana v višini najemnine objekta"
 
 #: ../tempcache/preferences.html.twig:105
 msgid "Choose a contribution type"
-msgstr ""
+msgstr "Izberite vrsto prispevka"
 
 #: ../tempcache/preferences.html.twig:127
 msgid "Contribution type:"
@@ -531,11 +531,11 @@ msgstr "Vrsta prispevka:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Contribution text:"
-msgstr ""
+msgstr "Besedilo prispevka:"
 
 #: ../tempcache/preferences.html.twig:134
 msgid "Comment text to add on generated contribution"
-msgstr ""
+msgstr "Besedilo komentarja, ki ga želite dodati ustvarjenemu prispevku"
 
 #: ../tempcache/preferences.html.twig:134
 msgid ""
@@ -544,48 +544,56 @@ msgid ""
 "Description<br/>- SERIAL_NUMBER: Serial number<br/>- PRICE: Price<br/>- "
 "RENT_PRICE: Borrow price<br/>- WEIGHT: Weight<br/>- DIMENSION: Dimensions"
 msgstr ""
+"Besedilo komentarja, ki ga želite dodati ustvarjenemu prispevku. Samodejno "
+"zamenjane vrednosti (v zavitih oklepajih): <br/>- NAME: Ime<br/>- "
+"DESCRIPTION: Opis<br/>- SERIAL_NUMBER: Serijska številka<br/>- PRICE: "
+"Cena<br/>- RENT_PRICE: Cena izposoje<br/>- WEIGHT: Teža<br/>- DIMENSION: "
+"Dimenzije"
 
 #: ../tempcache/preferences.html.twig:148
 msgid "Max thumb height (in px)"
-msgstr ""
+msgstr "Največja višina palca (v slikovnih pikah)"
 
 #: ../tempcache/preferences.html.twig:154
 msgid "Max thumb width (in px)"
-msgstr ""
+msgstr "Največja višina palca (v slikovnih pikah)"
 
 #: ../tempcache/preferences.html.twig:159
 msgid "Images in lists:"
-msgstr ""
+msgstr "Slike na seznamih:"
 
 #: ../tempcache/preferences.html.twig:159
 msgid "Display images in objects and categories lists"
-msgstr ""
+msgstr "Prikaz slik na seznamih predmetov in kategorij"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Enable fullsize:"
-msgstr ""
+msgstr "Omogoči polno velikost:"
 
 #: ../tempcache/preferences.html.twig:161
 msgid "Show fullsize image or just thumbs"
-msgstr ""
+msgstr "Prikaži sliko v polni velikosti ali samo sličice"
 
 #: ../tempcache/preferences.html.twig:161
 msgid ""
 "Will permit to see fullsize image clicking on thumbnails.<br/>If disabled, "
 "only thumbnails will be displayed, but full images are still kept."
 msgstr ""
+"Omogoča ogled slike v polni velikosti s klikom na sličice.<be/>Če je možnost "
+"onemogočena, bodo prikazane samo sličice, vendar se bodo slike v polni "
+"velikosti še vedno ohranile."
 
 #: ../tempcache/preferences.html.twig:196
 msgid "View category:"
-msgstr ""
+msgstr "Ogled kategorije:"
 
 #: ../tempcache/preferences.html.twig:198
 msgid "View forecast return date:"
-msgstr ""
+msgstr "Ogled napovedanega datuma vrnitve:"
 
 #: ../tempcache/preferences.html.twig:200
 msgid "View description"
-msgstr ""
+msgstr "Ogled opisa"
 
 #: ../tempcache/preferences.html.twig:202
 msgid "View dimensions:"
@@ -704,11 +712,11 @@ msgstr ""
 
 #: ../tempcache/category_edit.html.twig:74
 msgid "Is active"
-msgstr ""
+msgstr "Je aktiven"
 
 #: ../tempcache/category_edit.html.twig:81
 msgid "Picture:"
-msgstr ""
+msgstr "Slika:"
 
 #: ../tempcache/category_edit.html.twig:103
 msgid "Category photo"
