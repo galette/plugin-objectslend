@@ -3,13 +3,14 @@
 # Kehribar <103407696+dpentx@users.noreply.github.com>, 2026.
 # batuhan Okmen <batuhanokmen@gmail.com>, 2026.
 # H B <habibbktr@gmail.com>, 2026.
+# Ahmet Güneş <a.gunes55@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:16+0100\n"
-"PO-Revision-Date: 2026-07-06 00:01+0000\n"
-"Last-Translator: H B <habibbktr@gmail.com>\n"
+"PO-Revision-Date: 2026-07-28 13:01+0000\n"
+"Last-Translator: Ahmet Güneş <a.gunes55@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/galette/"
 "objectslend-plugin/tr/>\n"
 "Language: tr\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.7.1.dev0\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #. TRANS: this is a filename
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:58
@@ -30,7 +31,7 @@ msgstr ""
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:72
 msgid "Labels"
-msgstr ""
+msgstr "Etiketler"
 
 #: ../lib/GaletteObjectsLend/IO/PdfObject.php:136
 #: ../lib/GaletteObjectsLend/IO/PdfObjects.php:159
