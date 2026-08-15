@@ -208,7 +208,6 @@
             <i class="save icon"></i> {% if takeorgive == 'take' %}{{ _T("Borrow object", "objectslend") }}{% else %}{{ _T("Return object", "objectslend") }}{% endif %}
         </button>
         <input type="hidden" name="mode" value="{% if ajax %}ajax{% endif %}"/>
-        {% include "components/forms/csrf.html.twig" %}
     </div>
 </form>
 {% endblock %}

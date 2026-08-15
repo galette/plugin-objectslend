@@ -225,7 +225,7 @@ class Preferences
             )->where->equalTo(self::PK, ':' . self::PK);
             $stmt = $this->zdb->sql->prepareStatementForSqlObject($update);
 
-            unset($data['csrf_value'], $data['csrf_name'], $data['GENERATED_CONTRIB_INFO_TEXT']);
+            unset($data['GENERATED_CONTRIB_INFO_TEXT']);
             foreach ($data as $key => $value) {
                 $stmt->execute(
                     [

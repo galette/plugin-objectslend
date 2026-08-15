@@ -153,7 +153,6 @@
     {% endif %}
             <input type="hidden" name="object_id" value="{{ object.getId() }}">
         </div>
-        {% include "components/forms/csrf.html.twig" %}
     </form>
 
     {% if object.getId() %}
@@ -224,7 +223,6 @@
                     </button>
                 </div>
                 <input type="hidden" name="object_id" value="{{ object.object_id }}">
-                {% include "components/forms/csrf.html.twig" %}
             </form>
         </div>
     {% endif %}
