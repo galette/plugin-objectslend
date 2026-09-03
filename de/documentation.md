@@ -1,5 +1,5 @@
 ---
-title: Documentation
+title: Dokumentation
 description: Object lending and renting
 ---
 
@@ -14,15 +14,16 @@ This plugin provides:
 
 ## Installation
 
-First of all, download the plugin:
+Laden Sie zunächst das Plugin herunter:
 
 * [Get latest ObjectsLend
   plugin!](https://github.com/galette-plugins/plugin-objectslend/releases/latest)
 * [Get ObjectsLend plugin nightly
   build!](https://github.com/galette-plugins/plugin-objectslend/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Extrahieren Sie das heruntergeladene Archiv im Verzeichnis Galette `plugins`.
+Zum Beispiel unter Linux (Ersetzen Sie `{url}` und `{version}` durch korrekte
+Werte):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,11 +31,11 @@ $ wget {url}
 $ tar xjvf galette-plugin-objectslend-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Datenbank Initialisierung
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Um zu funktionieren, benötigt dieses Plugin mehrere Tabellen in der Datenbank.
+Siehe [Galette Plugins
+Management-Schnittstelle](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 And this is finished; ObjectsLend plugin is installed :)
 
@@ -53,7 +54,7 @@ reason, then give them back with location.
 A lend history is provided for administrators and staff members from object
 page.
 
-### Preferences
+### Einstellungen
 
 Several preferences allows to change plugin behavior.
 
