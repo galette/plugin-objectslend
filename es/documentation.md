@@ -1,28 +1,28 @@
 ---
-title: Documentation
+title: Documentación
 description: Object lending and renting
 ---
 
-This plugin provides:
+Este complemento proporciona:
 
-* objects management (description, size, length, price, ...)
-* groups objects by categories,
-* manage object state, and their presence in stock or not,
-* manage lending and/or renting objects,
-* contribution generation,
+* gestión de objetos (descripción, tamaño, longitud, precio, ...)
+* agrupa objetos por categorías,
+* gestiona el estado del objeto, y su presencia en stock o no,
+* gestiona el préstamo y/o alquiler de objetos,
+* generación de contribución,
 * ...
 
-## Installation
+## Instalación
 
-First of all, download the plugin:
+Lo primero de todo, descarga el complemento:
 
 * [Get latest ObjectsLend
   plugin!](https://github.com/galette-plugins/plugin-objectslend/releases/latest)
 * [Get ObjectsLend plugin nightly
   build!](https://github.com/galette-plugins/plugin-objectslend/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Extrae el archivo descargado en la carpeta `plugin` de Galette . Por ejemplo, en
+linux (sustituyendo `{url}` y `{version}` con los valores correctos):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,32 +30,34 @@ $ wget {url}
 $ tar xjvf galette-plugin-objectslend-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Inicialización de base de datos
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Para que funcione, este complemento necesita varias tablas en la base de datos.
+Consulta [la interfaz de gestión de complementos de
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; ObjectsLend plugin is installed :)
+Y esto está terminado; se ha instalado el complemento ObjectsLend :)
 
 ## Plugin usage
 
-Once plugin has been installed, a `Object lend` group is added to Galette menu.
+Una vez que el complemento ha sido instalado, se añadirá un grupo `Préstamo de
+objeto` al menú de Galette.
 
-Defaults status are provided at installation, but they can not fit your needs,
-you can of course define your own.
+Con la instalación se proporcionan los estados por defecto, pero puede que no
+encajen con tus necesidades, así que por supuesto puedes definir los tuyos
+propios.
 
 ![The list of object status](images/status.png)
 
-Define status, create categories and objects; users can lend objects with a
-reason, then give them back with location.
+Define estados, crea categorías y objetos; los usuarios pueden prestar objetos
+con un motivo, y después recuperarlos con una ubicación.
 
-A lend history is provided for administrators and staff members from object
-page.
+Desde la página del objeto se muestra un historial de préstamos para los
+administradores y el personal interno.
 
-### Preferences
+### Ajustes
 
-Several preferences allows to change plugin behavior.
+Varios ajustes permiten cambiar el funcionamiento del complemento.
 
 ![The plugin preferences](images/plugin_preferences.png)
 
@@ -63,14 +65,14 @@ Several preferences allows to change plugin behavior.
 
 ![The display preferences](images/display_preferences.png)
 
-From this screen, you can define if members can lend objects or not, if it
-should create a new contribution (and its type and description), if image should
-be displayed in objects list, and thumbnails size.
+Desde esta pantalla, puedes definir si los miembros pueden prestar objetos o no,
+si se debe crear una nueva contribución (y su tipo y descripción), si se debe
+mostrar una imagen en el listado de objetos, y el tamaño de la miniatura.
 
-It is possible to activate the fullsize photo display.
+Es posible activar la pantalla de la foto a tamaño completo.
 
 > **Note** — Added in version 0.5.
 > 
-> Photos sent with previous plugin version were always resized, only the
-> thumbnail was stored. If you want to get fullsize display, you will have to
-> send photos again.
+> Las fotos enviadas con las versiones anteriores del complemento siempre eran
+> redimensionadas, solo se guardaba la miniatura. Si quieres obtener la pantalla
+> a tamaño completo, tendrás que enviar las fotos otra vez.
