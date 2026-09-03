@@ -1,28 +1,28 @@
 ---
-title: Documentation
+title: Documentação
 description: Object lending and renting
 ---
 
-This plugin provides:
+Este plugin oferece :
 
-* objects management (description, size, length, price, ...)
-* groups objects by categories,
-* manage object state, and their presence in stock or not,
-* manage lending and/or renting objects,
-* contribution generation,
+* gestão de objetos (descrição, tamanho, comprimento, preço, ...)
+* Agrupa objetos por categorias,
+* Gerenciar o estado dos objetos e sua presença em estoque ou não,
+* Gerenciar o empréstimo e/ou aluguel de objetos,
+* Geração de contribuições,
 * ...
 
-## Installation
+## Instalação
 
-First of all, download the plugin:
+Primeiramente, baixe o plugin:
 
 * [Get latest ObjectsLend
   plugin!](https://github.com/galette-plugins/plugin-objectslend/releases/latest)
 * [Get ObjectsLend plugin nightly
   build!](https://github.com/galette-plugins/plugin-objectslend/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Extraia o arquivo baixado no diretório `plugins` do Galette. Por exemplo, no
+Linux (substituindo `{url}` e `{version}` pelos valores corretos):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,32 +30,33 @@ $ wget {url}
 $ tar xjvf galette-plugin-objectslend-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Inicialização do banco de dados
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Para funcionar, este plugin requer várias tabelas no banco de dados. Consulte
+[Interface de gerenciamento de plugins do
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; ObjectsLend plugin is installed :)
+E está concluído; o plugin ObjectsLend está instalado :)
 
 ## Plugin usage
 
-Once plugin has been installed, a `Object lend` group is added to Galette menu.
+Após a instalação do plugin, um grupo `Object lend` é adicionado ao menu
+Galette.
 
-Defaults status are provided at installation, but they can not fit your needs,
-you can of course define your own.
+As configurações padrão são fornecidas na instalação, mas podem não atender às
+suas necessidades; você pode, naturalmente, definir as suas próprias.
 
 ![The list of object status](images/status.png)
 
-Define status, create categories and objects; users can lend objects with a
-reason, then give them back with location.
+Defina o status, crie categorias e objetos; os usuários podem emprestar objetos
+com uma justificativa e, em seguida, devolvê-los com a localização.
 
-A lend history is provided for administrators and staff members from object
-page.
+Um histórico de empréstimos é fornecido para administradores e funcionários na
+página do objeto.
 
-### Preferences
+### Preferências
 
-Several preferences allows to change plugin behavior.
+Diversas preferências permitem alterar o comportamento do plugin.
 
 ![The plugin preferences](images/plugin_preferences.png)
 
@@ -63,14 +64,14 @@ Several preferences allows to change plugin behavior.
 
 ![The display preferences](images/display_preferences.png)
 
-From this screen, you can define if members can lend objects or not, if it
-should create a new contribution (and its type and description), if image should
-be displayed in objects list, and thumbnails size.
+Nessa tela, você pode definir se os membros podem emprestar objetos ou não, se
+deve ser criada uma nova contribuição (e seu tipo e descrição), se a imagem deve
+ser exibida na lista de objetos e o tamanho das miniaturas.
 
-It is possible to activate the fullsize photo display.
+É possível ativar a exibição da foto em tamanho real.
 
 > **Note** — Added in version 0.5.
 > 
-> Photos sent with previous plugin version were always resized, only the
-> thumbnail was stored. If you want to get fullsize display, you will have to
-> send photos again.
+> As fotos enviadas com a versão anterior do plugin eram sempre redimensionadas,
+> apenas a miniatura era armazenada. Se você quiser que as fotos sejam exibidas
+> em tamanho original, será necessário enviá-las novamente.
