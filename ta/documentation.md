@@ -1,28 +1,30 @@
 ---
-title: Documentation
+title: ஆவணமாக்கல்
 description: Object lending and renting
 ---
 
-This plugin provides:
+இந்த சொருகி வழங்குகிறது:
 
-* objects management (description, size, length, price, ...)
-* groups objects by categories,
-* manage object state, and their presence in stock or not,
-* manage lending and/or renting objects,
-* contribution generation,
+* பொருள்கள் மேலாண்மை (விளக்கம், அளவு, நீளம், விலை, ...)
+* பொருள்களை வகைகளின்படி குழுக்கள்,
+* பொருளின் நிலையை நிர்வகித்தல் மற்றும் அவற்றின் இருப்பு கையிருப்பில் உள்ளதா
+  இல்லையா,
+* கடன் மற்றும்/அல்லது பொருட்களை வாடகைக்கு நிர்வகித்தல்,
+* பங்களிப்பு உருவாக்கம்,
 * ...
 
-## Installation
+## நிறுவல்
 
-First of all, download the plugin:
+முதலில், சொருகி பதிவிறக்கவும்:
 
 * [Get latest ObjectsLend
   plugin!](https://github.com/galette-plugins/plugin-objectslend/releases/latest)
 * [Get ObjectsLend plugin nightly
   build!](https://github.com/galette-plugins/plugin-objectslend/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+பதிவிறக்கம் செய்யப்பட்ட காப்பகத்தைக் கேலட் `செருகுநிரல்கள்` கோப்பகத்தில்
+பிரித்தெடுக்கவும். எடுத்துக்காட்டாக, லினக்சின் கீழ் (`{url}` மற்றும் `{version}`
+ஆகியவற்றை சரியான மதிப்புகளுடன் மாற்றுகிறது):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,32 +32,34 @@ $ wget {url}
 $ tar xjvf galette-plugin-objectslend-{version}.tar.bz2
 ```
 
-## Database initialisation
+## தரவுத்தள துவக்கம்
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+வேலை செய்ய, இந்தச் சொருகி தரவுத்தளத்தில் பல அட்டவணைகள் தேவை. காண்க [கேலட்
+செருகுநிரல்கள் மேலாண்மை
+இடைமுகம்](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; ObjectsLend plugin is installed :)
+மேலும் இது முடிந்தது; பொருள்கள்கடன் செருகுநிரல் நிறுவப்பட்டது :)
 
-## Plugin usage
+## சொருகி பயன்பாடு
 
-Once plugin has been installed, a `Object lend` group is added to Galette menu.
+செருகுநிரல் நிறுவப்பட்டதும், கேலட் பட்டியலில் `ஆப்செக்ட் லெண்ட்` குழு
+சேர்க்கப்படும்.
 
-Defaults status are provided at installation, but they can not fit your needs,
-you can of course define your own.
+நிறுவலின் போது இயல்புநிலை நிலை வழங்கப்படுகிறது, ஆனால் அவை உங்கள் தேவைகளுக்கு
+பொருந்தாது, நீங்கள் நிச்சயமாக உங்கள் சொந்தத்தை வரையறுக்கலாம்.
 
 ![The list of object status](images/status.png)
 
-Define status, create categories and objects; users can lend objects with a
-reason, then give them back with location.
+நிலையை வரையறுக்கவும், பிரிவுகள் மற்றும் பொருள்களை உருவாக்கவும்; பயனர்கள் ஒரு
+காரணத்துடன் பொருட்களைக் கடன் கொடுக்கலாம், பின்னர் அவற்றை இருப்பிடத்துடன்
+திருப்பிக் கொடுக்கலாம்.
 
-A lend history is provided for administrators and staff members from object
-page.
+பொருள் பக்கத்திலிருந்து நிர்வாகிகள் மற்றும் பணியாளர்களுக்கு கடன் வரலாறு
+வழங்கப்படுகிறது.
 
-### Preferences
+### விருப்பத்தேர்வுகள்
 
-Several preferences allows to change plugin behavior.
+பல விருப்பத்தேர்வுகள் செருகுநிரல் நடத்தையை மாற்ற அனுமதிக்கிறது.
 
 ![The plugin preferences](images/plugin_preferences.png)
 
@@ -63,14 +67,15 @@ Several preferences allows to change plugin behavior.
 
 ![The display preferences](images/display_preferences.png)
 
-From this screen, you can define if members can lend objects or not, if it
-should create a new contribution (and its type and description), if image should
-be displayed in objects list, and thumbnails size.
+இந்தத் திரையில் இருந்து, உறுப்பினர்கள் பொருட்களைக் கொடுக்க முடியுமா இல்லையா,
+புதிய பங்களிப்பை உருவாக்க வேண்டுமா (மற்றும் அதன் வகை மற்றும் விளக்கம்),
+பொருள்கள் பட்டியலில் படம் காட்டப்பட வேண்டுமா மற்றும் சிறுபடங்களின் அளவு
+ஆகியவற்றை நீங்கள் வரையறுக்கலாம்.
 
-It is possible to activate the fullsize photo display.
+முழு அளவிலான புகைப்படக் காட்சியை செயல்படுத்துவது சாத்தியமாகும்.
 
 > **Note** — Added in version 0.5.
 > 
-> Photos sent with previous plugin version were always resized, only the
-> thumbnail was stored. If you want to get fullsize display, you will have to
-> send photos again.
+> முந்தைய செருகுநிரல் பதிப்பில் அனுப்பப்பட்ட புகைப்படங்கள் எப்போதும் அளவு
+> மாற்றப்படும், சிறுபடம் மட்டுமே சேமிக்கப்படும். நீங்கள் முழு அளவிலான காட்சியைப்
+> பெற விரும்பினால், நீங்கள் மீண்டும் புகைப்படங்களை அனுப்ப வேண்டும்.
