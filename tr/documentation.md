@@ -3,7 +3,7 @@ title: Documentation
 description: Object lending and renting
 ---
 
-This plugin provides:
+Bu eklenti şunları sağlar:
 
 * objects management (description, size, length, price, ...)
 * groups objects by categories,
@@ -12,17 +12,17 @@ This plugin provides:
 * contribution generation,
 * ...
 
-## Installation
+## Kurulum
 
-First of all, download the plugin:
+Öncelikle, eklentiyi indirin:
 
 * [Get latest ObjectsLend
   plugin!](https://github.com/galette-plugins/plugin-objectslend/releases/latest)
 * [Get ObjectsLend plugin nightly
   build!](https://github.com/galette-plugins/plugin-objectslend/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+İndirilen arşivi Galette `plugins` dizinine çıkarın. Örneğin, Linux altında
+(`{url}` ve `{version}` değerlerini doğru değerlerle değiştirerek):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,15 +30,15 @@ $ wget {url}
 $ tar xjvf galette-plugin-objectslend-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Veritabanı başlatma
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Çalışabilmesi için, bu eklenti veritabanında birkaç tablo gerektirir. Bkz.
+[Galette eklenti yönetim
+arayüzü](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
 And this is finished; ObjectsLend plugin is installed :)
 
-## Plugin usage
+## Eklenti kullanımı
 
 Once plugin has been installed, a `Object lend` group is added to Galette menu.
 
