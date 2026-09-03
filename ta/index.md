@@ -6,13 +6,14 @@ description: Object lending and renting
 A [Galette](https://galette.eu) plugin to manage objects, and to lend or rent
 them to members.
 
-This plugin provides:
+இந்த சொருகி வழங்குகிறது:
 
-* objects management (description, size, length, price, ...)
-* groups objects by categories,
-* manage object state, and their presence in stock or not,
-* manage lending and/or renting objects,
-* contribution generation,
+* பொருள்கள் மேலாண்மை (விளக்கம், அளவு, நீளம், விலை, ...)
+* பொருள்களை வகைகளின்படி குழுக்கள்,
+* பொருளின் நிலையை நிர்வகித்தல் மற்றும் அவற்றின் இருப்பு கையிருப்பில் உள்ளதா
+  இல்லையா,
+* கடன் மற்றும்/அல்லது பொருட்களை வாடகைக்கு நிர்வகித்தல்,
+* பங்களிப்பு உருவாக்கம்,
 * ...
 
 * [documentation](documentation.html)
