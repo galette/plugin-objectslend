@@ -1,28 +1,28 @@
 ---
-title: Documentation
+title: Документація
 description: Object lending and renting
 ---
 
-This plugin provides:
+Це розширення надає:
 
-* objects management (description, size, length, price, ...)
-* groups objects by categories,
-* manage object state, and their presence in stock or not,
-* manage lending and/or renting objects,
-* contribution generation,
+* управління об'єктами (опис, розмір, довжина, ціна, ...)
+* порядкує об'єкти за категоріями,
+* управління станом об'єкта та їх наявністю чи відсутністю на складі,
+* управління об’єктами позики та/або оренди,
+* утворення внесків,
 * ...
 
-## Installation
+## Встановлення
 
-First of all, download the plugin:
+Перш за все, завантажте розширення:
 
 * [Get latest ObjectsLend
   plugin!](https://github.com/galette-plugins/plugin-objectslend/releases/latest)
 * [Get ObjectsLend plugin nightly
   build!](https://github.com/galette-plugins/plugin-objectslend/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Витягніть завантажений архів у каталог Galette `plugins`. Наприклад, ось
+вказівки під Linux (замініть `{url}` та `{version}` правильними значеннями):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -30,32 +30,32 @@ $ wget {url}
 $ tar xjvf galette-plugin-objectslend-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Започаткування бази даних
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Для роботи цього розширення потрібно кілька таблиць у базі даних. Див [Інтерфейс
+управління розширеннями
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; ObjectsLend plugin is installed :)
+Усе завершено. Розширення "ObjectsLend" установлено :)
 
-## Plugin usage
+## Використання розширення
 
-Once plugin has been installed, a `Object lend` group is added to Galette menu.
+Після встановлення розширення до меню Galette буде додано групу `Object lend`.
 
-Defaults status are provided at installation, but they can not fit your needs,
-you can of course define your own.
+Типові значення надаються під час встановлення, але вони можуть не відповідати
+вашим потребам, ви, звичайно ж, можете визначити власні.
 
 ![The list of object status](images/status.png)
 
-Define status, create categories and objects; users can lend objects with a
-reason, then give them back with location.
+Визначати статус, створювати категорії та об’єкти; користувачі можуть позичати
+об’єкти з причиною, а потім повертати їх із місцем розташування.
 
-A lend history is provided for administrators and staff members from object
-page.
+Історія позичання надається для адміністраторів і співробітників зі сторінки
+об'єкта.
 
-### Preferences
+### Параметрів
 
-Several preferences allows to change plugin behavior.
+Декілька параметрів дозволяють змінювати поведінку розширень.
 
 ![The plugin preferences](images/plugin_preferences.png)
 
@@ -63,14 +63,14 @@ Several preferences allows to change plugin behavior.
 
 ![The display preferences](images/display_preferences.png)
 
-From this screen, you can define if members can lend objects or not, if it
-should create a new contribution (and its type and description), if image should
-be displayed in objects list, and thumbnails size.
+На цьому екрані ви можете визначити, чи можуть учасники позичати об'єкти чи ні,
+якщо вони повинні створити новий внесок (і його тип і опис), якщо зображення
+повинно відображатися у списку об'єктів, і розмір мініатюр.
 
-It is possible to activate the fullsize photo display.
+Є можливість задіяти повнорозмірний дисплей світлин.
 
 > **Note** — Added in version 0.5.
 > 
-> Photos sent with previous plugin version were always resized, only the
-> thumbnail was stored. If you want to get fullsize display, you will have to
-> send photos again.
+> Світлини, надіслані з попередньою версією розширення, завжди змінювали розмір,
+> зберігалася тільки мініатюра. Якщо ви хочете отримати повнорозмірний дисплей,
+> вам доведеться надіслати світлини знову.
