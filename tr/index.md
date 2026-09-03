@@ -6,7 +6,7 @@ description: Object lending and renting
 A [Galette](https://galette.eu) plugin to manage objects, and to lend or rent
 them to members.
 
-This plugin provides:
+Bu eklenti şunları sağlar:
 
 * objects management (description, size, length, price, ...)
 * groups objects by categories,
